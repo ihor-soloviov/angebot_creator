@@ -1,0 +1,31 @@
+@import "../../utilsScss/colors.scss";
+
+.buttonNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 18px 0;
+
+  border: none;
+  border-radius: 8px;
+  background-color: $main-red;
+
+  color: white;
+
+  font-family: Inter Tight;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+
+  img {
+    padding-left: 6px;
+  }
+
+  &:hover {
+    background-color: $light-red;
+  }
+}

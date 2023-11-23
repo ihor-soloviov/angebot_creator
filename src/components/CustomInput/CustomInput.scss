@@ -1,0 +1,54 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.customInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Poppins; 
+  padding: 18px 27px;
+  border-radius: 8px;
+  border: 1px solid $border-grey;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: $dark-grey;
+
+  &:not(:last-of-type) {
+    margin-bottom: 26px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 32px;
+  }
+
+  input {
+    padding: 0;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 400;
+
+    &:active {
+      border: none;
+      outline: none;
+    }
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      font-family: Poppins; 
+      color: $dark-grey;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  img {
+    width: 20px;
+  }
+}

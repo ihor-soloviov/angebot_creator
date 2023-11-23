@@ -1,0 +1,40 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+@import "../../utilsScss/colors.scss";
+
+.welcomePage {
+
+  background-color: $main-grey;
+  height: 100vh;
+
+
+  &__inner {
+    display: flex;
+    gap: 89px;
+    width: max-content;
+    margin: 0 auto;
+
+  }
+
+  &__imageBlock {
+    padding-top: 106px;
+    h1 {
+      color: $main-black;
+      font-family: Poppins;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 130%;
+      margin-bottom: 57px;
+    }
+    img {
+      width: 806px;
+    }
+  }
+
+  &__login {
+    padding-top: 188px;
+    width: max-content;
+  }
+}

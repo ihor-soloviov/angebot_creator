@@ -1,0 +1,47 @@
+@import "../../utilsScss/colors.scss";
+
+.customCheckbox {
+  display: flex;
+  align-items: center;
+
+  color: $dark-grey;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  cursor: pointer;
+  user-select: none;
+
+  margin-bottom: 44px;
+
+  input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .checkbox {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    background: #fff;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    margin-right: 8px;
+    background-image: url("../../assets/checkbox.svg");
+    background-size: contain;
+    background-position: center;
+    transition: all 0.15s ease-in-out;
+  }
+
+  .active {
+    border: 1px solid $main-red;
+    background-color: $main-red;
+    background-image: url("../../assets/checkbox-active.svg");
+  }
+}
