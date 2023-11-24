@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-enum UserRole {
+export enum UserRole {
   admin = "admin",
   user = "user",
   notLogged = "",

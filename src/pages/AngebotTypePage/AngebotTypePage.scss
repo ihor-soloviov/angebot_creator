@@ -1,0 +1,39 @@
+@import "../../utilsScss/colors.scss";
+
+.angebotTypePage {
+  background-color: $main-grey;
+  height: 100vh;
+  font-family: Inter Tight;
+
+  &__inner {
+    display: flex;
+    gap: 89px;
+    margin: 0 auto;
+    padding-top: 148px;
+    height: calc(100% - 64px);
+    width: max-content;
+  }
+}
+.angebotType {
+  padding: 90px 68px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  width: calc(668px - 136px);
+  height: max-content;
+
+  &__inner {
+    width: 100%;
+
+    .label {
+      margin-bottom: 14px;
+      font-size: 20px; 
+    }
+  }
+}
+
+.angebotImage {
+  padding-top: 157px;
+  width: 668px;
+  height: 457px;
+}

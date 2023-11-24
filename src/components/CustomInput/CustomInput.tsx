@@ -5,7 +5,7 @@ import "./CustomInput.scss";
 interface Props {
   placeholder: string
   img: string
-  value: string
+  value: string | number
   setValue: (e: string) => void
 }
 

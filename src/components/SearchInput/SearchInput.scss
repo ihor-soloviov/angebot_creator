@@ -1,0 +1,17 @@
+@import "../../utilsScss/colors.scss";
+
+.searchInput {
+  color: #000;
+  border: 1px solid $stroke-grey;
+  outline: none;
+  border-radius: 8px;
+  padding: 18px 24px;
+  margin-bottom: 90px;
+
+  font-size: 18px;
+  width: calc(100% - 48px);
+
+  &::placeholder {
+    color: $input-grey;
+  }
+}
