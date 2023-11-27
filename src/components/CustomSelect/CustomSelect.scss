@@ -36,6 +36,8 @@
     background-color: white;
     border: 1px solid $stroke-grey;
     border-radius: 8px;
+    display: none;
+    pointer-events: none;
 
     p {
       color: $input-grey;
@@ -52,4 +54,9 @@
       }
     }
   }
+}
+
+.isOpened {
+  display: block;
+  pointer-events: all;
 }

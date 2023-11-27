@@ -7,7 +7,11 @@ import { SearchInput } from "../../components/SearchInput";
 import { ButtonNext } from "../../components/ButtonNext";
 
 export const AngebotTypePage: React.FC = () => {
-  const [selectValue, setSelectValue] = useState('')
+  const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
+  const changeSelectedValue: (value: string) => void = (newValue) => {
+    setSelectedValue(newValue)
+  }
+
   return (
     <div className="angebotTypePage">
       <Header />
@@ -15,7 +19,7 @@ export const AngebotTypePage: React.FC = () => {
         <div className="angebotType">
           <div className="angebotType__inner">
             <p className="label">Тип предложения</p>
-            <CustomSelect />
+            <CustomSelect selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} />
             <p className="label">ID клиента</p>
             <SearchInput />
             <ButtonNext />
