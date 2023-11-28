@@ -1,7 +1,8 @@
 import React from "react";
-import "./PvsolFilePage.scss";
 import { Header } from "../../components/Header";
 import { FileLoaderWindow } from "../../components/FileLoaderWindow";
+import { ButtonPrev } from "../../components/ButtonPrev";
+import "./PvsolFilePage.scss";
 
 export const PvsolFilePage: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ export const PvsolFilePage: React.FC = () => {
       <Header />
       <div className="pvsolFilePage__inner">
         <FileLoaderWindow/>
-        <ButtonPrev/>
+        {/* <ButtonPrev/> */}
       </div>
     </div>
   );

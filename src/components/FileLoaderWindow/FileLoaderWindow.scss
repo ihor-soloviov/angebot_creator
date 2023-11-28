@@ -2,5 +2,32 @@
 @import "../../utilsScss/mixins.scss";
 
 .fileLoaderWindow {
+  width: max-content;
+  padding-top: 104px;
 
+  h3 {
+    color: $main-black;
+    font-family: Inter Tight;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-bottom: 24px;
+  }
+}
+
+.dragWindow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px dashed $border-grey;
+  border-radius: 14px;
+  width: 806px;
+  height: 420px;
+
+}
+
+.drag {
+  background-color: $border-grey;
 }

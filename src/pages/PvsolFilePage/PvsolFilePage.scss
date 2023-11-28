@@ -3,4 +3,12 @@
 
 .pvsolFilePage {
   @include pageDecore;
+
+  &__inner {
+    width: 100%;
+    height: calc(100% - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
