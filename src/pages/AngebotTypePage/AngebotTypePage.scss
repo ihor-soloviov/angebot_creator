@@ -1,9 +1,8 @@
 @import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
 
 .angebotTypePage {
-  background-color: $main-grey;
-  height: 100vh;
-  font-family: Inter Tight;
+  @include pageDecore;
 
   &__inner {
     display: flex;

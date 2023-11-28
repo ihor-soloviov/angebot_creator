@@ -32,7 +32,7 @@ export const AngebotTypePage: React.FC = () => {
             <CustomSelect selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} />
             <p className="label">ID клиента</p>
             <SearchInput setSelectedId={setSelectedId} />
-            <ButtonNext isDisabled={isDisabled} />
+            <ButtonNext isDisabled={isDisabled} nextStep={3} />
           </div>
         </div>
         <img className="angebotImage" src={img} alt="girl with notebook" />

@@ -2,9 +2,11 @@ import { WelcomePage } from "./pages/WelcomePage";
 import { AngebotTypePage } from "./pages/AngebotTypePage";
 import { observer } from "mobx-react-lite";
 import stepStore from "./stores/step-store";
+import { PvsolFilePage } from "./pages/PvsolFilePage";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
+  console.log(step)
 
   const switchComponent = () => {
     switch (step) {
@@ -15,6 +17,11 @@ export const App: React.FC = observer(() => {
         return (
           <AngebotTypePage />
         );
+
+      case 3:
+        return (
+          <PvsolFilePage />
+        )
     }
   }
 
