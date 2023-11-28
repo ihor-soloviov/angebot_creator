@@ -1,5 +1,4 @@
 import roleStore, { UserRole } from "../stores/role-store";
-import stepStore from "../stores/step-store";
 
 interface User {
   login: string;
@@ -7,7 +6,6 @@ interface User {
 }
 
 export const getLogIn = (data: User) => {
-  const { setStep } = stepStore;
   console.log("started");
   const ADMIN_LOGIN = "admin";
   const ADMIN_PASSWORD = "88141321";
@@ -18,9 +16,8 @@ export const getLogIn = (data: User) => {
     case ADMIN_LOGIN:
       if (data.password === ADMIN_PASSWORD) {
         roleStore.setRole(UserRole.admin);
-        setStep(2)
       } else {
-        console.log('admin no pass');
+        console.log("admin no pass");
         roleStore.setRole(UserRole.notLogged);
       }
       break;
@@ -28,7 +25,6 @@ export const getLogIn = (data: User) => {
     case USER_LOGIN:
       if (data.password === USER_PASSWORD) {
         roleStore.setRole(UserRole.user);
-        setStep(2)
       } else {
         roleStore.setRole(UserRole.notLogged);
       }

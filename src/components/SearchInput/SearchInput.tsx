@@ -1,23 +1,46 @@
-import React, { useState } from "react";
-import "./SearchInput.scss";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
-export const SearchInput: React.FC = () => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState('');
+import { useDebounce } from "../../hooks/useDebounce";
+import { fetchUserAndSellerData } from "../../api/deals";
+import { SearchResult } from "../../types/dealsTypes";
 
-  const handleSelect = (id: string) => {
+import "./SearchInput.scss";
+
+interface Props {
+  setSelectedId: (value: number) => void
+}
+
+export const SearchInput: React.FC<Props> = ({ setSelectedId }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+
+  const debouncedSearch = useDebounce(searchValue, 500);
+  const selectValue = searchResult !== null ? searchResult.userData.id : "такого id не знайдено"
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      fetchUserAndSellerData(debouncedSearch, setIsOpen, setSearchResult)
+    }
+  }, [debouncedSearch])
+
+
+  const handleSelect = (id: number) => {
     setIsOpen(false);
     setSelectedId(id)
   }
+
+
   return (
     <div className="searchInput__block">
-      <input className="searchInput" type="text" placeholder={selectedId || "Введите ID клиента"} />
+      <input className="searchInput" onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder={searchValue || "Введите ID клиента"} />
       <div className={classNames("customSelect__dropdown", { isOpened: isOpen })}>
-        {searchResults.map(type => (
-          <p key={type} onClick={() => handleSelect(type)}>{type}</p>
-        ))}
+        <p onClick={() => {
+          selectValue !== "такого id не знайдено" &&
+            handleSelect(selectValue)
+        }
+        }>{selectValue}</p>
       </div>
     </div>
   );
