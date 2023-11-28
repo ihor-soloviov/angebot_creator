@@ -3,12 +3,17 @@
 
 .pvsolFilePage {
   @include pageDecore;
+  min-height: 100vh;
+  max-height: max-content;
 
   &__inner {
+    position: relative;
     width: 100%;
-    height: calc(100% - 64px);
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: $main-grey;
+    padding-bottom: 154px;
   }
 }

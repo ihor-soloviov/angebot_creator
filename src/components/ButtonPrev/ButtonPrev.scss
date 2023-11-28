@@ -2,5 +2,15 @@
 @import "../../utilsScss/mixins.scss";
 
 .buttonPrev {
+  position: absolute;
+  bottom: 64px;
+  left: 117px;
+  padding: 18px 55px;
+  display: flex;
+  gap: 4px;
 
+  border-radius: 58px;
+  border: 1px solid $dark-grey;
+
+  color: $dark-grey;
 }

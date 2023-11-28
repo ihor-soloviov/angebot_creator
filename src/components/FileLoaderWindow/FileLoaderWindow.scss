@@ -1,9 +1,14 @@
 @import "../../utilsScss/colors.scss";
 @import "../../utilsScss/mixins.scss";
-
+.fileLoaderWindow__inner {
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  padding: 54px 69px;
+  margin-top: 104px;
+}
 .fileLoaderWindow {
   width: max-content;
-  padding-top: 104px;
 
   h3 {
     color: $main-black;
@@ -17,7 +22,9 @@
 }
 
 .dragWindow {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -26,8 +33,60 @@
   width: 806px;
   height: 420px;
 
+  p {
+    position: absolute;
+    bottom: 31px;
+
+    width: 320px;
+    color: rgba(11, 11, 12, 0.9);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  margin-bottom: 64px;
 }
 
 .drag {
   background-color: $border-grey;
+}
+
+.loadedFile {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 17px;
+  border-radius: 12px;
+  border: 1px solid $stroke-grey;
+
+  &__icon {
+    width: max-content;
+    padding: 9px 13px;
+    border-radius: 10px;
+    border: 1px solid $stroke-grey;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+
+    .file__name {
+      font-family: Poppins;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: normal;
+      color: $main-black;
+      margin-bottom: 4px;
+    }
+
+    .file__size {
+      color: $dark-grey;
+      font-family: Poppins;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
 }
