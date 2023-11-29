@@ -2,5 +2,35 @@
 @import "../../utilsScss/mixins.scss";
 
 .producerPage {
+  @include pageDecore;
+  padding-bottom: 94px;
+  position: relative; 
 
+  &__container {
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    gap: 105px;
+    margin-top: 166px;
+    background-color: $main-grey;
+
+    .customSelect {
+      margin-bottom: 214px;
+    }
+  }
+
+  &__image {
+    padding-top: 135px;
+    width: 741px;
+    height: 514px;
+  }
+}
+
+.producer__inner {
+  height: calc(548px - 180px);
+  width: calc(668px - 136px);
+  padding: 90px 68px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
 }

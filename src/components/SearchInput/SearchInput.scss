@@ -18,8 +18,10 @@
 
 .searchInput__block {
   position: relative;
+
+  .customSelect__dropdown {
+    top: 40%;
+  }
 }
 
-.customSelect__dropdown {
-  top: 40%;
-}
+

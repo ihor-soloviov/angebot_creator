@@ -23,11 +23,6 @@
 
   &__inner {
     width: 100%;
-
-    .label {
-      margin-bottom: 14px;
-      font-size: 20px; 
-    }
   }
 }
 
@@ -35,4 +30,9 @@
   padding-top: 157px;
   width: 668px;
   height: 457px;
+}
+
+.label {
+  margin-bottom: 14px;
+  font-size: 20px;
 }

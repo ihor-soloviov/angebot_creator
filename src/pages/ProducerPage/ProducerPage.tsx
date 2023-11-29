@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "./ProducerPage.scss";
+import producerImg from "../../assets/producerImg.svg"
+
 import { Header } from "../../components/Header";
 import { CustomSelect } from "../../components/CustomSelect";
 import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonPrev } from "../../components/ButtonPrev";
+import "./ProducerPage.scss";
 
 export const ProducerPage: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState('Выберете производителя');
@@ -27,7 +30,9 @@ export const ProducerPage: React.FC = () => {
           />
           <ButtonNext width={532} isDisabled={isDisabled} />
         </div>
+        <img className="producerPage__image" src={producerImg} alt="дура не втикай" />
       </div>
+      <ButtonPrev />
     </div>
   );
 }
