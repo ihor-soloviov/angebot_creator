@@ -20,7 +20,7 @@ interface Props {
 export const FileLoaderWindow: React.FC<Props> = ({setIsDisabled}) => {
   const [drag, setDrag] = useState(false);
   const [dragIcon, setDragIcon] = useState<string>(dragSvg);
-  const [dragtext, setDragtext] = useState('Выберите файл PDF для загрузки или перетащите его сюда');
+  const [dragtext, setDragtext] = useState('Перетащите сюда DOCX файл');
   const [loadedFileInfo, setLoadedFileInfo] = useState<LoadedFile | null>(null);
 
   const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {

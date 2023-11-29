@@ -11,9 +11,9 @@ export const PvsolFilePage: React.FC = () => {
     <div className="pvsolFilePage">
       <Header />
       <div className="pvsolFilePage__inner">
-        <FileLoaderWindow setIsDisabled={setIsDisabled}/>
+        <FileLoaderWindow setIsDisabled={setIsDisabled} />
         <ButtonNext width={394} isDisabled={isDisabled} />
-        <ButtonPrev/> 
+        <ButtonPrev/>
       </div>
     </div>
   );

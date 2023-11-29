@@ -18,6 +18,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+  transition: all 0.2s ease-in-out;
 
   cursor: pointer;
 
@@ -27,6 +28,7 @@
 
   &:hover {
     background-color: $light-red;
+    transform: scale(1.1);
   }
 }
 

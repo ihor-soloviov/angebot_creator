@@ -6,11 +6,12 @@ import classNames from "classnames";
 interface Props {
   selectedValue: string
   changeSelectedValue: (newValue: string) => void
+  values: string[]
 }
 
-export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedValue }) => {
+export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedValue, values }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse'];
+
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedVal
         <img src={arr} alt="arrow" />
       </div>
       <div className={classNames("customSelect__dropdown", { isOpened: isOpen })}>
-        {angebotTypes.map(type => (
+        {values.map(type => (
           <p key={type} onClick={() => handleSelect(type)}>{type}</p>
         ))}
       </div>

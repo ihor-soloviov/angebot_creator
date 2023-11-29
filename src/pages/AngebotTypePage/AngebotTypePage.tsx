@@ -11,6 +11,8 @@ export const AngebotTypePage: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isDisabled, setIsDisabled] = useState(true);
 
+  const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse'];
+
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
   }
@@ -29,7 +31,11 @@ export const AngebotTypePage: React.FC = () => {
         <div className="angebotType">
           <div className="angebotType__inner">
             <p className="label">Тип предложения</p>
-            <CustomSelect selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} />
+            <CustomSelect
+              selectedValue={selectedValue}
+              changeSelectedValue={changeSelectedValue}
+              values={angebotTypes}
+            />
             <p className="label">ID клиента</p>
             <SearchInput setSelectedId={setSelectedId} />
             <ButtonNext isDisabled={isDisabled} nextStep={3} />

@@ -13,4 +13,13 @@
   border: 1px solid $dark-grey;
 
   color: $dark-grey;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: $main-black;
+    cursor: pointer;
+
+  }
 }
