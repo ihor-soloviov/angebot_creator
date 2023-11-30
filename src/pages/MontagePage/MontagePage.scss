@@ -1,0 +1,8 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.montagePage {
+  position: relative;
+
+  @include pageDecore
+}

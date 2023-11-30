@@ -1,20 +1,17 @@
 @import "../../utilsScss/colors.scss";
 @import "../../utilsScss/mixins.scss";
 
-.buttonPrev {
+.totalCost {
   position: absolute;
   bottom: 64px;
-  left: 117px;
-  padding: 18px 55px;
-  display: flex;
-  gap: 4px;
-
-  font-size: 18px;
-
-  border-radius: 58px;
-  border: 1px solid $dark-grey;
+  right: 117px;
 
   color: $dark-grey;
+  font-size: 18px;
+
+  padding: 18px 48px;
+  border: 1px solid $dark-grey;
+  border-radius: 58px;
 
   transition: all 0.2s ease-in-out;
 

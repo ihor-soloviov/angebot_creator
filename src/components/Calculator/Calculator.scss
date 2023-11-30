@@ -1,0 +1,15 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.calculator {
+  height: max-content;
+
+  &__container {
+    width: calc(1262px - 180px);
+    margin: 0 auto;
+    padding: 90px;
+    border: 1px solid red;
+    margin-top: 64px;
+    padding-bottom: 122px;
+  }
+}

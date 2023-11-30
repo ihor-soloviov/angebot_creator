@@ -6,17 +6,17 @@ import stepStore from "../../stores/step-store";
 
 interface Props {
   isDisabled?: boolean
-  nextStep?: number
   width?: number
 }
 
 
-export const ButtonNext: React.FC<Props> = ({ isDisabled, nextStep, width }) => {
+export const ButtonNext: React.FC<Props> = ({ isDisabled, width }) => {
+  const { step, setStep } = stepStore;
   const handler = () => {
-    nextStep && stepStore.setStep(nextStep)
+    setStep(step + 1)
   }
   return (
-    <button style={{width: width, position: "relative", marginTop: 54}} onClick={handler} className={classNames("buttonNext", { "disabled": isDisabled })} disabled={isDisabled}>
+    <button style={{ width: width, position: "relative", marginTop: 54 }} onClick={handler} className={classNames("buttonNext", { "disabled": isDisabled })} disabled={isDisabled}>
       Далее
       <img src={arrButton} alt="butt" />
     </button>

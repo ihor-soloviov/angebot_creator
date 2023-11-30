@@ -1,0 +1,16 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.footer {
+  font-family: Inter Tight;
+  background-color: $main-grey;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: max-content;
+
+  &__inner {
+    position: relative;
+  }
+}

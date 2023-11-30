@@ -38,7 +38,7 @@ export const AngebotTypePage: React.FC = () => {
             />
             <p className="label">ID клиента</p>
             <SearchInput setSelectedId={setSelectedId} />
-            <ButtonNext isDisabled={isDisabled} nextStep={3} />
+            <ButtonNext isDisabled={isDisabled} />
           </div>
         </div>
         <img className="angebotImage" src={img} alt="girl with notebook" />
