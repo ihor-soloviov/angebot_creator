@@ -1,0 +1,22 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.progressBar__inner {
+  border-radius: 2px;
+  height: 4px;
+  background-color: #ebebeb;
+  margin-bottom: 12px;
+
+}
+
+.progressBar {
+  border-radius: 2px;
+  height: 4px;
+  background-color: $main-red;
+
+  &__value {
+    font-family: Inter Tight;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
