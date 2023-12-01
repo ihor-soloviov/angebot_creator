@@ -8,7 +8,7 @@ export type SingleService = Title & {
 };
 
 
-export type SelectServices = {
+export type SelectService = {
   label: string
   select: SelectServiceOption[]
 }

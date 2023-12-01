@@ -1,17 +1,20 @@
 import React from "react";
 import { ProgressBar } from "../ProgressBar";
-import { SelectServices, SingleService, Title } from "./calculator-types";
+import { SelectService, SingleService, Title } from "./calculator-types";
 import "./Calculator.scss";
 import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
+import { SelectServiceItem } from "../SelectServiceItem";
 
 interface Props {
   title: Title
+  additionTitle: Title
   singleServices: SingleService[]
-  selectServices: SelectServices[]
+  selectServices: SelectService[]
+  additionParagraph?: boolean
 }
 
-export const Calculator: React.FC<Props> = ({ title, singleServices, selectServices }) => {
+export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServices, selectServices, additionParagraph }) => {
 
 
   return (
@@ -21,12 +24,22 @@ export const Calculator: React.FC<Props> = ({ title, singleServices, selectServi
         <div className="calculator__progressBar">
           <ProgressBar />
         </div>
-        <div className="calculatorService__container">
+        <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
           {singleServices.map(service => (
             <SingleServiceItem service={service} />
           )
           )}
         </div>
+        {additionParagraph && (
+          <>
+            <CalculatorTitle title={additionTitle} />
+            <div className="calculatorService__container">
+              {selectServices.map(service => (
+                <SelectServiceItem service={service} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

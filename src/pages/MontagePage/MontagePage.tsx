@@ -2,13 +2,18 @@ import React from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SelectServices, SingleService, Title } from "../../components/Calculator/calculator-types";
+import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
 
 export const MontagePage: React.FC = () => {
   const title: Title = {
     blackTitle: "Installation + Lieferung",
     greyTitle: "Монтаж + доставка"
+  }
+
+  const additionTitle = {
+    blackTitle: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
+    greyTitle: "Размер и количество лесов"
   }
 
   const singleServices: SingleService[] = [{
@@ -27,7 +32,7 @@ export const MontagePage: React.FC = () => {
     price: 165
   }]
 
-  const selectServices: SelectServices[] = [{
+  const selectServices: SelectService[] = [{
     label: "Леса 1",
     select: [{ value: "<5m", price: 400 }, { value: "5m - 8m", price: 500 }, { value: ">8m", price: 600 }]
   },
@@ -36,7 +41,13 @@ export const MontagePage: React.FC = () => {
   return (
     <div className="montagePage">
       <Header />
-      <Calculator title={title} singleServices={singleServices} selectServices={selectServices} />
+      <Calculator
+        title={title}
+        additionTitle={additionTitle}
+        singleServices={singleServices}
+        selectServices={selectServices}
+        additionParagraph={true}
+      />
       <Footer />
     </div>
   );

@@ -3,6 +3,7 @@
 
 .montagePage {
   position: relative;
-
-  @include pageDecore
+  @include pageDecore;
+  height: max-content;
+  padding-bottom: 158px;;
 }

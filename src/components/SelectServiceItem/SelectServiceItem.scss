@@ -1,0 +1,16 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.selectServiceItem {
+  margin-top: 64px;
+}
+.selectService {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Inter Tight;
+
+  &__left {
+    display: flex;
+  }
+}
