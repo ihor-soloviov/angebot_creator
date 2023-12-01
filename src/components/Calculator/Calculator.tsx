@@ -1,8 +1,8 @@
 import React from "react";
 import { ProgressBar } from "../ProgressBar";
 import { SingleService, Title } from "./calculator-types";
-import { PlusMinusHandler } from "../PlusMinusHandler";
 import "./Calculator.scss";
+import { SingleServiceItem } from "../SingleServiceItem";
 
 interface Props {
   title: Title
@@ -23,21 +23,10 @@ export const Calculator: React.FC<Props> = ({ title, singleServices }) => {
           <ProgressBar />
         </div>
         <div className="calculatorService__container">
-          {singleServices.map(service => {
-            const { blackTitle, greyTitle, price } = service;
-            return (
-              <div className="singleService">
-                <div className="singleService__left">
-                  <b>{blackTitle}</b>
-                  <p>{greyTitle}</p>
-                </div>
-                <div className="singleService__right">
-                  <PlusMinusHandler />
-                  <p>{price}</p>
-                </div>
-              </div>
-            )
-          })}
+          {singleServices.map(service => (
+            <SingleServiceItem service={service} />
+          )
+          )}
         </div>
       </div>
     </div>

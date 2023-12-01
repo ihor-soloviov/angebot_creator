@@ -1,0 +1,42 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.singleService {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Inter Tight;
+
+  &:not(:last-of-type) {
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid $dark-grey;
+  }
+
+  &__left {
+    line-height: normal;
+    b {
+      display: block;
+      font-size: 20px;
+      font-weight: 500;
+      color: $sec-black;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      letter-spacing: 0.16px;
+      color: $dark-grey;
+    }
+  }
+
+  &__right {
+    display: flex;
+    gap: 90px;
+
+    p {
+      font-size: 20px;
+      line-height: normal;
+    }
+  }
+}
