@@ -2,7 +2,7 @@ import React from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleService, Title } from "../../components/Calculator/calculator-types";
+import { SelectServices, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
 
 export const MontagePage: React.FC = () => {
@@ -26,10 +26,17 @@ export const MontagePage: React.FC = () => {
     greyTitle: "(монтаж на крыше)",
     price: 165
   }]
+
+  const selectServices: SelectServices[] = [{
+    label: "Леса 1",
+    select: [{ value: "<5m", price: 400 }, { value: "5m - 8m", price: 500 }, { value: ">8m", price: 600 }]
+  },
+  ]
+
   return (
     <div className="montagePage">
       <Header />
-      <Calculator title={title} singleServices={singleServices} />
+      <Calculator title={title} singleServices={singleServices} selectServices={selectServices} />
       <Footer />
     </div>
   );

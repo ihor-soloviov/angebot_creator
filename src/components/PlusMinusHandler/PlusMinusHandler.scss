@@ -2,5 +2,40 @@
 @import "../../utilsScss/mixins.scss";
 
 .plusMinusHandler {
+  display: flex;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid $light-grey;
 
+  input,
+  button {
+    border: none;
+    color: $dark-grey;
+  }
+  input {
+    font-family: Inter Tight;
+    width: 23px;
+    color: $dark-grey;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.15);
+    }
+  }
 }
