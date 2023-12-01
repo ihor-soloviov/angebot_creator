@@ -1,22 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SelectServiceItem.scss";
 import { SelectService } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
+import { PlusMinusHandler } from "../PlusMinusHandler";
 
 interface Props {
   service: SelectService
 }
 
 export const SelectServiceItem: React.FC<Props> = ({ service }) => {
-  const [selectedValue, setSelectedValue] = useState('Выберете высоту')
+  const [selectedValue, setSelectedValue] = useState('Выберете высоту');
+  const [optionPrice, setOptionPrice] = useState(0)
   const { label, select } = service;
-
   const valuesForSelect = select.map(obj => obj.value);
-  console.log(valuesForSelect)
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
   }
+
+  useEffect(() => {
+    if (selectedValue !== 'Выберете высоту') {
+      const newPrice = select.find(el => el.value === selectedValue)?.price || 0;
+      setOptionPrice(newPrice);
+    }
+  }, [selectedValue, select])
+
 
   return (
     <div className="selectServiceItem">
@@ -30,6 +38,10 @@ export const SelectServiceItem: React.FC<Props> = ({ service }) => {
               <path d="M10.5 18.5L10.5 3.5" stroke="#8F9AA5" stroke-width="2" stroke-linecap="round" />
             </svg>
           </button>
+        </div>
+        <div className="selectService__right">
+          <PlusMinusHandler />
+          <p>{optionPrice}.00 €</p>
         </div>
       </div>
     </div>
