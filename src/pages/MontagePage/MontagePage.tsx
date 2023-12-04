@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
@@ -6,6 +6,16 @@ import { SelectService, SingleService, Title } from "../../components/Calculator
 import "./MontagePage.scss";
 
 export const MontagePage: React.FC = () => {
+  const [selects, setSelects] = useState<SelectService[]>([{
+    label: "Леса",
+    select: [{ value: "<5m", price: 400 }, { value: "5m - 8m", price: 500 }, { value: ">8m", price: 600 }]
+  }
+  ])
+
+  const addNewSelectService = (selectObject: SelectService) => {
+    setSelects((prev: SelectService[]) => [...prev, selectObject])
+  }
+
   const title: Title = {
     blackTitle: "Installation + Lieferung",
     greyTitle: "Монтаж + доставка"
@@ -32,12 +42,6 @@ export const MontagePage: React.FC = () => {
     price: 165
   }]
 
-  const selectServices: SelectService[] = [{
-    label: "Леса 1",
-    select: [{ value: "<5m", price: 400 }, { value: "5m - 8m", price: 500 }, { value: ">8m", price: 600 }]
-  },
-  ]
-
   return (
     <div className="montagePage">
       <Header />
@@ -45,7 +49,8 @@ export const MontagePage: React.FC = () => {
         title={title}
         additionTitle={additionTitle}
         singleServices={singleServices}
-        selectServices={selectServices}
+        selectServices={selects}
+        addNewSelectService={addNewSelectService}
         additionParagraph={true}
       />
       <Footer />

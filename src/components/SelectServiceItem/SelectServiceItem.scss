@@ -3,6 +3,14 @@
 
 .selectServiceItem {
   margin-top: 64px;
+  margin-bottom: 28px;
+
+  .label {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
 }
 .selectService {
   display: flex;
@@ -12,5 +20,33 @@
 
   &__left {
     display: flex;
+    align-items: center;
+    gap: 20px;
+
+    button {
+      height: 39px;
+      width: 39px;
+      padding: 9px;
+      border-radius: 4px;
+      border: 1px solid $light-grey;
+
+      background-color: #fff;
+
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.15);
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 90px;
+    font-size: 20px;
+    line-height: normal;
   }
 }

@@ -7,9 +7,10 @@ interface Props {
   selectedValue: string
   changeSelectedValue: (newValue: string) => void
   values: string[]
+  width?: number
 }
 
-export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedValue, values }) => {
+export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedValue, values, width }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -34,7 +35,7 @@ export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedVal
   const isPlaceholderSelected = selectedValue === 'Выберете тип предложения';
 
   return (
-    <div className="customSelect__inner" ref={selectRef}>
+    <div className="customSelect__inner" style={{width: `${width}px`}} ref={selectRef}>
       <div onClick={() => setIsOpen(prev => !prev)}
         className="customSelect">
         <p style={{ color: isPlaceholderSelected ? "#8f9aa5" : "black" }}>{selectedValue}</p>

@@ -6,11 +6,15 @@ import { PlusMinusHandler } from "../PlusMinusHandler";
 
 interface Props {
   service: SelectService
+  index: number
+  addNewSelectService: (selectObject: SelectService) => void
 }
 
-export const SelectServiceItem: React.FC<Props> = ({ service }) => {
+export const SelectServiceItem: React.FC<Props> = ({ service, addNewSelectService, index }) => {
   const [selectedValue, setSelectedValue] = useState('Выберете высоту');
   const [optionPrice, setOptionPrice] = useState(0)
+  const [priceСount, setPriceСount] = useState(0);
+
   const { label, select } = service;
   const valuesForSelect = select.map(obj => obj.value);
 
@@ -26,13 +30,14 @@ export const SelectServiceItem: React.FC<Props> = ({ service }) => {
   }, [selectedValue, select])
 
 
+
   return (
     <div className="selectServiceItem">
-      <p>{label}</p>
+      <p className="label">{label} {index + 1}</p>
       <div className="selectService">
         <div className="selectService__left">
-          <CustomSelect selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} values={valuesForSelect} />
-          <button>
+          <CustomSelect width={460} selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} values={valuesForSelect} />
+          <button onClick={() => addNewSelectService(service)}>
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 11L18 11" stroke="#8F9AA5" stroke-width="2" stroke-linecap="round" />
               <path d="M10.5 18.5L10.5 3.5" stroke="#8F9AA5" stroke-width="2" stroke-linecap="round" />
@@ -40,8 +45,8 @@ export const SelectServiceItem: React.FC<Props> = ({ service }) => {
           </button>
         </div>
         <div className="selectService__right">
-          <PlusMinusHandler />
-          <p>{optionPrice}.00 €</p>
+          <PlusMinusHandler priceСount={priceСount} setPriceСount={setPriceСount} />
+          <p>{priceСount === 0 ? 0 : optionPrice * priceСount}.00 €</p>
         </div>
       </div>
     </div>

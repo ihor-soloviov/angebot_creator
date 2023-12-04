@@ -2,18 +2,20 @@
 
 .customSelect__inner {
   position: relative;
+
 }
 
 .customSelect {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 18px 24px;
 
   
   border: 1px solid $stroke-grey;
   border-radius: 8px;
 
-  margin-bottom: 28px;
+  
   cursor: pointer;
 
   p {

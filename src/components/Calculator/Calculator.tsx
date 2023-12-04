@@ -12,9 +12,10 @@ interface Props {
   singleServices: SingleService[]
   selectServices: SelectService[]
   additionParagraph?: boolean
+  addNewSelectService: (selectObject: SelectService) => void
 }
 
-export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServices, selectServices, additionParagraph }) => {
+export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServices, selectServices, addNewSelectService, additionParagraph }) => {
 
 
   return (
@@ -34,8 +35,8 @@ export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServic
           <>
             <CalculatorTitle title={additionTitle} />
             <div className="calculatorService__container">
-              {selectServices.map(service => (
-                <SelectServiceItem service={service} />
+              {selectServices.map((service, index) => (
+                <SelectServiceItem service={service} index={index} addNewSelectService={addNewSelectService} />
               ))}
             </div>
           </>
