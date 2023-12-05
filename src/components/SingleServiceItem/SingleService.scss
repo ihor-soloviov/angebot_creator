@@ -5,10 +5,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: Inter Tight;
+  font-family: Inter  Tight;
+  padding-bottom: 20px;
 
   &:not(:last-of-type) {
-    padding-bottom: 20px;
     margin-bottom: 32px;
     border-bottom: 1px solid $dark-grey;
   }

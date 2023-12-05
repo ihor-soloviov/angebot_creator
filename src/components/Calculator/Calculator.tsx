@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProgressBar } from "../ProgressBar";
 import { SelectService, SingleService, Title } from "./calculator-types";
 import "./Calculator.scss";
 import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
 import { SelectServiceItem } from "../SelectServiceItem";
+import { ButtonNext } from "../ButtonNext";
 
 interface Props {
   title: Title
@@ -15,8 +16,15 @@ interface Props {
   addNewSelectService: (selectObject: SelectService) => void
 }
 
-export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServices, selectServices, addNewSelectService, additionParagraph }) => {
-
+export const Calculator: React.FC<Props> = ({
+  title,
+  additionTitle,
+  singleServices,
+  selectServices,
+  addNewSelectService,
+  additionParagraph,
+}) => {
+  const [totalPrice, setTotalPrice] = useState(0);
 
   return (
     <div className="calculator">
@@ -26,8 +34,8 @@ export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServic
           <ProgressBar />
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-          {singleServices.map(service => (
-            <SingleServiceItem service={service} />
+          {singleServices.map((service, index) => (
+            <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} />
           )
           )}
         </div>
@@ -36,11 +44,16 @@ export const Calculator: React.FC<Props> = ({ title, additionTitle, singleServic
             <CalculatorTitle title={additionTitle} />
             <div className="calculatorService__container">
               {selectServices.map((service, index) => (
-                <SelectServiceItem service={service} index={index} addNewSelectService={addNewSelectService} />
+                <SelectServiceItem key={index} service={service} index={index} addNewSelectService={addNewSelectService} setTotalPrice={setTotalPrice} />
               ))}
             </div>
           </>
         )}
+        <div className="calculator__total">
+          <p>Стоимость этапа</p>
+          <p>{totalPrice}.00€</p>
+        </div>
+        <ButtonNext width={394} />
       </div>
     </div>
   );

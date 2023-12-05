@@ -6,25 +6,15 @@ import { SelectService, SingleService, Title } from "../../components/Calculator
 import "./MontagePage.scss";
 
 export const MontagePage: React.FC = () => {
-  const [selects, setSelects] = useState<SelectService[]>([{
+  const [selectServices, setSelectServices] = useState<SelectService[]>([{
     label: "Леса",
-    select: [{ value: "<5m", price: 400 }, { value: "5m - 8m", price: 500 }, { value: ">8m", price: 600 }]
+    select: [
+      { value: "<5m", price: 400 },
+      { value: "5m - 8m", price: 500 },
+      { value: ">8m", price: 600 }
+    ]
   }
   ])
-
-  const addNewSelectService = (selectObject: SelectService) => {
-    setSelects((prev: SelectService[]) => [...prev, selectObject])
-  }
-
-  const title: Title = {
-    blackTitle: "Installation + Lieferung",
-    greyTitle: "Монтаж + доставка"
-  }
-
-  const additionTitle = {
-    blackTitle: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
-    greyTitle: "Размер и количество лесов"
-  }
 
   const singleServices: SingleService[] = [{
     blackTitle: "Montage, Verkabelung, Anschluss je Wechselrichter",
@@ -42,6 +32,21 @@ export const MontagePage: React.FC = () => {
     price: 165
   }]
 
+  const addNewSelectService = (selectObject: SelectService) => {
+    setSelectServices((prev: SelectService[]) => [...prev, selectObject])
+  }
+
+  const title: Title = {
+    blackTitle: "Installation + Lieferung",
+    greyTitle: "Монтаж + доставка"
+  }
+
+  const additionTitle = {
+    blackTitle: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
+    greyTitle: "Размер и количество лесов"
+  }
+
+
   return (
     <div className="montagePage">
       <Header />
@@ -49,7 +54,7 @@ export const MontagePage: React.FC = () => {
         title={title}
         additionTitle={additionTitle}
         singleServices={singleServices}
-        selectServices={selects}
+        selectServices={selectServices}
         addNewSelectService={addNewSelectService}
         additionParagraph={true}
       />
