@@ -1,0 +1,9 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.pvModulePage {
+  @include pageDecore;
+  position: relative;
+  height: max-content;
+  padding-bottom: 158px;
+}

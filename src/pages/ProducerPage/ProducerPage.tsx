@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import producerImg from "../../assets/producerImg.svg"
 
 import { Header } from "../../components/Header";
@@ -6,16 +6,26 @@ import { CustomSelect } from "../../components/CustomSelect";
 import { ButtonNext } from "../../components/ButtonNext";
 import { ButtonPrev } from "../../components/ButtonPrev";
 import "./ProducerPage.scss";
+import producerStore, { Producer } from "../../stores/producer-store";
 
 export const ProducerPage: React.FC = () => {
-  const [selectedValue, setSelectedValue] = useState('Выберете производителя');
+  const [selectedValue, setSelectedValue] = useState<string>('Выберете производителя');
   const [isDisabled, setIsDisabled] = useState(true);
-  const producerValues = ["HUAWEI", "TYGO", "ENPHASE"]
+  const producerValues = Object.values(Producer);
+
+  const { setProducer } = producerStore;
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
     setIsDisabled(false)
   }
+
+  useEffect(() => {
+    if (selectedValue !== 'Выберете производителя') {
+      setProducer(selectedValue as Producer);
+    }
+  }, [selectedValue, setProducer]);
+
 
   return (
     <div className="producerPage">
