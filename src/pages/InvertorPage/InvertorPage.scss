@@ -2,5 +2,8 @@
 @import "../../utilsScss/mixins.scss";
 
 .invertorPage {
-
+  @include pageDecore;
+  position: relative;
+  height: max-content;
+  padding-bottom: 158px;
 }

@@ -8,7 +8,7 @@ export type SingleService = Title & {
 };
 
 export type SelectService = {
-  label: string;
+  label?: string;
   select: SelectServiceOption[];
 };
 

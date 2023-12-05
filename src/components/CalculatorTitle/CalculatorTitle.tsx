@@ -3,7 +3,7 @@ import "./CalculatorTitle.scss";
 import { Title } from "../Calculator/calculator-types";
 
 interface Props {
-  title: Title
+  title?: Title
 }
 
 export const CalculatorTitle: React.FC<Props> = ({ title }) => {

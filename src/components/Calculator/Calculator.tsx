@@ -39,16 +39,16 @@ export const Calculator: React.FC<Props> = ({
           )
           )}
         </div>
-        {additionParagraph && (
-          <>
-            <CalculatorTitle title={additionTitle} />
-            <div className="calculatorService__container">
-              {selectServices.map((service, index) => (
-                <SelectServiceItem key={index} service={service} index={index} addNewSelectService={addNewSelectService} setTotalPrice={setTotalPrice} />
-              ))}
-            </div>
-          </>
+        {additionParagraph && <CalculatorTitle title={additionTitle} />}
+        {selectServices && (
+
+          <div className="calculatorService__container">
+            {selectServices.map((service, index) => (
+              <SelectServiceItem key={index} service={service} index={index} addNewSelectService={addNewSelectService} setTotalPrice={setTotalPrice} />
+            ))}
+          </div>
         )}
+
         <div className="calculator__total">
           <p>Стоимость этапа</p>
           <p>{totalPrice}.00€</p>

@@ -8,6 +8,7 @@ import { MontagePage } from "./pages/MontagePage";
 import { UnderConstructionsPage } from "./pages/UnderConstructionsPage";
 import { PvModulePage } from "./pages/PvModulePage";
 import { OptimizerPage } from "./pages/OptimizerPage";
+import { InvertorPage } from "./pages/InvertorPage";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
@@ -50,6 +51,11 @@ export const App: React.FC = observer(() => {
       case 8:
         return (
           <OptimizerPage />
+        )
+
+      case 9:
+        return (
+          <InvertorPage />
         )
     }
   }
