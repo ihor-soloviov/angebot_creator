@@ -9,11 +9,11 @@ import { ButtonNext } from "../ButtonNext";
 
 interface Props {
   title: Title
-  additionTitle: Title
+  additionTitle?: Title
   singleServices: SingleService[]
-  selectServices: SelectService[]
+  selectServices?: SelectService[]
   additionParagraph?: boolean
-  addNewSelectService: (selectObject: SelectService) => void
+  addNewSelectService?: (selectObject: SelectService) => void
 }
 
 export const Calculator: React.FC<Props> = ({
