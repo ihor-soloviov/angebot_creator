@@ -4,16 +4,15 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
-import producerStore from "../../stores/producer-store";
+import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
 
 export const InvertorPage: React.FC = () => {
+
   const [singleServices, setSingleServices] = useState<SingleService[]>([])
   const [selectServices, setSelectServices] = useState<SelectService[]>([])
-
   const { producer } = producerStore;
-
   const title: Title = titles[producer]
 
   const addNewSelectService = (selectObject: SelectService) => {
@@ -22,7 +21,10 @@ export const InvertorPage: React.FC = () => {
 
   useEffect(() => {
     fetchSelectItems("inverters", setSelectServices)
-    fetchSingleItems("other", setSingleServices);
+    if (producer !== Producer.enphase) {
+      const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
+      fetchSingleItems(endpoint, setSingleServices);
+    }
   }, [])
 
   return (
