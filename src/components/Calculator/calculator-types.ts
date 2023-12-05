@@ -1,6 +1,6 @@
 export type Title = {
   blackTitle: string;
-  greyTitle: string;
+  greyTitle?: string;
 };
 
 export type SingleService = Title & {

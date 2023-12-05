@@ -5,6 +5,7 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SingleService, Title } from "../../components/Calculator/calculator-types";
 import producerStore from "../../stores/producer-store";
+import { fetchItemsFromTable } from "../../api/fetchItemsFromtable";
 
 export const OptimizerPage: React.FC = () => {
   const { producer } = producerStore;
@@ -17,13 +18,9 @@ export const OptimizerPage: React.FC = () => {
   }
 
   useEffect(() => {
-    
-  
-    return () => {
-      
-    }
+    fetchItemsFromTable("optimizers", setSingleServices);
   }, [])
-  
+
 
   return (
     <div className="optimizerPage">
