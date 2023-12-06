@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class StepStore {
-  step = 8;
+  step = 11;
 
   constructor() {
     makeAutoObservable(this);

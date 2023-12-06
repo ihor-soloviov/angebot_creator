@@ -10,7 +10,7 @@ import { ButtonNext } from "../ButtonNext";
 interface Props {
   title: Title
   additionTitle?: Title
-  singleServices: SingleService[]
+  singleServices?: SingleService[]
   selectServices?: SelectService[]
   additionParagraph?: boolean
   addNewSelectService?: (selectObject: SelectService) => void
@@ -34,7 +34,7 @@ export const Calculator: React.FC<Props> = ({
           <ProgressBar />
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-          {singleServices.map((service, index) => (
+          {singleServices && singleServices?.length > 0 && singleServices?.map((service, index) => (
             <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} />
           )
           )}

@@ -36,7 +36,7 @@ export const fetchSingleItems = async (
 
 export const fetchSelectItems = async (
   tableName: string,
-  setSelectService: (value: SelectService[]) => void
+  setSelectServices: (value: SelectService[]) => void
 ) => {
   const { producer } = producerStore;
   try {
@@ -55,7 +55,7 @@ export const fetchSelectItems = async (
       price: +el.preis,
     }));
 
-    setSelectService([{ select: services }]);
+    setSelectServices([{ select: services }]);
   } catch (error) {
     console.log(error);
   }

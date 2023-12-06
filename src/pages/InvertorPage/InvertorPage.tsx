@@ -21,11 +21,15 @@ export const InvertorPage: React.FC = () => {
 
   useEffect(() => {
     fetchSelectItems("inverters", setSelectServices)
-    if (producer !== Producer.enphase) {
+    if (producer == Producer.enphase) {
+      //single services from file
+    }
+
+    else {
       const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
       fetchSingleItems(endpoint, setSingleServices);
     }
-  }, [])
+  }, [producer])
 
   return (
     <div className="invertorPage">

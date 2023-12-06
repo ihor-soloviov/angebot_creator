@@ -9,6 +9,8 @@ import { UnderConstructionsPage } from "./pages/UnderConstructionsPage";
 import { PvModulePage } from "./pages/PvModulePage";
 import { OptimizerPage } from "./pages/OptimizerPage";
 import { InvertorPage } from "./pages/InvertorPage";
+import { IqCombiner } from "./pages/IqCombiner";
+import { BatteryPage } from "./pages/BatteryPage";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
@@ -56,6 +58,16 @@ export const App: React.FC = observer(() => {
       case 9:
         return (
           <InvertorPage />
+        )
+
+      case 10:
+        return (
+          <IqCombiner />
+        )
+
+      case 11:
+        return (
+          <BatteryPage />
         )
     }
   }
