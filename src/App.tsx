@@ -9,14 +9,17 @@ import { UnderConstructionsPage } from "./pages/UnderConstructionsPage";
 import { PvModulePage } from "./pages/PvModulePage";
 import { OptimizerPage } from "./pages/OptimizerPage";
 import { InvertorPage } from "./pages/InvertorPage";
-import { IqCombiner } from "./pages/IqCombiner";
+import { IqCombinerPage } from "./pages/IqCombinerPage";
 import { BatteryPage } from "./pages/BatteryPage";
 import { WallboxPage } from "./pages/WallboxPage";
 import { BackupBoxPage } from "./pages/BackupBoxPage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
+import { TaubenschutzPage } from "./pages/TaubenschutzPage";
+import producerStore from "./stores/producer-store";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
+  const { producer } = producerStore;
 
   const switchComponent = () => {
     switch (step) {
@@ -65,7 +68,7 @@ export const App: React.FC = observer(() => {
 
       case 10:
         return (
-          <IqCombiner />
+          <IqCombinerPage />
         )
 
       case 11:
@@ -84,6 +87,11 @@ export const App: React.FC = observer(() => {
         )
 
       case 14:
+        return (
+          <TaubenschutzPage />
+        )
+
+      case 15:
         return (
           <ZusatzarbeitenPage />
         )

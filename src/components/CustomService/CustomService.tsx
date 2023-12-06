@@ -3,7 +3,7 @@ import "./CustomService.scss";
 import { SingleService } from "../Calculator/calculator-types";
 
 interface Props {
-  setSingleServices: Dispatch<SetStateAction<SingleService[]>>
+  setSingleServices?: Dispatch<SetStateAction<SingleService[]>>
 }
 
 export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
@@ -15,7 +15,7 @@ export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
       return
     }
 
-    setSingleServices((prev: SingleService[]) => [...prev, { blackTitle: blackTitle, price: price }])
+    setSingleServices && setSingleServices((prev: SingleService[]) => [...prev, { blackTitle: blackTitle, price: price }])
   }
 
   return (
