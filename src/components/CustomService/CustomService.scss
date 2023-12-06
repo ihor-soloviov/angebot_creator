@@ -1,0 +1,91 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.customService {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+
+  .left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Poppins;
+    padding: 18px 27px;
+    border-radius: 8px;
+    border: 1px solid $border-grey;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    color: $dark-grey;
+    width: calc(460px - 54px);
+
+    input {
+      padding: 0;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      font-weight: 400;
+
+      &:active {
+        border: none;
+        outline: none;
+      }
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+
+      &::placeholder {
+        font-family: Inter Tight;
+        color: $dark-grey;
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  button {
+    height: 39px;
+    width: 39px;
+    padding: 9px;
+    border-radius: 4px;
+    border: 1px solid $light-grey;
+
+    background-color: #fff;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    margin-left: 20px;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.15);
+    }
+  }
+
+  &__price {
+    color: $main-black;
+    font-family: Inter Tight;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 7px 24px;
+    width: calc(100px - 48px);
+    border-radius: 8px;
+    border: 1px solid $border-grey;
+
+    &::placeholder {
+      color: $dark-grey;
+    }
+  }
+}

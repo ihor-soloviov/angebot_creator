@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
 import { SelectService, SingleService, Title } from "./calculator-types";
 import "./Calculator.scss";
@@ -6,6 +6,7 @@ import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
 import { SelectServiceItem } from "../SelectServiceItem";
 import { ButtonNext } from "../ButtonNext";
+import { CustomService } from "../CustomService";
 
 interface Props {
   title: Title
@@ -15,6 +16,8 @@ interface Props {
   additionParagraph?: boolean
   addNewSelectService?: (selectObject: SelectService) => void
   unNormalPriceChange?: boolean
+  customServiceInput?: boolean
+  setSingleServices?: Dispatch<SetStateAction<SingleService[]>>;
 }
 
 export const Calculator: React.FC<Props> = ({
@@ -25,6 +28,8 @@ export const Calculator: React.FC<Props> = ({
   addNewSelectService,
   additionParagraph,
   unNormalPriceChange,
+  customServiceInput,
+  setSingleServices
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -57,6 +62,9 @@ export const Calculator: React.FC<Props> = ({
               <SelectServiceItem key={index} service={service} index={index} addNewSelectService={addNewSelectService} setTotalPrice={setTotalPrice} />
             ))}
           </div>
+        )}
+        {customServiceInput && (
+          <CustomService setSingleServices={setSingleServices} />
         )}
 
         <div className="calculator__total">
