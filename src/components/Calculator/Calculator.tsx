@@ -14,6 +14,7 @@ interface Props {
   selectServices?: SelectService[]
   additionParagraph?: boolean
   addNewSelectService?: (selectObject: SelectService) => void
+  unNormalPriceChange?: boolean
 }
 
 export const Calculator: React.FC<Props> = ({
@@ -23,8 +24,12 @@ export const Calculator: React.FC<Props> = ({
   selectServices,
   addNewSelectService,
   additionParagraph,
+  unNormalPriceChange,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const singleServiceCondition = singleServices && singleServices?.length > 0;
+  const selectServicesCondition = selectServices && selectServices?.length > 0;
 
   return (
     <div className="calculator">
@@ -34,13 +39,18 @@ export const Calculator: React.FC<Props> = ({
           <ProgressBar />
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-          {singleServices && singleServices?.length > 0 && singleServices?.map((service, index) => (
-            <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} />
-          )
+          {singleServiceCondition && singleServices?.map((service, index) => {
+            if (service.blackTitle === "Kaskadenschaltung") {
+              return (
+                <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
+              )
+            }
+            return <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
+          }
           )}
         </div>
         {additionParagraph && <CalculatorTitle title={additionTitle} />}
-        {selectServices && (
+        {selectServicesCondition && (
 
           <div className="calculatorService__container">
             {selectServices.map((service, index) => (
