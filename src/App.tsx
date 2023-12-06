@@ -11,6 +11,9 @@ import { OptimizerPage } from "./pages/OptimizerPage";
 import { InvertorPage } from "./pages/InvertorPage";
 import { IqCombiner } from "./pages/IqCombiner";
 import { BatteryPage } from "./pages/BatteryPage";
+import { WallboxPage } from "./pages/WallboxPage";
+import { BackupBoxPage } from "./pages/BackupBoxPage";
+import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
@@ -68,6 +71,21 @@ export const App: React.FC = observer(() => {
       case 11:
         return (
           <BatteryPage />
+        )
+
+      case 12:
+        return (
+          <WallboxPage />
+        )
+
+      case 13:
+        return (
+          <BackupBoxPage />
+        )
+
+      case 14:
+        return (
+          <ZusatzarbeitenPage />
         )
     }
   }
