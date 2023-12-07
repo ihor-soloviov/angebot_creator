@@ -1,7 +1,6 @@
 import { WelcomePage } from "./pages/WelcomePage";
 import { AngebotTypePage } from "./pages/AngebotTypePage";
 import { observer } from "mobx-react-lite";
-import stepStore from "./stores/step-store";
 import { PvsolFilePage } from "./pages/PvsolFilePage";
 import { ProducerPage } from "./pages/ProducerPage";
 import { MontagePage } from "./pages/MontagePage";
@@ -15,85 +14,91 @@ import { WallboxPage } from "./pages/WallboxPage";
 import { BackupBoxPage } from "./pages/BackupBoxPage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { TaubenschutzPage } from "./pages/TaubenschutzPage";
-import producerStore from "./stores/producer-store";
+import { SkontoPage } from "./pages/SkontoPage";
+
+import stepStore, { Steps } from "./stores/step-store";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
-  const { producer } = producerStore;
 
   const switchComponent = () => {
     switch (step) {
-      case 1:
+      case Steps.welcome:
         return <WelcomePage />;
 
-      case 2:
+      case Steps.angebotType:
         return (
           <AngebotTypePage />
         );
 
-      case 3:
+      case Steps.pvsolFile:
         return (
           <PvsolFilePage />
         );
 
-      case 4:
+      case Steps.producer:
         return (
           <ProducerPage />
         )
 
-      case 5:
+      case Steps.montage:
         return (
           <MontagePage />
         )
 
-      case 6:
+      case Steps.underConstructions:
         return (
           <UnderConstructionsPage />
         )
 
-      case 7:
+      case Steps.pvModule:
         return (
           <PvModulePage />
         )
 
-      case 8:
+      case Steps.optimizer:
         return (
           <OptimizerPage />
         )
 
-      case 9:
+      case Steps.invertor:
         return (
           <InvertorPage />
         )
 
-      case 10:
+      case Steps.iqCombiner:
         return (
           <IqCombinerPage />
         )
 
-      case 11:
+      case Steps.battery:
         return (
           <BatteryPage />
         )
 
-      case 12:
+      case Steps.wallbox:
         return (
           <WallboxPage />
         )
 
-      case 13:
+      case Steps.backupBox:
         return (
           <BackupBoxPage />
         )
 
-      case 14:
+      case Steps.taubenschutz:
         return (
           <TaubenschutzPage />
         )
 
-      case 15:
+      case Steps.zusatzarbeiten:
         return (
           <ZusatzarbeitenPage />
+        )
+
+      case Steps.skonto:
+        return (
+          <SkontoPage />
         )
     }
   }

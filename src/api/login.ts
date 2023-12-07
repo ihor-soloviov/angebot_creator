@@ -1,37 +1,42 @@
 import roleStore, { UserRole } from "../stores/role-store";
+import stepStore, { Steps } from "../stores/step-store";
 
 interface User {
   login: string;
   password: string;
 }
 
+const updateLocalStorageCredentials = (user: User) => {
+  const { login, password } = user;
+  console.log("Updating local storage credentials");
+  console.log("New login:", login);
+  console.log("New password:", password);
+
+  localStorage.setItem("login", login);
+  localStorage.setItem("password", password);
+};
+
 export const getLogIn = (data: User) => {
-  console.log("started");
   const ADMIN_LOGIN = "admin";
   const ADMIN_PASSWORD = "88141321";
   const USER_LOGIN = "ne_admin";
   const USER_PASSWORD = "12344321";
 
-  switch (data.login) {
-    case ADMIN_LOGIN:
-      if (data.password === ADMIN_PASSWORD) {
-        roleStore.setRole(UserRole.admin);
-      } else {
-        console.log("admin no pass");
-        roleStore.setRole(UserRole.notLogged);
-      }
-      break;
+  const { login, password } = data;
+  // Перевірка логіну та паролю
+  if (login === ADMIN_LOGIN && password === ADMIN_PASSWORD) {
 
-    case USER_LOGIN:
-      if (data.password === USER_PASSWORD) {
-        roleStore.setRole(UserRole.user);
-      } else {
-        roleStore.setRole(UserRole.notLogged);
-      }
-      break;
+    stepStore.setStep(Steps.angebotType);
+    roleStore.setRole(UserRole.admin);
+    updateLocalStorageCredentials(data);
 
-    default:
-      roleStore.setRole(UserRole.notLogged);
-      return;
+  } else if (login === USER_LOGIN && password === USER_PASSWORD) {
+
+    stepStore.setStep(Steps.angebotType);
+    roleStore.setRole(UserRole.user);
+    updateLocalStorageCredentials(data);
+    
+  } else {
+    alert("Неправильний логін або пароль");
   }
 };

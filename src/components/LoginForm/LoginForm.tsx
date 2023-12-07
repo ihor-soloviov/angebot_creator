@@ -6,47 +6,52 @@ import log from "../../assets/log.svg";
 import pass from "../../assets/pass.svg";
 
 import { CustomCheckbox } from "../CustomCheckbox";
-import { ButtonNext } from "../ButtonNext";
+import arrButton from "../../assets/arrowButton.svg"
 
 import { getLogIn } from "../../api/login";
 import "./LoginForm.scss";
-import roleStore, { UserRole } from "../../stores/role-store";
-import stepStore from "../../stores/step-store";
-
 
 export const LoginForm: React.FC = observer(() => {
-  const { role } = roleStore;
-  const { setStep } = stepStore;
 
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  useEffect(() => {
+    checkLocalStorageCredentials();
+  }, [])
+
+  const checkLocalStorageCredentials = () => {
+    const storedLogin = localStorage.getItem('login');
+    const storedPassword = localStorage.getItem('password');
+
+    if (storedLogin && storedPassword) {
+      setLogin(storedLogin);
+      setPassword(storedPassword);
+    }
+  };
+
+  const formSubmit = () => {
     if (login && password) {
       getLogIn({ login: login, password: password });
+
     }
   }
-
-  useEffect(() => {
-    if (role === UserRole.admin || role === UserRole.user) {
-      setStep(2)
-    }
-  }, [role, setStep])
-
 
   return (
     <div className="welcomePage__login">
       <div className="loginForm">
         <h2>Login</h2>
         <h3>Добро пожаловать! Пожалуйста, <br /> войдите в свой аккаунт</h3>
-        <form onSubmit={(event) => formSubmit(event)}>
+        <div className="welcomePage__form">
           <CustomInput placeholder="Login" img={log} value={login} setValue={setLogin} />
           <CustomInput placeholder="Password" img={pass} value={password} setValue={setPassword} />
           <CustomCheckbox isChecked={isChecked} setIsChecked={setIsChecked} />
-          <ButtonNext />
-        </form>
+          <button onClick={formSubmit} className="buttonNext">
+            Далее
+            <img src={arrButton} alt="butt" />
+          </button>
+        </div>
       </div>
     </div>
   );

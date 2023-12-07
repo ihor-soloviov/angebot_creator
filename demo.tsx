@@ -1,26 +1,5 @@
 import React, { useState } from 'react';
 
-const WelcomePage: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => (
-  <div>
-    <h1>Welcome Page</h1>
-    <button onClick={onNextStep}>Next</button>
-  </div>
-);
-
-const AngebotTypePage: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => (
-  <div>
-    <h1>AngebotType Page</h1>
-    <button onClick={onNextStep}>Next</button>
-  </div>
-);
-
-const PvsolFilePage: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => (
-  <div>
-    <h1>PvsolFile Page</h1>
-    <button onClick={onNextStep}>Next</button>
-  </div>
-);
-
 const App: React.FC = () => {
   const [producer, setProducer] = useState<string>('producer1');
   const [currentStep, setCurrentStep] = useState<number>(0);
