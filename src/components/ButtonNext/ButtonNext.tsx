@@ -2,19 +2,22 @@ import React from "react";
 import arrButton from "../../assets/arrowButton.svg"
 import "./ButtonNext.scss";
 import classNames from "classnames";
-import stepStore, { Steps } from "../../stores/step-store";
+import stepStore from "../../stores/step-store";
 
 interface Props {
   isDisabled?: boolean
   width?: number
-  nextStep: Steps
 }
 
 
-export const ButtonNext: React.FC<Props> = ({ isDisabled, width, nextStep }) => {
-  const { setStep } = stepStore;
-  
+export const ButtonNext: React.FC<Props> = ({ isDisabled, width }) => {
+  const { setStep, generateNextStep } = stepStore;
+
   const handler = () => {
+    const nextStep = generateNextStep();
+    if (nextStep === null) {
+      return;
+    }
     setStep(nextStep)
   }
   return (

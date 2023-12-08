@@ -1,11 +1,9 @@
-export const titles = {
+import { Title } from "../../components/Calculator/calculator-types";
+
+export const titles: Record<string, Title> = {
   Huawei: {
     blackTitle: "PV-Speicher",
     greyTitle: "Накопители фотоэлектричества (Huawei)",
-  },
-  Tigo: {
-    blackTitle: "EI Battery",
-    greyTitle: "Аккумуляторная батарея EI (Tigo)",
   },
   Enphase: {
     blackTitle: "IQ-Geteway",

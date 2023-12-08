@@ -6,7 +6,7 @@ export enum Producer {
 }
 
 class ProducerStore {
-  producer = "" ;
+  producer = Producer.huawei;
 
   constructor() {
     makeAutoObservable(this);

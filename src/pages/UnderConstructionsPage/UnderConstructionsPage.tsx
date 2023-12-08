@@ -4,6 +4,7 @@ import { SingleService, Title } from "../../components/Calculator/calculator-typ
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
+import { Steps } from "../../stores/step-store";
 
 export const UnderConstructionsPage: React.FC = () => {
   const singleServices: SingleService[] = [{
@@ -59,6 +60,7 @@ export const UnderConstructionsPage: React.FC = () => {
       <Calculator
         title={title}
         singleServices={singleServices}
+        nextStepEnum={Steps.pvModule}
       />
       <Footer />
     </div>

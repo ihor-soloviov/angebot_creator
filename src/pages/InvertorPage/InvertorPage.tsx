@@ -7,6 +7,7 @@ import { SelectService, SingleService, Title } from "../../components/Calculator
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
+import { Steps } from "../../stores/step-store";
 
 export const InvertorPage: React.FC = () => {
 
@@ -18,6 +19,7 @@ export const InvertorPage: React.FC = () => {
   const addNewSelectService = (selectObject: SelectService) => {
     setSelectServices((prev: SelectService[]) => [...prev, selectObject])
   }
+
 
   useEffect(() => {
     fetchSelectItems("inverters", setSelectServices)
@@ -39,6 +41,7 @@ export const InvertorPage: React.FC = () => {
         singleServices={singleServices}
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
+        nextStepEnum={Steps.battery}
       />
       <Footer />
     </div>

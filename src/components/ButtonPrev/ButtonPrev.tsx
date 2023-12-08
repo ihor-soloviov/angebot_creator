@@ -4,9 +4,17 @@ import "./ButtonPrev.scss";
 import stepStore from "../../stores/step-store";
 
 export const ButtonPrev: React.FC = () => {
-  const { step, setStep } = stepStore;
+  const { setStep, generatePrevStep } = stepStore;
+
+  const handler = () => {
+    const prevStep = generatePrevStep();
+    if (prevStep === null) {
+      return;
+    }
+    setStep(prevStep)
+  }
   return (
-    <div onClick={() => setStep((step - 1))} className="buttonPrev">
+    <div onClick={handler} className="buttonPrev">
       <p>Назад</p>
       <img src={arrBack} alt="arr back" />
     </div>

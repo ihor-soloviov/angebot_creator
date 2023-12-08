@@ -29,7 +29,7 @@ export const Calculator: React.FC<Props> = ({
   additionParagraph,
   unNormalPriceChange,
   customServiceInput,
-  setSingleServices
+  setSingleServices,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 

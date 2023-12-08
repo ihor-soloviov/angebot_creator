@@ -6,6 +6,8 @@ interface User {
   password: string;
 }
 
+const {setStep} = stepStore;
+
 const updateLocalStorageCredentials = (user: User) => {
   const { login, password } = user;
   console.log("Updating local storage credentials");
@@ -26,13 +28,13 @@ export const getLogIn = (data: User) => {
   // Перевірка логіну та паролю
   if (login === ADMIN_LOGIN && password === ADMIN_PASSWORD) {
 
-    stepStore.setStep(Steps.angebotType);
+    setStep(Steps.angebotType);
     roleStore.setRole(UserRole.admin);
     updateLocalStorageCredentials(data);
 
   } else if (login === USER_LOGIN && password === USER_PASSWORD) {
 
-    stepStore.setStep(Steps.angebotType);
+    setStep(Steps.angebotType);
     roleStore.setRole(UserRole.user);
     updateLocalStorageCredentials(data);
     

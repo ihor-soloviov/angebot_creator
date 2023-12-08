@@ -17,18 +17,15 @@ export const LoginForm: React.FC = observer(() => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  useEffect(() => {
-    checkLocalStorageCredentials();
-  }, [])
-
   const checkLocalStorageCredentials = () => {
     const storedLogin = localStorage.getItem('login');
     const storedPassword = localStorage.getItem('password');
-
-    if (storedLogin && storedPassword) {
-      setLogin(storedLogin);
-      setPassword(storedPassword);
+    if (storedLogin === null || storedPassword === null) {
+      return;
     }
+    setLogin(storedLogin);
+    setPassword(storedPassword);
+
   };
 
   const formSubmit = () => {
@@ -37,6 +34,11 @@ export const LoginForm: React.FC = observer(() => {
 
     }
   }
+
+  useEffect(() => {
+    checkLocalStorageCredentials();
+  }, [])
+
 
   return (
     <div className="welcomePage__login">

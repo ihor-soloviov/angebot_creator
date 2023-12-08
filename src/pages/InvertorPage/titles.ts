@@ -1,8 +1,6 @@
-export const titles = {
-  Tigo: {
-    blackTitle: "El Inverter + El Link",
-    greyTitle: "El Inverter + El Link (Tigo)",
-  },
+import { Title } from "../../components/Calculator/calculator-types";
+
+export const titles: Record<string, Title> = {
   Huawei: {
     blackTitle: "Wechselrichter + Smart Dongle + Smartmeter",
     greyTitle: "Инвертор + смарт-ключ + смарт-счетчик (Huawei)",

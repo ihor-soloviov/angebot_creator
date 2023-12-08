@@ -36,7 +36,7 @@ export const AngebotTypePage: React.FC = () => {
               changeSelectedValue={changeSelectedValue}
               values={angebotTypes}
             />
-            <p className="label">ID клиента</p>
+            <p className="label angebotTypeLabel">ID клиента</p>
             <SearchInput setSelectedId={setSelectedId} />
             <ButtonNext isDisabled={isDisabled} />
           </div>

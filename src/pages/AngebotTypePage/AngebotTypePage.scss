@@ -3,6 +3,8 @@
 
 .angebotTypePage {
   @include pageDecore;
+  height: max-content;
+  padding-bottom: 120px;
 
   &__inner {
     display: flex;
@@ -35,4 +37,8 @@
 .label {
   margin-bottom: 14px;
   font-size: 20px;
+}
+
+.angebotTypeLabel {
+  margin-top: 64px;
 }
