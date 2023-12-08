@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./PlusMinusHandler.scss";
+import { updateTotalPrice } from "../../utils/updateTotalPrice";
 
 interface Props {
   priceСount: number
@@ -8,7 +9,6 @@ interface Props {
 }
 
 export const PlusMinusHandler: React.FC<Props> = ({ priceСount, setPriceСount, setTotalPrice }) => {
-
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = +e.target.value;
@@ -30,28 +30,7 @@ export const PlusMinusHandler: React.FC<Props> = ({ priceСount, setPriceСount,
   }
 
   useEffect(() => {
-    const updateTotalPrice = () => {
-      const allPricesElements = [...document.getElementsByClassName('service_price')];
-      if (allPricesElements.length > 0) {
-        const prices = allPricesElements.map(el => {
-          if (el.textContent) {
-            return +el.textContent.split('.')[0];
-          }
-          return 0; // Default value if textContent is not available
-        });
-
-        const sumArray = (numbers: number[]): number => {
-          return numbers.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue;
-          }, 0);
-        };
-
-        const result = sumArray(prices);
-        setTotalPrice(result);
-      }
-    };
-
-    updateTotalPrice();
+    updateTotalPrice(setTotalPrice);
   }, [priceСount, setTotalPrice]);
 
 

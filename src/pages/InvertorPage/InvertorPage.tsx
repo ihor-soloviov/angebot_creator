@@ -7,7 +7,7 @@ import { SelectService, SingleService, Title } from "../../components/Calculator
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
-import { Steps } from "../../stores/step-store";
+import { enphaseServices } from "./singleServiceEnphase";
 
 export const InvertorPage: React.FC = () => {
 
@@ -22,9 +22,9 @@ export const InvertorPage: React.FC = () => {
 
 
   useEffect(() => {
-    fetchSelectItems("inverters", setSelectServices)
+    fetchSelectItems("inverters", setSelectServices);
     if (producer == Producer.enphase) {
-      //single services from file
+      setSingleServices(enphaseServices);
     }
 
     else {
@@ -41,7 +41,6 @@ export const InvertorPage: React.FC = () => {
         singleServices={singleServices}
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
-        nextStepEnum={Steps.battery}
       />
       <Footer />
     </div>

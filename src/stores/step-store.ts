@@ -17,11 +17,10 @@ export enum Steps {
   backupBox,
   taubenschutz,
   zusatzarbeiten,
-  skonto,
 }
 
 class StepStore {
-  step = Steps.welcome;
+  step = Steps.producer;
 
   arraysOfSteps = {
     Huawei: [
@@ -48,7 +47,6 @@ class StepStore {
       Steps.montage,
       Steps.underConstructions,
       Steps.pvModule,
-      Steps.optimizer,
       Steps.invertor,
       Steps.iqCombiner,
       Steps.battery,
@@ -86,14 +84,16 @@ class StepStore {
   generatePrevStep = () => {
     const activeStep = this.step;
     const stepsArray = this.arraysOfSteps[producerStore.producer];
-  
-    const prevStepIndex = stepsArray.findIndex((el, index) => el === activeStep && index > 0);
-  
+
+    const prevStepIndex = stepsArray.findIndex(
+      (el, index) => el === activeStep && index > 0
+    );
+
     // Перевірка, чи був знайдений попередній крок
     if (prevStepIndex !== -1) {
       return stepsArray[prevStepIndex - 1];
     }
-  
+
     // Якщо вже на першому кроці або крок не знайдено
     return null;
   };
