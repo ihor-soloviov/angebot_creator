@@ -1,6 +1,25 @@
 @import "../../utilsScss/colors.scss";
 @import "../../utilsScss/mixins.scss";
 
-.calculatorTitle {
+.calculator__title {
+  margin-bottom: 36px;
 
+  h3 {
+    text-align: center;
+    font-family: Poppins;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 6px;
+  }
+
+  p {
+    text-align: center;
+    font-family: Inter Tight;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }

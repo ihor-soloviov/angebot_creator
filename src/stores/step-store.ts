@@ -5,6 +5,7 @@ export enum Steps {
   welcome,
   angebotType,
   pvsolFile,
+  projectImages,
   producer,
   montage,
   underConstructions,
@@ -17,16 +18,19 @@ export enum Steps {
   backupBox,
   taubenschutz,
   zusatzarbeiten,
+  checkout,
+  bravo
 }
 
 class StepStore {
-  step = Steps.producer;
+  step = Steps.projectImages;
 
   arraysOfSteps = {
     Huawei: [
       Steps.welcome,
       Steps.angebotType,
       Steps.pvsolFile,
+      Steps.projectImages,
       Steps.producer,
       Steps.montage,
       Steps.underConstructions,
@@ -38,11 +42,14 @@ class StepStore {
       Steps.backupBox,
       Steps.taubenschutz,
       Steps.zusatzarbeiten,
+      Steps.checkout,
+      Steps.bravo
     ],
     Enphase: [
       Steps.welcome,
       Steps.angebotType,
       Steps.pvsolFile,
+      Steps.projectImages,
       Steps.producer,
       Steps.montage,
       Steps.underConstructions,
@@ -53,6 +60,8 @@ class StepStore {
       Steps.wallbox,
       Steps.taubenschutz,
       Steps.zusatzarbeiten,
+      Steps.checkout,
+      Steps.bravo
     ],
   };
 

@@ -1,6 +1,8 @@
+import { BravoPage } from "./pages/BravoPage";
 import { AngebotTypePage } from "./pages/AngebotTypePage";
 import { BackupBoxPage } from "./pages/BackupBoxPage";
 import { BatteryPage } from "./pages/BatteryPage";
+import { CheckoutPage } from "./pages/CheckoutPage";
 import { InvertorPage } from "./pages/InvertorPage";
 import { IqCombinerPage } from "./pages/IqCombinerPage";
 import { MontagePage } from "./pages/MontagePage";
@@ -14,6 +16,7 @@ import { WallboxPage } from "./pages/WallboxPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { Steps } from "./stores/step-store";
+import { ProjectImagesPage } from "./components/ProjectImagesPage";
 
 export const stepComponents = {
   [Steps.welcome]: WelcomePage,
@@ -31,4 +34,7 @@ export const stepComponents = {
   [Steps.backupBox]: BackupBoxPage,
   [Steps.taubenschutz]: TaubenschutzPage,
   [Steps.zusatzarbeiten]: ZusatzarbeitenPage,
+  [Steps.checkout]: CheckoutPage,
+  [Steps.bravo]: BravoPage,
+  [Steps.projectImages]: ProjectImagesPage,
 };

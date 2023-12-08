@@ -3,15 +3,16 @@ import "./CalculatorTitle.scss";
 import { Title } from "../Calculator/calculator-types";
 
 interface Props {
-  title?: Title
+  title: Title
+  fontFamily?: string
 }
 
-export const CalculatorTitle: React.FC<Props> = ({ title }) => {
+export const CalculatorTitle: React.FC<Props> = ({ title, fontFamily }) => {
   const { blackTitle, greyTitle } = title;
 
   return (
     <div className="calculator__title">
-      <h3>{blackTitle}</h3>
+      <h3 style={fontFamily && { fontFamily: fontFamily }}>{blackTitle}</h3>
       <p>{greyTitle}</p>
     </div>
   );
