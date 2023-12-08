@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import producerStore from "./producer-store";
+import producerStore, { Producer } from "./producer-store";
 
 export enum Steps {
   welcome,
@@ -19,11 +19,14 @@ export enum Steps {
   taubenschutz,
   zusatzarbeiten,
   checkout,
-  bravo
+  bravo,
 }
 
+const { producer } = producerStore;
+
 class StepStore {
-  step = Steps.projectImages;
+  step = Steps.producer;
+  stepFromMontage = 6;
 
   arraysOfSteps = {
     Huawei: [
@@ -43,7 +46,7 @@ class StepStore {
       Steps.taubenschutz,
       Steps.zusatzarbeiten,
       Steps.checkout,
-      Steps.bravo
+      Steps.bravo,
     ],
     Enphase: [
       Steps.welcome,
@@ -61,7 +64,7 @@ class StepStore {
       Steps.taubenschutz,
       Steps.zusatzarbeiten,
       Steps.checkout,
-      Steps.bravo
+      Steps.bravo,
     ],
   };
 
@@ -71,6 +74,19 @@ class StepStore {
 
   setStep = (value: Steps) => {
     this.step = value;
+  };
+
+  getStepNumber = () => {
+
+    const index = this.arraysOfSteps[producer].indexOf(this.step);
+
+  if (index === -1) {
+    return null; // Якщо крок не знайдений в масиві, повертаємо null
+  }
+    const arrayOfStepsLength = producer === Producer.huawei ? 12 : 11;
+    const stepCount = index - this.stepFromMontage + 2;
+
+    return [arrayOfStepsLength, stepCount];
   };
 
   generateNextStep = () => {

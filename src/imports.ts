@@ -16,7 +16,7 @@ import { WallboxPage } from "./pages/WallboxPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { Steps } from "./stores/step-store";
-import { ProjectImagesPage } from "./components/ProjectImagesPage";
+import { ProjectImagesPage } from "./pages/ProjectImagesPage";
 
 export const stepComponents = {
   [Steps.welcome]: WelcomePage,

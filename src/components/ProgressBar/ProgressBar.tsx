@@ -1,13 +1,14 @@
 import React from "react";
 import "./ProgressBar.scss";
+import stepStore from "../../stores/step-store";
 
-interface Props {
-  stepCount?: number
-  calculatorStep?: number
-}
 
-export const ProgressBar: React.FC<Props> = ({ stepCount = 10, calculatorStep = 5 }) => {
-  const progresSize = Math.round(100 * calculatorStep / stepCount);
+export const ProgressBar: React.FC = () => {
+  const { getStepNumber } = stepStore;
+  const [arrayOfStepsLength, stepCount] = getStepNumber();
+  console.log(arrayOfStepsLength, stepCount)
+
+  const progresSize = Math.round(100 * stepCount  / arrayOfStepsLength);
 
   return (
     <>
@@ -15,7 +16,7 @@ export const ProgressBar: React.FC<Props> = ({ stepCount = 10, calculatorStep = 
         <div className="progressBar" style={{ width: `${progresSize}%` }} />
       </div>
       <div className="progressBar__value">
-        {calculatorStep}/{stepCount}
+        {stepCount}/{arrayOfStepsLength}
       </div>
     </>
   );

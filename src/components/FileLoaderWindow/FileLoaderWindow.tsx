@@ -7,6 +7,7 @@ import dragSuccess from "../../assets/dragSuccess.svg"
 import docIcon from "../../assets/docIcon.svg";
 import "./FileLoaderWindow.scss";
 import classNames from "classnames";
+import { dragLeaveHandler, dragStartHandler } from "../../utils/dragFunctions";
 
 interface LoadedFile {
   name: string
@@ -17,21 +18,13 @@ interface Props {
   setIsDisabled: (value: boolean) => void
 }
 
-export const FileLoaderWindow: React.FC<Props> = ({setIsDisabled}) => {
+export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
   const [drag, setDrag] = useState(false);
   const [dragIcon, setDragIcon] = useState<string>(dragSvg);
   const [dragtext, setDragtext] = useState('Перетащите сюда DOCX файл');
   const [loadedFileInfo, setLoadedFileInfo] = useState<LoadedFile | null>(null);
 
-  const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setDrag(true)
-  }
 
-  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setDrag(false)
-  }
 
   const onDragHandler = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -79,9 +72,9 @@ export const FileLoaderWindow: React.FC<Props> = ({setIsDisabled}) => {
 
         {drag
           ? <div
-            onDragStart={(e) => dragStartHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-            onDragOver={(e) => dragStartHandler(e)}
+            onDragStart={(e) => dragStartHandler(e, setDrag)}
+            onDragLeave={(e) => dragLeaveHandler(e, setDrag)}
+            onDragOver={(e) => dragStartHandler(e, setDrag)}
             onDrop={(e) => onDragHandler(e)}
             className={classNames("dragWindow", { drag: drag })}
           >
@@ -89,9 +82,9 @@ export const FileLoaderWindow: React.FC<Props> = ({setIsDisabled}) => {
             <p>{dragtext}</p>
           </div>
           : <div
-            onDragStart={(e) => dragStartHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-            onDragOver={(e) => dragStartHandler(e)}
+            onDragStart={(e) => dragStartHandler(e, setDrag)}
+            onDragLeave={(e) => dragLeaveHandler(e, setDrag)}
+            onDragOver={(e) => dragStartHandler(e, setDrag)}
             className={classNames("dragWindow", { drag: drag })}
           >
             <img src={dragIcon} alt="draggggs" />
