@@ -25,7 +25,7 @@ export enum Steps {
 const { producer } = producerStore;
 
 class StepStore {
-  step = Steps.producer;
+  step = Steps.projectImages;
   stepFromMontage = 6;
 
   arraysOfSteps = {
@@ -76,10 +76,8 @@ class StepStore {
     this.step = value;
   };
 
-  getStepNumber = () => {
-
+  getRangeValues = () => {
     const index = this.arraysOfSteps[producer].indexOf(this.step);
-
   if (index === -1) {
     return null; // Якщо крок не знайдений в масиві, повертаємо null
   }

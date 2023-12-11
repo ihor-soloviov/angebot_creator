@@ -4,8 +4,8 @@ import stepStore from "../../stores/step-store";
 
 
 export const ProgressBar: React.FC = () => {
-  const { getStepNumber } = stepStore;
-  const [arrayOfStepsLength, stepCount] = getStepNumber();
+  const { getRangeValues } = stepStore;
+  const [arrayOfStepsLength, stepCount] = getRangeValues();
   console.log(arrayOfStepsLength, stepCount)
 
   const progresSize = Math.round(100 * stepCount  / arrayOfStepsLength);
