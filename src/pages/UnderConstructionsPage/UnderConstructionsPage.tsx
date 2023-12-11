@@ -62,7 +62,7 @@ export const UnderConstructionsPage: React.FC = () => {
         singleServices={singleServices}
         nextStepEnum={Steps.pvModule}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

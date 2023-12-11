@@ -8,7 +8,7 @@
   border: 1px solid $light-grey;
 
   input,
-  button {
+  .buttonHandler {
     border: none;
     color: $dark-grey;
   }
@@ -28,7 +28,7 @@
     margin: 0;
   }
 
-  button {
+  .buttonHandler {
     display: flex;
     align-items: center;
     justify-content: center;

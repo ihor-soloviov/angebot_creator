@@ -38,7 +38,7 @@ export const SelectServiceItem: React.FC<Props> = ({ service, addNewSelectServic
       <div className="selectService">
         <div className="selectService__left">
           <CustomSelect width={460} selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} values={valuesForSelect} />
-          <button onClick={() => {
+          <button className="button__add" onClick={() => {
             if (addNewSelectService) {
               addNewSelectService(service)
             }

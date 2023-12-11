@@ -33,7 +33,7 @@ export const WallboxPage: React.FC = () => {
         title={title}
         singleServices={singleServices}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

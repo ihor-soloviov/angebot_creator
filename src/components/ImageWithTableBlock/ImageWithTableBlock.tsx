@@ -23,7 +23,7 @@ export const ImageWithTableBlock: React.FC = () => {
 
     const formData = new FormData();
     formData.append("mainImg", files[0])
-    alert(formData)
+    console.log(formData)
     setDrag(false)
   }
 

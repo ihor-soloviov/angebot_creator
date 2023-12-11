@@ -18,7 +18,7 @@ export const CheckoutPage: React.FC = () => {
       <div className="checkoutPage__container">
         <CalculatorTitle title={title} fontFamily="Inter Tight" />
       </div>
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

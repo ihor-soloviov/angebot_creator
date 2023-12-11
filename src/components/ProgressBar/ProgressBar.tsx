@@ -4,11 +4,9 @@ import stepStore from "../../stores/step-store";
 
 
 export const ProgressBar: React.FC = () => {
-  const { getRangeValues } = stepStore;
-  const [arrayOfStepsLength, stepCount] = getRangeValues();
-  console.log(arrayOfStepsLength, stepCount)
+  const { calculatorSteps, calculatorStep } = stepStore;
 
-  const progresSize = Math.round(100 * stepCount  / arrayOfStepsLength);
+  const progresSize = Math.round(100 * calculatorStep / calculatorSteps);
 
   return (
     <>
@@ -16,7 +14,7 @@ export const ProgressBar: React.FC = () => {
         <div className="progressBar" style={{ width: `${progresSize}%` }} />
       </div>
       <div className="progressBar__value">
-        {stepCount}/{arrayOfStepsLength}
+        {calculatorStep}/{calculatorSteps}
       </div>
     </>
   );

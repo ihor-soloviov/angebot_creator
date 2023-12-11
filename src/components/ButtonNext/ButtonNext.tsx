@@ -7,17 +7,21 @@ import stepStore from "../../stores/step-store";
 interface Props {
   isDisabled?: boolean
   width?: number
+  isCalculator?: boolean
 }
 
 
-export const ButtonNext: React.FC<Props> = ({ isDisabled, width }) => {
-  const { setStep, generateNextStep } = stepStore;
+export const ButtonNext: React.FC<Props> = ({ isDisabled, width, isCalculator }) => {
+  const { setStep, generateNextStep, setCalculatorStepNext } = stepStore;
 
   const handler = () => {
     const nextStep = generateNextStep();
     if (nextStep === null) {
       return;
     }
+
+    isCalculator && setCalculatorStepNext()
+
     setStep(nextStep)
   }
   return (

@@ -3,14 +3,19 @@ import arrBack from "../../assets/arrBack.svg"
 import "./ButtonPrev.scss";
 import stepStore from "../../stores/step-store";
 
-export const ButtonPrev: React.FC = () => {
-  const { setStep, generatePrevStep } = stepStore;
+interface Props {
+  isCalculator?: boolean
+}
+
+export const ButtonPrev: React.FC<Props> = ({ isCalculator }) => {
+  const { setStep, generatePrevStep, setCalculatorStepPrev } = stepStore;
 
   const handler = () => {
     const prevStep = generatePrevStep();
     if (prevStep === null) {
       return;
     }
+    isCalculator && setCalculatorStepPrev();
     setStep(prevStep)
   }
   return (

@@ -60,7 +60,7 @@ export const MontagePage: React.FC = () => {
         additionParagraph={true}
         nextStepEnum={Steps.underConstructions}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

@@ -31,7 +31,7 @@ export const OptimizerPage: React.FC = () => {
         singleServices={singleServices}
         nextStepEnum={Steps.invertor}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

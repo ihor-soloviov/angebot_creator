@@ -42,7 +42,7 @@ export const InvertorPage: React.FC = () => {
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

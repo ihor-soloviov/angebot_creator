@@ -31,7 +31,7 @@ export const PvModulePage: React.FC = () => {
         singleServices={singleServices}
         nextStepEnum={Steps.optimizer}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

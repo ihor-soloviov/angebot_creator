@@ -25,7 +25,7 @@ export const ZusatzarbeitenPage: React.FC = () => {
         customServiceInput={true}
         setSingleServices={setSingleServices}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

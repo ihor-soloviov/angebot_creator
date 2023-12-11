@@ -6,6 +6,7 @@ import "./ProjectImagesPage.scss";
 import { ImageWithTableBlock } from "../../components/ImageWithTableBlock";
 import { MainImageAdder } from "../../components/MainImageAdder";
 import { PlusButton } from "../../components/PlusButton";
+import { ButtonNext } from "../../components/ButtonNext";
 
 
 export const ProjectImagesPage: React.FC = () => {
@@ -31,6 +32,7 @@ export const ProjectImagesPage: React.FC = () => {
         <div className="projectImagesPage__plusButton">
           <PlusButton handler={addNewItem} />
           <p>Добавить фото</p>
+          <ButtonNext width={532} />
         </div>
       </div>
       <Footer />

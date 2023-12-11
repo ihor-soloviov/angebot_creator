@@ -28,7 +28,7 @@ export const BatteryPage: React.FC = () => {
         selectServices={selectServices}
         nextStepEnum={nextStep}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

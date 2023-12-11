@@ -19,7 +19,7 @@ export const TaubenschutzPage: React.FC = () => {
         title={{ blackTitle: "Taubenschutz", greyTitle: "Защита от голубей" }}
         singleServices={singleServices}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

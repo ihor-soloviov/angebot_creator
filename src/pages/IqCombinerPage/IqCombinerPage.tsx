@@ -30,7 +30,7 @@ export const IqCombinerPage: React.FC = () =>
           title={title}
           singleServices={singleServices}
         />
-        <Footer />
+        <Footer isCalculator={true} />
       </div >
     );
   }

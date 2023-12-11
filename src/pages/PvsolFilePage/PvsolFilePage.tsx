@@ -13,7 +13,7 @@ export const PvsolFilePage: React.FC = () => {
       <div className="pvsolFilePage__inner">
         <FileLoaderWindow setIsDisabled={setIsDisabled} />
         <ButtonNext width={394} isDisabled={isDisabled} />
-        <ButtonPrev/>
+        <ButtonPrev isCalculator={true}/>
       </div>
     </div>
   );

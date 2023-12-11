@@ -24,7 +24,7 @@ export const BackupBoxPage: React.FC = () => {
         title={{ greyTitle: "Решение для аварийного электроснабжения", blackTitle: "Notstromlösung" }}
         singleServices={singleServices}
       />
-      <Footer />
+      <Footer isCalculator={true} />
     </div>
   );
 }

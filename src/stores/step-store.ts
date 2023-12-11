@@ -26,7 +26,8 @@ const { producer } = producerStore;
 
 class StepStore {
   step = Steps.projectImages;
-  stepFromMontage = 6;
+  calculatorSteps = producer === Producer.huawei ? 10 : 9;
+  calculatorStep = 1;
 
   arraysOfSteps = {
     Huawei: [
@@ -76,16 +77,14 @@ class StepStore {
     this.step = value;
   };
 
-  getRangeValues = () => {
-    const index = this.arraysOfSteps[producer].indexOf(this.step);
-  if (index === -1) {
-    return null; // Якщо крок не знайдений в масиві, повертаємо null
+  setCalculatorStepNext = () => {
+    this.calculatorStep += 1;
   }
-    const arrayOfStepsLength = producer === Producer.huawei ? 12 : 11;
-    const stepCount = index - this.stepFromMontage + 2;
 
-    return [arrayOfStepsLength, stepCount];
-  };
+  setCalculatorStepPrev = () => {
+    this.calculatorStep -= 1;
+  }
+
 
   generateNextStep = () => {
     const activeStep = this.step;
