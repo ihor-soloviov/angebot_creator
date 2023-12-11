@@ -1,0 +1,37 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.table__block {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
+  .table-head {
+    display: flex;
+    color: #fff;
+    background-color: $main-red;
+    border-radius: 8px 8px 0 0;
+
+    p {
+      flex: 1;
+      padding: 24px 0 24px 24px;
+      width: calc(265px - 24px);
+    }
+  }
+
+  .table-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    
+    
+    p {
+      font-size: 14px; 
+      color: $dark-grey;
+    }
+  }
+
+  
+}

@@ -1,0 +1,30 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.table-row {
+  display: flex;
+  width: 100%;
+
+  input {
+    padding: 24px 0 24px 24px;
+    border: 0;
+    outline: none;
+    border-left: 1px solid $light-grey;
+    border-bottom: 1px solid $light-grey;
+    border-right: 1px solid $light-grey;
+    width: calc(265px - 24px);
+    color: #000;
+    font-size: 15px;
+
+    &::placeholder {
+      color: $dark-grey;
+    }
+  }
+
+  p {
+    padding: 24px 0 24px 24px;
+    width: calc(265px - 24px);
+    border-left: 1px solid $light-grey;
+    border-bottom: 1px solid $light-grey;
+  }
+}
