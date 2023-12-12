@@ -2,24 +2,24 @@ import { makeAutoObservable } from "mobx";
 import producerStore from "./producer-store";
 
 export enum Steps {
-  welcome,
-  angebotType,
-  pvsolFile,
-  projectImages,
-  producer,
-  montage,
-  underConstructions,
-  pvModule,
-  optimizer,
-  invertor,
-  iqCombiner,
-  battery,
-  wallbox,
-  backupBox,
-  taubenschutz,
-  zusatzarbeiten,
-  checkout,
-  bravo,
+  welcome = "welcome",
+  angebotType = "angebotType",
+  pvsolFile = "pvsolFile",
+  projectImages = "projectImages",
+  producer = "producer",
+  montage = "montage",
+  underConstructions = "underConstructions",
+  pvModule = "pvModule",
+  optimizer = "optimizer",
+  invertor = "invertor",
+  iqCombiner = "iqCombiner",
+  battery = "battery",
+  wallbox = "wallbox",
+  backupBox = "backupBox",
+  taubenschutz = "taubenschutz",
+  zusatzarbeiten = "zusatzarbeiten",
+  checkout = "checkout",
+  bravo = "bravo",
 }
 
 export enum ProducerSteps {
@@ -28,7 +28,7 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.producer;
+  step = Steps.montage;
   calculatorSteps = 10;
   calculatorStep = 1;
 

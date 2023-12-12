@@ -3,6 +3,7 @@ import "./SelectServiceItem.scss";
 import { SelectService } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
 import { PlusMinusHandler } from "../PlusMinusHandler";
+import stepStore from "../../stores/step-store";
 
 interface Props {
   service: SelectService
@@ -11,14 +12,27 @@ interface Props {
   setTotalPrice: (value: number) => void
 }
 
-export const SelectServiceItem: React.FC<Props> = ({ service, addNewSelectService, index, setTotalPrice }) => {
+export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService, index, setTotalPrice }) => {
 
   const [selectedValue, setSelectedValue] = useState('Выберете вариант');
   const [optionPrice, setOptionPrice] = useState(0)
   const [priceСount, setPriceСount] = useState(0);
+  const [countedPrice, setCountedPrice] = useState(0)
 
   const { label, select } = service;
   const valuesForSelect = select.map(obj => obj.value);
+
+  const { step } = stepStore;
+
+  useEffect(() => {
+    const newPrice = priceСount === 0 ? 0 : optionPrice * priceСount
+    setCountedPrice(newPrice)
+  }, [optionPrice, priceСount])
+
+
+  console.log(step, service.label, selectedValue, countedPrice, priceСount)
+
+
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
@@ -50,10 +64,10 @@ export const SelectServiceItem: React.FC<Props> = ({ service, addNewSelectServic
           </button>
         </div>
         <div className="selectService__right">
-          <PlusMinusHandler service={service} priceСount={priceСount} setPriceСount={setPriceСount} setTotalPrice={setTotalPrice} />
-          <p className="service_price">{priceСount === 0 ? 0 : optionPrice * priceСount}.00 €</p>
+          <PlusMinusHandler priceСount={priceСount} setPriceСount={setPriceСount} setTotalPrice={setTotalPrice} />
+          <p className="service_price">{countedPrice}.00 €</p>
         </div>
       </div>
     </div>
   );
-}
+})

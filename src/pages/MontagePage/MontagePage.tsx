@@ -46,7 +46,6 @@ export const MontagePage: React.FC = () => {
     greyTitle: "Размер и количество лесов"
   }
 
-
   return (
     <div className="montagePage">
       <Header />
