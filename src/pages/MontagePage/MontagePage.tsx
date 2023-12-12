@@ -4,7 +4,6 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
-import { Steps } from "../../stores/step-store";
 
 export const MontagePage: React.FC = () => {
   const [selectServices, setSelectServices] = useState<SelectService[]>([{
@@ -58,7 +57,6 @@ export const MontagePage: React.FC = () => {
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
         additionParagraph={true}
-        nextStepEnum={Steps.underConstructions}
       />
       <Footer isCalculator={true} />
     </div>

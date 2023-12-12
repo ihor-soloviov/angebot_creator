@@ -7,12 +7,14 @@ import { ButtonNext } from "../../components/ButtonNext";
 import { ButtonPrev } from "../../components/ButtonPrev";
 import "./ProducerPage.scss";
 import producerStore, { Producer } from "../../stores/producer-store";
+import stepStore from "../../stores/step-store";
 
 export const ProducerPage: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState<string>('Выберете производителя');
   const [isDisabled, setIsDisabled] = useState(true);
   const producerValues = Object.values(Producer);
 
+  const { setCalculatorSteps } = stepStore;
   const { setProducer } = producerStore;
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
@@ -24,7 +26,11 @@ export const ProducerPage: React.FC = () => {
     if (selectedValue !== 'Выберете производителя') {
       setProducer(selectedValue as Producer);
     }
-  }, [selectedValue, setProducer]);
+
+    if (selectedValue === Producer.enphase) {
+      setCalculatorSteps(9)
+    }
+  }, [selectedValue, setProducer, setCalculatorSteps]);
 
 
   return (
@@ -40,7 +46,7 @@ export const ProducerPage: React.FC = () => {
           />
           <ButtonNext width={532} isDisabled={isDisabled} />
         </div>
-        <img className="producerPage__image" src={producerImg} alt="дура не втикай" />
+        <img className="producerPage__image" src={producerImg} alt="..." />
       </div>
       <ButtonPrev />
     </div>

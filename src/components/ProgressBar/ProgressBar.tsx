@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProgressBar.scss";
 import stepStore from "../../stores/step-store";
 
 
 export const ProgressBar: React.FC = () => {
-  const { calculatorSteps, calculatorStep } = stepStore;
+  const { calculatorSteps, getCurrectRangeIndex } = stepStore;
+  const [currentRangeIndex, setCurrentRangeIndex] = useState(1);
 
-  const progresSize = Math.round(100 * calculatorStep / calculatorSteps);
+
+  useEffect(() => {
+    setCurrentRangeIndex(getCurrectRangeIndex());
+  }, [getCurrectRangeIndex])
+
+
+  const progresSize = Math.round(100 * currentRangeIndex / calculatorSteps);
 
   return (
     <>
@@ -14,7 +21,7 @@ export const ProgressBar: React.FC = () => {
         <div className="progressBar" style={{ width: `${progresSize}%` }} />
       </div>
       <div className="progressBar__value">
-        {calculatorStep}/{calculatorSteps}
+        {currentRangeIndex}/{calculatorSteps}
       </div>
     </>
   );

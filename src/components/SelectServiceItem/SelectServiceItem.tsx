@@ -50,7 +50,7 @@ export const SelectServiceItem: React.FC<Props> = ({ service, addNewSelectServic
           </button>
         </div>
         <div className="selectService__right">
-          <PlusMinusHandler priceСount={priceСount} setPriceСount={setPriceСount} setTotalPrice={setTotalPrice} />
+          <PlusMinusHandler service={service} priceСount={priceСount} setPriceСount={setPriceСount} setTotalPrice={setTotalPrice} />
           <p className="service_price">{priceСount === 0 ? 0 : optionPrice * priceСount}.00 €</p>
         </div>
       </div>

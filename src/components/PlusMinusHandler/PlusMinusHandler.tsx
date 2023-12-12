@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import "./PlusMinusHandler.scss";
 import { updateTotalPrice } from "../../utils/updateTotalPrice";
+import { SelectService, SingleService } from "../Calculator/calculator-types";
 
 interface Props {
+  service: SingleService | SelectService
   priceСount: number
   setPriceСount: (value: number | ((prev: number) => number)) => void;
   setTotalPrice: (value: number) => void
 }
 
-export const PlusMinusHandler: React.FC<Props> = ({ priceСount, setPriceСount, setTotalPrice }) => {
+export const PlusMinusHandler: React.FC<Props> = ({ service, priceСount, setPriceСount, setTotalPrice }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = +e.target.value;
@@ -33,6 +35,7 @@ export const PlusMinusHandler: React.FC<Props> = ({ priceСount, setPriceСount,
     updateTotalPrice(setTotalPrice);
   }, [priceСount, setTotalPrice]);
 
+  console.log(service)
 
   return (
     <div className="plusMinusHandler">

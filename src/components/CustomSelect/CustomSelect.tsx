@@ -27,6 +27,8 @@ export const CustomSelect: React.FC<Props> = ({ selectedValue, changeSelectedVal
     return () => document.removeEventListener("mousedown", handler)
   }, [])
 
+  
+
   const handleSelect = (newValue: string) => {
     setIsOpen(false);
     changeSelectedValue(newValue)

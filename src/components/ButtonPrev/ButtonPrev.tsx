@@ -7,15 +7,15 @@ interface Props {
   isCalculator?: boolean
 }
 
-export const ButtonPrev: React.FC<Props> = ({ isCalculator }) => {
-  const { setStep, generatePrevStep, setCalculatorStepPrev } = stepStore;
+export const ButtonPrev: React.FC<Props> = () => {
+  const { setStep, generatePrevStep } = stepStore;
 
   const handler = () => {
     const prevStep = generatePrevStep();
     if (prevStep === null) {
       return;
     }
-    isCalculator && setCalculatorStepPrev();
+
     setStep(prevStep)
   }
   return (
