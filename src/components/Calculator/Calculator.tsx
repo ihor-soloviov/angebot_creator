@@ -20,7 +20,7 @@ interface Props {
   setSingleServices?: Dispatch<SetStateAction<SingleService[]>>;
 }
 
-export const Calculator: React.FC<Props> = ({
+export const Calculator: React.FC<Props> = React.memo(({
   title,
   additionTitle,
   singleServices,
@@ -75,4 +75,4 @@ export const Calculator: React.FC<Props> = ({
       </div>
     </div>
   );
-}
+})

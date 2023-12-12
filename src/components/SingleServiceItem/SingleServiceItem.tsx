@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { PlusMinusHandler } from "../PlusMinusHandler";
-
-import "./SingleService.scss";
 import { SingleService } from "../Calculator/calculator-types";
 import { getUnNormalShownPrice } from "../../utils/getUnNormalShownPrice";
-import stepStore from "../../stores/step-store";
+import { addOrUpdateSingleService, getSavedSingleServiceCount } from "../../utils/sessionStorageMethods";
+import "./SingleService.scss";
 
 interface Props {
   service: SingleService
@@ -17,20 +16,16 @@ export const SingleServiceItem: React.FC<Props> = React.memo(({ service, setTota
   const { blackTitle, greyTitle, price } = service;
   const shownPrice = priceCount === 0 ? 0 : price * priceCount;
 
-  const { step } = stepStore;
 
   useEffect(() => {
-    const a = JSON.parse(sessionStorage.getItem('singleServices'));
+    getSavedSingleServiceCount(setPriceСount, service)
+  }, [service])
 
-    const currentItem = a.find(({ name }) => name === service.blackTitle);
-
-    if (currentItem) {
-      setPriceСount(currentItem.count)
-    }
-  }, [])
+  useEffect(() => {
+    addOrUpdateSingleService(service.blackTitle, priceCount, shownPrice)
+  }, [priceCount, service.blackTitle, shownPrice])
 
 
-  console.log(step, service.blackTitle, priceCount, shownPrice)
 
   return (
     <div className="singleService">

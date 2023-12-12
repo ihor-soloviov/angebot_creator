@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
+import { getSavedSelectServiceCount } from "../../utils/sessionStorageMethods";
 
 export const MontagePage: React.FC = () => {
   const [selectServices, setSelectServices] = useState<SelectService[]>([{
@@ -32,9 +33,13 @@ export const MontagePage: React.FC = () => {
     price: 165
   }]
 
-  const addNewSelectService = (selectObject: SelectService) => {
+  const addNewSelectService = useCallback((selectObject: SelectService) => {
     setSelectServices((prev: SelectService[]) => [...prev, selectObject])
-  }
+  }, [])
+
+  useEffect(() => {
+    getSavedSelectServiceCount(selectServices[0].label, addNewSelectService)
+  }, [addNewSelectService, selectServices])
 
   const title: Title = {
     blackTitle: "Installation + Lieferung",

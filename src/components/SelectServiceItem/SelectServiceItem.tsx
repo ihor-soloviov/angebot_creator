@@ -19,20 +19,16 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
   const [priceСount, setPriceСount] = useState(0);
   const [countedPrice, setCountedPrice] = useState(0)
 
+  const { step } = stepStore;
   const { label, select } = service;
   const valuesForSelect = select.map(obj => obj.value);
-
-  const { step } = stepStore;
 
   useEffect(() => {
     const newPrice = priceСount === 0 ? 0 : optionPrice * priceСount
     setCountedPrice(newPrice)
   }, [optionPrice, priceСount])
 
-
   console.log(step, service.label, selectedValue, countedPrice, priceСount)
-
-
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
