@@ -6,10 +6,11 @@ interface Props {
   priceСount: number
   setPriceСount: (value: number | ((prev: number) => number)) => void;
   setTotalPrice: (value: number) => void
+  selectedValue?: string
 }
 
 export const PlusMinusHandler: React.FC<Props> = React.memo(
-  ({ priceСount, setPriceСount, setTotalPrice }) => {
+  ({ priceСount, setPriceСount, setTotalPrice, selectedValue }) => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = +e.target.value;
@@ -23,11 +24,13 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
     };
 
     const decrement = () => {
-      setPriceСount(prev => prev > 0 ? prev - 1 : prev)
+      selectedValue !== 'Выберете вариант' &&
+        setPriceСount(prev => prev > 0 ? prev - 1 : prev)
     }
 
     const increment = () => {
-      setPriceСount(prev => prev + 1)
+      selectedValue !== 'Выберете вариант' &&
+        setPriceСount(prev => prev + 1)
     }
 
     useEffect(() => {
@@ -45,6 +48,7 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
           </svg>
         </button>
         <input
+          disabled={selectedValue === 'Выберете вариант'}
           value={priceСount === 0 ? "" : priceСount}
           onChange={handleInputChange}
           type="number"

@@ -7,15 +7,15 @@ import { CalculatorTitle } from "../CalculatorTitle";
 import { SelectServiceItem } from "../SelectServiceItem";
 import { ButtonNext } from "../ButtonNext";
 import { CustomService } from "../CustomService";
-import stepStore from "../../stores/step-store";
 
 interface Props {
   title: Title
   additionTitle?: Title
   singleServices?: SingleService[]
-  selectServices?: SelectService[]
+  defaultSelectService?: SelectService
+  selectServices?: SingleService[]
   additionParagraph?: boolean
-  addNewSelectService?: (selectObject: SelectService) => void
+  addNewSelectService?: (selectObject: SingleService) => void
   unNormalPriceChange?: boolean
   customServiceInput?: boolean
   setSingleServices?: Dispatch<SetStateAction<SingleService[]>>;
@@ -25,6 +25,7 @@ export const Calculator: React.FC<Props> = React.memo(({
   title,
   additionTitle,
   singleServices,
+  defaultSelectService,
   selectServices,
   addNewSelectService,
   additionParagraph,
@@ -37,7 +38,6 @@ export const Calculator: React.FC<Props> = React.memo(({
   const singleServiceCondition = singleServices && singleServices?.length > 0;
   const selectServicesCondition = selectServices && selectServices?.length > 0;
 
-  console.log(stepStore.step)
   return (
     <div className="calculator">
       <div className="calculator__container">
@@ -46,21 +46,19 @@ export const Calculator: React.FC<Props> = React.memo(({
           <ProgressBar />
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-          {singleServiceCondition && singleServices?.map((service, index) => {
-
-            return <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
-          }
+          {singleServiceCondition && singleServices?.map((service, index) => (<SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
+          )
           )}
         </div>
         {additionParagraph && <CalculatorTitle title={additionTitle} />}
-        {selectServicesCondition && (
-
-          <div className="calculatorService__container">
-            {selectServices.map((service, index) => (
-              <SelectServiceItem key={index} service={service} index={index} addNewSelectService={addNewSelectService} setTotalPrice={setTotalPrice} />
-            ))}
-          </div>
-        )}
+        <div className="calculatorService__container">
+          {selectServicesCondition && (
+            selectServices.map((service, index) => (
+              <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} />
+            ))
+          )}
+          {defaultSelectService && <SelectServiceItem service={defaultSelectService} setTotalPrice={setTotalPrice} addNewSelectService={addNewSelectService} />}
+        </div>
         {customServiceInput && (
           <CustomService setSingleServices={setSingleServices} />
         )}

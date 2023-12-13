@@ -57,7 +57,7 @@ export const addOrUpdateSingleService: AddOrUpdateSingleService = (name, count, 
   sessionStorage.setItem('singleServices', JSON.stringify(services));
 };
 
-export const getSavedSelectServiceCount = (label, addNewSelectService) => {
+export const getSavedSelectServiceCount = (label: string, addNewSelectService) => {
   const servicesFromStorage = sessionStorage.getItem('selectServices');
 
   if (!servicesFromStorage || servicesFromStorage.trim() === "") {
@@ -81,4 +81,3 @@ export const getSavedSelectServiceCount = (label, addNewSelectService) => {
     console.error("Error parsing JSON from sessionStorage:", error);
   }
 }
-

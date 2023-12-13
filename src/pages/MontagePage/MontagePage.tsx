@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
+import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
 
 export const MontagePage: React.FC = React.memo(() => {
-  const selectService: SelectService = {
+  const defaultSelectService: SelectService = {
     label: "Леса",
     select: [
       { value: "<5m", price: 400 },
@@ -15,7 +16,7 @@ export const MontagePage: React.FC = React.memo(() => {
     ]
   }
 
-  const [selectServices, setSelectServices] = useState<SelectService[]>([selectService])
+  const [selectServices, setSelectServices] = useState<SingleService[]>([])
 
   const singleServices: SingleService[] = [{
     blackTitle: "Montage, Verkabelung, Anschluss je Wechselrichter",
@@ -33,28 +34,26 @@ export const MontagePage: React.FC = React.memo(() => {
     price: 165
   }]
 
-  const addNewSelectService = useCallback((selectObject: SelectService) => {
-    setSelectServices((prev: SelectService[]) => [...prev, selectObject])
+  const addNewSelectService = useCallback((selectObject: SingleService) => {
+    const id = generateUniqueThreeDigitNumber(selectServices);
+    const objWithId = { ...selectObject, id: id }
+    setSelectServices((prev) => [...prev, objWithId])
   }, [])
 
   // useEffect(() => {
-  //   getSavedSelectServiceCount(selectServices[0].label, addNewSelectService)
-  // }, [addNewSelectService, selectServices])
+  //   const storedServices = sessionStorage.getItem('selectServices');
+  //   if (storedServices) {
+  //     const services = JSON.parse(storedServices);
+  //     const matchingService = services.find((service: SelectService) => service.label === selectService.label);
 
-  useEffect(() => {
-    const storedServices = sessionStorage.getItem('selectServices');
-    if (storedServices) {
-      const services = JSON.parse(storedServices);
-      const matchingService = services.find((service: SelectService) => service.label === selectService.label);
-
-      if (matchingService && matchingService.items) {
-        // Перевірка, чи стейт вже був оновлений цими даними
-        if (selectServices.length !== matchingService.items.length) {
-          setSelectServices(matchingService.items);
-        }
-      }
-    }
-  }, [selectServices.length, selectService.label]);
+  //     if (matchingService && matchingService.items) {
+  //       // Перевірка, чи стейт вже був оновлений цими даними
+  //       if (selectServices.length !== matchingService.items.length) {
+  //         setSelectServices(matchingService.items);
+  //       }
+  //     }
+  //   }
+  // }, [selectServices.length, selectService.label]);
 
   const title: Title = {
     blackTitle: "Installation + Lieferung",
@@ -73,6 +72,7 @@ export const MontagePage: React.FC = React.memo(() => {
         title={title}
         additionTitle={additionTitle}
         singleServices={singleServices}
+        defaultSelectService={defaultSelectService}
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
         additionParagraph={true}
