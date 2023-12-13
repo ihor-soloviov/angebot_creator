@@ -31,7 +31,10 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
     }
 
     useEffect(() => {
-      updateTotalPrice(setTotalPrice);
+      setTimeout(() => {
+        updateTotalPrice(setTotalPrice);
+      }, 20);
+      //a bit time to update prices list 
     }, [priceСount, setTotalPrice]);
 
     return (

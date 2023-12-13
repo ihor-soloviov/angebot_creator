@@ -12,14 +12,15 @@ interface Props {
   setTotalPrice: (value: number) => void
 }
 
+[{ "label": "Леса", "items": [{ "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": ">8m", "price": 600, "count": 3 } }, { "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": "5m - 8m", "price": 500, "count": 3 } }, { "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": "<5m", "price": 400, "count": 1 } }] }]
+
 export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService, index, setTotalPrice }) => {
 
-  const [selectedValue, setSelectedValue] = useState('Выберете вариант');
-  const [optionPrice, setOptionPrice] = useState(0)
-  const [priceСount, setPriceСount] = useState(0);
+  const [selectedValue, setSelectedValue] = useState(service.selected?.value || 'Выберете вариант');
+  const [optionPrice, setOptionPrice] = useState(service.selected?.price || 0)
+  const [priceСount, setPriceСount] = useState(service.selected?.count || 0);
   const [countedPrice, setCountedPrice] = useState(0)
 
-  const { step } = stepStore;
   const { label, select } = service;
   const valuesForSelect = select.map(obj => obj.value);
 
@@ -27,8 +28,6 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
     const newPrice = priceСount === 0 ? 0 : optionPrice * priceСount
     setCountedPrice(newPrice)
   }, [optionPrice, priceСount])
-
-  console.log(step, service.label, selectedValue, countedPrice, priceСount)
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)

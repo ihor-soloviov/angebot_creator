@@ -4,10 +4,9 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
-import { getSavedSelectServiceCount } from "../../utils/sessionStorageMethods";
 
 export const MontagePage: React.FC = () => {
-  const [selectServices, setSelectServices] = useState<SelectService[]>([{
+  const selectService: SelectService = {
     label: "Леса",
     select: [
       { value: "<5m", price: 400 },
@@ -15,7 +14,8 @@ export const MontagePage: React.FC = () => {
       { value: ">8m", price: 600 }
     ]
   }
-  ])
+
+  const [selectServices, setSelectServices] = useState<SelectService[]>([selectService])
 
   const singleServices: SingleService[] = [{
     blackTitle: "Montage, Verkabelung, Anschluss je Wechselrichter",
@@ -37,9 +37,24 @@ export const MontagePage: React.FC = () => {
     setSelectServices((prev: SelectService[]) => [...prev, selectObject])
   }, [])
 
+  // useEffect(() => {
+  //   getSavedSelectServiceCount(selectServices[0].label, addNewSelectService)
+  // }, [addNewSelectService, selectServices])
+
   useEffect(() => {
-    getSavedSelectServiceCount(selectServices[0].label, addNewSelectService)
-  }, [addNewSelectService, selectServices])
+    const storedServices = sessionStorage.getItem('selectServices');
+    if (storedServices) {
+      const services = JSON.parse(storedServices);
+      const matchingService = services.find((service: SelectService) => service.label === selectService.label);
+
+      if (matchingService && matchingService.items) {
+        // Перевірка, чи стейт вже був оновлений цими даними
+        if (selectServices.length !== matchingService.items.length) {
+          setSelectServices(matchingService.items);
+        }
+      }
+    }
+  }, [selectServices.length, selectService.label]);
 
   const title: Title = {
     blackTitle: "Installation + Lieferung",
