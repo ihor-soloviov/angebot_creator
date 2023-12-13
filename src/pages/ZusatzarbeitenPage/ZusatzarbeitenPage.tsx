@@ -5,7 +5,7 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SingleService } from "../../components/Calculator/calculator-types";
 
-export const ZusatzarbeitenPage: React.FC = () => {
+export const ZusatzarbeitenPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<SingleService[]>([
     { blackTitle: "Überspannungsschutz Typ 1+2 installieren", price: 415 },
     { blackTitle: "SLS Schalter installieren", price: 135 },
@@ -28,4 +28,4 @@ export const ZusatzarbeitenPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

@@ -9,7 +9,7 @@ import { PlusButton } from "../../components/PlusButton";
 import { ButtonNext } from "../../components/ButtonNext";
 
 
-export const ProjectImagesPage: React.FC = () => {
+export const ProjectImagesPage: React.FC = React.memo(() => {
   const [imageWithTable, setImageWithTable] = useState([{ id: 1 }])
 
   const addNewItem = () => {
@@ -38,4 +38,4 @@ export const ProjectImagesPage: React.FC = () => {
       <Footer />
     </div>
   );
-}
+})

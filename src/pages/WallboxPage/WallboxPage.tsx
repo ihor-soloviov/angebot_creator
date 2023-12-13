@@ -7,7 +7,7 @@ import { SingleService, Title } from "../../components/Calculator/calculator-typ
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 
-export const WallboxPage: React.FC = () => {
+export const WallboxPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<SingleService[]>([])
 
   const { producer } = producerStore;
@@ -36,4 +36,4 @@ export const WallboxPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

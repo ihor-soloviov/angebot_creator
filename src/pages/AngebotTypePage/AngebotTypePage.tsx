@@ -6,7 +6,7 @@ import "./AngebotTypePage.scss";
 import { SearchInput } from "../../components/SearchInput";
 import { ButtonNext } from "../../components/ButtonNext";
 
-export const AngebotTypePage: React.FC = () => {
+export const AngebotTypePage: React.FC = React.memo(() => {
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -45,4 +45,4 @@ export const AngebotTypePage: React.FC = () => {
       </div>
     </div>
   );
-}
+})

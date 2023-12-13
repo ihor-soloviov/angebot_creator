@@ -4,9 +4,8 @@ import { Header } from "../../components/Header";
 import { Calculator } from "../../components/Calculator";
 import { Footer } from "../../components/Footer";
 import { SingleService, Title } from "../../components/Calculator/calculator-types";
-import { Steps } from "../../stores/step-store";
 
-export const PvModulePage: React.FC = () => {
+export const PvModulePage: React.FC = React.memo(() => {
   const title: Title = {
     blackTitle: "PV-Module",
     greyTitle: "Фотоэлектрические модули"
@@ -29,9 +28,8 @@ export const PvModulePage: React.FC = () => {
       <Calculator
         title={title}
         singleServices={singleServices}
-        nextStepEnum={Steps.optimizer}
       />
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

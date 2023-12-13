@@ -6,9 +6,8 @@ import { Calculator } from "../../components/Calculator";
 import { SingleService, Title } from "../../components/Calculator/calculator-types";
 import producerStore from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
-import { Steps } from "../../stores/step-store";
 
-export const OptimizerPage: React.FC = () => {
+export const OptimizerPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
 
   const [singleServices, setSingleServices] = useState<SingleService[]>([]);
@@ -29,9 +28,8 @@ export const OptimizerPage: React.FC = () => {
       <Calculator
         title={title}
         singleServices={singleServices}
-        nextStepEnum={Steps.invertor}
       />
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

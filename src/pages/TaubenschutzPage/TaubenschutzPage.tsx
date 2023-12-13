@@ -5,7 +5,7 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SingleService } from "../../components/Calculator/calculator-types";
 
-export const TaubenschutzPage: React.FC = () => {
+export const TaubenschutzPage: React.FC = React.memo(() => {
   const singleServices: SingleService[] = [
     { blackTitle: "Material + Montage je Laufmeter", greyTitle: "(материал и монтаж за погонный метр)", price: 18 },
     { blackTitle: "240 mm Spitzen", greyTitle: "(наконечники 240 мм)", price: 18 }
@@ -22,4 +22,4 @@ export const TaubenschutzPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

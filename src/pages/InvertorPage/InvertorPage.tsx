@@ -9,7 +9,7 @@ import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtabl
 import { titles } from "./titles";
 import { enphaseServices } from "./singleServiceEnphase";
 
-export const InvertorPage: React.FC = () => {
+export const InvertorPage: React.FC = React.memo(() => {
 
   const [singleServices, setSingleServices] = useState<SingleService[]>([])
   const [selectServices, setSelectServices] = useState<SelectService[]>([])
@@ -45,4 +45,4 @@ export const InvertorPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

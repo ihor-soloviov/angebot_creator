@@ -7,7 +7,7 @@ import { SingleService } from "../../components/Calculator/calculator-types";
 import producerStore from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 
-export const BackupBoxPage: React.FC = () => {
+export const BackupBoxPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<SingleService[]>([]);
 
   const { producer } = producerStore;
@@ -27,4 +27,4 @@ export const BackupBoxPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

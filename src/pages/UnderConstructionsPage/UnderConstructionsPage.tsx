@@ -5,7 +5,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 
-export const UnderConstructionsPage: React.FC = () => {
+export const UnderConstructionsPage: React.FC = React.memo(() => {
   const singleServices: SingleService[] = [{
     blackTitle: "Quermontage",
     greyTitle: "(модули лежа)",
@@ -63,4 +63,4 @@ export const UnderConstructionsPage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

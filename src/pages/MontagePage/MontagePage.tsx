@@ -5,7 +5,7 @@ import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import "./MontagePage.scss";
 
-export const MontagePage: React.FC = () => {
+export const MontagePage: React.FC = React.memo(() => {
   const selectService: SelectService = {
     label: "Леса",
     select: [
@@ -80,4 +80,4 @@ export const MontagePage: React.FC = () => {
       <Footer isCalculator={true} />
     </div>
   );
-}
+})

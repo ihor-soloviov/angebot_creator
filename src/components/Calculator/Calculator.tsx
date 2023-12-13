@@ -7,6 +7,7 @@ import { CalculatorTitle } from "../CalculatorTitle";
 import { SelectServiceItem } from "../SelectServiceItem";
 import { ButtonNext } from "../ButtonNext";
 import { CustomService } from "../CustomService";
+import stepStore from "../../stores/step-store";
 
 interface Props {
   title: Title
@@ -36,6 +37,7 @@ export const Calculator: React.FC<Props> = React.memo(({
   const singleServiceCondition = singleServices && singleServices?.length > 0;
   const selectServicesCondition = selectServices && selectServices?.length > 0;
 
+  console.log(stepStore.step)
   return (
     <div className="calculator">
       <div className="calculator__container">
@@ -45,11 +47,7 @@ export const Calculator: React.FC<Props> = React.memo(({
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
           {singleServiceCondition && singleServices?.map((service, index) => {
-            if (service.blackTitle === "Kaskadenschaltung") {
-              return (
-                <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
-              )
-            }
+
             return <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
           }
           )}

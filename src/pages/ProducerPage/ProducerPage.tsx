@@ -9,7 +9,7 @@ import "./ProducerPage.scss";
 import producerStore, { Producer } from "../../stores/producer-store";
 import stepStore from "../../stores/step-store";
 
-export const ProducerPage: React.FC = () => {
+export const ProducerPage: React.FC = React.memo(() => {
   const [selectedValue, setSelectedValue] = useState<string>('Выберете производителя');
   const [isDisabled, setIsDisabled] = useState(true);
   const producerValues = Object.values(Producer);
@@ -51,4 +51,4 @@ export const ProducerPage: React.FC = () => {
       <ButtonPrev />
     </div>
   );
-}
+})

@@ -3,7 +3,6 @@ import "./SelectServiceItem.scss";
 import { SelectService } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
 import { PlusMinusHandler } from "../PlusMinusHandler";
-import stepStore from "../../stores/step-store";
 
 interface Props {
   service: SelectService
