@@ -1,8 +1,8 @@
 import { SingleService } from "../components/Calculator/calculator-types";
-import { SelectService } from "../components/Calculator/calculator-types";
 import stepStore from "../stores/step-store";
 
 type GetSavedService = (
+  pageName: string,
   serviceStorageName: string,
   setPriceСount: (value: number | ((prev: number) => number)) => void,
   service: SingleService
@@ -16,7 +16,7 @@ type AddOrUpdateSingleService = (
   price: number
 ) => void;
 
-export const getSavedServiceCount = (
+export const getSavedServiceCount: GetSavedService = (
   pageName,
   serviceArrayName,
   setPriceCount,
@@ -30,7 +30,7 @@ export const getSavedServiceCount = (
 
   try {
     const parsedPage = JSON.parse(pageData);
-    const services = parsedPage[serviceArrayName];
+    const services: SingleService[] = parsedPage[serviceArrayName];
     if (!services) {
       return;
     }
@@ -39,7 +39,7 @@ export const getSavedServiceCount = (
       ({ blackTitle }) => blackTitle === service.blackTitle
     );
 
-    if (currentItem) {
+    if (currentItem?.count) {
       setPriceCount(currentItem.count);
     }
   } catch (error) {
@@ -55,12 +55,12 @@ export const addOrUpdateSingleService: AddOrUpdateSingleService = (
   price
 ) => {
   const pageData = sessionStorage.getItem(pageName);
-  let pageObj = pageData ? JSON.parse(pageData) : {};
+  const pageObj = pageData ? JSON.parse(pageData) : {};
 
-  let services = pageObj[serviceArrayName] || [];
+  const services = pageObj[serviceArrayName] || [];
 
   const serviceIndex = services.findIndex(
-    (service) => service.blackTitle === blackTitle
+    (service: SingleService) => service.blackTitle === blackTitle
   );
 
   if (count > 0) {
@@ -77,12 +77,18 @@ export const addOrUpdateSingleService: AddOrUpdateSingleService = (
   sessionStorage.setItem(pageName, JSON.stringify(pageObj));
 };
 
-export const getSavedSelectServicesWithCount = (setSelectServices) => {
+export const getSavedSelectServicesWithCount = (
+  setSelectServices: (value: SingleService[]) => void
+) => {
   const selectsByStep = JSON.parse(
     sessionStorage.getItem(stepStore.step) || "{}"
   );
   const typedSelects = selectsByStep["selectServices"]?.map(
-    ({ blackTitle, price, count }) => ({ blackTitle, price, count })
+    ({ blackTitle, price, count }: SingleService) => ({
+      blackTitle,
+      price,
+      count,
+    })
   );
 
   if (typedSelects) {

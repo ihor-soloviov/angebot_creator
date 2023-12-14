@@ -6,6 +6,7 @@ export type Title = {
 export type SingleService = Title & {
   price: number;
   count?: number;
+  id?: number
 };
 
 export type SelectService = {

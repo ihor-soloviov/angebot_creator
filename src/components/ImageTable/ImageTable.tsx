@@ -14,14 +14,26 @@ export interface TableData {
 
 
 export const ImageTable: React.FC = () => {
-  const [tabelData, setTabelData] = useState<TableData | null>(null)
+  const [tabelData, setTabelData] = useState<TableData>()
   const [rowNames, setRowNames] = useState(["Neigung", "Azimut", "Unterkonstruktion", "Modulanzahl"])
 
   const addRowToData = (rowName: string, objectValue: string) => {
     setTabelData(prev => {
-      return { ...prev, [rowName]: objectValue }
-    })
-  }
+      // Перевірка, чи попередній стан є визначеним
+      const newData: TableData = prev ? { ...prev } : {
+        Neigung: '',
+        Azimut: '',
+        Unterkonstruktion: '',
+        Modulanzahl: '',
+        Modulaufständerung: ''
+      };
+
+      // Додавання або оновлення значення
+      newData[rowName as keyof TableData] = objectValue;
+
+      return newData;
+    });
+  };
 
   const addAdditionalRow = () => {
     rowNames.length === 4 && setRowNames(prev => [...prev, 'Modulaufständerung'])
@@ -31,7 +43,7 @@ export const ImageTable: React.FC = () => {
     console.log(tabelData)
   }, [tabelData])
 
-  
+
   return (
     <div className="table__block">
       <div className="table-head">

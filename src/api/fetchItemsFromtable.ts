@@ -5,6 +5,11 @@ import {
   SingleService,
 } from "../components/Calculator/calculator-types";
 
+type El = {
+  modell: string;
+  preis: string;
+};
+
 export const fetchSingleItems = async (
   tableName: string,
   setSingleServices: (value: SingleService[]) => void,
@@ -25,12 +30,10 @@ export const fetchSingleItems = async (
       },
     });
 
-    const services = result.data.map((el) => ({
+    const services = result.data.map((el: El) => ({
       blackTitle: el.modell,
       price: +el.preis,
     }));
-
-    console.log(services);
 
     setSingleServices(services);
   } catch (error) {
@@ -54,12 +57,12 @@ export const fetchSelectItems = async (
       }
     );
 
-    const services = result.data.map((el) => ({
+    const services = result.data.map((el: El) => ({
       value: el.modell,
       price: +el.preis,
     }));
 
-    console.log(services)
+    console.log(services);
 
     setSelectService({ select: services });
   } catch (error) {
