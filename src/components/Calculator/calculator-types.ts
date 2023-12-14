@@ -11,7 +11,6 @@ export type SingleService = Title & {
 export type SelectService = {
   label?: string;
   select: SelectServiceOption[];
-  selected?: SelectedServiceOption;
 };
 
 type SelectServiceOption = {

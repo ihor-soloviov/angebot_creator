@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import img from "../../assets/skonko.png"
 import "./SkontoPage.scss";
 import { ButtonNext } from "../../components/ButtonNext";
 

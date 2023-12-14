@@ -14,7 +14,6 @@ export const BackupBoxPage: React.FC = React.memo(() => {
 
   useEffect(() => {
     fetchSingleItems("other", setSingleServices)
-
   }, [producer])
 
   return (

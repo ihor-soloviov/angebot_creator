@@ -28,7 +28,7 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.montage;
+  step = Steps.producer;
   calculatorSteps = 10;
   calculatorStep = 1;
 

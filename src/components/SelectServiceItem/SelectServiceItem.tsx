@@ -45,7 +45,8 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
           <button className="button__add" disabled={selectedValue === 'Выберете вариант'} onClick={() => {
             if (addNewSelectService) {
               const price = select.find(el => el.value === selectedValue)?.price || 0;
-              addNewSelectService({ blackTitle: selectedValue, price: price })
+              addNewSelectService({ blackTitle: selectedValue, price: price });
+              setSelectedValue('Выберете вариант')
             }
           }}>
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">

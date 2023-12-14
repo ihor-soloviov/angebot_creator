@@ -1,5 +1,6 @@
 import { SingleService } from "../components/Calculator/calculator-types";
 import { SelectService } from "../components/Calculator/calculator-types";
+import stepStore from "../stores/step-store";
 
 type GetSavedService = (
   serviceStorageName: string,
@@ -7,9 +8,10 @@ type GetSavedService = (
   service: SingleService
 ) => void;
 
-type AddOrUpdateService = (
-  serviceStorageName: string,
-  name: string,
+type AddOrUpdateSingleService = (
+  pageName: string,
+  serviceArrayName: string,
+  blackTitle: string,
   count: number,
   price: number
 ) => void;
@@ -45,7 +47,7 @@ export const getSavedServiceCount = (
   }
 };
 
-export const addOrUpdateSingleService = (
+export const addOrUpdateSingleService: AddOrUpdateSingleService = (
   pageName,
   serviceArrayName,
   blackTitle,
@@ -57,7 +59,9 @@ export const addOrUpdateSingleService = (
 
   let services = pageObj[serviceArrayName] || [];
 
-  const serviceIndex = services.findIndex((service) => service.blackTitle === blackTitle);
+  const serviceIndex = services.findIndex(
+    (service) => service.blackTitle === blackTitle
+  );
 
   if (count > 0) {
     if (serviceIndex !== -1) {
@@ -71,4 +75,17 @@ export const addOrUpdateSingleService = (
 
   pageObj[serviceArrayName] = services;
   sessionStorage.setItem(pageName, JSON.stringify(pageObj));
+};
+
+export const getSavedSelectServicesWithCount = (setSelectServices) => {
+  const selectsByStep = JSON.parse(
+    sessionStorage.getItem(stepStore.step) || "{}"
+  );
+  const typedSelects = selectsByStep["selectServices"]?.map(
+    ({ blackTitle, price, count }) => ({ blackTitle, price, count })
+  );
+
+  if (typedSelects) {
+    setSelectServices(typedSelects);
+  }
 };

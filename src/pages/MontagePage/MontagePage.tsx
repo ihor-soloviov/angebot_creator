@@ -5,14 +5,13 @@ import { Calculator } from "../../components/Calculator";
 import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
 import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
 import "./MontagePage.scss";
-import stepStore from "../../stores/step-store";
+import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
 
 export const MontagePage: React.FC = React.memo(() => {
   const title: Title = {
     blackTitle: "Installation + Lieferung",
     greyTitle: "Монтаж + доставка"
   }
-
   const additionTitle: Title = {
     blackTitle: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
     greyTitle: "Размер и количество лесов"
@@ -44,23 +43,8 @@ export const MontagePage: React.FC = React.memo(() => {
   const [selectServices, setSelectServices] = useState<SingleService[]>([])
 
   useEffect(() => {
-    const selectsByStep = JSON.parse(sessionStorage.getItem(stepStore.step));
-
-    if (!selectsByStep) {
-      return;
-    }
-
-    const arrayOfServices = selectsByStep['selectServices'];
-
-    if (!arrayOfServices) {
-      return;
-    }
-
-    const typedSelects = arrayOfServices.map(el => ({ blackTitle: el.blackTitle, price: el.price, count: el.count }));
-
-    setSelectServices(typedSelects)
-
-  }, [])
+    getSavedSelectServicesWithCount(setSelectServices)
+  }, []);
 
 
   const addNewSelectService = useCallback((selectObject: SingleService) => {
