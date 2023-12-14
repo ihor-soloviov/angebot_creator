@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./SelectServiceItem.scss";
 import { SelectService, SingleService } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
-import { PlusMinusHandler } from "../PlusMinusHandler";
 
 interface Props {
   service: SelectService
   addNewSelectService?: (selectObject: SingleService) => void
-  setTotalPrice: (value: number) => void
 }
 
-export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService, setTotalPrice }) => {
+export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService }) => {
   const { label, select } = service;
 
   const [selectedValue, setSelectedValue] = useState('Выберете вариант');

@@ -67,7 +67,7 @@ export const Calculator: React.FC<Props> = React.memo(({
               <SingleServiceItem serviceStorageName='selectServi' key={index} service={service} setTotalPrice={setTotalPrice} />
             ))
           )}
-          {defaultSelectService && <SelectServiceItem service={defaultSelectService} setTotalPrice={setTotalPrice} addNewSelectService={addNewSelectService} />}
+          {defaultSelectService && <SelectServiceItem service={defaultSelectService} addNewSelectService={addNewSelectService} />}
         </div>
         {customServiceInput && (
           <CustomService setSingleServices={setSingleServices} />
