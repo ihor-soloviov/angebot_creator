@@ -24,4 +24,34 @@
       font-family: Inter Tight;
     }
   }
+
+  .pageList {
+    width: 100%;
+    margin-bottom: 64px;
+
+    .pageItem {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #d7d8da;
+      padding-bottom: 14px;
+
+      font-size: 24px;
+      line-height: normal;
+      text-transform: capitalize;
+
+      &:not(:last-of-type) {
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  .totalPriceForAllPages {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    line-height: normal;
+    border-bottom: 1px solid #d7d8da;
+    padding-bottom: 14px;
+  }
 }

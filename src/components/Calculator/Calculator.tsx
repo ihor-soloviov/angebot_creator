@@ -64,7 +64,7 @@ export const Calculator: React.FC<Props> = React.memo(({
         <div className="calculatorService__container">
           {selectServicesCondition && (
             selectServices.map((service, index) => (
-              <SingleServiceItem serviceStorageName='selectServi' key={index} service={service} setTotalPrice={setTotalPrice} />
+              <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
             ))
           )}
           {defaultSelectService && <SelectServiceItem service={defaultSelectService} addNewSelectService={addNewSelectService} />}

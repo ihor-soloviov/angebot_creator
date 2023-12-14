@@ -28,7 +28,7 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.welcome;
+  step = Steps.producer;
   calculatorSteps = 10;
   calculatorStep = 1;
 
@@ -76,6 +76,9 @@ class StepStore {
     makeAutoObservable(this);
   }
 
+  get steps() {
+    return this.arraysOfSteps;
+  }
   setStep = (value: Steps) => {
     this.step = value;
   };
