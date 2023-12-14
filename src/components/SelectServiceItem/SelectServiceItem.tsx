@@ -6,12 +6,9 @@ import { PlusMinusHandler } from "../PlusMinusHandler";
 
 interface Props {
   service: SelectService
-
   addNewSelectService?: (selectObject: SingleService) => void
   setTotalPrice: (value: number) => void
 }
-
-[{ "label": "Леса", "items": [{ "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": ">8m", "price": 600, "count": 3 } }, { "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": "5m - 8m", "price": 500, "count": 3 } }, { "label": "Леса", "select": [{ "value": "<5m", "price": 400 }, { "value": "5m - 8m", "price": 500 }, { "value": ">8m", "price": 600 }], "selected": { "value": "<5m", "price": 400, "count": 1 } }] }]
 
 export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService, setTotalPrice }) => {
   const { label, select } = service;
@@ -38,8 +35,6 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
       setOptionPrice(newPrice);
     }
   }, [selectedValue, select])
-
-
 
   return (
     <div className="selectServiceItem">

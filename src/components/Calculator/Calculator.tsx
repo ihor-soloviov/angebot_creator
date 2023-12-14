@@ -46,7 +46,7 @@ export const Calculator: React.FC<Props> = React.memo(({
           <ProgressBar />
         </div>
         <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-          {singleServiceCondition && singleServices?.map((service, index) => (<SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
+          {singleServiceCondition && singleServices?.map((service, index) => (<SingleServiceItem serviceStorageName='singleServices' key={index} service={service} setTotalPrice={setTotalPrice} unNormalPriceChange={unNormalPriceChange} />
           )
           )}
         </div>
@@ -54,7 +54,7 @@ export const Calculator: React.FC<Props> = React.memo(({
         <div className="calculatorService__container">
           {selectServicesCondition && (
             selectServices.map((service, index) => (
-              <SingleServiceItem key={index} service={service} setTotalPrice={setTotalPrice} />
+              <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
             ))
           )}
           {defaultSelectService && <SelectServiceItem service={defaultSelectService} setTotalPrice={setTotalPrice} addNewSelectService={addNewSelectService} />}

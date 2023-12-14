@@ -1,83 +1,74 @@
 import { SingleService } from "../components/Calculator/calculator-types";
 import { SelectService } from "../components/Calculator/calculator-types";
 
-type GetSavedSingleService = (setPriceСount: (value: number | ((prev: number) => number)) => void,
-  service: SingleService) => void
+type GetSavedService = (
+  serviceStorageName: string,
+  setPriceСount: (value: number | ((prev: number) => number)) => void,
+  service: SingleService
+) => void;
 
-type GetSavedSelectService = (label: string, setPriceСount: (value: number | ((prev: number) => number)) => void,
-  service: SingleService) => void
+type AddOrUpdateService = (
+  serviceStorageName: string,
+  name: string,
+  count: number,
+  price: number
+) => void;
 
-type AddOrUpdateSingleService = (name: string, count: number, price: number) => void
+export const getSavedServiceCount = (
+  pageName,
+  serviceArrayName,
+  setPriceCount,
+  service
+) => {
+  const pageData = sessionStorage.getItem(pageName);
 
-export const getSavedSingleServiceCount: GetSavedSingleService = (setPriceСount, service) => {
-  const servicesFromStorage = sessionStorage.getItem('singleServices');
-
-  if (!servicesFromStorage || servicesFromStorage.trim() === "") {
+  if (!pageData) {
     return;
   }
 
   try {
-    const parsedServices = JSON.parse(servicesFromStorage);
-    const currentItem = parsedServices.find(({ name }) => name === service.blackTitle);
+    const parsedPage = JSON.parse(pageData);
+    const services = parsedPage[serviceArrayName];
+    if (!services) {
+      return;
+    }
+
+    const currentItem = services.find(
+      ({ blackTitle }) => blackTitle === service.blackTitle
+    );
 
     if (currentItem) {
-      setPriceСount(currentItem.count);
+      setPriceCount(currentItem.count);
     }
   } catch (error) {
     console.error("Error parsing JSON from sessionStorage:", error);
   }
 };
 
-export const addOrUpdateSingleService: AddOrUpdateSingleService = (name, count, price) => {
-  const servicesFromStorage = sessionStorage.getItem('singleServices');
-  let services = [];
+export const addOrUpdateSingleService = (
+  pageName,
+  serviceArrayName,
+  blackTitle,
+  count,
+  price
+) => {
+  const pageData = sessionStorage.getItem(pageName);
+  let pageObj = pageData ? JSON.parse(pageData) : {};
 
-  if (servicesFromStorage) {
-    services = JSON.parse(servicesFromStorage);
-  }
+  let services = pageObj[serviceArrayName] || [];
 
-  const serviceIndex = services.findIndex(service => service.name === name);
+  const serviceIndex = services.findIndex((service) => service.blackTitle === blackTitle);
 
   if (count > 0) {
     if (serviceIndex !== -1) {
-      // Оновлення існуючого елементу
       services[serviceIndex] = { ...services[serviceIndex], count, price };
     } else {
-      // Додавання нового елементу
-      services.push({ name, count, price });
+      services.push({ blackTitle, count, price });
     }
-  } else {
-    // Видалення елементу, якщо count = 0
-    if (serviceIndex !== -1) {
-      services.splice(serviceIndex, 1);
-    }
+  } else if (serviceIndex !== -1) {
+    services.splice(serviceIndex, 1);
   }
 
-  // Збереження оновленого масиву назад у sessionStorage
-  sessionStorage.setItem('singleServices', JSON.stringify(services));
+  pageObj[serviceArrayName] = services;
+  sessionStorage.setItem(pageName, JSON.stringify(pageObj));
 };
-
-export const getSavedSelectServiceCount = (label: string, addNewSelectService) => {
-  const servicesFromStorage = sessionStorage.getItem('selectServices');
-
-  if (!servicesFromStorage || servicesFromStorage.trim() === "") {
-    return;
-  }
-
-  try {
-    const parsedServices = JSON.parse(servicesFromStorage);
-    console.log(parsedServices, parsedServices.label, label)
-    if (parsedServices[0].label === label) {
-      parsedServices[0].items.forEach(el => addNewSelectService({
-        label: "Леса",
-        select: [
-          { value: "<5m", price: 400 },
-          { value: "5m - 8m", price: 500 },
-          { value: ">8m", price: 600 }
-        ]
-      }))
-    }
-  } catch (error) {
-    console.error("Error parsing JSON from sessionStorage:", error);
-  }
-}
