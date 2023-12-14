@@ -15,15 +15,9 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
 
   const [selectedValue, setSelectedValue] = useState('Выберете вариант');
   const [optionPrice, setOptionPrice] = useState(0)
-  const [priceСount, setPriceСount] = useState(0);
-  const [countedPrice, setCountedPrice] = useState(0)
 
   const valuesForSelect = select.map(obj => obj.value);
 
-  useEffect(() => {
-    const newPrice = priceСount === 0 ? 0 : optionPrice * priceСount
-    setCountedPrice(newPrice)
-  }, [optionPrice, priceСount])
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
@@ -56,10 +50,8 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
           </button>
         </div>
         <div className="selectService__right">
-          {setTotalPrice &&
-            <PlusMinusHandler selectedValue={selectedValue} priceСount={priceСount} setPriceСount={setPriceСount} setTotalPrice={setTotalPrice} />
-          }
-          <p className="service_price">{countedPrice}.00 €</p>
+
+          <p className="service_price">{optionPrice}.00 €</p>
         </div>
       </div>
     </div>

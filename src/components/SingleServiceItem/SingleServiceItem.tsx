@@ -34,7 +34,7 @@ export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageNa
       </div>
       <div className="singleService__right">
         <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} setTotalPrice={setTotalPrice} />
-        {unNormalPriceChange
+        {unNormalPriceChange && blackTitle === 'Kaskadenschaltung'
           ? (<p className="service_price">{getUnNormalShownPrice(price, priceCount)}.00 €</p>)
           : (<p className="service_price">{shownPrice}.00 €</p>)
         }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import img from "../../assets/addMainImg.png"
+import dragSuccess from "../../assets/dragSuccess.svg"
 
 import { dragLeaveHandler, dragStartHandler } from "../../utils/dragFunctions";
 import classNames from "classnames";
@@ -7,6 +8,8 @@ import "./MainImageAdder.scss";
 
 export const MainImageAdder: React.FC = () => {
   const [drag, setDrag] = useState(false);
+  const [icon, setIcon] = useState(img);
+  const [dragtext, setDragtext] = useState('Перетяните изображение')
 
   const onDragHandler = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -23,6 +26,8 @@ export const MainImageAdder: React.FC = () => {
 
     const formData = new FormData();
     formData.append("mainImg", files[0])
+    setIcon(dragSuccess)
+    setDragtext('Фото успешно загружено')
     console.log(formData)
     setDrag(false)
   }
@@ -38,8 +43,8 @@ export const MainImageAdder: React.FC = () => {
           className={classNames("dragWindow", { drag: drag })}
 
         >
-          <img src={img} alt="..." />
-          <p>Перетяните изображение</p>
+          <img src={icon} alt="..." />
+          <p>{dragtext}</p>
         </div>
         : <div
           onDragStart={(e) => dragStartHandler(e, setDrag)}
@@ -47,8 +52,8 @@ export const MainImageAdder: React.FC = () => {
           onDragOver={(e) => dragStartHandler(e, setDrag)}
           className={classNames("dragWindow", { drag: drag })}
         >
-          <img src={img} alt="..." />
-          <p>Перетяните изображение</p>
+          <img src={icon} alt="..." />
+          <p>{dragtext}</p>
         </div>
       }
     </div>
