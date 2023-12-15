@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import producerStore from "../../stores/producer-store";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
-import { Title } from "../../components/Calculator/calculator-types";
+import { SingleService, Title } from "../../components/Calculator/calculator-types";
 import stepStore from "../../stores/step-store";
 
 interface Page {
@@ -47,18 +47,19 @@ export const CheckoutPage: React.FC = React.memo(() => {
 
         // Перевірка наявності і підрахунок суми для singleServices
         if (itemData.singleServices) {
-          totalPrice += itemData.singleServices.reduce((sum, service) => sum + (service.price || 0), 0);
+          totalPrice += itemData.singleServices.reduce((sum: number, service: SingleService) => sum + (service.price || 0), 0);
         }
 
         // Перевірка наявності і підрахунок суми для selectServices
         if (itemData.selectServices) {
-          totalPrice += itemData.selectServices.reduce((sum, service) => sum + (service.price || 0), 0);
+          totalPrice += itemData.selectServices.reduce((sum: number, service: SingleService) => sum + (service.price || 0), 0);
         }
       }
 
       return { page, price: totalPrice };
     });
 
+  
     setPages(pagePrices)
   }, [producer, arraysOfSteps]);
 
