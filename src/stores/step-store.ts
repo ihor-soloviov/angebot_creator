@@ -31,6 +31,7 @@ class StepStore {
   step = Steps.welcome;
   calculatorSteps = 10;
   calculatorStep = 1;
+  angebotId = 0;
 
   arraysOfSteps = {
     Huawei: [
@@ -123,6 +124,14 @@ class StepStore {
     // Якщо вже на першому кроці або крок не знайдено
     return null;
   };
+
+  setAngebotId = (value: number) => {
+      this.angebotId = value;
+  };
+
+  get id() {
+    return this.angebotId;
+  }
 }
 
 export default new StepStore();

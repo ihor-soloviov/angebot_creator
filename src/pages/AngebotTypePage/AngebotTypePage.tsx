@@ -5,8 +5,11 @@ import { CustomSelect } from "../../components/CustomSelect";
 import "./AngebotTypePage.scss";
 import { SearchInput } from "../../components/SearchInput";
 import { ButtonNext } from "../../components/ButtonNext";
+import stepStore from "../../stores/step-store";
 
 export const AngebotTypePage: React.FC = React.memo(() => {
+  const { setAngebotId } = stepStore;
+
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -19,6 +22,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (selectedId && selectedValue) {
+      setAngebotId(selectedId)
       setIsDisabled(false)
     }
   }, [selectedValue, selectedId])
@@ -36,7 +40,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
               changeSelectedValue={changeSelectedValue}
               values={angebotTypes}
             />
-            <p className="label angebotTypeLabel">ID клиента</p>
+            <p className="label angebotTypeLabel">ID ангебота</p>
             <SearchInput setSelectedId={setSelectedId} />
             <ButtonNext isDisabled={isDisabled} />
           </div>

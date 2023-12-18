@@ -6,6 +6,7 @@ import producerStore from "../../stores/producer-store";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
 import { SingleService, Title } from "../../components/Calculator/calculator-types";
 import stepStore from "../../stores/step-store";
+import { ButtonNext } from "../../components/ButtonNext";
 
 interface Page {
   page: string
@@ -14,9 +15,9 @@ interface Page {
 
 export const CheckoutPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
-  const { arraysOfSteps } = stepStore;
+  const { arraysOfSteps, id } = stepStore;
   const title: Title = {
-    blackTitle: "Проверьте ваше предложение - ID 806 v.1",
+    blackTitle: `Проверьте ваше предложение - ID ${id} v.1`,
     greyTitle: `Производитель (${producer})`
   }
 
@@ -59,7 +60,7 @@ export const CheckoutPage: React.FC = React.memo(() => {
       return { page, price: totalPrice };
     });
 
-  
+
     setPages(pagePrices)
   }, [producer, arraysOfSteps]);
 
@@ -95,6 +96,7 @@ export const CheckoutPage: React.FC = React.memo(() => {
           <p>Общая стоимость</p>
           <p>{total}.00€</p>
         </div>
+        <ButtonNext width={394} />
       </div>
       <Footer isCalculator={true} />
     </div>

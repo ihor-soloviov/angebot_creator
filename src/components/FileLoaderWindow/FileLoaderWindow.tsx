@@ -19,12 +19,11 @@ interface Props {
 }
 
 export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
+
   const [drag, setDrag] = useState(false);
   const [dragIcon, setDragIcon] = useState<string>(dragSvg);
   const [dragtext, setDragtext] = useState('Перетащите сюда DOCX файл');
   const [loadedFileInfo, setLoadedFileInfo] = useState<LoadedFile | null>(null);
-
-
 
   const onDragHandler = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
 
     const formData = new FormData();
     formData.append("docxFile", files[0])
-    const result = await axios.post('http://185.25.119.143:8082/sendFile', formData, {
+    const result = await axios.post('https://api.creator.work-set.eu/sendFile', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*'
@@ -52,6 +51,7 @@ export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
     })
 
     if (result.status === 200) {
+      console.log(result)
       setDragIcon(dragSuccess);
       setDragtext('Данные были успешно загружены');
       setLoadedFileInfo({ name: files[0].name, size: "1.7MB" });

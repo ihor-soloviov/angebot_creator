@@ -20,8 +20,8 @@ export const fetchSingleItems = async (
   try {
     const link =
       brand !== ""
-        ? `http://185.25.119.143:8082/getTable?table_name=${tableName}&hersteller=${brand}`
-        : `http://185.25.119.143:8082/getTable?table_name=${tableName}&hersteller=${producer}`;
+        ? `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${brand}`
+        : `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${producer}`;
 
     const result = await axios.get(link, {
       headers: {
@@ -48,7 +48,7 @@ export const fetchSelectItems = async (
   const { producer } = producerStore;
   try {
     const result = await axios.get(
-      `http://185.25.119.143:8082/getTable?table_name=${tableName}&hersteller=${producer}`,
+      `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${producer}`,
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
