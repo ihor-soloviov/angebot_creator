@@ -8,7 +8,7 @@ import { ButtonNext } from "../../components/ButtonNext";
 import stepStore from "../../stores/step-store";
 
 export const AngebotTypePage: React.FC = React.memo(() => {
-  const { setAngebotId } = stepStore;
+  const { step, setAngebotId } = stepStore;
 
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -18,14 +18,15 @@ export const AngebotTypePage: React.FC = React.memo(() => {
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
-  }
+  };
 
   useEffect(() => {
     if (selectedId && selectedValue) {
+      sessionStorage.setItem(step, JSON.stringify([selectedValue, selectedId]))
       setAngebotId(selectedId)
       setIsDisabled(false)
     }
-  }, [selectedValue, selectedId])
+  }, [selectedValue, selectedId, setAngebotId, step])
 
 
   return (

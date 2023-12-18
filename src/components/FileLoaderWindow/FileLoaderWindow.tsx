@@ -8,6 +8,7 @@ import docIcon from "../../assets/docIcon.svg";
 import "./FileLoaderWindow.scss";
 import classNames from "classnames";
 import { dragLeaveHandler, dragStartHandler } from "../../utils/dragFunctions";
+import stepStore from "../../stores/step-store";
 
 interface LoadedFile {
   name: string
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
+  const { step } = stepStore;
 
   const [drag, setDrag] = useState(false);
   const [dragIcon, setDragIcon] = useState<string>(dragSvg);
@@ -51,7 +53,7 @@ export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
     })
 
     if (result.status === 200) {
-      console.log(result)
+      sessionStorage.setItem(step, result.data)
       setDragIcon(dragSuccess);
       setDragtext('Данные были успешно загружены');
       setLoadedFileInfo({ name: files[0].name, size: "1.7MB" });

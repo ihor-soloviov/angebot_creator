@@ -12,8 +12,6 @@ export const BravoPage: React.FC = () => {
     const pagesByProducer = [...arraysOfSteps[producer]].filter((page: string) => {
       const unavailablePages = [
         "welcome",
-        "angebotType",
-        "pvsolFile",
         "projectImages",
         "producer",
         "checkout",
