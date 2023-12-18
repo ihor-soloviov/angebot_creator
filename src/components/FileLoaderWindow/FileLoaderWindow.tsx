@@ -53,7 +53,7 @@ export const FileLoaderWindow: React.FC<Props> = ({ setIsDisabled }) => {
     })
 
     if (result.status === 200) {
-      sessionStorage.setItem(step, result.data)
+      sessionStorage.setItem(step, JSON.stringify({ tableData: [...result.data] }))
       setDragIcon(dragSuccess);
       setDragtext('Данные были успешно загружены');
       setLoadedFileInfo({ name: files[0].name, size: "1.7MB" });

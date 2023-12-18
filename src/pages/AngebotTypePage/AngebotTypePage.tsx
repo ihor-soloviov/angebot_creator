@@ -22,7 +22,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (selectedId && selectedValue) {
-      sessionStorage.setItem(step, JSON.stringify([selectedValue, selectedId]))
+      sessionStorage.setItem(step, JSON.stringify({ angebotType: selectedValue, id: selectedId }))
       setAngebotId(selectedId)
       setIsDisabled(false)
     }

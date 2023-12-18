@@ -3,13 +3,26 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 
 import "./ProjectImagesPage.scss";
-import { ImageWithTableBlock } from "../../components/ImageWithTableBlock";
+import { ImageWithTableBlock, TableData } from "../../components/ImageWithTableBlock";
 import { MainImageAdder } from "../../components/MainImageAdder";
 import { PlusButton } from "../../components/PlusButton";
 import { ButtonNext } from "../../components/ButtonNext";
+import picturesStore from "../../stores/pictures-store";
+
+export interface ProjectPhoto {
+  [key: string]: File
+}
+
+export interface PictureWithTable {
+  picture: File;
+  tableData: TableData;
+}
 
 
 export const ProjectImagesPage: React.FC = React.memo(() => {
+  const { setMainProjectPhoto, setPictureWithTableArray } = picturesStore;
+  const [mainPictureOfObject, setMainPictureOfObject] = useState<File | null>(null);
+  const [picturesWithTables, setPicturesWithTables] = useState<PictureWithTable[]>([])
   const [imageWithTable, setImageWithTable] = useState([{ id: 1 }])
 
   const addNewItem = () => {
@@ -21,18 +34,26 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
     })
   }
 
+  const storageSetter = () => {
+    if (mainPictureOfObject && picturesWithTables.length > 0) {
+      console.log({ mainPictureOfObject: mainPictureOfObject, additional: picturesWithTables });
+      setMainProjectPhoto(mainPictureOfObject);
+      setPictureWithTableArray(picturesWithTables)
+    }
+  }
+
   return (
     <div className="projectImagesPage">
       <Header />
       <div className="projectImagesPage__container">
-        <MainImageAdder />
+        <MainImageAdder setMainPictureOfObject={setMainPictureOfObject} />
         {imageWithTable.map(el =>
-          (<ImageWithTableBlock key={el.id} />)
+          (<ImageWithTableBlock key={el.id} setPicturesWithTables={setPicturesWithTables} />)
         )}
         <div className="projectImagesPage__plusButton">
           <PlusButton handler={addNewItem} />
           <p>Добавить фото</p>
-          <ButtonNext width={532} />
+          <ButtonNext width={532} storageSetter={storageSetter} />
         </div>
       </div>
       <Footer />

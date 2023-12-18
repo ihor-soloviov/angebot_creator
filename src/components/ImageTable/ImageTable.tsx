@@ -2,23 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./ImageTable.scss";
 import { TableRow } from "../TableRow";
 import { PlusButton } from "../PlusButton";
+import { TableData } from "../ImageWithTableBlock";
 
-export interface TableData {
-  Neigung: string
-  Azimut: string
-  Unterkonstruktion: string
-  Modulanzahl: string
-  Modulaufständerung?: string
+interface Props {
+  tableData: TableData | null
+  setTableData: React.Dispatch<React.SetStateAction<TableData | null>>
 }
 
+export const ImageTable: React.FC<Props> = React.memo(({ setTableData, tableData }) => {
 
-
-export const ImageTable: React.FC = () => {
-  const [tabelData, setTabelData] = useState<TableData>()
   const [rowNames, setRowNames] = useState(["Neigung", "Azimut", "Unterkonstruktion", "Modulanzahl"])
 
   const addRowToData = (rowName: string, objectValue: string) => {
-    setTabelData(prev => {
+    setTableData(prev => {
       // Перевірка, чи попередній стан є визначеним
       const newData: TableData = prev ? { ...prev } : {
         Neigung: '',
@@ -40,8 +36,8 @@ export const ImageTable: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(tabelData)
-  }, [tabelData])
+    console.log(tableData)
+  }, [tableData])
 
 
   return (
@@ -59,4 +55,4 @@ export const ImageTable: React.FC = () => {
       </div>
     </div>
   );
-}
+})

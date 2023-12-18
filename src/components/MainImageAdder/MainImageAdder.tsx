@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import img from "../../assets/addMainImg.png"
 import dragSuccess from "../../assets/dragSuccess.svg"
+import dragError from "../../assets/dragError.svg"
 
 import { dragLeaveHandler, dragStartHandler } from "../../utils/dragFunctions";
 import classNames from "classnames";
 import "./MainImageAdder.scss";
 
-export const MainImageAdder: React.FC = () => {
+interface Props {
+  setMainPictureOfObject: Dispatch<SetStateAction<File | null>>
+}
+
+export const MainImageAdder: React.FC<Props> = ({ setMainPictureOfObject }) => {
   const [drag, setDrag] = useState(false);
   const [icon, setIcon] = useState(img);
   const [dragtext, setDragtext] = useState('Перетяните изображение')
@@ -15,20 +20,19 @@ export const MainImageAdder: React.FC = () => {
     e.preventDefault();
     const files = [...e.dataTransfer.files];
 
-    const allowedExtensions = ['.png', 'jpg'];
+    const allowedExtensions = ['.png', '.PNG', 'JPG', 'jpg'];
     const isFileValid = allowedExtensions.some(ext => files[0].name.endsWith(ext));
 
     if (!isFileValid) {
-      console.log("Неприпустимий формат файлу. Будь ласка, оберіть файл з розширенням .png, jpg");
+      setIcon(dragError)
+      setDragtext("Неприпустимий формат файлу. Будь ласка, оберіть файл з розширенням .png, jpg")
       setDrag(false);
       return;
     }
 
-    const formData = new FormData();
-    formData.append("mainImg", files[0])
+    setMainPictureOfObject(files[0])
     setIcon(dragSuccess)
     setDragtext('Фото успешно загружено')
-    console.log(formData)
     setDrag(false)
   }
   return (
