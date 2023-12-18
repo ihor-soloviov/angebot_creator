@@ -17,9 +17,9 @@ export const BravoPage: React.FC = () => {
         "checkout",
         "bravo"
       ];
-
       return !unavailablePages.includes(page);
     });
+
     const dataToGenerator = [];
 
     if (!pagesByProducer) {
@@ -28,13 +28,15 @@ export const BravoPage: React.FC = () => {
 
     pagesByProducer.forEach(el => {
       const storageForPage = sessionStorage.getItem(el);
-      if (storageForPage) {
-        console.log(JSON.parse(storageForPage))
-      } else {
-        console.log('jopa')
+      if (!storageForPage) {
+        return;
       }
+      dataToGenerator.push(JSON.parse(storageForPage))
     })
 
+    if (dataToGenerator.length > 0) {
+      console.log(dataToGenerator)
+    }
   }
 
 
