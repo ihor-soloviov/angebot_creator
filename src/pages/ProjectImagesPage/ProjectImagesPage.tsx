@@ -7,7 +7,7 @@ import { ImageWithTableBlock, TableData } from "../../components/ImageWithTableB
 import { MainImageAdder } from "../../components/MainImageAdder";
 import { PlusButton } from "../../components/PlusButton";
 import { ButtonNext } from "../../components/ButtonNext";
-import picturesStore from "../../stores/pictures-store";
+import { uploadMainImage } from "../../utils/sendDataToGenerator";
 
 export interface ProjectPhoto {
   [key: string]: File
@@ -20,7 +20,7 @@ export interface PictureWithTable {
 
 
 export const ProjectImagesPage: React.FC = React.memo(() => {
-  const { setMainProjectPhoto, setPictureWithTableArray } = picturesStore;
+  // const { setMainProjectPhoto, setPictureWithTableArray } = picturesStore;
   const [mainPictureOfObject, setMainPictureOfObject] = useState<File | null>(null);
   const [picturesWithTables, setPicturesWithTables] = useState<PictureWithTable[]>([])
   const [imageWithTable, setImageWithTable] = useState([{ id: 1 }])
@@ -34,11 +34,21 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
     })
   }
 
+
+
   const storageSetter = () => {
+    const angebotInfo = JSON.parse(sessionStorage.getItem('angebotType') || "")
+    if (angebotInfo === "") {
+      throw new Error('не існує ангебот інфо');
+      return
+    }
+
     if (mainPictureOfObject && picturesWithTables.length > 0) {
       console.log({ mainPictureOfObject: mainPictureOfObject, additional: picturesWithTables });
-      setMainProjectPhoto(mainPictureOfObject);
-      setPictureWithTableArray(picturesWithTables)
+      console.log(angebotInfo)
+      uploadMainImage({ mainPictureOfObject: mainPictureOfObject }, angebotInfo.id.toString())
+      // setMainProjectPhoto(mainPictureOfObject);
+      // setPictureWithTableArray(picturesWithTables)
     }
   }
 

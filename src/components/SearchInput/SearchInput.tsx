@@ -8,7 +8,7 @@ import { SearchResult } from "../../types/dealsTypes";
 import "./SearchInput.scss";
 
 interface Props {
-  setSelectedId: (value: number) => void
+  setSelectedId: (value: string) => void
 }
 
 export const SearchInput: React.FC<Props> = ({ setSelectedId }) => {
@@ -26,7 +26,7 @@ export const SearchInput: React.FC<Props> = ({ setSelectedId }) => {
   }, [debouncedSearch])
 
 
-  const handleSelect = (id: number) => {
+  const handleSelect = (id: string) => {
     setIsOpen(false);
     setSelectedId(id)
   }

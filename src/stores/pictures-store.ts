@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { PictureWithTable } from "../pages/ProjectImagesPage";
 
 class PicturesStore {
@@ -7,6 +7,14 @@ class PicturesStore {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get picObject() {
+    return this.mainPictureOfObject;
+  }
+
+  get picArray() {
+    return this.picturesWithTables;
   }
 
   setMainProjectPhoto = (file: File) => {
@@ -19,7 +27,7 @@ class PicturesStore {
   setPictureWithTableArray = (array: PictureWithTable[]) => {
     this.picturesWithTables = array;
     setTimeout(() => {
-      console.log([...this.picturesWithTables]);
+      console.log(toJS(this.picturesWithTables));
     }, 1000);
   };
 }

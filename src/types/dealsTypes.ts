@@ -1,5 +1,5 @@
 export interface UserData {
-  id: number;
+  id: string;
   home: string;
   name: string;
   tel: string;

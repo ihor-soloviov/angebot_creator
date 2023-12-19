@@ -11,7 +11,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
   const { step, setAngebotId } = stepStore;
 
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse'];

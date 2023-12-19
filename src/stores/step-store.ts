@@ -31,7 +31,7 @@ class StepStore {
   step = Steps.welcome;
   calculatorSteps = 10;
   calculatorStep = 1;
-  angebotId = 0;
+  angebotId = '';
 
   arraysOfSteps = {
     Huawei: [
@@ -125,7 +125,7 @@ class StepStore {
     return null;
   };
 
-  setAngebotId = (value: number) => {
+  setAngebotId = (value: string) => {
       this.angebotId = value;
   };
 
