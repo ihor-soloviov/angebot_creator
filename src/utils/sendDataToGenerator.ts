@@ -31,15 +31,16 @@ export const sendDataToGenerator = () => {
 };
 
 export const uploadMainImage = async (
-  mainPictureOfObject: { mainPictureOfObject: File },
-  angebot_id: string
+  mainImage: File,
+  angebot_id: string,
+  dir: string
 ): Promise<void> => {
   const formData = new FormData();
-  formData.append("mainImage", mainPictureOfObject.mainPictureOfObject);
+  formData.append(dir, mainImage);
 
   try {
     const response = await fetch(
-      `https://api.creator.work-set.eu/mainImage/${angebot_id}`,
+      `https://api.creator.work-set.eu/${dir}/${angebot_id}/${dir}`,
       {
         method: "POST",
         body: formData,

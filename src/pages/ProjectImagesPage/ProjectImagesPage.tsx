@@ -21,7 +21,7 @@ export interface PictureWithTable {
 
 export const ProjectImagesPage: React.FC = React.memo(() => {
   // const { setMainProjectPhoto, setPictureWithTableArray } = picturesStore;
-  const [mainPictureOfObject, setMainPictureOfObject] = useState<File | null>(null);
+  const [mainImage, setMainImage] = useState<File | null>(null);
   const [picturesWithTables, setPicturesWithTables] = useState<PictureWithTable[]>([])
   const [imageWithTable, setImageWithTable] = useState([{ id: 1 }])
 
@@ -43,12 +43,13 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
       return
     }
 
-    if (mainPictureOfObject && picturesWithTables.length > 0) {
-      console.log({ mainPictureOfObject: mainPictureOfObject, additional: picturesWithTables });
+    const stringId = angebotInfo.id.toString();
+
+    if (mainImage && picturesWithTables.length > 0) {
+      console.log(picturesWithTables);
       console.log(angebotInfo)
-      uploadMainImage({ mainPictureOfObject: mainPictureOfObject }, angebotInfo.id.toString())
-      // setMainProjectPhoto(mainPictureOfObject);
-      // setPictureWithTableArray(picturesWithTables)
+      uploadMainImage(mainImage, stringId, "mainImage");
+      picturesWithTables.forEach(file => uploadMainImage(file.picture, stringId, "additionalImage"))
     }
   }
 
@@ -56,7 +57,7 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
     <div className="projectImagesPage">
       <Header />
       <div className="projectImagesPage__container">
-        <MainImageAdder setMainPictureOfObject={setMainPictureOfObject} />
+        <MainImageAdder setMainPictureOfObject={setMainImage} />
         {imageWithTable.map(el =>
           (<ImageWithTableBlock key={el.id} setPicturesWithTables={setPicturesWithTables} />)
         )}
