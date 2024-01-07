@@ -28,7 +28,7 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.welcome;
+  step = Steps.angebotType;
   calculatorSteps = 10;
   calculatorStep = 1;
   angebotId = '';

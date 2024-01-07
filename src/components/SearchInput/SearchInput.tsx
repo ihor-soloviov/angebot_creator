@@ -9,12 +9,14 @@ import "./SearchInput.scss";
 
 interface Props {
   setSelectedId: (value: string) => void
+  searchResult: SearchResult | null
+  setSearchResult: (value: SearchResult | null) => void
 }
 
-export const SearchInput: React.FC<Props> = ({ setSelectedId }) => {
+export const SearchInput: React.FC<Props> = ({ setSelectedId, searchResult, setSearchResult }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('')
-  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+
 
   const debouncedSearch = useDebounce(searchValue, 500);
   const selectValue = searchResult !== null ? searchResult.userData.id : "такого id не знайдено"

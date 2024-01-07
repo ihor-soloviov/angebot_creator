@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { KeyboardEvent, useEffect, useRef } from "react";
 import "./PlusMinusHandler.scss";
 import { updateTotalPrice } from "../../utils/updateTotalPrice";
 
@@ -12,14 +12,22 @@ interface Props {
 export const PlusMinusHandler: React.FC<Props> = React.memo(
   ({ priceСount, setPriceСount, setTotalPrice, selectedValue }) => {
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = +e.target.value;
-      if (!isNaN(inputValue)) {
-        setPriceСount(inputValue);
+      if (isNaN(inputValue)) {
+        setPriceСount(0);
+        return
+      }
+
+      if (inputValue < 0) {
+        setPriceСount(0);
+        return
       }
 
       else {
-        setPriceСount(0);
+        setPriceСount(inputValue);
       }
     };
 
@@ -40,6 +48,15 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
       //a bit time to update prices list 
     }, [priceСount, setTotalPrice]);
 
+    const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        if (inputRef.current?.value) {
+          setPriceСount(+inputRef.current?.value);
+          inputRef.current.blur();
+        }
+      }
+    };
+
     return (
       <div className="plusMinusHandler">
         <button className="buttonHandler" onClick={decrement}>
@@ -51,7 +68,9 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
           disabled={selectedValue === 'Выберете вариант'}
           value={priceСount === 0 ? "" : priceСount}
           onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
           type="number"
+          ref={inputRef}
         />
         <button className="buttonHandler" onClick={increment}>
           <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">

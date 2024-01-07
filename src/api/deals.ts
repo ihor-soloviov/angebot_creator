@@ -10,6 +10,8 @@ export const fetchUserAndSellerData = async (
     `https://mailer.work-set.eu/deals/${debouncedSearch}`
   );
 
+  console.log(data)
+
   if (data && Object.keys(data).length > 0) {
     setSearchResult(data.data);
   } else {

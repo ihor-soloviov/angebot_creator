@@ -43,7 +43,7 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
       return
     }
 
-    const stringId = angebotInfo.id.toString();
+    const stringId = angebotInfo.angebotId.toString();
 
     if (mainImage && picturesWithTables.length > 0) {
       console.log(picturesWithTables);

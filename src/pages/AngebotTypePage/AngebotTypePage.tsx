@@ -6,6 +6,7 @@ import "./AngebotTypePage.scss";
 import { SearchInput } from "../../components/SearchInput";
 import { ButtonNext } from "../../components/ButtonNext";
 import stepStore from "../../stores/step-store";
+import { SearchResult } from "../../types/dealsTypes";
 
 export const AngebotTypePage: React.FC = React.memo(() => {
   const { step, setAngebotId } = stepStore;
@@ -16,17 +17,28 @@ export const AngebotTypePage: React.FC = React.memo(() => {
 
   const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse'];
 
+  const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+
   const changeSelectedValue: (value: string) => void = (newValue) => {
     setSelectedValue(newValue)
   };
 
   useEffect(() => {
     if (selectedId && selectedValue) {
-      sessionStorage.setItem(step, JSON.stringify({ angebotType: selectedValue, id: selectedId }))
+      sessionStorage.setItem(step, JSON.stringify({
+        ...searchResult,
+        angebotId: selectedId,
+        angebotType: selectedValue,
+      }))
+      console.log({
+        ...searchResult,
+        angebotId: selectedId,
+        angebotType: selectedValue,
+      })
       setAngebotId(selectedId)
       setIsDisabled(false)
     }
-  }, [selectedValue, selectedId, setAngebotId, step])
+  }, [selectedValue, selectedId, setAngebotId, step, searchResult])
 
 
   return (
@@ -42,7 +54,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
               values={angebotTypes}
             />
             <p className="label angebotTypeLabel">ID ангебота</p>
-            <SearchInput setSelectedId={setSelectedId} />
+            <SearchInput searchResult={searchResult} setSearchResult={setSearchResult} setSelectedId={setSelectedId} />
             <ButtonNext isDisabled={isDisabled} />
           </div>
         </div>

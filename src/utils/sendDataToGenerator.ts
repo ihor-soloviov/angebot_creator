@@ -19,10 +19,16 @@ export const sendDataToGenerator = () => {
   );
 
   const dataToGenerator = pagesByProducer
-    .map((page) => sessionStorage.getItem(page))
-    .filter((storageItem): storageItem is string => storageItem != null)
-    .map((storageItem) => JSON.parse(storageItem));
-
+    .map((page) => {
+      const dataFromPage = sessionStorage.getItem(page);
+      if (dataFromPage) {
+        return {
+          [page]: JSON.parse(dataFromPage),
+        };
+      }
+      return undefined;
+    })
+    .filter((storageItem) => storageItem !== undefined);
   if (dataToGenerator.length > 0) {
     console.log(dataToGenerator);
     console.log(picObject);
