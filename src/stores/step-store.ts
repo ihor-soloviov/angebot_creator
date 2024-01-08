@@ -28,10 +28,10 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.angebotType;
+  step = Steps.welcome;
   calculatorSteps = 10;
   calculatorStep = 1;
-  angebotId = '';
+  angebotId = "";
 
   arraysOfSteps = {
     Huawei: [
@@ -126,7 +126,7 @@ class StepStore {
   };
 
   setAngebotId = (value: string) => {
-      this.angebotId = value;
+    this.angebotId = value;
   };
 
   get id() {

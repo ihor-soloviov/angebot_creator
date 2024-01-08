@@ -1,11 +1,12 @@
 import producerStore from "../stores/producer-store";
 import stepStore from "../stores/step-store";
-import picturesStore from "../stores/pictures-store";
+// import picturesStore from "../stores/pictures-store";
+import axios from "axios";
 
-export const sendDataToGenerator = () => {
+export const sendDataToGenerator = async () => {
   const { producer } = producerStore;
-  const { arraysOfSteps } = stepStore;
-  const { picObject, picArray } = picturesStore;
+  const { arraysOfSteps, id } = stepStore;
+  // const { picObject, picArray } = picturesStore;
 
   const unavailablePages = [
     "welcome",
@@ -29,10 +30,29 @@ export const sendDataToGenerator = () => {
       return undefined;
     })
     .filter((storageItem) => storageItem !== undefined);
+
   if (dataToGenerator.length > 0) {
-    console.log(dataToGenerator);
-    console.log(picObject);
-    console.log(picArray);
+    const combinedObject = dataToGenerator.reduce(
+      (accumulator, currentObject) => {
+        return { ...accumulator, ...currentObject };
+      },
+      { angebotId: id }
+    );
+
+    const result = await axios.post(
+      "https://api.creator.work-set.eu/dataToGenerator",
+      combinedObject,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+
+    console.log(result);
+    // console.log([...dataToGenerator, { angebotId: id }]);
+    // console.log(picObject);
+    // console.log(picArray);
   }
 };
 

@@ -30,12 +30,14 @@ export const AngebotTypePage: React.FC = React.memo(() => {
         angebotId: selectedId,
         angebotType: selectedValue,
       }))
+      setAngebotId(selectedId)
+      
       console.log({
         ...searchResult,
         angebotId: selectedId,
         angebotType: selectedValue,
       })
-      setAngebotId(selectedId)
+
       setIsDisabled(false)
     }
   }, [selectedValue, selectedId, setAngebotId, step, searchResult])
