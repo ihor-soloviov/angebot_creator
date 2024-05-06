@@ -25,7 +25,6 @@ export const WallboxPage: React.FC = React.memo(() => {
     fetchSingleItems("wallbox", setSingleServices);
   }, [producer])
 
-
   return (
     <div className="wallboxPage">
       <Header />

@@ -5,62 +5,60 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 
-export const UnderConstructionsPage: React.FC = React.memo(() => {
-  const singleServices: SingleService[] = [{
-    blackTitle: "Quermontage",
-    greyTitle: "(модули лежа)",
-    price: 220
-  },
-  {
-    blackTitle: "Hochmontage",
-    greyTitle: "(модули стоя)",
-    price: 190
-  },
-  {
-    blackTitle: "Trapezdach",
-    greyTitle: "(трапециевидная крыша)",
-    price: 68
-  },
-  {
-    blackTitle: "Flachdach Ost/West",
-    greyTitle: "(на плоской крыше)",
-    price: 160
-  },
-  {
-    blackTitle: "Quermontage Alpha",
-    greyTitle: "(поперечное крепление Альфа)",
-    price: 263
-  },
-  {
-    blackTitle: "Hochmontage Alpha",
-    greyTitle: "(высокие монтажные альфа-панели)",
-    price: 230
-  },
-  {
-    blackTitle: "Trapezdach Alpha",
-    greyTitle: "(трапециевидная крыша Альфа)",
-    price: 95
-  },
-  {
-    blackTitle: "Flachdach Alpha",
-    greyTitle: "(плоская кровля Альфа)",
-    price: 190
-  }
-  ]
+const singleServices: SingleService[] = [{
+  blackTitle: "Quermontage",
+  greyTitle: "(модули лежа)",
+  price: 220
+},
+{
+  blackTitle: "Hochmontage",
+  greyTitle: "(модули стоя)",
+  price: 190
+},
+{
+  blackTitle: "Trapezdach",
+  greyTitle: "(трапециевидная крыша)",
+  price: 68
+},
+{
+  blackTitle: "Flachdach Ost/West",
+  greyTitle: "(на плоской крыше)",
+  price: 160
+},
+{
+  blackTitle: "Quermontage Alpha",
+  greyTitle: "(поперечное крепление Альфа)",
+  price: 263
+},
+{
+  blackTitle: "Hochmontage Alpha",
+  greyTitle: "(высокие монтажные альфа-панели)",
+  price: 230
+},
+{
+  blackTitle: "Trapezdach Alpha",
+  greyTitle: "(трапециевидная крыша Альфа)",
+  price: 95
+},
+{
+  blackTitle: "Flachdach Alpha",
+  greyTitle: "(плоская кровля Альфа)",
+  price: 190
+}
+]
 
-  const title: Title = {
-    blackTitle: "Unterkonstruktion",
-    greyTitle: "Подконструкция"
-  }
+const title: Title = {
+  blackTitle: "Unterkonstruktion",
+  greyTitle: "Подконструкция"
+}
 
-  return (
-    <div className="underConstructionsPage">
-      <Header />
-      <Calculator
-        title={title}
-        singleServices={singleServices}
-      />
-      <Footer isCalculator={true} />
-    </div>
-  );
-})
+export const UnderConstructionsPage: React.FC = React.memo(() => (
+  <div className="underConstructionsPage">
+    <Header />
+    <Calculator
+      title={title}
+      singleServices={singleServices}
+    />
+    <Footer isCalculator={true} />
+  </div>
+))
