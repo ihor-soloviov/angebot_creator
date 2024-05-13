@@ -11,9 +11,9 @@ const links: Array<AdminLink> = [
   { pic: first, title: "Посмотреть выиграш выбранного\n предложения", href: '/admin/table' }
 ]
 
-const Admin = () => {
+const AdminPage = () => {
   return (
-    <main>
+    <>
       <Header />
       <div className="adminPage">
         <div className="adminPage__links">
@@ -26,8 +26,8 @@ const Admin = () => {
           ))}
         </div>
       </div>
-    </main>
+    </>
   )
 }
 
-export default Admin
+export default AdminPage

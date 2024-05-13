@@ -4,17 +4,14 @@
 @import "../../utilsScss/colors.scss";
 
 .welcomePage {
-
   background-color: $main-grey;
-  height: 100vh;
-
+  height: calc(100vh - 65.5px);
 
   &__inner {
     display: flex;
     gap: 89px;
     width: max-content;
     margin: 0 auto;
-
   }
 
   &__imageBlock {
