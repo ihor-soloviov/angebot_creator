@@ -40,7 +40,6 @@ export const ProjectImagesPage: React.FC = React.memo(() => {
     const angebotInfo = JSON.parse(sessionStorage.getItem('angebotType') || "")
     if (angebotInfo === "") {
       throw new Error('не існує ангебот інфо');
-      return
     }
 
     const stringId = angebotInfo.angebotId.toString();
