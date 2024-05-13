@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 import stepStore from "./stores/step-store";
 import { stepComponents } from "./imports";
+import { Route, Routes } from "react-router-dom";
+import Admin from "./pages/Admin/Admin";
 
 export const App: React.FC = observer(() => {
   const { step } = stepStore;
@@ -12,6 +14,9 @@ export const App: React.FC = observer(() => {
 
 
   return (
-    <main>{switchComponent()}</main>
+    <Routes>
+      <Route path="/" element={<main>{switchComponent()}</main>} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   )
 })

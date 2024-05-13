@@ -4,6 +4,7 @@ import roleStore from "../../stores/role-store";
 import stepStore from "../../stores/step-store";
 import classNames from "classnames";
 import producerStore from "../../stores/producer-store";
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = React.memo(
   () => {
@@ -23,7 +24,7 @@ export const Header: React.FC = React.memo(
       <div className="header">
         <div className={classNames("header__item", { active: getStepIndex() < 5 })}>Angebot Creater</div>
         <div className={classNames("header__item", { active: getStepIndex() >= 5 })}>Калькулятор</div>
-        {role === 'admin' && <div className="header__item">Admin Panel</div>}
+        {role === 'admin' && <Link to="/admin" className="header__item">Admin Panel</Link>}
       </div>
     );
   }
