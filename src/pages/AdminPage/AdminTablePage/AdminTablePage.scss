@@ -1,0 +1,140 @@
+@import "../../../utilsScss/mixins.scss";
+@import "../../../utilsScss/colors.scss";
+
+.adminPage__table {
+  @include pageDecore;
+  height: calc(100vh - 65.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 63px;
+
+  h1 {
+    font-family: Poppins;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    color: #8f9aa5;
+    font-family: Inter Tight;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 59px;
+  }
+}
+
+.tablesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 49px 34px 112px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.06);
+}
+
+.giwennfaktor__inner {
+  display: flex;
+  width: max-content;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid #8f9aa5;
+  margin-bottom: 64px;
+
+  p {
+    color: #2e2e2e;
+    text-align: center;
+    font-family: "Inter Tight";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    padding: 16px 246px 16px 24px;
+
+    user-select: none;
+    cursor: default;
+  }
+
+  .giwennfaktor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $main-red;
+    border-radius: 0 8px 8px 0;
+    width: 138px;
+
+    input {
+      color: #fff;
+      font-family: "Inter Tight";
+      font-size: 20px;
+      font-weight: 500;
+      background-color: $main-red;
+      border: 0;
+      padding: 0;
+      width: 44px;
+    }
+  }
+}
+
+.tables__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 461px);
+  gap: 55px;
+
+  table {
+    font-family: "Inter Tight";
+    font-size: 15px;
+    line-height: normal;
+    border: 1px solid #c3c9d6;
+    border-radius: 4px;
+
+    .grey {
+      background-color: #f0f0f0;
+    }
+
+    .red {
+      background-color: $main-red;
+    }
+  }
+
+  .tableColumn__first {
+    display: flex;
+    flex-direction: column;
+    gap: 92px;
+  }
+
+  .table-gewin {
+    td {
+      border-top: 1px solid #c3c9d6;
+    }
+    td:nth-child(odd) {
+      border-right: 1px solid #c3c9d6;
+    }
+
+    td,
+    th {
+      padding: 11px 0 11px 18px;
+    }
+
+    th {
+      font-weight: 500;
+      text-align: left;
+
+      &:nth-child(2) {
+        color: #fff;
+      }
+    }
+  }
+
+  .table-prices {
+    td {
+      font-weight: 400;
+      padding: 13px 0 13px 18px;
+    }
+
+    tr:nth-of-type(1) > td:nth-of-type(2) {
+      font-weight: 500;
+    }
+  }
+}

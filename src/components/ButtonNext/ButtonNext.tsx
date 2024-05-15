@@ -8,13 +8,18 @@ interface Props {
   isDisabled?: boolean
   width?: number
   storageSetter?: () => void
+  adminOnClick?: () => void
 }
 
 
-export const ButtonNext: React.FC<Props> = ({ isDisabled, width, storageSetter }) => {
+export const ButtonNext: React.FC<Props> = ({ isDisabled, width, storageSetter, adminOnClick }) => {
   const { setStep, generateNextStep } = stepStore;
 
   const handler = () => {
+    if (adminOnClick) {
+      adminOnClick();
+      return
+    }
     const nextStep = generateNextStep();
     if (nextStep === null) {
       return;

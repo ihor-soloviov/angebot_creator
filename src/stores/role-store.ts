@@ -10,11 +10,19 @@ class RoleStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.setRoleFromLS();
   }
 
   setRole = (value: UserRole) => {
     if (value) {
       this.role = value;
+    }
+  };
+
+  setRoleFromLS = () => {
+    const role = localStorage.getItem("login");
+    if (role && role in UserRole) {
+      this.role = role as UserRole;
     }
   };
 }
