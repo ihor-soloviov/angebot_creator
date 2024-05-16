@@ -19,7 +19,7 @@ const AdminTablePage = () => {
             </div>
           </div>
           <div className="tables__inner">
-            <div className="tableColumn__first">
+            <div className="tableColumn tableColumn__first">
               <table className="table-gewin">
                 <thead>
                   <tr>
@@ -47,7 +47,7 @@ const AdminTablePage = () => {
                 <tbody>
                   <tr className="grey">
                     <td>AC-Komponenten Holding Kosten</td>
-                    <td>6,350.00€</td>
+                    <td className="weight-500">6,350.00€</td>
                   </tr>
                   <tr>
                     <td>AC-Komponenten Energy Kosten:</td>
@@ -80,8 +80,232 @@ const AdminTablePage = () => {
                 </tbody>
               </table>
             </div>
-            <div></div>
-            <div></div>
+            <div className="tableColumn tableColumn__second">
+              <table className="table-profit">
+                <thead>
+                  <tr className="grey">
+                    <th></th>
+                    <th></th>
+                    <th className="weight-500">Gewinn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Verkaufspreis</td>
+                    <td className="light-red">11,868.64€</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Skonto</td>
+                    <td className="table__discount">11,868.64€</td>
+                    <td className="table__profit">7,328.64€</td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Vertrieb</td>
+                    <td className="table__distribution">17,453.49€</td>
+                    <td className="table__profit">5,913.49€</td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Vertrieb + Skonto</td>
+                    <td className="table__distribution_discount">17,453.49€</td>
+                    <td className="table__profit light-red">5,913.49€</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table className="table-discount">
+                <thead>
+                  <tr className="grey">
+                    <th>Skonto</th>
+                    <th>abzgl. Vertrieb</th>
+                    <th>abzgl. Vertrieb + Skonto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0%</td>
+                    <td className="red white-color">8%</td>
+                    <td>8%</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <table className="table-capital">
+                <thead>
+                  <tr >
+                    <th>Kapital, das vorgestreckt <br /> werden muss</th>
+                    <th>8,510.00€</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Gewinn im Verhältnis zum <br /> vorgestreckten Kaptal</td>
+                    <td className="red white-color">32,80%</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div className="tableColumn tableColumn__second">
+              <table className="table-profit">
+                <thead>
+                  <tr className="grey">
+                    <th></th>
+                    <th></th>
+                    <th className="weight-500">Gewinn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Verkaufspreis</td>
+                    <td className="light-red">11,868.64€</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Skonto</td>
+                    <td className="table__discount">11,868.64€</td>
+                    <td className="table__profit">7,328.64€</td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Vertrieb</td>
+                    <td className="table__distribution">17,453.49€</td>
+                    <td className="table__profit">5,913.49€</td>
+                  </tr>
+                  <tr>
+                    <td>abzgl. Vertrieb + Skonto</td>
+                    <td className="table__distribution_discount">17,453.49€</td>
+                    <td className="table__profit light-red">5,913.49€</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table className="table-discount">
+                <thead>
+                  <tr className="grey">
+                    <th>Skonto</th>
+                    <th>abzgl. Vertrieb</th>
+                    <th>abzgl. Vertrieb + Skonto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0%</td>
+                    <td className="red white-color">8%</td>
+                    <td>8%</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <table className="table-capital">
+                <thead>
+                  <tr >
+                    <th>Kapital, das vorgestreckt <br /> werden muss</th>
+                    <th>8,510.00€</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Gewinn im Verhältnis zum <br /> vorgestreckten Kaptal</td>
+                    <td className="red white-color">32,80%</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div className="tablesWrapper">
+          <div className="tablesFinal__inner">
+            <div className="tableColumn">
+              <table>
+                <tbody className="table-steps">
+                  <tr>
+                    <td>1. Projektierung</td>
+                    <td>500.00€</td>
+                  </tr>
+                  <tr>
+                    <td>2. Installation + Lieferung</td>
+                    <td>4,710.00€</td>
+                  </tr>
+                  <tr>
+                    <td>3. Inbetriebnahme</td>
+                    <td>900.00€</td>
+                  </tr>
+                  <tr>
+                    <td>4. Unterkonstruktion</td>
+                    <td>3,674.59€</td>
+                  </tr>
+                  <tr>
+                    <td>5. PV-Module</td>
+                    <td>3,876.75€</td>
+                  </tr>
+                  <tr>
+                    <td>6. Optimierer</td>
+                    <td>0.00€</td>
+                  </tr>
+                  <tr>
+                    <td>7. Wechselrichter + Smart Dongle + Smartmeter</td>
+                    <td>2,002.43€</td>
+                  </tr>
+                  <tr>
+                    <td>8. PV-Speicher</td>
+                    <td>3,204.86€</td>
+                  </tr>
+                  <tr>
+                    <td>9. Wallbox</td>
+                    <td>3,204.86€</td>
+                  </tr>
+                  <tr>
+                    <td>10. Notstromlösung</td>
+                    <td>0.00€</td>
+                  </tr>
+                  <tr>
+                    <td>11. Gateway</td>
+                    <td>0.00€</td>
+                  </tr>
+                  <tr>
+                    <td>12. Taubenschutz</td>
+                    <td>0.00€</td>
+                  </tr>
+                  <tr>
+                    <td>13. Zusatzarbeiten</td>
+                    <td>0.00€</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="tableColumn finalTableColumn">
+              <h3>Предварительный рассчет</h3>
+              <table className="table-pre-calculation">
+                <thead>
+                  <tr className="grey">
+                    <th></th>
+                    <th></th>
+                    <th>Разница</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Verkaufspreis</td>
+                    <td>14,595.00€</td>
+                    <td>8,122.00€</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Verkaufspreis(Skonto)</td>
+                    <td>14,595.00€</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
