@@ -3,7 +3,7 @@ import first from "../../../assets/admin/first.png"
 import sec from "../../../assets/admin/sec.png"
 import { AdminLink } from '../../../types/admin';
 import { Link } from 'react-router-dom';
-import { ButtonNext } from '../../ButtonNext';
+import { ButtonNext } from '../../Buttons/ButtonNext';
 import "./AdminLinks.scss"
 
 const links: Array<AdminLink> = [

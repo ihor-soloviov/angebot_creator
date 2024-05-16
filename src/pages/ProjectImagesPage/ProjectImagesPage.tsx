@@ -6,7 +6,7 @@ import "./ProjectImagesPage.scss";
 import { ImageWithTableBlock, TableData } from "../../components/ImageWithTableBlock";
 import { MainImageAdder } from "../../components/MainImageAdder";
 import { PlusButton } from "../../components/PlusButton";
-import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import { uploadMainImage } from "../../utils/sendDataToGenerator";
 
 export interface ProjectPhoto {

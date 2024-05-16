@@ -4,7 +4,7 @@ import { SearchInput } from '../../../components/SearchInput';
 import img from '../../../assets/angebotTypePicture.png'
 import './AdminSearchPage.scss'
 import { SearchResult } from '../../../types/dealsTypes';
-import { ButtonNext } from '../../../components/ButtonNext';
+import { ButtonNext } from '../../../components/Buttons/ButtonNext';
 import { useNavigate } from 'react-router-dom';
 
 const AdminSearchPage = () => {

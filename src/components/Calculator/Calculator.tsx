@@ -5,7 +5,7 @@ import "./Calculator.scss";
 import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
 import { SelectServiceItem } from "../SelectServiceItem";
-import { ButtonNext } from "../ButtonNext";
+import { ButtonNext } from "../Buttons/ButtonNext";
 import { CustomService } from "../CustomService";
 
 interface Props {

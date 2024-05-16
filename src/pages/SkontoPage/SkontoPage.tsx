@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import "./SkontoPage.scss";
-import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
 
 export const SkontoPage: React.FC = () => {
   const [value, setValue] = useState('')
@@ -17,7 +17,7 @@ export const SkontoPage: React.FC = () => {
             <input value={value} onChange={(e) => setValue(e.target.value)} type="text" placeholder="Введите скидку в %" />
           </div>
           <div className="skonto-result">
-            
+
           </div>
           <ButtonNext />
         </div>

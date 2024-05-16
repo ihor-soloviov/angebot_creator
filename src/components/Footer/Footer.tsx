@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonPrev } from "../ButtonPrev";
+import { ButtonPrev } from "../Buttons/ButtonPrev";
 import { TotalCost } from "../TotalCost";
 import "./Footer.scss";
 

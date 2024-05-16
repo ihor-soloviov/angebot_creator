@@ -6,13 +6,16 @@
 
   &__item {
     flex: 1;
-    text-align: center;
     padding: 19px 0;
-    color: $dark-grey;
     border: 1px solid $light-grey;
+
+    color: $dark-grey;
+    text-align: center;
+    text-decoration: none;
     font-size: 20px;
     font-weight: 500;
     line-height: normal;
+    
     background-color: #fff;
   }
 

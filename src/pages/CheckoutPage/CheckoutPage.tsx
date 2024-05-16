@@ -6,7 +6,7 @@ import producerStore from "../../stores/producer-store";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
 import { SingleService, Title } from "../../components/Calculator/calculator-types";
 import stepStore from "../../stores/step-store";
-import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
 
 interface Page {
   page: string

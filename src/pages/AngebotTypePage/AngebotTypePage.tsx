@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { CustomSelect } from "../../components/CustomSelect";
 import "./AngebotTypePage.scss";
 import { SearchInput } from "../../components/SearchInput";
-import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import stepStore from "../../stores/step-store";
 import { SearchResult } from "../../types/dealsTypes";
 
@@ -31,7 +31,7 @@ export const AngebotTypePage: React.FC = React.memo(() => {
         angebotType: selectedValue,
       }))
       setAngebotId(selectedId)
-      
+
       console.log({
         ...searchResult,
         angebotId: selectedId,

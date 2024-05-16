@@ -38,3 +38,10 @@ export const stepComponents = {
   [Steps.bravo]: BravoPage,
   [Steps.projectImages]: ProjectImagesPage,
 };
+
+export const angebotCreatorSteps = {
+  // [Steps.welcome]: WelcomePage,
+  [Steps.angebotType]: AngebotTypePage,
+  [Steps.pvsolFile]: PvsolFilePage,
+  [Steps.producer]: ProducerPage,
+};

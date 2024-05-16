@@ -1,7 +1,7 @@
 import React from "react";
-import arrBack from "../../assets/arrBack.svg"
+import arrBack from "../../../assets/arrBack.svg"
 import "./ButtonPrev.scss";
-import stepStore from "../../stores/step-store";
+import stepStore from "../../../stores/step-store";
 
 interface Props {
   isCalculator?: boolean

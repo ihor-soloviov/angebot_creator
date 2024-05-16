@@ -3,8 +3,8 @@ import producerImg from "../../assets/producerImg.svg"
 
 import { Header } from "../../components/Header";
 import { CustomSelect } from "../../components/CustomSelect";
-import { ButtonNext } from "../../components/ButtonNext";
-import { ButtonPrev } from "../../components/ButtonPrev";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
+import { ButtonPrev } from "../../components/Buttons/ButtonPrev";
 import "./ProducerPage.scss";
 import producerStore, { Producer } from "../../stores/producer-store";
 import stepStore from "../../stores/step-store";

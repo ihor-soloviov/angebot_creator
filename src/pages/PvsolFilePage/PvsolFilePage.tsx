@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Header } from "../../components/Header";
 import { FileLoaderWindow } from "../../components/FileLoaderWindow";
-import { ButtonPrev } from "../../components/ButtonPrev";
+import { ButtonPrev } from "../../components/Buttons/ButtonPrev";
 import "./PvsolFilePage.scss";
-import { ButtonNext } from "../../components/ButtonNext";
+import { ButtonNext } from "../../components/Buttons/ButtonNext";
 
 export const PvsolFilePage: React.FC = React.memo(() => {
   const [isDisabled, setIsDisabled] = useState(true)
