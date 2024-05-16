@@ -15,7 +15,7 @@ const AdminLinks: React.FC = () => {
   return (
     <div className="adminPage__links">
       {links.map(({ pic, title, href }, index) => (
-        <Link to={href} className="adminPage__link" >
+        <Link key={title} to={href} className="adminPage__link" >
           <img src={pic} alt="picture" className={`link-${index}`} />
           <p>{title}</p>
           <ButtonNext width={248} />

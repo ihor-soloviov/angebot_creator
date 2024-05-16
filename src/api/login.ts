@@ -42,3 +42,8 @@ export const getLogIn = (data: User) => {
     alert("Неправильний логін або пароль");
   }
 };
+
+export const logIn = () => {
+  setStep(Steps.angebotType);
+  // updateLocalStorageCredentials(data);
+}

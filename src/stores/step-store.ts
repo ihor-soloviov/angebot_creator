@@ -2,7 +2,6 @@ import { makeAutoObservable } from "mobx";
 import producerStore from "./producer-store";
 
 export enum Steps {
-  welcome = "welcome",
   angebotType = "angebotType",
   pvsolFile = "pvsolFile",
   projectImages = "projectImages",
@@ -28,14 +27,13 @@ export enum ProducerSteps {
 }
 
 class StepStore {
-  step = Steps.welcome;
+  step = Steps.angebotType;
   calculatorSteps = 10;
   calculatorStep = 1;
   angebotId = "";
 
   arraysOfSteps = {
     Huawei: [
-      Steps.welcome,
       Steps.angebotType,
       Steps.pvsolFile,
       Steps.projectImages,
@@ -54,7 +52,6 @@ class StepStore {
       Steps.bravo,
     ],
     Enphase: [
-      Steps.welcome,
       Steps.angebotType,
       Steps.pvsolFile,
       Steps.projectImages,

@@ -5,13 +5,12 @@ import { stepComponents } from "../../imports";
 const AngebotCreatorSteps = observer(
   () => {
     const { step } = stepStore;
+    const Step = stepComponents[step];
 
-    const switchComponent = () => {
-      const Component = stepComponents[step];
-      return <Component />;
-    };
     return (
-      <main>{switchComponent()}</main>
+      <main>
+        <Step />
+      </main>
     )
   }
 )

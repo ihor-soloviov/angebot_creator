@@ -13,13 +13,11 @@ import { PvsolFilePage } from "./pages/PvsolFilePage";
 import { TaubenschutzPage } from "./pages/TaubenschutzPage";
 import { UnderConstructionsPage } from "./pages/UnderConstructionsPage";
 import { WallboxPage } from "./pages/WallboxPage";
-import { WelcomePage } from "./pages/WelcomePage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { Steps } from "./stores/step-store";
 import { ProjectImagesPage } from "./pages/ProjectImagesPage";
 
 export const stepComponents = {
-  [Steps.welcome]: WelcomePage,
   [Steps.angebotType]: AngebotTypePage,
   [Steps.pvsolFile]: PvsolFilePage,
   [Steps.producer]: ProducerPage,
@@ -40,7 +38,6 @@ export const stepComponents = {
 };
 
 export const angebotCreatorSteps = {
-  // [Steps.welcome]: WelcomePage,
   [Steps.angebotType]: AngebotTypePage,
   [Steps.pvsolFile]: PvsolFilePage,
   [Steps.producer]: ProducerPage,

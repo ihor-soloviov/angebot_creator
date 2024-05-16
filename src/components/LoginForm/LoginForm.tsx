@@ -8,32 +8,26 @@ import pass from "../../assets/pass.svg";
 import { CustomCheckbox } from "../CustomCheckbox";
 import arrButton from "../../assets/arrowButton.svg"
 
-import { getLogIn } from "../../api/login";
 import "./LoginForm.scss";
+import { Link } from "react-router-dom";
+import { logIn } from "../../api/login";
 
 export const LoginForm: React.FC = observer(() => {
-
   const [isChecked, setIsChecked] = useState<boolean>(true);
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const checkLocalStorageCredentials = () => {
+
     const storedLogin = localStorage.getItem('login');
     const storedPassword = localStorage.getItem('password');
+
     if (storedLogin === null || storedPassword === null) {
       return;
     }
     setLogin(storedLogin);
     setPassword(storedPassword);
-
   };
-
-  const formSubmit = () => {
-    if (login && password) {
-      getLogIn({ login: login, password: password });
-
-    }
-  }
 
   useEffect(() => {
     checkLocalStorageCredentials();
@@ -49,10 +43,10 @@ export const LoginForm: React.FC = observer(() => {
           <CustomInput placeholder="Login" img={log} value={login} setValue={setLogin} />
           <CustomInput placeholder="Password" img={pass} value={password} setValue={setPassword} />
           <CustomCheckbox isChecked={isChecked} setIsChecked={setIsChecked} />
-          <button onClick={formSubmit} className="buttonNext">
+          <Link to="/angebotCreator" onClick={logIn} className="buttonNext">
             Далее
             <img src={arrButton} alt="butt" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -11,10 +11,8 @@ export const App: React.FC = observer(() => {
 
   return (
     <Routes>
-      <Route path="/">
-        <Route index element={<WelcomePage />} />
-        <Route path=":step" element={<AngebotCreatorSteps />} />
-      </Route>
+      <Route path="/" element={<WelcomePage />} />
+      <Route path="/angebotCreator" element={<AngebotCreatorSteps />} />
       <Route path="/calculator" element={<CalculatorPage />} />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/admin/prices" element={<AdminPage />} />

@@ -3,7 +3,7 @@ import "./Header.scss";
 import NavBarLink from "./NavBarLink/NavBarLink";
 
 const headerLinks = [
-  { href: "/", title: "Angebot Creator" },
+  { href: "/angebotCreator", title: "Angebot Creator" },
   { href: "/calculator", title: "Калькулятор" },
   { href: "/admin", title: "Admin Panel" }
 ]
@@ -11,7 +11,14 @@ const headerLinks = [
 export const Header: React.FC = React.memo(
   () => (
     <div className="header">
-      {headerLinks.map(({ href, title }) => <NavBarLink href={href} title={title} />)}
+      {
+        headerLinks.map(
+          ({ href, title }) =>
+            <React.Fragment key={title}>
+              <NavBarLink href={href} title={title} />
+            </React.Fragment>
+        )
+      }
     </div>
   )
 )
