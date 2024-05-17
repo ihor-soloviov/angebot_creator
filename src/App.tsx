@@ -6,6 +6,7 @@ import AdminTablePage from "./pages/AdminPage/AdminTablePage/AdminTablePage";
 import AngebotCreatorSteps from "./pages/AngebotCreatorSteps/AngebotCreatorSteps";
 import CalculatorPage from "./pages/CalculatorPage/CalculatorPage";
 import { WelcomePage } from "./pages/WelcomePage";
+import AdminCheckout from "./pages/AdminPage/AdminCheckout/AdminCheckout";
 
 export const App: React.FC = observer(() => {
 
@@ -15,7 +16,10 @@ export const App: React.FC = observer(() => {
       <Route path="/angebotCreator" element={<AngebotCreatorSteps />} />
       <Route path="/calculator" element={<CalculatorPage />} />
       <Route path="/admin" element={<AdminPage />} />
-      <Route path="/admin/prices" element={<AdminPage />} />
+      <Route path="/admin/prices">
+        <Route index element={<AdminCheckout />} />
+        <Route path=":partition" element={<AdminCheckout />} />
+      </Route>
       <Route path="/admin/table">
         <Route index element={<AdminSearchPage />} />
         <Route path=':id' element={<AdminTablePage />} />

@@ -17,8 +17,16 @@ export const OptimizerPage: React.FC = React.memo(() => {
     greyTitle: `оптимизатор (${producer})`
   }
 
+  const setServicesFromServer = async () => {
+    const singleServices = await fetchSingleItems("optimizers");
+    if (!singleServices) {
+      return;
+    }
+    setSingleServices(singleServices)
+  }
+
   useEffect(() => {
-    fetchSingleItems("optimizers", setSingleServices);
+    setServicesFromServer();
   }, [])
 
 

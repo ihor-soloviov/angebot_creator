@@ -1,20 +1,13 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
-import {
-  SelectService,
-  SingleService,
-} from "../components/Calculator/calculator-types";
+import { SelectService } from "../components/Calculator/calculator-types";
 
 type El = {
   modell: string;
   preis: string;
 };
 
-export const fetchSingleItems = async (
-  tableName: string,
-  setSingleServices: (value: SingleService[]) => void,
-  brand = ""
-) => {
+export const fetchSingleItems = async (tableName: string, brand = "") => {
   const { producer } = producerStore;
 
   try {
@@ -30,12 +23,14 @@ export const fetchSingleItems = async (
       },
     });
 
-    const services = result.data.map((el: El) => ({
+    if (!result) {
+      return null;
+    }
+
+    return result.data.map((el: El) => ({
       blackTitle: el.modell,
       price: +el.preis,
     }));
-
-    setSingleServices(services);
   } catch (error) {
     console.log(error);
   }

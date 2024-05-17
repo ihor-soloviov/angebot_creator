@@ -5,12 +5,18 @@ import stepStore from "../../../stores/step-store";
 
 interface Props {
   isCalculator?: boolean
+  adminOnClick?: () => void
 }
 
-export const ButtonPrev: React.FC<Props> = () => {
+export const ButtonPrev: React.FC<Props> = ({ adminOnClick }) => {
   const { setStep, generatePrevStep } = stepStore;
 
   const handler = () => {
+    if (adminOnClick) {
+      adminOnClick();
+      return
+    }
+
     const prevStep = generatePrevStep();
     if (prevStep === null) {
       return;
@@ -18,10 +24,11 @@ export const ButtonPrev: React.FC<Props> = () => {
 
     setStep(prevStep)
   }
+  
   return (
-    <div onClick={handler} className="buttonPrev">
+    <button onClick={handler} className="buttonPrev">
       <p>Назад</p>
       <img src={arrBack} alt="arr back" />
-    </div>
+    </button>
   );
 }

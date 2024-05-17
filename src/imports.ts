@@ -37,8 +37,24 @@ export const stepComponents = {
   [Steps.projectImages]: ProjectImagesPage,
 };
 
-export const angebotCreatorSteps = {
-  [Steps.angebotType]: AngebotTypePage,
-  [Steps.pvsolFile]: PvsolFilePage,
-  [Steps.producer]: ProducerPage,
-};
+export const partitions = [
+  { name: "Projektierung", href: "projectPlanning", className: "checkoutLink" },
+  {
+    name: "Installation + Lieferung",
+    href: "install-delivery",
+    className: "checkoutLink",
+  },
+  { name: "Inbetriebnahme", href: "install-start", className: "checkoutLink" },
+  {
+    name: "Unterkonstruktion",
+    href: "subconstructions",
+    className: "checkoutLink",
+  },
+  {
+    name: "Компоненты",
+    href: "components",
+    className: "checkoutLink interTigth",
+  },
+  { name: "Taubenschutz", href: "birdsProtection", className: "checkoutLink" },
+  { name: "Zusatzarbeiten", href: "extraWork", className: "checkoutLink" },
+];

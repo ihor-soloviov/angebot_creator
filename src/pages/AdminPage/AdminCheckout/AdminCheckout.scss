@@ -1,0 +1,57 @@
+@import "../../../utilsScss/colors.scss";
+@import "../../../utilsScss/mixins.scss";
+.adminPage__checkout {
+  @include pageDecore;
+  // height: calc(100vh - 65.5px);
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 63px;
+  padding-bottom: 199px;
+
+  .checkoutWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1356px;
+    padding: 66px 0 126px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
+
+    h1 {
+      color: #0b0b0c;
+      text-align: center;
+      font-family: Inter Tight;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 142%; /* 45.44px */
+      margin-bottom: 72px;
+    }
+  }
+
+  .checkoutItems {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: 24px;
+  }
+  .checkoutLink {
+    color: rgba(11, 11, 12, 0.9);
+    font-family: Poppins;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .interTigth {
+    font-family: Inter Tight;
+  }
+}
