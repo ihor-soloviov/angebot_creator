@@ -50,6 +50,20 @@ export const MontagePage: React.FC = React.memo(() => {
     getSavedSelectServicesWithCount(setSelectServices)
   }, []);
 
+  useEffect(() => {
+    fetch('https://api.creator.work-set.eu/usual_service/Installation + Lieferung')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+  }, [])
+
+
 
   const addNewSelectService = useCallback((selectObject: SingleService) => {
     const id = generateUniqueThreeDigitNumber(selectServices);
