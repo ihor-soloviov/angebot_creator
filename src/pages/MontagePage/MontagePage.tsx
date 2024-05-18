@@ -8,31 +8,31 @@ import "./MontagePage.scss";
 import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
 
 const title: Title = {
-  blackTitle: "Installation + Lieferung",
-  greyTitle: "Монтаж + доставка"
+  title: "Installation + Lieferung",
+  description: "Монтаж + доставка"
 }
 
-const additionTitle: Title = {
-  blackTitle: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
-  greyTitle: "Размер и количество лесов"
+const additionHeader: Title = {
+  title: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
+  description: "Размер и количество лесов"
 }
 
-const singleServices: SingleService[] = [{
-  blackTitle: "Montage, Verkabelung, Anschluss je Wechselrichter",
-  greyTitle: "(монтаж, подключение проводов и подключение самого инвертора)",
-  price: 400
-},
+// const singleServices: SingleService[] = [{
+//   title: "Montage, Verkabelung, Anschluss je Wechselrichter",
+//   description: "(монтаж, подключение проводов и подключение самого инвертора)",
+//   price: 400
+// },
 
-{
-  blackTitle: "Montage, Verkabelung, Anschluss je Stromspeicher",
-  greyTitle: "(монтаж, подключение проводов и подключение самой батареи)",
-  price: 400
-},
-{
-  blackTitle: "DC-Montage je Modul",
-  greyTitle: "(монтаж на крыше)",
-  price: 165
-}]
+// {
+//   title: "Montage, Verkabelung, Anschluss je Stromspeicher",
+//   description: "(монтаж, подключение проводов и подключение самой батареи)",
+//   price: 400
+// },
+// {
+//   title: "DC-Montage je Modul",
+//   description: "(монтаж на крыше)",
+//   price: 165
+// }]
 
 const defaultSelectService: SelectService = {
   label: "Леса",
@@ -44,6 +44,7 @@ const defaultSelectService: SelectService = {
 }
 
 export const MontagePage: React.FC = React.memo(() => {
+  const [singleServices, setSingleServices] = useState<SingleService[]>([])
   const [selectServices, setSelectServices] = useState<SingleService[]>([])
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export const MontagePage: React.FC = React.memo(() => {
       })
       .then(data => {
         console.log(data);
+        setSingleServices(data)
       })
   }, [])
 
@@ -75,13 +77,13 @@ export const MontagePage: React.FC = React.memo(() => {
     <div className="montagePage">
       <Header />
       <Calculator
-        title={title}
-        additionTitle={additionTitle}
+        header={title}
+        additionHeader={additionHeader}
         singleServices={singleServices}
         defaultSelectService={defaultSelectService}
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
-        additionParagraph={true}
+        additionServices={true}
       />
       <Footer isCalculator={true} />
     </div>

@@ -28,7 +28,7 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
     }
 
     return result.data.map((el: El) => ({
-      blackTitle: el.modell,
+      title: el.modell,
       price: +el.preis,
     }));
   } catch (error) {

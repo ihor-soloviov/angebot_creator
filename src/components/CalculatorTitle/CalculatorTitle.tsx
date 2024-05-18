@@ -3,23 +3,19 @@ import "./CalculatorTitle.scss";
 import { Title } from "../Calculator/calculator-types";
 
 interface Props {
-  title?: Title
+  header?: Title
 }
 
-export const CalculatorTitle: React.FC<Props> = ({ title }) => {
+export const CalculatorTitle: React.FC<Props> = ({ header }) => {
 
-  let blackTitle;
-  let greyTitle;
+  if (header) {
+    const { title, description } = header
 
-  if (title) {
-    blackTitle = title.blackTitle;
-    greyTitle = title.greyTitle
+    return (
+      <div className="calculator__title">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+    );
   }
-
-  return (
-    <div className="calculator__title">
-      <h3>{blackTitle}</h3>
-      <p>{greyTitle}</p>
-    </div>
-  );
 }

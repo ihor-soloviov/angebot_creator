@@ -28,7 +28,7 @@ export const BackupBoxPage: React.FC = React.memo(() => {
     <div className="backupBoxPage">
       <Header />
       <Calculator
-        title={{ greyTitle: "Решение для аварийного электроснабжения", blackTitle: "Notstromlösung" }}
+        title={{ description: "Решение для аварийного электроснабжения", title: "Notstromlösung" }}
         singleServices={singleServices}
       />
       <Footer isCalculator={true} />

@@ -15,7 +15,7 @@ export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
       return
     }
 
-    setSingleServices && setSingleServices((prev: SingleService[]) => [...prev, { blackTitle: blackTitle, price: price, count: 1 }])
+    setSingleServices && setSingleServices((prev: SingleService[]) => [...prev, { title: blackTitle, price: price, count: 1 }])
   }
 
   return (

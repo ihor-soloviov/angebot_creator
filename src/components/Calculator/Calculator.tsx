@@ -9,12 +9,12 @@ import { ButtonNext } from "../Buttons/ButtonNext";
 import { CustomService } from "../CustomService";
 
 interface Props {
-  title: Title
-  additionTitle?: Title
+  header: Title
+  additionHeader?: Title
   singleServices?: SingleService[]
   defaultSelectService?: SelectService
   selectServices?: SingleService[]
-  additionParagraph?: boolean
+  additionServices?: boolean
   addNewSelectService?: (selectObject: SingleService) => void
   unNormalPriceChange?: boolean
   customServiceInput?: boolean
@@ -22,13 +22,13 @@ interface Props {
 }
 
 export const Calculator: React.FC<Props> = React.memo(({
-  title,
-  additionTitle,
+  header,
+  additionHeader,
   singleServices,
   defaultSelectService,
   selectServices,
   addNewSelectService,
-  additionParagraph,
+  additionServices,
   unNormalPriceChange,
   customServiceInput,
   setSingleServices,
@@ -41,14 +41,14 @@ export const Calculator: React.FC<Props> = React.memo(({
   return (
     <div className="calculator">
       <div className="calculator__container">
-        <CalculatorTitle title={title} />
+        <CalculatorTitle header={header} />
         <div className="calculator__progressBar">
           <ProgressBar />
         </div>
         {
           singleServiceCondition &&
-          <div className="calculatorService__container" style={{ marginBottom: additionParagraph ? "100px" : 0 }}>
-            {singleServices?.map((service, index) => (
+          <div className="calculatorService__container" style={{ marginBottom: additionServices ? "100px" : 0 }}>
+            {singleServices?.map((service, index) =>
               <SingleServiceItem
                 serviceStorageName='singleServices'
                 key={index}
@@ -57,15 +57,19 @@ export const Calculator: React.FC<Props> = React.memo(({
                 unNormalPriceChange={unNormalPriceChange}
               />
             )
-            )}
+            }
           </div>
         }
-        {additionParagraph && <CalculatorTitle title={additionTitle} />}
+        {additionServices && <CalculatorTitle header={additionHeader} />}
         <div className="calculatorService__container">
           {selectServicesCondition && (
-            selectServices.map((service, index) => (
-              <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
-            ))
+            selectServices.map((service, index) => {
+              console.log(service);
+
+              return (
+                <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
+              )
+            })
           )}
           {defaultSelectService && <SelectServiceItem service={defaultSelectService} addNewSelectService={addNewSelectService} />}
         </div>

@@ -17,8 +17,8 @@ export const CheckoutPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
   const { arraysOfSteps, id } = stepStore;
   const title: Title = {
-    blackTitle: `Проверьте ваше предложение - ID ${id} v.1`,
-    greyTitle: `Производитель (${producer})`
+    title: `Проверьте ваше предложение - ID ${id} v.1`,
+    description: `Производитель (${producer})`
   }
 
   const [pages, setPages] = useState<Array<Page>>([]);

@@ -7,19 +7,19 @@ import { SingleService } from "../../components/Calculator/calculator-types";
 
 export const ZusatzarbeitenPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<SingleService[]>([
-    { blackTitle: "Überspannungsschutz Typ 1+2 installieren", price: 415 },
-    { blackTitle: "SLS Schalter installieren", price: 135 },
-    { blackTitle: "Kaskadenschaltung", greyTitle: "(каскадное соединение)", price: 1000 },
-    { blackTitle: "Zählerkasten nach VDE-Norm", greyTitle: "(расходомерная коробка в соответствии со стандартом VDE)", price: 2380 },
-    { blackTitle: "Versetzen einer SAT-Schlüssel", greyTitle: "(перемещение SAT)", price: 250 },
-    { blackTitle: "Potentialausgleich mit Erdungsspieß setzen", greyTitle: "(установить выравнивание потенциалов с помощью заземляющего колышка)", price: 300 },
+    { title: "Überspannungsschutz Typ 1+2 installieren", price: 415 },
+    { title: "SLS Schalter installieren", price: 135 },
+    { title: "Kaskadenschaltung", description: "(каскадное соединение)", price: 1000 },
+    { title: "Zählerkasten nach VDE-Norm", description: "(расходомерная коробка в соответствии со стандартом VDE)", price: 2380 },
+    { title: "Versetzen einer SAT-Schlüssel", description: "(перемещение SAT)", price: 250 },
+    { title: "Potentialausgleich mit Erdungsspieß setzen", description: "(установить выравнивание потенциалов с помощью заземляющего колышка)", price: 300 },
   ])
 
   return (
     <div className="zusatzarbeitenPage">
       <Header />
       <Calculator
-        title={{ blackTitle: "Zusatzarbeiten", greyTitle: "Доп. услуги" }}
+        title={{ title: "Zusatzarbeiten", description: "Доп. услуги" }}
         singleServices={singleServices}
         unNormalPriceChange={true}
         customServiceInput={true}

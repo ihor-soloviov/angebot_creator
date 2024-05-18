@@ -6,8 +6,8 @@ import { Calculator } from "../../components/Calculator";
 import { SingleService } from "../../components/Calculator/calculator-types";
 
 const singleServices: SingleService[] = [
-  { blackTitle: "Material + Montage je Laufmeter", greyTitle: "(материал и монтаж за погонный метр)", price: 18 },
-  { blackTitle: "240 mm Spitzen", greyTitle: "(наконечники 240 мм)", price: 18 }
+  { title: "Material + Montage je Laufmeter", description: "(материал и монтаж за погонный метр)", price: 18 },
+  { title: "240 mm Spitzen", description: "(наконечники 240 мм)", price: 18 }
 ];
 
 export const TaubenschutzPage: React.FC = React.memo(() =>
@@ -15,7 +15,7 @@ export const TaubenschutzPage: React.FC = React.memo(() =>
   <div className="taubenschutzPage">
     <Header />
     <Calculator
-      title={{ blackTitle: "Taubenschutz", greyTitle: "Защита от голубей" }}
+      title={{ title: "Taubenschutz", description: "Защита от голубей" }}
       singleServices={singleServices}
     />
     <Footer isCalculator={true} />

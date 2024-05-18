@@ -36,7 +36,7 @@ export const getSavedServiceCount: GetSavedService = (
     }
 
     const currentItem = services.find(
-      ({ blackTitle }) => blackTitle === service.blackTitle
+      ({ title: blackTitle }) => blackTitle === service.title
     );
 
     if (currentItem?.count) {
@@ -60,7 +60,7 @@ export const addOrUpdateSingleService: AddOrUpdateSingleService = (
   const services = pageObj[serviceArrayName] || [];
 
   const serviceIndex = services.findIndex(
-    (service: SingleService) => service.blackTitle === blackTitle
+    (service: SingleService) => service.title === blackTitle
   );
 
   if (count > 0) {
@@ -84,7 +84,7 @@ export const getSavedSelectServicesWithCount = (
     sessionStorage.getItem(stepStore.step) || "{}"
   );
   const typedSelects = selectsByStep["selectServices"]?.map(
-    ({ blackTitle, price, count }: SingleService) => ({
+    ({ title: blackTitle, price, count }: SingleService) => ({
       blackTitle,
       price,
       count,

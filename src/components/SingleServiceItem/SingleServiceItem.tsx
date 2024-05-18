@@ -15,7 +15,7 @@ interface Props {
 
 export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageName, service, setTotalPrice, unNormalPriceChange }) => {
   const [priceCount, setPriceСount] = useState(service.count || 0)
-  const { blackTitle, greyTitle, price } = service;
+  const { title, description: greyTitle, price } = service;
   const shownPrice = priceCount === 0 ? 0 : price * priceCount;
 
   useEffect(() => {
@@ -23,18 +23,18 @@ export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageNa
   }, [serviceStorageName, service])
 
   useEffect(() => {
-    addOrUpdateSingleService(stepStore.step, serviceStorageName, service.blackTitle, priceCount, shownPrice)
-  }, [serviceStorageName, priceCount, service.blackTitle, shownPrice])
+    addOrUpdateSingleService(stepStore.step, serviceStorageName, service.title, priceCount, shownPrice)
+  }, [serviceStorageName, priceCount, service.title, shownPrice])
 
   return (
     <div className="singleService">
       <div className="singleService__left">
-        <b>{blackTitle}</b>
+        <b>{title}</b>
         <p>{greyTitle}</p>
       </div>
       <div className="singleService__right">
         <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} setTotalPrice={setTotalPrice} />
-        {unNormalPriceChange && blackTitle === 'Kaskadenschaltung'
+        {unNormalPriceChange && title === 'Kaskadenschaltung'
           ? (<p className="service_price">{getUnNormalShownPrice(price, priceCount)}.00 €</p>)
           : (<p className="service_price">{shownPrice}.00 €</p>)
         }

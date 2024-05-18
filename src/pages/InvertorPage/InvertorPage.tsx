@@ -53,8 +53,8 @@ export const InvertorPage: React.FC = React.memo(() => {
             title={title}
             singleServices={singleServices}
             selectServices={selectServices}
-            additionTitle={{ blackTitle: "Invertor" }}
-            additionParagraph={true}
+            additionHeader={{ title: "Invertor" }}
+            additionServices={true}
             defaultSelectService={selectService}
             addNewSelectService={addNewSelectService}
           />

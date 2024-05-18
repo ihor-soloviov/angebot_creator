@@ -13,8 +13,8 @@ export const OptimizerPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<SingleService[]>([]);
 
   const title: Title = {
-    blackTitle: "Optimierer",
-    greyTitle: `оптимизатор (${producer})`
+    title: "Optimierer",
+    description: `оптимизатор (${producer})`
   }
 
   const setServicesFromServer = async () => {

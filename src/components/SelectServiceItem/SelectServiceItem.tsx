@@ -37,7 +37,7 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
           <button className="button__add" disabled={selectedValue === 'Выберете вариант'} onClick={() => {
             if (addNewSelectService) {
               const price = select.find(el => el.value === selectedValue)?.price || 0;
-              addNewSelectService({ blackTitle: selectedValue, price: price, count: 1 });
+              addNewSelectService({ title: selectedValue, price: price, count: 1 });
               setSelectedValue('Выберете вариант');
               setOptionPrice(0)
             }

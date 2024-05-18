@@ -2,11 +2,11 @@ import { Title } from "../../components/Calculator/calculator-types";
 
 export const titles: Record<string, Title> = {
   Huawei: {
-    blackTitle: "PV-Speicher",
-    greyTitle: "Накопители фотоэлектричества (Huawei)",
+    title: "PV-Speicher",
+    description: "Накопители фотоэлектричества (Huawei)",
   },
   Enphase: {
-    blackTitle: "IQ-Geteway",
-    greyTitle: "IQ-Geteway (Enphase)",
+    title: "IQ-Geteway",
+    description: "IQ-Geteway (Enphase)",
   },
 };

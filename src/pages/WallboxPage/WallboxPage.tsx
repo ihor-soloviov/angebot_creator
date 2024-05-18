@@ -13,8 +13,8 @@ export const WallboxPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
 
   const title: Title = {
-    blackTitle: "Wallbox",
-    greyTitle: `(${producer})`
+    title: "Wallbox",
+    description: `(${producer})`
   }
 
   useEffect(() => {

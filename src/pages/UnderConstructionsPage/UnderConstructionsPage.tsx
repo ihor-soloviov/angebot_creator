@@ -6,50 +6,50 @@ import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 
 const singleServices: SingleService[] = [{
-  blackTitle: "Quermontage",
-  greyTitle: "(модули лежа)",
+  title: "Quermontage",
+  description: "(модули лежа)",
   price: 220
 },
 {
-  blackTitle: "Hochmontage",
-  greyTitle: "(модули стоя)",
+  title: "Hochmontage",
+  description: "(модули стоя)",
   price: 190
 },
 {
-  blackTitle: "Trapezdach",
-  greyTitle: "(трапециевидная крыша)",
+  title: "Trapezdach",
+  description: "(трапециевидная крыша)",
   price: 68
 },
 {
-  blackTitle: "Flachdach Ost/West",
-  greyTitle: "(на плоской крыше)",
+  title: "Flachdach Ost/West",
+  description: "(на плоской крыше)",
   price: 160
 },
 {
-  blackTitle: "Quermontage Alpha",
-  greyTitle: "(поперечное крепление Альфа)",
+  title: "Quermontage Alpha",
+  description: "(поперечное крепление Альфа)",
   price: 263
 },
 {
-  blackTitle: "Hochmontage Alpha",
-  greyTitle: "(высокие монтажные альфа-панели)",
+  title: "Hochmontage Alpha",
+  description: "(высокие монтажные альфа-панели)",
   price: 230
 },
 {
-  blackTitle: "Trapezdach Alpha",
-  greyTitle: "(трапециевидная крыша Альфа)",
+  title: "Trapezdach Alpha",
+  description: "(трапециевидная крыша Альфа)",
   price: 95
 },
 {
-  blackTitle: "Flachdach Alpha",
-  greyTitle: "(плоская кровля Альфа)",
+  title: "Flachdach Alpha",
+  description: "(плоская кровля Альфа)",
   price: 190
 }
 ]
 
 const title: Title = {
-  blackTitle: "Unterkonstruktion",
-  greyTitle: "Подконструкция"
+  title: "Unterkonstruktion",
+  description: "Подконструкция"
 }
 
 export const UnderConstructionsPage: React.FC = React.memo(() => (

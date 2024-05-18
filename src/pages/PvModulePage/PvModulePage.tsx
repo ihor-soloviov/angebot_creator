@@ -7,18 +7,18 @@ import { SingleService, Title } from "../../components/Calculator/calculator-typ
 
 export const PvModulePage: React.FC = React.memo(() => {
   const title: Title = {
-    blackTitle: "PV-Module",
-    greyTitle: "Фотоэлектрические модули"
+    title: "PV-Module",
+    description: "Фотоэлектрические модули"
   }
   const singleServices: SingleService[] = [
     {
-      blackTitle: "Trina Glas-Glas Module 440W",
-      greyTitle: "(модуль)",
+      title: "Trina Glas-Glas Module 440W",
+      description: "(модуль)",
       price: 220
     },
     {
-      blackTitle: "Jolywood JW-HD108N-420W Full black glas-glas",
-      greyTitle: "(модуль)",
+      title: "Jolywood JW-HD108N-420W Full black glas-glas",
+      description: "(модуль)",
       price: 250
     }
   ]

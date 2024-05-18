@@ -1,12 +1,12 @@
 export type Title = {
-  blackTitle: string;
-  greyTitle?: string;
+  title: string;
+  description?: string;
 };
 
 export type SingleService = Title & {
   price: number;
   count?: number;
-  id?: number
+  id?: number;
 };
 
 export type SelectService = {
