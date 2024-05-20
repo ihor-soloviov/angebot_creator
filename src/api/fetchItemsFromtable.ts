@@ -83,7 +83,7 @@ export const fetchSelectItems = async (
 
     console.log(services);
 
-    setSelectService({ select: services });
+    setSelectService({ options: services });
   } catch (error) {
     console.log(error);
   }

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService }) => {
-  const { label, select } = service;
+  const { label, options: select } = service;
 
   const [selectedValue, setSelectedValue] = useState('Выберете вариант');
   const [optionPrice, setOptionPrice] = useState(0)

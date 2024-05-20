@@ -1,42 +1,20 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
-import { DropdownService, IndividualService, Title } from "./calculator-types";
 import "./Calculator.scss";
-import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
-import { SelectServiceItem } from "../SelectServiceItem";
 import { ButtonNext } from "../Buttons/ButtonNext";
-import { CustomService } from "../CustomService";
+import { Title } from "./calculator-types";
 
 interface Props {
   header: Title
-  additionHeader?: Title
-  singleServices?: IndividualService[]
-  defaultSelectService?: DropdownService
-  selectServices?: IndividualService[]
-  additionServices?: boolean
-  addNewSelectService?: (selectObject: IndividualService) => void
-  unNormalPriceChange?: boolean
-  customServiceInput?: boolean
-  setSingleServices?: Dispatch<SetStateAction<IndividualService[]>>;
+  children: ReactNode
 }
 
 export const Calculator: React.FC<Props> = React.memo(({
   header,
-  additionHeader,
-  singleServices,
-  defaultSelectService,
-  selectServices,
-  addNewSelectService,
-  additionServices,
-  unNormalPriceChange,
-  customServiceInput,
-  setSingleServices,
+  children
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-
-  const singleServiceCondition = singleServices && singleServices?.length > 0;
-  const selectServicesCondition = selectServices && selectServices?.length > 0;
 
   return (
     <div className="calculator">
@@ -45,37 +23,7 @@ export const Calculator: React.FC<Props> = React.memo(({
         <div className="calculator__progressBar">
           <ProgressBar />
         </div>
-        {
-          singleServiceCondition &&
-          <div className="calculatorService__container" style={{ marginBottom: additionServices ? "100px" : 0 }}>
-            {singleServices.map((service, index) =>
-              <SingleServiceItem
-                serviceStorageName='singleServices'
-                key={index}
-                service={service}
-                setTotalPrice={setTotalPrice}
-                unNormalPriceChange={unNormalPriceChange}
-              />
-            )
-            }
-          </div>
-        }
-        {additionServices && <CalculatorTitle header={additionHeader} />}
-        <div className="calculatorService__container">
-          {selectServicesCondition && (
-            selectServices.map((service, index) => {
-              console.log(service);
-
-              return (
-                <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
-              )
-            })
-          )}
-          {defaultSelectService && <SelectServiceItem service={defaultSelectService} addNewSelectService={addNewSelectService} />}
-        </div>
-        {customServiceInput && (
-          <CustomService setSingleServices={setSingleServices} />
-        )}
+        {children}
 
         <div className="calculator__total">
           <p>Стоимость этапа</p>

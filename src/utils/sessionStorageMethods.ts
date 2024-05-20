@@ -84,8 +84,8 @@ export const getSavedSelectServicesWithCount = (
     sessionStorage.getItem(stepStore.step) || "{}"
   );
   const typedSelects = selectsByStep["selectServices"]?.map(
-    ({ title: blackTitle, price, count }: IndividualService) => ({
-      blackTitle,
+    ({ title, price, count }: IndividualService) => ({
+      title,
       price,
       count,
     })

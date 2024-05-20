@@ -10,6 +10,7 @@ import { titles } from "./titles";
 import { enphaseServices } from "./singleServiceEnphase";
 import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
 import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
+import { SingleServiceItem } from "../../components/SingleServiceItem";
 
 export const InvertorPage: React.FC = React.memo(() => {
 
@@ -29,14 +30,8 @@ export const InvertorPage: React.FC = React.memo(() => {
 
   useEffect(() => {
     fetchSelectItems("inverters", setSelectService);
-    if (producer == Producer.enphase) {
-      setSingleServices(enphaseServices);
-    }
-
-    else {
-      const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
-      fetchSingleItems(endpoint).then((res) => setSingleServices(res));
-    }
+    const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
+    fetchSingleItems(endpoint).then((res) => setSingleServices(res));
   }, [producer])
 
   useEffect(() => {
@@ -47,29 +42,20 @@ export const InvertorPage: React.FC = React.memo(() => {
   return (
     <div className="invertorPage">
       <Header />
-      {Producer.huawei
-        ? (
-          <Calculator
-            header={title}
-            singleServices={singleServices}
-            selectServices={selectServices}
-            additionHeader={{ title: "Invertor" }}
-            additionServices={true}
-            defaultSelectService={selectService}
-            addNewSelectService={addNewSelectService}
+      <Calculator
+        header={title}
+      >
+        {singleServices.map((service, index) =>
+          <SingleServiceItem
+            serviceStorageName='singleServices'
+            key={index}
+            service={service}
+            setTotalPrice={() => console.log('e')}
+            unNormalPriceChange={true}
           />
         )
-
-        : (
-          <Calculator
-            header={title}
-            singleServices={singleServices}
-            selectServices={selectServices}
-            defaultSelectService={selectService}
-            addNewSelectService={addNewSelectService}
-          />
-        )
-      }
+        }
+      </Calculator>
 
       <Footer isCalculator={true} />
     </div>

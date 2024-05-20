@@ -5,8 +5,10 @@ import { Calculator } from "../../components/Calculator";
 import { DropdownService, IndividualService, Title } from "../../components/Calculator/calculator-types";
 import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
 import "./MontagePage.scss";
-import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
-import { fetchServices, fetchServicesBySection, fetchServicesByTableName } from "../../api/fetchItemsFromtable";
+// import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
+import { fetchServicesBySection } from "../../api/fetchItemsFromtable";
+import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { CalculatorTitle } from "../../components/CalculatorTitle";
 
 const title: Title = {
   title: "Installation + Lieferung",
@@ -46,14 +48,15 @@ const additionHeader: Title = {
 
 export const MontagePage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<IndividualService[]>([])
-  const [selectServices, setSelectServices] = useState<IndividualService[]>([])
+  const [selectServices, setSelectServices] = useState<DropdownService[]>([])
+
+  // useEffect(() => {
+  //   getSavedSelectServicesWithCount(setSelectServices)
+  // }, []);
 
   useEffect(() => {
-    getSavedSelectServicesWithCount(setSelectServices)
-  }, []);
+    fetchServicesBySection("Installation + Lieferung").then(({ single }) => setSingleServices(single));
 
-  useEffect(() => {
-    fetchServicesBySection('Installation + Lieferung')
   }, [])
 
   const addNewSelectService = useCallback((selectObject: IndividualService) => {
@@ -65,16 +68,38 @@ export const MontagePage: React.FC = React.memo(() => {
   return (
     <div className="montagePage">
       <Header />
-      <Calculator
-        header={title}
-        additionHeader={additionHeader}
-        singleServices={singleServices}
-        // defaultSelectService={defaultSelectService}
-        selectServices={selectServices}
-        addNewSelectService={addNewSelectService}
-        additionServices={true}
-      />
+      <Calculator header={title}>
+        <div
+          className="calculatorService__container"
+          style={{ marginBottom: "100px" }}
+        >
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+              setTotalPrice={() => console.log('e')}
+              unNormalPriceChange={true}
+            />
+          )
+          }
+        </div>
+
+        <CalculatorTitle header={additionHeader} />
+        {/* <div className="calculatorService__container">
+          {selectServicesCondition && (
+            selectServices.map((service, index) => {
+              console.log(service);
+
+              return (
+                <SingleServiceItem serviceStorageName='selectServices' key={index} service={service} setTotalPrice={setTotalPrice} />
+              )
+            })
+          )}
+          {defaultSelectService && <SelectServiceItem service={defaultSelectService} addNewSelectService={addNewSelectService} />}
+        </div> */}
+      </Calculator >
       <Footer isCalculator={true} />
-    </div>
+    </div >
   );
 })

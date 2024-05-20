@@ -9,6 +9,7 @@ import { titles } from "./titles";
 import { fetchSelectItems } from "../../api/fetchItemsFromtable";
 import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
 import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
+import { SingleServiceItem } from "../../components/SingleServiceItem";
 
 export const BatteryPage: React.FC = React.memo(() => {
   const [selectServices, setSelectServices] = useState<IndividualService[]>([])
@@ -33,12 +34,10 @@ export const BatteryPage: React.FC = React.memo(() => {
   return (
     <div className="batteryPage">
       <Header />
-      <Calculator
+      {/* <Calculator
         header={title}
-        selectServices={selectServices}
-        defaultSelectService={selectService}
-        addNewSelectService={addNewSelectService}
-      />
+      >
+      </Calculator> */}
       <Footer isCalculator={true} />
     </div>
   );

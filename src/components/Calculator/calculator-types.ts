@@ -17,7 +17,7 @@ export type IndividualService = Title & {
 
 export type DropdownService = {
   label?: string;
-  select: DropdownServiceOption[];
+  options: DropdownServiceOption[];
 };
 
 type DropdownServiceOption = {
