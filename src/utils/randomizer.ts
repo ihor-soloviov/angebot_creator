@@ -1,9 +1,7 @@
-import {
-  SingleService,
-} from "../components/Calculator/calculator-types";
+import { IndividualService } from "../components/Calculator/calculator-types";
 
 export const generateUniqueThreeDigitNumber = (
-  objectsArray: SingleService[]
+  objectsArray: IndividualService[]
 ) => {
   let randomNumber;
   if (objectsArray.length === 0) {
@@ -11,7 +9,7 @@ export const generateUniqueThreeDigitNumber = (
   }
 
   const isIdExists = (number: number) =>
-    objectsArray.some((obj: SingleService) => obj.id === number);
+    objectsArray.some((obj: IndividualService) => obj.id === number);
 
   do {
     randomNumber = Math.floor(Math.random() * 900) + 100; // Генерує число від 100 до 999

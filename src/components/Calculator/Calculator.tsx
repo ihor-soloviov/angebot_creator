@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
-import { SelectService, SingleService, Title } from "./calculator-types";
+import { DropdownService, IndividualService, Title } from "./calculator-types";
 import "./Calculator.scss";
 import { SingleServiceItem } from "../SingleServiceItem";
 import { CalculatorTitle } from "../CalculatorTitle";
@@ -11,14 +11,14 @@ import { CustomService } from "../CustomService";
 interface Props {
   header: Title
   additionHeader?: Title
-  singleServices?: SingleService[]
-  defaultSelectService?: SelectService
-  selectServices?: SingleService[]
+  singleServices?: IndividualService[]
+  defaultSelectService?: DropdownService
+  selectServices?: IndividualService[]
   additionServices?: boolean
-  addNewSelectService?: (selectObject: SingleService) => void
+  addNewSelectService?: (selectObject: IndividualService) => void
   unNormalPriceChange?: boolean
   customServiceInput?: boolean
-  setSingleServices?: Dispatch<SetStateAction<SingleService[]>>;
+  setSingleServices?: Dispatch<SetStateAction<IndividualService[]>>;
 }
 
 export const Calculator: React.FC<Props> = React.memo(({
@@ -48,7 +48,7 @@ export const Calculator: React.FC<Props> = React.memo(({
         {
           singleServiceCondition &&
           <div className="calculatorService__container" style={{ marginBottom: additionServices ? "100px" : 0 }}>
-            {singleServices?.map((service, index) =>
+            {singleServices.map((service, index) =>
               <SingleServiceItem
                 serviceStorageName='singleServices'
                 key={index}

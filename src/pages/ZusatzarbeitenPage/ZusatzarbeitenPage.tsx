@@ -3,10 +3,10 @@ import "./ZusatzarbeitenPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleService } from "../../components/Calculator/calculator-types";
+import { IndividualService } from "../../components/Calculator/calculator-types";
 
 export const ZusatzarbeitenPage: React.FC = React.memo(() => {
-  const [singleServices, setSingleServices] = useState<SingleService[]>([
+  const [singleServices, setSingleServices] = useState<IndividualService[]>([
     { title: "Überspannungsschutz Typ 1+2 installieren", price: 415 },
     { title: "SLS Schalter installieren", price: 135 },
     { title: "Kaskadenschaltung", description: "(каскадное соединение)", price: 1000 },

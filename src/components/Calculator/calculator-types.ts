@@ -3,18 +3,24 @@ export type Title = {
   description?: string;
 };
 
-export type SingleService = Title & {
+export enum ServiceSpecific {
+  Select = "select",
+  Single = "single",
+}
+
+export type IndividualService = Title & {
   price: number;
+  specific: ServiceSpecific;
   count?: number;
   id?: number;
 };
 
-export type SelectService = {
+export type DropdownService = {
   label?: string;
-  select: SelectServiceOption[];
+  select: DropdownServiceOption[];
 };
 
-type SelectServiceOption = {
+type DropdownServiceOption = {
   value: string;
   price: number;
 };

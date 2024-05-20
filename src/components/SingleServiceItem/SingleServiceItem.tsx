@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlusMinusHandler } from "../PlusMinusHandler";
-import { SingleService } from "../Calculator/calculator-types";
+import { IndividualService } from "../Calculator/calculator-types";
 import { getUnNormalShownPrice } from "../../utils/getUnNormalShownPrice";
 import { addOrUpdateSingleService, getSavedServiceCount } from "../../utils/sessionStorageMethods";
 import "./SingleService.scss";
@@ -8,7 +8,7 @@ import stepStore from "../../stores/step-store";
 
 interface Props {
   serviceStorageName: string
-  service: SingleService
+  service: IndividualService
   setTotalPrice: (value: number) => void
   unNormalPriceChange?: boolean
 }

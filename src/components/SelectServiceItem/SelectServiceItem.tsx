@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./SelectServiceItem.scss";
-import { SelectService, SingleService } from "../Calculator/calculator-types";
+import { DropdownService, IndividualService } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
 
 interface Props {
-  service: SelectService
-  addNewSelectService?: (selectObject: SingleService) => void
+  service: DropdownService
+  addNewSelectService?: (selectObject: IndividualService) => void
 }
 
 export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService }) => {

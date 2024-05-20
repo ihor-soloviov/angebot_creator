@@ -3,9 +3,9 @@ import "./TaubenschutzPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleService } from "../../components/Calculator/calculator-types";
+import { IndividualService } from "../../components/Calculator/calculator-types";
 
-const singleServices: SingleService[] = [
+const singleServices: IndividualService[] = [
   { title: "Material + Montage je Laufmeter", description: "(материал и монтаж за погонный метр)", price: 18 },
   { title: "240 mm Spitzen", description: "(наконечники 240 мм)", price: 18 }
 ];

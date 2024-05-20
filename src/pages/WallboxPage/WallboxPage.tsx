@@ -3,12 +3,12 @@ import "./WallboxPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleService, Title } from "../../components/Calculator/calculator-types";
+import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 
 export const WallboxPage: React.FC = React.memo(() => {
-  const [singleServices, setSingleServices] = useState<SingleService[]>([])
+  const [singleServices, setSingleServices] = useState<IndividualService[]>([])
 
   const { producer } = producerStore;
 

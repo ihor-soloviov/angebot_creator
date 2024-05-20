@@ -3,14 +3,14 @@ import "./PvModulePage.scss";
 import { Header } from "../../components/Header";
 import { Calculator } from "../../components/Calculator";
 import { Footer } from "../../components/Footer";
-import { SingleService, Title } from "../../components/Calculator/calculator-types";
+import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 
 export const PvModulePage: React.FC = React.memo(() => {
   const title: Title = {
     title: "PV-Module",
     description: "Фотоэлектрические модули"
   }
-  const singleServices: SingleService[] = [
+  const singleServices: IndividualService[] = [
     {
       title: "Trina Glas-Glas Module 440W",
       description: "(модуль)",

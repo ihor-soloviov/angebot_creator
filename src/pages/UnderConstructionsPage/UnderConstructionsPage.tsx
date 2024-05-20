@@ -1,11 +1,11 @@
 import React from "react";
 import "./UnderConstructionsPage.scss";
-import { SingleService, Title } from "../../components/Calculator/calculator-types";
+import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 
-const singleServices: SingleService[] = [{
+const singleServices: IndividualService[] = [{
   title: "Quermontage",
   description: "(модули лежа)",
   price: 220

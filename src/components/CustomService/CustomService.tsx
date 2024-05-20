@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import "./CustomService.scss";
-import { SingleService } from "../Calculator/calculator-types";
+import { IndividualService } from "../Calculator/calculator-types";
 
 interface Props {
-  setSingleServices?: Dispatch<SetStateAction<SingleService[]>>
+  setSingleServices?: Dispatch<SetStateAction<IndividualService[]>>
 }
 
 export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
@@ -18,7 +18,7 @@ export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
       return
     }
 
-    setSingleServices((prev: SingleService[]) => [...prev, { title: title, price: price, count: 1 }])
+    setSingleServices((prev: IndividualService[]) => [...prev, { title: title, price: price, count: 1 }])
   }
 
   return (

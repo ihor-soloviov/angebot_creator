@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
+import { DropdownService, IndividualService, Title } from "../../components/Calculator/calculator-types";
 import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
 import "./MontagePage.scss";
 import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
+import { fetchServices, fetchServicesBySection, fetchServicesByTableName } from "../../api/fetchItemsFromtable";
 
 const title: Title = {
   title: "Installation + Lieferung",
@@ -34,40 +35,28 @@ const additionHeader: Title = {
 //   price: 165
 // }]
 
-const defaultSelectService: SelectService = {
-  label: "Леса",
-  select: [
-    { value: "<5m", price: 400 },
-    { value: "5m - 8m", price: 500 },
-    { value: ">8m", price: 600 }
-  ]
-}
+// const defaultSelectService: SelectService = {
+//   label: "Леса",
+//   select: [
+//     { value: "<5m", price: 400 },
+//     { value: "5m - 8m", price: 500 },
+//     { value: ">8m", price: 600 }
+//   ]
+// }
 
 export const MontagePage: React.FC = React.memo(() => {
-  const [singleServices, setSingleServices] = useState<SingleService[]>([])
-  const [selectServices, setSelectServices] = useState<SingleService[]>([])
+  const [singleServices, setSingleServices] = useState<IndividualService[]>([])
+  const [selectServices, setSelectServices] = useState<IndividualService[]>([])
 
   useEffect(() => {
     getSavedSelectServicesWithCount(setSelectServices)
   }, []);
 
   useEffect(() => {
-    fetch('https://api.creator.work-set.eu/usual_service/Installation + Lieferung')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        setSingleServices(data)
-      })
+    fetchServicesBySection('Installation + Lieferung')
   }, [])
 
-
-
-  const addNewSelectService = useCallback((selectObject: SingleService) => {
+  const addNewSelectService = useCallback((selectObject: IndividualService) => {
     const id = generateUniqueThreeDigitNumber(selectServices);
     const objWithId = { ...selectObject, id: id }
     setSelectServices((prev) => [...prev, objWithId])
@@ -80,7 +69,7 @@ export const MontagePage: React.FC = React.memo(() => {
         header={title}
         additionHeader={additionHeader}
         singleServices={singleServices}
-        defaultSelectService={defaultSelectService}
+        // defaultSelectService={defaultSelectService}
         selectServices={selectServices}
         addNewSelectService={addNewSelectService}
         additionServices={true}

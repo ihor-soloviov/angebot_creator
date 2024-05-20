@@ -3,7 +3,7 @@ import "./InvertorPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SelectService, SingleService, Title } from "../../components/Calculator/calculator-types";
+import { DropdownService, IndividualService, Title } from "../../components/Calculator/calculator-types";
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
@@ -13,14 +13,14 @@ import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMetho
 
 export const InvertorPage: React.FC = React.memo(() => {
 
-  const [singleServices, setSingleServices] = useState<SingleService[]>([])
-  const [selectServices, setSelectServices] = useState<SingleService[]>([])
-  const [selectService, setSelectService] = useState<SelectService>();
+  const [singleServices, setSingleServices] = useState<IndividualService[]>([])
+  const [selectServices, setSelectServices] = useState<IndividualService[]>([])
+  const [selectService, setSelectService] = useState<DropdownService>();
   const { producer } = producerStore;
   const title: Title = titles[producer]
 
 
-  const addNewSelectService = useCallback((selectObject: SingleService) => {
+  const addNewSelectService = useCallback((selectObject: IndividualService) => {
     const id = generateUniqueThreeDigitNumber(selectServices);
     const objWithId = { ...selectObject, id: id }
     setSelectServices((prev) => [...prev, objWithId])

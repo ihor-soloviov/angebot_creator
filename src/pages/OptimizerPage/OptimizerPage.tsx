@@ -3,14 +3,14 @@ import "./OptimizerPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleService, Title } from "../../components/Calculator/calculator-types";
+import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 import producerStore from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 
 export const OptimizerPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
 
-  const [singleServices, setSingleServices] = useState<SingleService[]>([]);
+  const [singleServices, setSingleServices] = useState<IndividualService[]>([]);
 
   const title: Title = {
     title: "Optimierer",
