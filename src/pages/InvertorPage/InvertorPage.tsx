@@ -35,7 +35,7 @@ export const InvertorPage: React.FC = React.memo(() => {
 
     else {
       const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
-      fetchSingleItems(endpoint, setSingleServices);
+      fetchSingleItems(endpoint).then((res) => setSingleServices(res));
     }
   }, [producer])
 
@@ -50,7 +50,7 @@ export const InvertorPage: React.FC = React.memo(() => {
       {Producer.huawei
         ? (
           <Calculator
-            title={title}
+            header={title}
             singleServices={singleServices}
             selectServices={selectServices}
             additionHeader={{ title: "Invertor" }}
@@ -62,7 +62,7 @@ export const InvertorPage: React.FC = React.memo(() => {
 
         : (
           <Calculator
-            title={title}
+            header={title}
             singleServices={singleServices}
             selectServices={selectServices}
             defaultSelectService={selectService}

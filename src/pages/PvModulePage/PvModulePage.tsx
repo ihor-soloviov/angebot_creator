@@ -26,7 +26,7 @@ export const PvModulePage: React.FC = React.memo(() => {
     <div className="pvModulePage">
       <Header />
       <Calculator
-        title={title}
+        header={title}
         singleServices={singleServices}
       />
       <Footer isCalculator={true} />

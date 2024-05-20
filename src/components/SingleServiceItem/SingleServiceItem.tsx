@@ -15,7 +15,7 @@ interface Props {
 
 export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageName, service, setTotalPrice, unNormalPriceChange }) => {
   const [priceCount, setPriceСount] = useState(service.count || 0)
-  const { title, description: greyTitle, price } = service;
+  const { title, description, price } = service;
   const shownPrice = priceCount === 0 ? 0 : price * priceCount;
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageNa
     <div className="singleService">
       <div className="singleService__left">
         <b>{title}</b>
-        <p>{greyTitle}</p>
+        <p>{description}</p>
       </div>
       <div className="singleService__right">
         <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} setTotalPrice={setTotalPrice} />

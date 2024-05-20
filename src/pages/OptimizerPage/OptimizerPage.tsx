@@ -34,7 +34,7 @@ export const OptimizerPage: React.FC = React.memo(() => {
     <div className="optimizerPage">
       <Header />
       <Calculator
-        title={title}
+        header={title}
         singleServices={singleServices}
       />
       <Footer isCalculator={true} />

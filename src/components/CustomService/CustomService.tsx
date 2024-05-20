@@ -7,22 +7,25 @@ interface Props {
 }
 
 export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
-  const [blackTitle, setBlackTitle] = useState('');
+  const [title, setTitle] = useState('');
   const [price, setPrice] = useState(0);
 
   const addNewSingleService = () => {
-    if (blackTitle === "" || price === 0) {
+    if (!setSingleServices) {
+      return
+    }
+    if (title === "" || price === 0) {
       return
     }
 
-    setSingleServices && setSingleServices((prev: SingleService[]) => [...prev, { title: blackTitle, price: price, count: 1 }])
+    setSingleServices((prev: SingleService[]) => [...prev, { title: title, price: price, count: 1 }])
   }
 
   return (
     <div className="customService">
       <div className="left">
         <div className="customService__input">
-          <input value={blackTitle} onChange={(e) => setBlackTitle(e.target.value)} type="text" placeholder="Введите свой вариант" />
+          <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Введите свой вариант" />
         </div>
         <button
           onClick={addNewSingleService}>

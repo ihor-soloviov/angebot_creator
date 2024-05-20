@@ -34,7 +34,7 @@ export const BatteryPage: React.FC = React.memo(() => {
     <div className="batteryPage">
       <Header />
       <Calculator
-        title={title}
+        header={title}
         selectServices={selectServices}
         defaultSelectService={selectService}
         addNewSelectService={addNewSelectService}

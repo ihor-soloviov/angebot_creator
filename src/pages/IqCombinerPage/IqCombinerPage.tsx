@@ -26,7 +26,7 @@ export const IqCombinerPage: React.FC = () => {
     <div className="iqCombiner" >
       <Header />
       <Calculator
-        title={title}
+        header={title}
         singleServices={singleServices}
       />
       <Footer isCalculator={true} />

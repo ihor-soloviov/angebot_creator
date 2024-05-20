@@ -19,17 +19,17 @@ export const WallboxPage: React.FC = React.memo(() => {
 
   useEffect(() => {
     if (producer === Producer.enphase) {
-      fetchSingleItems("wallbox", setSingleServices, "Pulsar Plus");
+      fetchSingleItems("wallbox", "Pulsar Plus").then(res => setSingleServices(res));
       return;
     }
-    fetchSingleItems("wallbox", setSingleServices);
+    fetchSingleItems("wallbox").then(res => setSingleServices(res));
   }, [producer])
 
   return (
     <div className="wallboxPage">
       <Header />
       <Calculator
-        title={title}
+        header={title}
         singleServices={singleServices}
       />
       <Footer isCalculator={true} />
