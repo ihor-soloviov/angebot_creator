@@ -3,7 +3,7 @@ import "./InvertorPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { DropdownService, IndividualService, Title } from "../../components/Calculator/calculator-types";
+import { DropdownServices, IndividualService, Title } from "../../components/Calculator/calculator-types";
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
@@ -16,7 +16,7 @@ export const InvertorPage: React.FC = React.memo(() => {
 
   const [singleServices, setSingleServices] = useState<IndividualService[]>([])
   const [selectServices, setSelectServices] = useState<IndividualService[]>([])
-  const [selectService, setSelectService] = useState<DropdownService>();
+  const [selectService, setSelectService] = useState<DropdownServices>();
   const { producer } = producerStore;
   const title: Title = titles[producer]
 

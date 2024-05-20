@@ -1,6 +1,6 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
-import { DropdownService } from "../components/Calculator/calculator-types";
+import { DropdownServices } from "../components/Calculator/calculator-types";
 
 type El = {
   modell: string;
@@ -67,7 +67,7 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
 
 export const fetchSelectItems = async (
   tableName: string,
-  setSelectService: (value: DropdownService) => void
+  setSelectService: (value: DropdownServices) => void
 ) => {
   const { producer } = producerStore;
   try {
@@ -109,6 +109,7 @@ export const fetchServicesBySection = async (section: string) => {
   try {
     const url = `${apiUrl}/usual_service/${section}`;
     const response = await fetchData(HttpMethod.GET, url);
+    console.log(response);
     return response;
   } catch (error) {
     console.error("There was an error!", error);

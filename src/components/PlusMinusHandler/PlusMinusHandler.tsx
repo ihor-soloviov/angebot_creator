@@ -1,16 +1,14 @@
-import React, { KeyboardEvent, useEffect, useRef } from "react";
+import React, { KeyboardEvent, useRef } from "react";
 import "./PlusMinusHandler.scss";
-import { updateTotalPrice } from "../../utils/updateTotalPrice";
 
 interface Props {
   priceСount: number
   setPriceСount: (value: number | ((prev: number) => number)) => void;
-  setTotalPrice: (value: number) => void
   selectedValue?: string
 }
 
 export const PlusMinusHandler: React.FC<Props> = React.memo(
-  ({ priceСount, setPriceСount, setTotalPrice, selectedValue }) => {
+  ({ priceСount, setPriceСount, selectedValue }) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -40,13 +38,6 @@ export const PlusMinusHandler: React.FC<Props> = React.memo(
       selectedValue !== 'Выберете вариант' &&
         setPriceСount(prev => prev + 1)
     }
-
-    useEffect(() => {
-      setTimeout(() => {
-        updateTotalPrice(setTotalPrice);
-      }, 20);
-      //a bit time to update prices list 
-    }, [priceСount, setTotalPrice]);
 
     const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter") {

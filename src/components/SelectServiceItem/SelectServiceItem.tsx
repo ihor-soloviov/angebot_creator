@@ -1,47 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import "./SelectServiceItem.scss";
-import { DropdownService, IndividualService } from "../Calculator/calculator-types";
+import { DropdownServices, IndividualService, ServiceSpecific } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
 
 interface Props {
-  service: DropdownService
-  addNewSelectService?: (selectObject: IndividualService) => void
+  services: DropdownServices
+  addSelectedService: (selectObject: IndividualService) => void
 }
 
-export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewSelectService }) => {
-  const { label, options: select } = service;
+const defaultOption: IndividualService = {
+  title: 'Выберете вариант',
+  price: 0,
+  count: 0,
+  specific: ServiceSpecific.Select
+}
 
-  const [selectedValue, setSelectedValue] = useState('Выберете вариант');
-  const [optionPrice, setOptionPrice] = useState(0)
+export const SelectServiceItem: React.FC<Props> = React.memo(({ services, addSelectedService }) => {
+  const [selectedOption, setSelectedOption] = useState<IndividualService>(defaultOption);
 
-  const valuesForSelect = select.map(obj => obj.value);
+  const { label, options } = services;
+  const valuesForCustomSelect = useMemo(() => options.map(obj => obj.title), [options]);
 
+  const changeSelectedValue = useCallback((newValue: string) => {
+    const selectedService = options.find(s => s.title === newValue) || defaultOption;
+    setSelectedOption(selectedService);
+  }, [options]);
 
-  const changeSelectedValue: (value: string) => void = (newValue) => {
-    setSelectedValue(newValue)
-  }
-
-  useEffect(() => {
-    if (selectedValue !== 'Выберете вариант') {
-      const newPrice = select.find(el => el.value === selectedValue)?.price || 0;
-      setOptionPrice(newPrice);
-    }
-  }, [selectedValue, select])
+  const handleAddServiceClick = useCallback(() => {
+    addSelectedService({ ...selectedOption, count: 1 });
+    setSelectedOption(defaultOption);
+  }, [selectedOption, addSelectedService]);
 
   return (
     <div className="selectServiceItem">
       {label && <p className="label">{label}</p>}
       <div className="selectService">
         <div className="selectService__left">
-          <CustomSelect width={460} selectedValue={selectedValue} changeSelectedValue={changeSelectedValue} values={valuesForSelect} />
-          <button className="button__add" disabled={selectedValue === 'Выберете вариант'} onClick={() => {
-            if (addNewSelectService) {
-              const price = select.find(el => el.value === selectedValue)?.price || 0;
-              addNewSelectService({ title: selectedValue, price: price, count: 1 });
-              setSelectedValue('Выберете вариант');
-              setOptionPrice(0)
-            }
-          }}>
+          <CustomSelect
+            width={460}
+            selectedValue={selectedOption.title}
+            changeSelectedValue={changeSelectedValue}
+            values={valuesForCustomSelect}
+          />
+          <button
+            className="button__add"
+            disabled={selectedOption === defaultOption}
+            onClick={handleAddServiceClick}>
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 11L18 11" stroke="#8F9AA5" strokeWidth="2" strokeLinecap="round" />
               <path d="M10.5 18.5L10.5 3.5" stroke="#8F9AA5" strokeWidth="2" strokeLinecap="round" />
@@ -49,8 +53,7 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ service, addNewS
           </button>
         </div>
         <div className="selectService__right">
-
-          <p className="service_price">{optionPrice}.00 €</p>
+          <p className="service_price">{selectedOption.price}.00 €</p>
         </div>
       </div>
     </div>

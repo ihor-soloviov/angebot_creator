@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import producerStore from "../../stores/producer-store";
-import { DropdownService, IndividualService, Title } from "../../components/Calculator/calculator-types";
+import { DropdownServices, IndividualService, Title } from "../../components/Calculator/calculator-types";
 import { titles } from "./titles";
 import { fetchSelectItems } from "../../api/fetchItemsFromtable";
 import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
@@ -13,7 +13,7 @@ import { SingleServiceItem } from "../../components/SingleServiceItem";
 
 export const BatteryPage: React.FC = React.memo(() => {
   const [selectServices, setSelectServices] = useState<IndividualService[]>([])
-  const [selectService, setSelectService] = useState<DropdownService>()
+  const [selectService, setSelectService] = useState<DropdownServices>()
   const { producer } = producerStore;
   const title: Title = titles[producer];
 

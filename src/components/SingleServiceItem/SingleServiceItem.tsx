@@ -9,11 +9,10 @@ import stepStore from "../../stores/step-store";
 interface Props {
   serviceStorageName: string
   service: IndividualService
-  setTotalPrice: (value: number) => void
   unNormalPriceChange?: boolean
 }
 
-export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageName, service, setTotalPrice, unNormalPriceChange }) => {
+export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageName, service, unNormalPriceChange }) => {
   const [priceCount, setPriceСount] = useState(service.count || 0)
   const { title, description, price } = service;
   const shownPrice = priceCount === 0 ? 0 : price * priceCount;
@@ -33,7 +32,7 @@ export const SingleServiceItem: React.FC<Props> = React.memo(({ serviceStorageNa
         <p>{description}</p>
       </div>
       <div className="singleService__right">
-        <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} setTotalPrice={setTotalPrice} />
+        <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} />
         {unNormalPriceChange && title === 'Kaskadenschaltung'
           ? (<p className="service_price">{getUnNormalShownPrice(price, priceCount)}.00 €</p>)
           : (<p className="service_price">{shownPrice}.00 €</p>)
