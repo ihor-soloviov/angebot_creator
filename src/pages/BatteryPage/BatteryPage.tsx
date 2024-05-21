@@ -27,7 +27,9 @@ export const BatteryPage: React.FC = observer(() => {
 
   useEffect(() => {
     fetchServicesByTableName("batteries").then(res => {
-      const options = res.map((el: Module) => ({ title: el.model, price: el.price, specific: ServiceSpecific.Select }));
+      const options = res.map(
+        (el: Module) => ({ title: el.model, price: el.price, specific: ServiceSpecific.Select })
+      );
       setSelectServices({ options })
     })
   }, [producer])
@@ -47,7 +49,12 @@ export const BatteryPage: React.FC = observer(() => {
               />
             </React.Fragment>
           ))}
-          {selectServices && <SelectServiceItem services={selectServices} addSelectedService={addSelectedService} />}
+          {selectServices &&
+            <SelectServiceItem
+              services={selectServices}
+              addSelectedService={addSelectedService}
+            />
+          }
         </CalculatorContainer>
       </Calculator>
       <Footer isCalculator={true} />
