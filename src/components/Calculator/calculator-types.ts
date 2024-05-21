@@ -25,3 +25,8 @@ export type SelectedServiceOption = {
   price: number;
   count: number;
 };
+
+export type Module = {
+  model: string,
+  price: number
+}

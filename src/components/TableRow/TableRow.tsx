@@ -6,7 +6,6 @@ interface Props {
   rowName: string
 }
 
-
 export const TableRow: React.FC<Props> = ({ rowName, addRow }) => {
   const [objectValue, setObjectValue] = useState('');
 
@@ -14,11 +13,15 @@ export const TableRow: React.FC<Props> = ({ rowName, addRow }) => {
     addRow(rowName, objectValue)
   }
 
-
   return (
     <div className="table-row">
       <p>{rowName}</p>
-      <input value={objectValue} onChange={(e) => setObjectValue(e.target.value)} onBlur={addValueToRowData} type="text" placeholder="Text" />
+      <input
+        value={objectValue}
+        onChange={(e) => setObjectValue(e.target.value)}
+        onBlur={addValueToRowData}
+        type="text"
+        placeholder="Text" />
     </div>
   );
 }

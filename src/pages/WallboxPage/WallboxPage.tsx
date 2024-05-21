@@ -7,6 +7,7 @@ import { IndividualService, Title } from "../../components/Calculator/calculator
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 export const WallboxPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<IndividualService[]>([])
@@ -33,16 +34,18 @@ export const WallboxPage: React.FC = React.memo(() => {
         header={title}
 
       >
-        {singleServices.map((service, index) =>
-          <SingleServiceItem
-            serviceStorageName='singleServices'
-            key={index}
-            service={service}
-            setTotalPrice={() => console.log('e')}
-            unNormalPriceChange={true}
-          />
-        )
-        }
+        <CalculatorContainer>
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+
+              unNormalPriceChange={true}
+            />
+          )
+          }
+        </CalculatorContainer>
       </Calculator>
       <Footer isCalculator={true} />
     </div>

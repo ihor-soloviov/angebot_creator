@@ -5,6 +5,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 const singleServices: IndividualService[] = [{
   title: "Quermontage",
@@ -67,16 +68,17 @@ export const UnderConstructionsPage: React.FC = React.memo(() => (
     <Calculator
       header={title}
     >
-      {singleServices.map((service, index) =>
-        <SingleServiceItem
-          serviceStorageName='singleServices'
-          key={index}
-          service={service}
-          setTotalPrice={() => console.log('e')}
-          unNormalPriceChange={true}
-        />
-      )
-      }
+      <CalculatorContainer>
+        {singleServices.map((service, index) =>
+          <SingleServiceItem
+            serviceStorageName='singleServices'
+            key={index}
+            service={service}
+            unNormalPriceChange={true}
+          />
+        )
+        }
+      </CalculatorContainer>
     </Calculator>
     <Footer isCalculator={true} />
   </div>

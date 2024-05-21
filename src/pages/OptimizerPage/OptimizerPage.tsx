@@ -7,6 +7,7 @@ import { IndividualService, Title } from "../../components/Calculator/calculator
 import producerStore from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 export const OptimizerPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
@@ -37,16 +38,18 @@ export const OptimizerPage: React.FC = React.memo(() => {
       <Calculator
         header={title}
       >
-        {singleServices.map((service, index) =>
-          <SingleServiceItem
-            serviceStorageName='singleServices'
-            key={index}
-            service={service}
-            setTotalPrice={() => console.log('e')}
-            unNormalPriceChange={true}
-          />
-        )
-        }
+        <CalculatorContainer>
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+
+              unNormalPriceChange={true}
+            />
+          )
+          }
+        </CalculatorContainer>
       </Calculator>
       <Footer isCalculator={true} />
     </div>

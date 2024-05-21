@@ -10,6 +10,7 @@ import { SingleServiceItem } from "../../components/SingleServiceItem";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
 import { SelectServiceItem } from "../../components/SelectServiceItem";
 import "./MontagePage.scss";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 const title: Title = {
   title: "Installation + Lieferung",
@@ -49,9 +50,7 @@ export const MontagePage: React.FC = React.memo(() => {
     <div className="montagePage">
       <Header />
       <Calculator header={title}>
-        <div
-          className="calculatorService__container"
-          style={{ marginBottom: "100px" }}
+        <CalculatorContainer additionalSection={true}
         >
           {singleServices.map((service, index) =>
             <SingleServiceItem
@@ -61,7 +60,7 @@ export const MontagePage: React.FC = React.memo(() => {
             />
           )
           }
-        </div>
+        </CalculatorContainer>
 
         <CalculatorTitle header={additionHeader} />
         <div className="calculatorService__container">

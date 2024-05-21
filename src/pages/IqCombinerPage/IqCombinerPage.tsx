@@ -36,7 +36,7 @@ export const IqCombinerPage: React.FC = () => {
             serviceStorageName='singleServices'
             key={index}
             service={service}
-            setTotalPrice={() => console.log('e')}
+
             unNormalPriceChange={true}
           />
         )

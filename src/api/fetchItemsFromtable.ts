@@ -1,10 +1,9 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
-import { DropdownServices } from "../components/Calculator/calculator-types";
 
 type El = {
-  modell: string;
-  preis: string;
+  model: string;
+  price: string;
 };
 
 export enum HttpMethod {
@@ -47,8 +46,8 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
   try {
     const link =
       brand !== ""
-        ? `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${brand}`
-        : `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${producer}`;
+        ? `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${brand}`
+        : `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`;
 
     const result = await axios.get(link, { headers });
 
@@ -57,33 +56,34 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
     }
 
     return result.data.map((el: El) => ({
-      title: el.modell,
-      price: +el.preis,
+      title: el.model,
+      price: +el.price,
     }));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const fetchSelectItems = async (
-  tableName: string,
-  setSelectService: (value: DropdownServices) => void
-) => {
+export const fetchSelectItems = async (tableName: string) => {
   const { producer } = producerStore;
   try {
+    const params = `producer=${brand || producer}`;
+    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
     const result = await axios.get(
-      `https://api.creator.work-set.eu/getTable?table_name=${tableName}&hersteller=${producer}`,
+      `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`,
       { headers }
     );
 
-    const services = result.data.map((el: El) => ({
-      value: el.modell,
-      price: +el.preis,
-    }));
+    console.log(result);
 
-    console.log(services);
+    // const services = result.data.map((el: El) => ({
+    //   value: el.model,
+    //   price: +el.price,
+    // }));
 
-    setSelectService({ options: services });
+    // console.log(services);
+
+    // setSelectService({ options: services });
   } catch (error) {
     console.log(error);
   }
@@ -95,11 +95,12 @@ export const fetchServicesByTableName = async (
 ) => {
   const { producer } = producerStore;
   try {
-    const query = `hersteller=${brand || producer}`;
-    const url = `${apiUrl}/getTable?table_name=${tableName}&${query}`;
+    const query = `producer=${brand || producer}`;
+    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
 
     const response = await fetchData(HttpMethod.GET, url);
     console.log(response);
+    return response
   } catch (error) {
     console.error("There was an error!", error);
   }

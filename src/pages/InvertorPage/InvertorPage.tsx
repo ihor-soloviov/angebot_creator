@@ -1,43 +1,48 @@
-import React, { useCallback, useEffect, useState } from "react";
-import "./InvertorPage.scss";
+import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { DropdownServices, IndividualService, Title } from "../../components/Calculator/calculator-types";
+import { DropdownServices, IndividualService, Module, ServiceSpecific, Title } from "../../components/Calculator/calculator-types";
 import producerStore, { Producer } from "../../stores/producer-store";
-import { fetchSelectItems, fetchSingleItems } from "../../api/fetchItemsFromtable";
+import { fetchServicesByTableName } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
-import { enphaseServices } from "./singleServiceEnphase";
-import { generateUniqueThreeDigitNumber } from "../../utils/randomizer";
-import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
+import { SelectServiceItem } from "../../components/SelectServiceItem";
+import "./InvertorPage.scss";
+import { observer } from "mobx-react-lite";
 
-export const InvertorPage: React.FC = React.memo(() => {
-
+export const InvertorPage: React.FC = observer(() => {
   const [singleServices, setSingleServices] = useState<IndividualService[]>([])
-  const [selectServices, setSelectServices] = useState<IndividualService[]>([])
-  const [selectService, setSelectService] = useState<DropdownServices>();
+  const [selectServices, setSelectServices] = useState<DropdownServices | null>(null)
   const { producer } = producerStore;
   const title: Title = titles[producer]
 
-
-  const addNewSelectService = useCallback((selectObject: IndividualService) => {
-    const id = generateUniqueThreeDigitNumber(selectServices);
-    const objWithId = { ...selectObject, id: id }
-    setSelectServices((prev) => [...prev, objWithId])
-  }, [selectServices])
-
+  const addSelectedService = (service: IndividualService) => {
+    setSingleServices(prev => [...prev, service])
+  }
 
   useEffect(() => {
-    fetchSelectItems("inverters", setSelectService);
+    fetchServicesByTableName("inverters").then(res => {
+      const options = res.map((el: Module) => (
+        {
+          title: el.model,
+          price: el.price,
+          specific: ServiceSpecific.Select
+        }));
+      setSelectServices({ options })
+    })
     const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
-    fetchSingleItems(endpoint).then((res) => setSingleServices(res));
+    fetchServicesByTableName(endpoint).then((res) => {
+      const services = res.map((el: Module) => (
+        {
+          title: el.model,
+          price: el.price,
+          specific: ServiceSpecific.Select
+        }));
+      setSingleServices(services)
+    });
   }, [producer])
-
-  useEffect(() => {
-    getSavedSelectServicesWithCount(setSelectServices)
-  }, [])
-
 
   return (
     <div className="invertorPage">
@@ -45,16 +50,19 @@ export const InvertorPage: React.FC = React.memo(() => {
       <Calculator
         header={title}
       >
-        {singleServices.map((service, index) =>
-          <SingleServiceItem
-            serviceStorageName='singleServices'
-            key={index}
-            service={service}
-            setTotalPrice={() => console.log('e')}
-            unNormalPriceChange={true}
-          />
-        )
-        }
+        <CalculatorContainer>
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+
+              unNormalPriceChange={true}
+            />
+          )
+          }
+          {selectServices && <SelectServiceItem services={selectServices} addSelectedService={addSelectedService} />}
+        </CalculatorContainer>
       </Calculator>
 
       <Footer isCalculator={true} />

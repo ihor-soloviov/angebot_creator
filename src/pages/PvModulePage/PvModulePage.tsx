@@ -5,6 +5,7 @@ import { Calculator } from "../../components/Calculator";
 import { Footer } from "../../components/Footer";
 import { IndividualService, ServiceSpecific, Title } from "../../components/Calculator/calculator-types";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 const singleServices: IndividualService[] = [
   {
@@ -33,16 +34,17 @@ export const PvModulePage: React.FC = React.memo(() => {
       <Calculator
         header={title}
       >
-        {singleServices.map((service, index) =>
-          <SingleServiceItem
-            serviceStorageName='singleServices'
-            key={index}
-            service={service}
-            setTotalPrice={() => console.log('e')}
-            unNormalPriceChange={true}
-          />
-        )
-        }
+        <CalculatorContainer>
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+              unNormalPriceChange={true}
+            />
+          )
+          }
+        </CalculatorContainer>
       </Calculator>
       <Footer isCalculator={true} />
     </div>

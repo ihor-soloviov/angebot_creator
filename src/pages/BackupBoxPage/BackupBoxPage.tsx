@@ -7,6 +7,7 @@ import { IndividualService } from "../../components/Calculator/calculator-types"
 import producerStore from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
 import { SingleServiceItem } from "../../components/SingleServiceItem";
+import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 export const BackupBoxPage: React.FC = React.memo(() => {
   const [singleServices, setSingleServices] = useState<IndividualService[]>([]);
@@ -31,16 +32,17 @@ export const BackupBoxPage: React.FC = React.memo(() => {
       <Calculator
         header={{ description: "Решение для аварийного электроснабжения", title: "Notstromlösung" }}
       >
-        {singleServices.map((service, index) =>
-          <SingleServiceItem
-            serviceStorageName='singleServices'
-            key={index}
-            service={service}
-            setTotalPrice={() => console.log('e')}
-            unNormalPriceChange={true}
-          />
-        )
-        }
+        <CalculatorContainer>
+          {singleServices.map((service, index) =>
+            <SingleServiceItem
+              serviceStorageName='singleServices'
+              key={index}
+              service={service}
+              unNormalPriceChange={true}
+            />
+          )
+          }
+        </CalculatorContainer>
       </Calculator>
       <Footer isCalculator={true} />
     </div>

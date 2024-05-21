@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import "./SelectServiceItem.scss";
 import { DropdownServices, IndividualService, ServiceSpecific } from "../Calculator/calculator-types";
 import { CustomSelect } from "../CustomSelect";
+import classNames from "classnames";
 
 interface Props {
   services: DropdownServices
@@ -43,7 +44,7 @@ export const SelectServiceItem: React.FC<Props> = React.memo(({ services, addSel
             values={valuesForCustomSelect}
           />
           <button
-            className="button__add"
+            className={classNames("button__add", { add: selectedOption !== defaultOption })}
             disabled={selectedOption === defaultOption}
             onClick={handleAddServiceClick}>
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: Inter  Tight;
+  font-family: Inter Tight;
 
   &__left {
     display: flex;
@@ -40,6 +40,10 @@
         transform: scale(1.15);
       }
     }
+
+    .add {
+      animation: greenToWhite 0.3s infinite alternate;
+    }
   }
 
   &__right {
@@ -48,5 +52,14 @@
     gap: 90px;
     font-size: 20px;
     line-height: normal;
+  }
+}
+
+@keyframes greenToWhite {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
   }
 }
