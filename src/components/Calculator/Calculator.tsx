@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
 import "./Calculator.scss";
-import { CalculatorTitle } from "../CalculatorTitle";
+import { CalculatorTitle } from "./CalculatorTitle";
 import { ButtonNext } from "../Buttons/ButtonNext";
 import { Title } from "./calculator-types";
 

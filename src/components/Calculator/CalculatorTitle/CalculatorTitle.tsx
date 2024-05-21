@@ -1,6 +1,6 @@
 import React from "react";
 import "./CalculatorTitle.scss";
-import { Title } from "../Calculator/calculator-types";
+import { Title } from "../calculator-types";
 
 interface Props {
   header?: Title

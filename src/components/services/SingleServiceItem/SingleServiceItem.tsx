@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PlusMinusHandler } from "../../PlusMinusHandler";
+import { PlusMinusHandler } from "../../Buttons/PlusMinusHandler";
 import { IndividualService } from "../../Calculator/calculator-types";
 import { getUnNormalShownPrice } from "../../../utils/getUnNormalShownPrice";
 import { addOrUpdateSingleService, getSavedServiceCount } from "../../../utils/sessionStorageMethods";

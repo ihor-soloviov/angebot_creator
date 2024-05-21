@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { CustomInput } from "../CustomInput/CustomInput";
+import { CustomInput } from "../Inputs/CustomInput/CustomInput";
 
 import log from "../../assets/log.svg";
 import pass from "../../assets/pass.svg";
 
-import { CustomCheckbox } from "../CustomCheckbox";
+import { CustomCheckbox } from "../Inputs/CustomCheckbox";
 import arrButton from "../../assets/arrowButton.svg"
 
 import "./LoginForm.scss";

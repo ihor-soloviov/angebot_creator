@@ -14,6 +14,7 @@
 
 @mixin pageDecore {
   background-color: $main-grey;
-  height: calc(100vh - 65.5px);
+  min-height: calc(100vh - 65.5px);
+  max-height: max-content;
   font-family: Inter Tight;
 }

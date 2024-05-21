@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Header } from '../../../components/Header';
-import { SearchInput } from '../../../components/SearchInput';
+import { SearchInput } from '../../../components/Inputs/SearchInput';
 import img from '../../../assets/angebotTypePicture.png'
 import './AdminSearchPage.scss'
 import { SearchResult } from '../../../types/dealsTypes';

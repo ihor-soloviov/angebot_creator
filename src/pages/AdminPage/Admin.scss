@@ -3,7 +3,6 @@
 
 .adminPage {
   @include pageDecore;
-  height: calc(100vh - 65.5px);
   display: flex;
   flex-direction: column;
   justify-content: center;

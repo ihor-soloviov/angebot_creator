@@ -64,30 +64,30 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
   }
 };
 
-export const fetchSelectItems = async (tableName: string) => {
-  const { producer } = producerStore;
-  try {
-    const params = `producer=${brand || producer}`;
-    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
-    const result = await axios.get(
-      `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`,
-      { headers }
-    );
+// export const fetchSelectItems = async (tableName: string) => {
+//   const { producer } = producerStore;
+//   try {
+//     const params = `producer=${brand || producer}`;
+//     const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
+//     const result = await axios.get(
+//       `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`,
+//       { headers }
+//     );
 
-    console.log(result);
+//     console.log(result);
 
-    // const services = result.data.map((el: El) => ({
-    //   value: el.model,
-    //   price: +el.price,
-    // }));
+//     // const services = result.data.map((el: El) => ({
+//     //   value: el.model,
+//     //   price: +el.price,
+//     // }));
 
-    // console.log(services);
+//     // console.log(services);
 
-    // setSelectService({ options: services });
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     // setSelectService({ options: services });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const fetchServicesByTableName = async (
   tableName: string,

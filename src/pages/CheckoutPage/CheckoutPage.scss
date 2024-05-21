@@ -4,7 +4,6 @@
 .checkoutPage {
   @include pageDecore;
   position: relative;
-  height: max-content;
   padding-bottom: 158px;
 
   &__container {

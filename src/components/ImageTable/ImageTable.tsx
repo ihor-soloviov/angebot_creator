@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ImageTable.scss";
 import { TableRow } from "../TableRow";
-import { PlusButton } from "../PlusButton";
+import { PlusButton } from "../Inputs/PlusButton";
 import { TableData } from "../ImageWithTableBlock";
 
 interface Props {

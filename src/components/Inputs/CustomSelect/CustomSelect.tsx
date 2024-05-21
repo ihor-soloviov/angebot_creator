@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import arr from "../../assets/selectArr.svg";
+import arr from "../../../assets/selectArr.svg";
 import "./CustomSelect.scss";
 import classNames from "classnames";
 

@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./CustomInput.scss";
 
 interface Props {

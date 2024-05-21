@@ -2,8 +2,6 @@
 @import "../../../utilsScss/mixins.scss";
 .adminPage__checkout {
   @include pageDecore;
-  // height: calc(100vh - 65.5px);
-  height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;

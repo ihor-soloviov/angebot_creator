@@ -3,7 +3,7 @@ import "./CheckoutPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import producerStore from "../../stores/producer-store";
-import { CalculatorTitle } from "../../components/CalculatorTitle";
+import { CalculatorTitle } from "../../components/Calculator/CalculatorTitle";
 import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 import stepStore from "../../stores/step-store";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
@@ -81,7 +81,7 @@ export const CheckoutPage: React.FC = React.memo(() => {
     <div className="checkoutPage">
       <Header />
       <div className="checkoutPage__container">
-        <CalculatorTitle title={title} />
+        <CalculatorTitle header={title} />
         <div className="pageList">
           {pages && (
             pages.map(el => (

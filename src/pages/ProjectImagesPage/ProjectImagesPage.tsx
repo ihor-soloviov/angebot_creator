@@ -5,7 +5,7 @@ import { Footer } from "../../components/Footer";
 import "./ProjectImagesPage.scss";
 import { ImageWithTableBlock, TableData } from "../../components/ImageWithTableBlock";
 import { MainImageAdder } from "../../components/MainImageAdder";
-import { PlusButton } from "../../components/PlusButton";
+import { PlusButton } from "../../components/Inputs/PlusButton";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import { uploadMainImage } from "../../utils/sendDataToGenerator";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import producerImg from "../../assets/producerImg.svg"
 
 import { Header } from "../../components/Header";
-import { CustomSelect } from "../../components/CustomSelect";
+import { CustomSelect } from "../../components/Inputs/CustomSelect";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import { ButtonPrev } from "../../components/Buttons/ButtonPrev";
 import "./ProducerPage.scss";

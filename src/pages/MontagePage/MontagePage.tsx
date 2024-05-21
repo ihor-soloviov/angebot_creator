@@ -7,7 +7,7 @@ import { DropdownServices, IndividualService, Title } from "../../components/Cal
 // import { getSavedSelectServicesWithCount } from "../../utils/sessionStorageMethods";
 import { fetchServicesBySection } from "../../api/fetchItemsFromtable";
 import { SingleServiceItem } from "../../components/services/SingleServiceItem";
-import { CalculatorTitle } from "../../components/CalculatorTitle";
+import { CalculatorTitle } from "../../components/Calculator/CalculatorTitle";
 import { SelectServiceItem } from "../../components/services/SelectServiceItem";
 import "./MontagePage.scss";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";

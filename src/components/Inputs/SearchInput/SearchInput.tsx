@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useDebounce } from "../../hooks/useDebounce";
-import { fetchUserAndSellerData } from "../../api/deals";
-import { SearchResult } from "../../types/dealsTypes";
+import { useDebounce } from "../../../hooks/useDebounce";
+import { fetchUserAndSellerData } from "../../../api/deals";
+import { SearchResult } from "../../../types/dealsTypes";
 import "./SearchInput.scss";
 
 interface Props {

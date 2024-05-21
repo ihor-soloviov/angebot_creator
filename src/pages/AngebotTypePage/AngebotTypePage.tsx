@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import img from "../../assets/angebotTypePicture.png"
 import { Header } from "../../components/Header";
-import { CustomSelect } from "../../components/CustomSelect";
+import { CustomSelect } from "../../components/Inputs/CustomSelect";
 import "./AngebotTypePage.scss";
-import { SearchInput } from "../../components/SearchInput";
+import { SearchInput } from "../../components/Inputs/SearchInput";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import stepStore from "../../stores/step-store";
 import { SearchResult } from "../../types/dealsTypes";
