@@ -10,6 +10,8 @@ import { getActualHeader } from '../../utils/getActualHeader';
 import { IndividualService } from '../../components/Calculator/calculator-types';
 import { fetchServicesBySection } from '../../api/fetchItemsFromtable';
 import ServiceWrapper from '../../components/services/ServiceWrapper/ServiceWrapper';
+import PriceInput from '../../components/Inputs/PriceInput/PriceInput';
+import { ButtonNext } from '../../components/Buttons/ButtonNext';
 
 const ChangePricePage = () => {
   const [actialHeader, setActialHeader] = useState<Partition>({
@@ -59,11 +61,12 @@ const ChangePricePage = () => {
       <div className="changePricePage">
         <div className="changePricePage__wrapper">
           <CalculatorTitle header={actialHeader} />
-          {singleServices && singleServices.map(({ title, description }) => (
+          {singleServices && singleServices.map(({ title, description, price }) => (
             <ServiceWrapper title={title} description={description} >
-              <dir>huy</dir>
+              <PriceInput currentPrice={+price} />
             </ServiceWrapper>
           ))}
+          <ButtonNext width={394} />
         </div>
         <ButtonPrev adminOnClick={handleBackClick} />
       </div>

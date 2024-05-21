@@ -1,9 +1,8 @@
 @import "../../utilsScss/colors.scss";
 @import "../../utilsScss/mixins.scss";
 
-@import "../../utilsScss/colors.scss";
-
 .welcomePage {
+  height: 100dvh;
   background-color: $main-grey;
 
   &__inner {
