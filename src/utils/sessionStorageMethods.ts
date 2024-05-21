@@ -36,7 +36,7 @@ export const getSavedServiceCount: GetSavedService = (
     }
 
     const currentItem = services.find(
-      ({ title: blackTitle }) => blackTitle === service.title
+      ({ title }) => title === service.title
     );
 
     if (currentItem?.count) {
