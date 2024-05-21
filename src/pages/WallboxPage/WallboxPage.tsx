@@ -6,7 +6,7 @@ import { Calculator } from "../../components/Calculator";
 import { IndividualService, Title } from "../../components/Calculator/calculator-types";
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchSingleItems } from "../../api/fetchItemsFromtable";
-import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { SingleServiceItem } from "../../components/services/SingleServiceItem";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 export const WallboxPage: React.FC = React.memo(() => {

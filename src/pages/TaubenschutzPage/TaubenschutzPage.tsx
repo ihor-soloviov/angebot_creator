@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
 import { IndividualService } from "../../components/Calculator/calculator-types";
-import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { SingleServiceItem } from "../../components/services/SingleServiceItem";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 import { fetchServicesBySection } from "../../api/fetchItemsFromtable";
 

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { IndividualService, ServiceSpecific } from "../../Calculator/calculator-types";
 import "./CustomService.scss";
-import { IndividualService } from "../Calculator/calculator-types";
 
 interface Props {
   setSingleServices?: Dispatch<SetStateAction<IndividualService[]>>
@@ -18,14 +18,20 @@ export const CustomService: React.FC<Props> = ({ setSingleServices }) => {
       return
     }
 
-    setSingleServices((prev: IndividualService[]) => [...prev, { title: title, price: price, count: 1 }])
+    setSingleServices(
+      (prev: IndividualService[]) => [...prev, { title, price, specific: ServiceSpecific.Single, count: 1 }]
+    )
   }
 
   return (
     <div className="customService">
       <div className="left">
         <div className="customService__input">
-          <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Введите свой вариант" />
+          <input
+            value={title}
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Введите свой вариант" />
         </div>
         <button
           onClick={addNewSingleService}>

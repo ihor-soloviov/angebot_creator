@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Calculator } from "../../components/Calculator";
 import { Footer } from "../../components/Footer";
 import { IndividualService, ServiceSpecific, Title } from "../../components/Calculator/calculator-types";
-import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { SingleServiceItem } from "../../components/services/SingleServiceItem";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
 
 const singleServices: IndividualService[] = [

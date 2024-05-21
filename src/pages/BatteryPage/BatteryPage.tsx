@@ -4,7 +4,7 @@ import producerStore from "../../stores/producer-store";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { SingleServiceItem } from "../../components/services/SingleServiceItem";
 
 import { fetchServicesByTableName } from "../../api/fetchItemsFromtable";
 
@@ -13,7 +13,7 @@ import { titles } from "./titles";
 
 import "./BatteryPage.scss";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
-import { SelectServiceItem } from "../../components/SelectServiceItem";
+import { SelectServiceItem } from "../../components/services/SelectServiceItem";
 
 export const BatteryPage: React.FC = observer(() => {
   const [singleServices, setSingleServices] = useState<IndividualService[]>([])

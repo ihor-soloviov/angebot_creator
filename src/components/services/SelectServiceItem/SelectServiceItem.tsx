@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from "react";
 import "./SelectServiceItem.scss";
-import { DropdownServices, IndividualService, ServiceSpecific } from "../Calculator/calculator-types";
-import { CustomSelect } from "../CustomSelect";
+import { DropdownServices, IndividualService, ServiceSpecific } from "../../Calculator/calculator-types";
+import { CustomSelect } from "../../CustomSelect";
 import classNames from "classnames";
 
 interface Props {

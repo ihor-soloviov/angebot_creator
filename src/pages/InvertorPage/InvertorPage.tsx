@@ -6,9 +6,9 @@ import { DropdownServices, IndividualService, Module, ServiceSpecific, Title } f
 import producerStore, { Producer } from "../../stores/producer-store";
 import { fetchServicesByTableName } from "../../api/fetchItemsFromtable";
 import { titles } from "./titles";
-import { SingleServiceItem } from "../../components/SingleServiceItem";
+import { SingleServiceItem } from "../../components/services/SingleServiceItem";
 import CalculatorContainer from "../../components/Calculator/CalculatorContainer/CalculatorContainer";
-import { SelectServiceItem } from "../../components/SelectServiceItem";
+import { SelectServiceItem } from "../../components/services/SelectServiceItem";
 import "./InvertorPage.scss";
 import { observer } from "mobx-react-lite";
 
