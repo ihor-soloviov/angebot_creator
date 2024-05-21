@@ -7,6 +7,7 @@ import AngebotCreatorSteps from "./pages/AngebotCreatorSteps/AngebotCreatorSteps
 import CalculatorPage from "./pages/CalculatorPage/CalculatorPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import AdminCheckout from "./pages/AdminPage/AdminCheckout/AdminCheckout";
+import ChangePricePage from "./pages/ChangePricePage/ChangePricePage";
 
 export const App: React.FC = observer(() => {
 
@@ -18,7 +19,7 @@ export const App: React.FC = observer(() => {
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/admin/prices">
         <Route index element={<AdminCheckout />} />
-        <Route path=":partition" element={<AdminCheckout />} />
+        <Route path=":partition" element={<ChangePricePage />} />
       </Route>
       <Route path="/admin/table">
         <Route index element={<AdminSearchPage />} />

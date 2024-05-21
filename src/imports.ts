@@ -16,6 +16,7 @@ import { WallboxPage } from "./pages/WallboxPage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { Steps } from "./stores/step-store";
 import { ProjectImagesPage } from "./pages/ProjectImagesPage";
+import { Title } from "./components/Calculator/calculator-types";
 
 export const stepComponents = {
   [Steps.angebotType]: AngebotTypePage,
@@ -37,24 +38,52 @@ export const stepComponents = {
   [Steps.projectImages]: ProjectImagesPage,
 };
 
-export const partitions = [
-  { name: "Projektierung", href: "projectPlanning", className: "checkoutLink" },
+export type Partition = Title & {
+  href: string;
+  className: string;
+};
+
+export const partitions: Partition[] = [
   {
-    name: "Installation + Lieferung",
+    title: "Projektierung",
+    description: "Планирование проекта",
+    href: "projectPlanning",
+    className: "checkoutLink",
+  },
+  {
+    title: "Installation + Lieferung",
+    description: "Монтаж + доставка",
     href: "install-delivery",
     className: "checkoutLink",
   },
-  { name: "Inbetriebnahme", href: "install-start", className: "checkoutLink" },
   {
-    name: "Unterkonstruktion",
+    title: "Inbetriebnahme",
+    description: "Ввод в эксплуатацию",
+    href: "install-start",
+    className: "checkoutLink",
+  },
+  {
+    title: "Unterkonstruktion",
+    description: "Подконструкция",
     href: "subconstructions",
     className: "checkoutLink",
   },
   {
-    name: "Компоненты",
+    title: "Компоненты",
+    description: "Компоненты",
     href: "components",
     className: "checkoutLink interTigth",
   },
-  { name: "Taubenschutz", href: "birdsProtection", className: "checkoutLink" },
-  { name: "Zusatzarbeiten", href: "extraWork", className: "checkoutLink" },
+  {
+    title: "Taubenschutz",
+    description: "Защита от голубей",
+    href: "birdsProtection",
+    className: "checkoutLink",
+  },
+  {
+    title: "Zusatzarbeiten",
+    description: "Доп. услуги",
+    href: "extraWork",
+    className: "checkoutLink",
+  },
 ];

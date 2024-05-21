@@ -17,9 +17,9 @@ const AdminCheckout = () => {
         <div className="checkoutWrapper">
           <h1>Выберите раздел</h1>
           <div className="checkoutItems">
-            {partitions.map(({ name, href, className }, index) => (
-              <Link className={className} to={`/admin/prices/${href}`} key={name} >
-                {index + 1}. {name}
+            {partitions.map(({ title, href, className }, index) => (
+              <Link className={className} to={`/admin/prices/${href}`} key={title} >
+                {index + 1}. {title}
               </Link>
             ))}
           </div>

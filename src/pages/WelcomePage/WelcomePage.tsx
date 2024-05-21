@@ -4,7 +4,7 @@ import wbp from "../../assets/welcomeBackPicture.webp"
 import "./WelcomePage.scss";
 
 export const WelcomePage: React.FC = () => {
-
+  
   return (
     <div className="welcomePage">
       <div className="welcomePage__inner">
