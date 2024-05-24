@@ -12,24 +12,24 @@ import CalculatorContainer from "../../components/Calculator/CalculatorContainer
 export const OptimizerPage: React.FC = React.memo(() => {
   const { producer } = producerStore;
 
-  const [singleServices, setSingleServices] = useState<IndividualService[]>([]);
+  // const [singleServices, setSingleServices] = useState<IndividualService[]>([]);
 
   const title: Title = {
     title: "Optimierer",
     description: `оптимизатор (${producer})`
   }
 
-  const setServicesFromServer = async () => {
-    const singleServices = await fetchSingleItems("optimizers");
-    if (!singleServices) {
-      return;
-    }
-    setSingleServices(singleServices)
-  }
+  // const setServicesFromServer = async () => {
+  //   const singleServices = await fetchSingleItems("optimizers");
+  //   if (!singleServices) {
+  //     return;
+  //   }
+  //   setSingleServices(singleServices)
+  // }
 
-  useEffect(() => {
-    setServicesFromServer();
-  }, [])
+  // useEffect(() => {
+  //   setServicesFromServer();
+  // }, [])
 
 
   return (
@@ -37,20 +37,8 @@ export const OptimizerPage: React.FC = React.memo(() => {
       <Header />
       <Calculator
         header={title}
-      >
-        <CalculatorContainer>
-          {singleServices.map((service, index) =>
-            <SingleServiceItem
-              serviceStorageName='singleServices'
-              key={index}
-              service={service}
-
-              unNormalPriceChange={true}
-            />
-          )
-          }
-        </CalculatorContainer>
-      </Calculator>
+        serviceTableName="optimizers"
+      />
       <Footer isCalculator={true} />
     </div>
   );

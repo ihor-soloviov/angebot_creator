@@ -26,7 +26,12 @@ export type SelectedServiceOption = {
   count: number;
 };
 
+export type CalculatorServices = {
+  individual: IndividualService[];
+  optional?: DropdownServices[];
+};
+
 export type Module = {
-  model: string,
-  price: number
-}
+  model: string;
+  price: number;
+};

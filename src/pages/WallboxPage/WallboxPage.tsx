@@ -32,22 +32,10 @@ export const WallboxPage: React.FC = React.memo(() => {
       <Header />
       <Calculator
         header={title}
+        serviceTableName="wallbox"
+      />
 
-      >
-        <CalculatorContainer>
-          {singleServices.map((service, index) =>
-            <SingleServiceItem
-              serviceStorageName='singleServices'
-              key={index}
-              service={service}
-
-              unNormalPriceChange={true}
-            />
-          )
-          }
-        </CalculatorContainer>
-      </Calculator>
       <Footer isCalculator={true} />
-    </div>
+    </div >
   );
 })

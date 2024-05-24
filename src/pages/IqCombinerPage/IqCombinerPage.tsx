@@ -33,7 +33,6 @@ export const IqCombinerPage: React.FC = () => {
       >
         {singleServices.map((service, index) =>
           <SingleServiceItem
-            serviceStorageName='singleServices'
             key={index}
             service={service}
 

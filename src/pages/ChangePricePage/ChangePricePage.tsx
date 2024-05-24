@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
 import { Header } from '../../components/Header';
 import { Partition } from '../../imports';
@@ -62,9 +62,11 @@ const ChangePricePage = () => {
         <div className="changePricePage__wrapper">
           <CalculatorTitle header={actialHeader} />
           {singleServices && singleServices.map(({ title, description, price }) => (
-            <ServiceWrapper title={title} description={description} >
-              <PriceInput currentPrice={+price} />
-            </ServiceWrapper>
+            <React.Fragment key={title}>
+              <ServiceWrapper title={title} description={description} >
+                <PriceInput currentPrice={+price} />
+              </ServiceWrapper>
+            </React.Fragment>
           ))}
           <ButtonNext width={394} />
         </div>

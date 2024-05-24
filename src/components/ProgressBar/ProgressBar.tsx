@@ -9,7 +9,6 @@ export const ProgressBar: React.FC = observer(
     const { calculatorSteps, getCurrectRangeIndex } = stepStore;
     const [currentRangeIndex, setCurrentRangeIndex] = useState(1);
 
-
     useEffect(() => {
       setCurrentRangeIndex(getCurrectRangeIndex());
     }, [getCurrectRangeIndex])

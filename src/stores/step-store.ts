@@ -77,6 +77,7 @@ class StepStore {
   get steps() {
     return this.arraysOfSteps;
   }
+  
   setStep = (value: Steps) => {
     this.step = value;
   };
@@ -87,12 +88,13 @@ class StepStore {
 
   getCurrectRangeIndex = () => {
     const activeStep = this.step;
+    const startedIndexesLength = 3;
     const stepsArray = this.arraysOfSteps[producerStore.producer];
     const currentStepIndex = stepsArray.findIndex(
       (el, index) => el === activeStep && index < stepsArray.length - 1
     );
 
-    return currentStepIndex - 4;
+    return currentStepIndex - startedIndexesLength;
   };
 
   generateNextStep = () => {

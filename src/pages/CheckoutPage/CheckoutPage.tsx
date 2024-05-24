@@ -4,78 +4,37 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import producerStore from "../../stores/producer-store";
 import { CalculatorTitle } from "../../components/Calculator/CalculatorTitle";
-import { IndividualService, Title } from "../../components/Calculator/calculator-types";
+import { Title } from "../../components/Calculator/calculator-types";
 import stepStore from "../../stores/step-store";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
+import { observer } from "mobx-react-lite";
+import calculatorStore from "../../stores/calculator-store";
 
-interface Page {
-  page: string
-  price: number
-}
+const unavailablePages = [
+  "welcome",
+  "angebotType",
+  "pvsolFile",
+  "projectImages",
+  "producer",
+  "checkout",
+  "bravo"
+];
 
-export const CheckoutPage: React.FC = React.memo(() => {
+export const CheckoutPage: React.FC = observer(() => {
+  const [pages, setPages] = useState<Array<string>>([])
+
   const { producer } = producerStore;
-  const { arraysOfSteps, id } = stepStore;
+  const { totalPrice, stepTotalPrice } = calculatorStore
+  const { id, arraysOfSteps } = stepStore;
+
+  useEffect(() => {
+    setPages([...arraysOfSteps[producer]].filter((page: string) => !unavailablePages.includes(page)))
+  }, [arraysOfSteps, producer])
+
   const title: Title = {
     title: `Проверьте ваше предложение - ID ${id} v.1`,
     description: `Производитель (${producer})`
   }
-
-  const [pages, setPages] = useState<Array<Page>>([]);
-  const [total, setTotal] = useState(0)
-
-  useEffect(() => {
-    const checkoutPages = [...arraysOfSteps[producer]].filter((page: string) => {
-      const unavailablePages = [
-        "welcome",
-        "angebotType",
-        "pvsolFile",
-        "projectImages",
-        "producer",
-        "checkout",
-        "bravo"
-      ];
-
-      return !unavailablePages.includes(page);
-    });
-
-    const pagePrices = checkoutPages.map((page) => {
-      const storedItem = sessionStorage.getItem(page);
-      let totalPrice = 0;
-
-      if (storedItem) {
-        const itemData = JSON.parse(storedItem);
-
-        // Перевірка наявності і підрахунок суми для singleServices
-        if (itemData.singleServices) {
-          totalPrice += itemData.singleServices.reduce((sum: number, service: IndividualService) => sum + (service.price || 0), 0);
-        }
-
-        // Перевірка наявності і підрахунок суми для selectServices
-        if (itemData.selectServices) {
-          totalPrice += itemData.selectServices.reduce((sum: number, service: IndividualService) => sum + (service.price || 0), 0);
-        }
-      }
-
-      return { page, price: totalPrice };
-    });
-
-
-    setPages(pagePrices)
-  }, [producer, arraysOfSteps]);
-
-  useEffect(() => {
-    const sum = pages.reduce((acc, currentPage) => {
-      // Додавання ціни поточної сторінки до загальної суми
-      return acc + (currentPage.price || 0);
-    }, 0);
-
-    setTotal(sum);
-  }, [pages]);
-
-
-
-
 
   return (
     <div className="checkoutPage">
@@ -84,17 +43,17 @@ export const CheckoutPage: React.FC = React.memo(() => {
         <CalculatorTitle header={title} />
         <div className="pageList">
           {pages && (
-            pages.map(el => (
-              <div className="pageItem" key={el.page}>
-                <p>{el.page}</p>
-                <p className="page-price">{el.price}.00€</p>
+            pages.map(page => (
+              <div className="pageItem" key={page}>
+                <p>{page}</p>
+                <p className="page-price">{stepTotalPrice(page)}.00€</p>
               </div>
             ))
           )}
         </div>
         <div className="totalPriceForAllPages">
           <p>Общая стоимость</p>
-          <p>{total}.00€</p>
+          <p>{totalPrice}.00€</p>
         </div>
         <ButtonNext width={394} />
       </div>

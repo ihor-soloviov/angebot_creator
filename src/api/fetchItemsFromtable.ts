@@ -89,18 +89,12 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
 //   }
 // };
 
-export const fetchServicesByTableName = async (
-  tableName: string,
-  brand?: string
-) => {
+export const fetchServicesByTableName = async (tableName: string) => {
   const { producer } = producerStore;
   try {
-    const query = `producer=${brand || producer}`;
-    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
-
+    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&producer=${producer}`;
     const response = await fetchData(HttpMethod.GET, url);
-    console.log(response);
-    return response
+    return response;
   } catch (error) {
     console.error("There was an error!", error);
   }
@@ -110,7 +104,6 @@ export const fetchServicesBySection = async (section: string) => {
   try {
     const url = `${apiUrl}/usual_service/${section}`;
     const response = await fetchData(HttpMethod.GET, url);
-    console.log(response);
     return response;
   } catch (error) {
     console.error("There was an error!", error);
