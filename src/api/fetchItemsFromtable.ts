@@ -1,5 +1,6 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
+import { formatSingleServices } from "../utils/formatService";
 
 type El = {
   model: string;
@@ -75,12 +76,21 @@ export const fetchServicesByTableName = async (tableName: string) => {
   }
 };
 
-export const fetchServicesBySection = async (section: string) => {
+export const fetchServicesBySection = async (
+  section: string
+) => {
   try {
     const url = `${apiUrl}/usual_service/${section}`;
     const response = await fetchData(HttpMethod.GET, url);
     return response;
   } catch (error) {
     console.error("There was an error!", error);
+    return null;
   }
+};
+
+export const getComponents = async () => {
+  const url = `${apiUrl}/getAllModules`;
+  const components = await fetchData(HttpMethod.GET, url);
+  return formatSingleServices(components);
 };

@@ -13,6 +13,7 @@ export type IndividualService = Title & {
   specific: ServiceSpecific;
   count?: number;
   id?: number;
+  producer?: string;
 };
 
 export type DropdownServices = {
@@ -36,10 +37,6 @@ export type Module = {
   price: number;
 };
 
-export type UnformatedModule = Module & {
-  producer: string,
-}
-
-export type ModulesByTableName = {
-  [key: string]: Array<UnformatedModule>
-}
+export type ComponentsFromDatabase = IndividualService & {
+  table_name: string;
+};
