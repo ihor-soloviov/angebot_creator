@@ -1,5 +1,6 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
+import stepStore from "../stores/step-store";
 
 type El = {
   model: string;
@@ -64,31 +65,6 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
   }
 };
 
-// export const fetchSelectItems = async (tableName: string) => {
-//   const { producer } = producerStore;
-//   try {
-//     const params = `producer=${brand || producer}`;
-//     const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&${query}`;
-//     const result = await axios.get(
-//       `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`,
-//       { headers }
-//     );
-
-//     console.log(result);
-
-//     // const services = result.data.map((el: El) => ({
-//     //   value: el.model,
-//     //   price: +el.price,
-//     // }));
-
-//     // console.log(services);
-
-//     // setSelectService({ options: services });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const fetchServicesByTableName = async (tableName: string) => {
   const { producer } = producerStore;
   try {
@@ -107,5 +83,15 @@ export const fetchServicesBySection = async (section: string) => {
     return response;
   } catch (error) {
     console.error("There was an error!", error);
+  }
+};
+
+export const fetchServices = async (query: string) => {
+  try {
+    return stepStore.isModuleStep()
+      ? fetchServicesByTableName(query)
+      : fetchServicesBySection(query);
+  } catch (error) {
+    console.error(error);
   }
 };

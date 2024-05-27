@@ -77,7 +77,21 @@ class StepStore {
   get steps() {
     return this.arraysOfSteps;
   }
-  
+
+  isModuleStep = (): boolean => {
+    const moduleSteps = [
+      Steps.pvModule,
+      Steps.optimizer,
+      Steps.invertor,
+      Steps.iqCombiner,
+      Steps.battery,
+      Steps.wallbox,
+      Steps.backupBox,
+    ];
+
+    return moduleSteps.includes(this.step);
+  };
+
   setStep = (value: Steps) => {
     this.step = value;
   };

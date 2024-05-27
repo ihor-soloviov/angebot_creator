@@ -19,7 +19,7 @@ class CalculatorStore {
 
     const stepServices = this.targetServices[stepName];
     const selectedServiceIndex = stepServices.findIndex(
-      (s) => s.id === service.id
+      (s) => s.title === service.title
     );
 
     if (count > 0) {
@@ -46,6 +46,7 @@ class CalculatorStore {
 
   stepTotalPrice = (stepName: string) => {
     const stepServices = this.targetServices[stepName] || [];
+    console.log(stepServices)
     return stepServices.reduce((total, service) => {
       const count = service.count || 0;
       return total + service.price * count;
