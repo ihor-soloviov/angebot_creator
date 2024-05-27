@@ -35,3 +35,11 @@ export type Module = {
   model: string;
   price: number;
 };
+
+export type UnformatedModule = Module & {
+  producer: string,
+}
+
+export type ModulesByTableName = {
+  [key: string]: Array<UnformatedModule>
+}

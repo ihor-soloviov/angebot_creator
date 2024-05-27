@@ -1,5 +1,6 @@
 import {
   Module,
+  ModulesByTableName,
   ServiceSpecific,
 } from "../components/Calculator/calculator-types";
 
@@ -17,3 +18,7 @@ export const formatSelectServices = (servicesFromDatabase: Module[]) =>
     price: el.price,
     specific: ServiceSpecific.Select,
   }));
+
+  export const formatAllServices = (services: ModulesByTableName) => {
+    
+  }

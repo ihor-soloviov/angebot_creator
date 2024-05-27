@@ -24,7 +24,7 @@ export const SingleServiceItem: React.FC<Props> = observer(
 
     useEffect(() => {
       updateCount(step, service, priceCount);
-    }, [priceCount]);
+    }, [priceCount, step]);
 
     return (
       <ServiceWrapper title={title} description={description}>

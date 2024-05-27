@@ -1,6 +1,5 @@
 import axios from "axios";
 import producerStore from "../stores/producer-store";
-import stepStore from "../stores/step-store";
 
 type El = {
   model: string;
@@ -22,7 +21,7 @@ const headers = {
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const fetchData = async (method: string, url: string) => {
+export const fetchData = async (method: string, url: string) => {
   try {
     const response = await fetch(url, {
       method: method,
@@ -83,15 +82,5 @@ export const fetchServicesBySection = async (section: string) => {
     return response;
   } catch (error) {
     console.error("There was an error!", error);
-  }
-};
-
-export const fetchServices = async (query: string) => {
-  try {
-    return stepStore.isModuleStep()
-      ? fetchServicesByTableName(query)
-      : fetchServicesBySection(query);
-  } catch (error) {
-    console.error(error);
   }
 };

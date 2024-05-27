@@ -60,6 +60,7 @@ class CalculatorStore {
     const stepServices = this.targetServices[stepName] || [];
     return stepServices.find((s) => s.title === serviceTitle);
   };
+
 }
 
 export default new CalculatorStore();

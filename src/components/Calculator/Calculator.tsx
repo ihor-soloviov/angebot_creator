@@ -35,11 +35,13 @@ export const Calculator: React.FC<Props> = observer(({
   const { stepTotalPrice, getService } = calculatorStore;
 
   const [services, setServices] = useState<IndividualService[]>([]);
+  const [selectedServices, setSelectedServices] = useState<IndividualService[]>([])
   const [selects, setSelects] = useState<DropdownServices | null>(null);
 
   const addSelectedService = (service: IndividualService) => {
-    setServices(prev => [...prev, service])
+    setSelectedServices(prev => [...prev, service])
   }
+
 
   const setServicesByTables = useCallback(
     () => {
@@ -47,9 +49,9 @@ export const Calculator: React.FC<Props> = observer(({
         fetchServicesBySection(sectionTable).then(({ single, select }) => {
           const synchronizedServices = synchronizeServices(single, step);
           const synchronizedSelects = synchronizeServices(select, step).filter(service => service.count)
-          setServices([...synchronizedServices, ...synchronizedSelects]);
+          setSelectedServices(synchronizedSelects)
+          setServices(synchronizedServices);
           if (select.length > 0) {
-            // const synchronizedServices = synchronizeServices(select, step);
             setSelects({ options: select });
           }
         });
@@ -66,7 +68,8 @@ export const Calculator: React.FC<Props> = observer(({
         fetchServicesByTableName(selectsTable).then(res => {
           const selectServices = formatSelectServices(res);
           const synchronizedSelects = synchronizeServices(selectServices, step).filter(service => service.count)
-          setServices(prev => [...prev, ...synchronizedSelects])
+          setSelectedServices(synchronizedSelects)
+          console.log('selects Table', synchronizedSelects)
           setSelects({ options: selectServices })
         }
         )
@@ -90,7 +93,6 @@ export const Calculator: React.FC<Props> = observer(({
     setServicesByTables()
   }, [producer, sectionTable, selectsTable, serviceTableName])
 
-
   return (
     <div className="calculator">
       <div className="calculator__container">
@@ -99,8 +101,8 @@ export const Calculator: React.FC<Props> = observer(({
           <ProgressBar />
         </div>
         <CalculatorContainer>
-          {services.map((service, index) =>
-            <React.Fragment key={index}>
+          {services.map((service) =>
+            <React.Fragment key={service.title}>
               <SingleServiceItem
                 service={service}
                 unNormalPriceChange={true}
@@ -108,6 +110,14 @@ export const Calculator: React.FC<Props> = observer(({
             </React.Fragment>
           )
           }
+          {selectedServices.map(service => (
+            <React.Fragment key={service.title}>
+              <SingleServiceItem
+                service={service}
+                unNormalPriceChange={true}
+              />
+            </React.Fragment>
+          ))}
         </CalculatorContainer>
         {additionHeader && < CalculatorTitle header={additionHeader} className="additional__title" />}
         <div className="calculatorService__container">

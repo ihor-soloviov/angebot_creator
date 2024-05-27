@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ButtonPrev } from '../../components/Buttons/ButtonPrev';
 import { getActualHeader } from '../../utils/getActualHeader';
 import { IndividualService } from '../../components/Calculator/calculator-types';
-import { fetchServicesBySection } from '../../api/fetchItemsFromtable';
+import { HttpMethod, fetchData, fetchServicesBySection, fetchServicesByTableName } from '../../api/fetchItemsFromtable';
 import ServiceWrapper from '../../components/services/ServiceWrapper/ServiceWrapper';
 import PriceInput from '../../components/Inputs/PriceInput/PriceInput';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';
@@ -20,17 +20,21 @@ const ChangePricePage = () => {
     href: "",
     className: ""
   })
-  const [singleServices, setSingleServices] = useState<IndividualService[]>([])
+  const [services, setServices] = useState<IndividualService[]>([])
 
   const setServicesFromServer = async () => {
     if (actialHeader.title === "") {
       return
     }
-    const singleServices = await fetchServicesBySection(actialHeader.title);
-    if (!singleServices) {
+    if (actialHeader.title === "Компоненты") {
+      const url = `${import.meta.env.BASE_URL}/getAllModules`
+      const services = await fetchData(HttpMethod.GET, url)
+    }
+    const services = await fetchServicesBySection(actialHeader.title);
+    if (!services) {
       return;
     }
-    setSingleServices(singleServices.single)
+    setServices(services.single)
   }
 
   useEffect(() => {
@@ -61,7 +65,7 @@ const ChangePricePage = () => {
       <div className="changePricePage">
         <div className="changePricePage__wrapper">
           <CalculatorTitle header={actialHeader} />
-          {singleServices && singleServices.map(({ title, description, price }) => (
+          {services && services.map(({ title, description, price }) => (
             <React.Fragment key={title}>
               <ServiceWrapper title={title} description={description} >
                 <PriceInput currentPrice={+price} />

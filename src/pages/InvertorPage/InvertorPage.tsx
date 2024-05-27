@@ -14,7 +14,7 @@ export const InvertorPage: React.FC = observer(() => {
   const { producer } = producerStore;
   const title: Title = titles[producer]
 
-  const endpoint = producer === Producer.huawei ? "smartmeters" : "other"
+  const endpoint = producer === Producer.huawei ? "smartmeters" : "other";
 
   return (
     <div className="invertorPage">

@@ -1,3 +1,4 @@
+'use strict'
 import { observer } from "mobx-react-lite";
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/AdminPage/AdminPage";
