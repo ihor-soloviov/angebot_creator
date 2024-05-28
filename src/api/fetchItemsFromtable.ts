@@ -1,5 +1,5 @@
 import axios from "axios";
-import producerStore from "../stores/producer-store";
+import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
 
 type El = {
@@ -67,8 +67,9 @@ export const fetchSingleItems = async (tableName: string, brand = "") => {
 
 export const fetchServicesByTableName = async (tableName: string) => {
   const { producer } = producerStore;
+  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer
   try {
-    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&producer=${producer}`;
+    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&producer=${brand}`;
     const response = await fetchData(HttpMethod.GET, url);
     return response;
   } catch (error) {

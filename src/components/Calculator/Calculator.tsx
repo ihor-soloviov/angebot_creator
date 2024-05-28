@@ -37,11 +37,9 @@ export const Calculator: React.FC<Props> = observer(({
   const [services, setServices] = useState<IndividualService[]>([]);
   const [selectedServices, setSelectedServices] = useState<IndividualService[]>([])
   const [selects, setSelects] = useState<DropdownServices | null>(null);
-
   const addSelectedService = (service: IndividualService) => {
     setSelectedServices(prev => [...prev, service])
   }
-
 
   const setServicesByTables = useCallback(
     () => {

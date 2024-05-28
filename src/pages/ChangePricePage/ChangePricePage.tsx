@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
 import { Partition } from '../../imports';
 import "./ChangePrice.scss"
@@ -8,10 +8,9 @@ import { getActualHeader } from '../../utils/getActualHeader';
 import { IndividualService } from '../../components/Calculator/calculator-types';
 import { fetchServicesBySection, getComponents } from '../../api/fetchItemsFromtable';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
-import ServiceWrapper from '../../components/services/ServiceWrapper/ServiceWrapper';
-import PriceInput from '../../components/Inputs/PriceInput/PriceInput';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';
 import { ButtonPrev } from '../../components/Buttons/ButtonPrev';
+import EditableService from '../../components/services/EditableService/EditableService';
 
 const ChangePricePage = () => {
   const [actualHeader, setActualHeader] = useState<Partition>({
@@ -65,18 +64,19 @@ const ChangePricePage = () => {
         <div className="changePricePage__wrapper">
           <CalculatorTitle header={actualHeader} />
           {services && services.map(({ title, description, price }) => (
-            <React.Fragment key={title}>
-              <ServiceWrapper title={title} description={description} >
-                <PriceInput currentPrice={+price} />
-              </ServiceWrapper>
-            </React.Fragment>
+            <EditableService
+              title={title}
+              description={description}
+              price={+price}
+              key={title} />
           ))}
           {components && components.map(({ title, description, price, producer }) => (
-            <React.Fragment key={title}>
-              <ServiceWrapper title={`${producer} ${title}`} description={description} >
-                <PriceInput currentPrice={+price} />
-              </ServiceWrapper>
-            </React.Fragment>
+            <EditableService
+              title={`${producer} ${title}`}
+              description={description}
+              price={+price}
+              key={title}
+            />
           ))}
           <ButtonNext width={394} />
         </div >

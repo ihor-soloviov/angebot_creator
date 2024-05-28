@@ -1,12 +1,13 @@
-import { ReactNode } from "react";
+import React, { ReactElement } from "react";
 import { Title } from "../../Calculator/calculator-types";
 import "./ServiceWrapper.scss";
 
 interface Props extends Title {
-  children: ReactNode
+  children: ReactElement
 }
 
 const ServiceWrapper: React.FC<Props> = ({ title, description, children }) => {
+
   return (
     <div className="serviceWrapper">
       <div className="serviceWrapper__info">

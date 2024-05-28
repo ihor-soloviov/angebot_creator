@@ -3,7 +3,7 @@ import classNames from "classnames";
 import "./PriceInput.scss";
 
 interface Props {
-  currentPrice: number
+  currentPrice: number,
 }
 
 const PriceInput: React.FC<Props> = ({ currentPrice }) => {
