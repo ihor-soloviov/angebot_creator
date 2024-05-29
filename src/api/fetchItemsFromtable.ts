@@ -1,19 +1,13 @@
-import axios from "axios";
 import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
+import {
+  CalculatorServices,
+  Module,
+} from "../components/Calculator/calculator-types";
 
-type El = {
-  model: string;
-  price: string;
-};
+type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
-export enum HttpMethod {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
-  PATCH = "PATCH",
-}
+type RequestData = Record<string, unknown> | null;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -22,76 +16,51 @@ const headers = {
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const fetchData = async (method: string, url: string) => {
-  try {
-    const response = await fetch(url, {
-      method: method,
-      headers: headers,
-    });
+const request = async <T>(
+  url: string,
+  method: RequestMethod = "GET",
+  data: RequestData = null
+): Promise<T> => {
+  const options: RequestInit = { method };
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("There was an error!", error);
-    throw error; // Перепроброс помилки для обробки на вищому рівні
+  if (data) {
+    options.body = JSON.stringify(data);
+    options.headers = headers;
+    options.credentials = "include";
   }
+
+  const response = await fetch(apiUrl + url, options);
+
+  const jsonResponse = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error ${response.status}: ${jsonResponse.message || response.statusText}`
+    );
+  }
+
+  return jsonResponse;
 };
 
-export const fetchSingleItems = async (tableName: string, brand = "") => {
-  const { producer } = producerStore;
-
-  try {
-    const link =
-      brand !== ""
-        ? `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${brand}`
-        : `https://api.creator.work-set.eu/getCalculatorModules?table_name=${tableName}&producer=${producer}`;
-
-    const result = await axios.get(link, { headers });
-
-    if (!result) {
-      return null;
-    }
-
-    return result.data.map((el: El) => ({
-      title: el.model,
-      price: +el.price,
-    }));
-  } catch (error) {
-    console.log(error);
-  }
+export const client = {
+  get: <T>(url: string) => request<T>(url),
+  post: <T>(url: string, data: RequestData) => request<T>(url, "POST", data),
+  patch: <T>(url: string, data: RequestData) => request<T>(url, "PATCH", data),
+  delete: (url: string) => request(url, "DELETE"),
 };
 
 export const fetchServicesByTableName = async (tableName: string) => {
   const { producer } = producerStore;
-  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer
-  try {
-    const url = `${apiUrl}/getCalculatorModules?table_name=${tableName}&producer=${brand}`;
-    const response = await fetchData(HttpMethod.GET, url);
-    return response;
-  } catch (error) {
-    console.error("There was an error!", error);
-  }
+  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
+  return client.get<Module[]>(
+    `/getCalculatorModules?table_name=${tableName}&producer=${brand}`
+  );
 };
 
-export const fetchServicesBySection = async (
-  section: string
-) => {
-  try {
-    const url = `${apiUrl}/usual_service/${section}`;
-    const response = await fetchData(HttpMethod.GET, url);
-    return response;
-  } catch (error) {
-    console.error("There was an error!", error);
-    return null;
-  }
-};
+export const fetchServicesBySection = async (section: string) =>
+  client.get<CalculatorServices>(`/usual_service/${section}`);
 
 export const getComponents = async () => {
-  const url = `${apiUrl}/getAllModules`;
-  const components = await fetchData(HttpMethod.GET, url);
+  const components = await client.get<Module[]>("/getAllModules");
   return formatSingleServices(components);
 };

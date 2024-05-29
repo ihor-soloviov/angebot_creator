@@ -41,6 +41,7 @@ export const Calculator: React.FC<Props> = observer(({
     setSelectedServices(prev => [...prev, service])
   }
 
+
   const setServicesByTables = useCallback(
     () => {
       if (sectionTable) {

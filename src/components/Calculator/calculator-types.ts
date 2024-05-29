@@ -28,8 +28,8 @@ export type SelectedServiceOption = {
 };
 
 export type CalculatorServices = {
-  individual: IndividualService[];
-  optional?: DropdownServices[];
+  single: IndividualService[];
+  select: IndividualService[];
 };
 
 export type Module = {
