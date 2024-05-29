@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { HttpMethod, fetchData } from '../../../api/fetchItemsFromtable'
+import { HttpMethod, fetchData } from '../../../api/modules'
 import { CalculatorTitle } from '../../Calculator/CalculatorTitle'
 import { ButtonNext } from '../../Buttons/ButtonNext'
 
@@ -28,7 +28,7 @@ const ChangeModuleWrapper: React.FC<Props> = ({ actualTitle, handleBackClick }) 
 
   return (
     <>
-      
+
     </>
   )
 }

@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
 import { Partition } from '../../imports';
-import "./ChangePrice.scss"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getActualHeader } from '../../utils/getActualHeader';
 import { IndividualService } from '../../components/Calculator/calculator-types';
-import { fetchServicesBySection, getComponents } from '../../api/fetchItemsFromtable';
+import { fetchServicesBySection, getComponents } from '../../api/fetch';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';
 import { ButtonPrev } from '../../components/Buttons/ButtonPrev';
 import EditableService from '../../components/services/EditableService/EditableService';
+import "./ChangePrice.scss";
 
 const ChangePricePage = () => {
   const [actualHeader, setActualHeader] = useState<Partition>({
@@ -25,6 +25,9 @@ const ChangePricePage = () => {
 
   const setServicesFromServer = async () => {
     const { title } = actualHeader;
+    if (!title) {
+      return
+    }
 
     if (title === "Компоненты") {
       const components = await getComponents();
@@ -54,7 +57,6 @@ const ChangePricePage = () => {
     if (headerByHref?.title) {
       setActualHeader(headerByHref)
     }
-
   }, [pathname])
 
   return (
@@ -63,20 +65,21 @@ const ChangePricePage = () => {
       <div className="changePricePage">
         <div className="changePricePage__wrapper">
           <CalculatorTitle header={actualHeader} />
-          {services && services.map(({ title, description, price }) => (
-            <EditableService
-              title={title}
-              description={description}
-              price={+price}
-              key={title} />
+          {services && services.map(service => (
+            <React.Fragment key={service.title}>
+              <EditableService
+                title={service.title}
+                item={service}
+              />
+            </React.Fragment>
           ))}
-          {components && components.map(({ title, description, price, producer }) => (
-            <EditableService
-              title={`${producer} ${title}`}
-              description={description}
-              price={+price}
-              key={title}
-            />
+          {components && components.map(component => (
+            <React.Fragment key={component.title}>
+              <EditableService
+                title={`${component.producer} ${component.title}`}
+                item={component}
+              />
+            </React.Fragment>
           ))}
           <ButtonNext width={394} />
         </div >

@@ -3,17 +3,17 @@ export type Title = {
   description?: string;
 };
 
-export enum ServiceSpecific {
-  Select = "select",
-  Single = "single",
-}
+export type Module = Title & {
+  price: number;
+};
 
-export type IndividualService = Title & {
+export type IndividualService = Module & {
   price: number;
   specific: ServiceSpecific;
   count?: number;
   id?: number;
   producer?: string;
+  table_name?: string
 };
 
 export type DropdownServices = {
@@ -27,16 +27,12 @@ export type SelectedServiceOption = {
   count: number;
 };
 
+export enum ServiceSpecific {
+  Select = "select",
+  Single = "single",
+}
+
 export type CalculatorServices = {
   single: IndividualService[];
   select: IndividualService[];
-};
-
-export type Module = {
-  model: string;
-  price: number;
-};
-
-export type ComponentsFromDatabase = IndividualService & {
-  table_name: string;
 };

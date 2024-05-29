@@ -1,24 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import "./PriceInput.scss";
+import { updateServicePrice } from "../../../api/fetch";
+import { IndividualService } from "../../Calculator/calculator-types";
 
 interface Props {
+  item: IndividualService,
   currentPrice: number,
   showSuccess: () => void,
 }
 
 const PriceInput: React.FC<Props> = React.memo(
-  ({ currentPrice, showSuccess }) => {
+  ({ item, currentPrice, showSuccess }) => {
     const formattedCurrentPrice = currentPrice.toFixed(2);
     const [price, setPrice] = useState<string>('');
     const [isPriceShown, setIsPriceShown] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value.replace(/[^0-9.]/g, '');
       setPrice(value);
     };
-
-    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleBlur = () => {
       formatAndSavePrice();
@@ -34,11 +36,15 @@ const PriceInput: React.FC<Props> = React.memo(
     };
 
     const formatAndSavePrice = () => {
+      if (!item.id) {
+        return
+      }
+
       const numericPrice = parseFloat(price);
       if (!isNaN(numericPrice)) {
         setPrice(numericPrice.toFixed(2));
         showSuccess()
-        // Можна також додати виклик функції для збереження значення на сервер тут, якщо потрібно.
+        updateServicePrice(item, numericPrice)
       } else {
         setPrice('');
       }
@@ -59,7 +65,6 @@ const PriceInput: React.FC<Props> = React.memo(
         }
       };
     }, []);
-
 
     return (
       <div className="priceInput">

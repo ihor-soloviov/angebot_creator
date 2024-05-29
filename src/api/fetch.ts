@@ -2,11 +2,11 @@ import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
 import {
   CalculatorServices,
+  IndividualService,
   Module,
 } from "../components/Calculator/calculator-types";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
-
 type RequestData = Record<string, unknown> | null;
 
 const headers = {
@@ -42,7 +42,7 @@ const request = async <T>(
   return jsonResponse;
 };
 
-export const client = {
+const client = {
   get: <T>(url: string) => request<T>(url),
   post: <T>(url: string, data: RequestData) => request<T>(url, "POST", data),
   patch: <T>(url: string, data: RequestData) => request<T>(url, "PATCH", data),
@@ -57,10 +57,31 @@ export const fetchServicesByTableName = async (tableName: string) => {
   );
 };
 
-export const fetchServicesBySection = async (section: string) =>
-  client.get<CalculatorServices>(`/usual_service/${section}`);
+export const fetchServicesBySection = async (section: string) => {
+  const result = await client.get<CalculatorServices>(
+    `/usual_service/${section}`
+  );
+  console.log(result);
+  return result;
+};
 
 export const getComponents = async () => {
   const components = await client.get<Module[]>("/getAllModules");
   return formatSingleServices(components);
+};
+
+export const updateServicePrice = async (
+  item: IndividualService,
+  newPrice: number
+) => {
+  const responseData: { id: number; newPrice: number; table_name?: string } = {
+    id: item.id || 0,
+    newPrice,
+  };
+
+  if (item.table_name) {
+    responseData.table_name = item.table_name;
+  }
+
+  await client.patch<Module>("/update_usual_service", responseData);
 };

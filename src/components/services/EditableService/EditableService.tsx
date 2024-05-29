@@ -3,15 +3,13 @@ import ServiceWrapper from '../ServiceWrapper/ServiceWrapper'
 import PriceInput from '../../Inputs/PriceInput/PriceInput';
 import checkDone from '../../../assets/admin/changedPrice.svg'
 import "./EditableService.scss"
-
+import { IndividualService } from '../../Calculator/calculator-types';
 
 interface Props {
-  title: string,
-  description: string | undefined,
-  price: number,
-  key: string,
+  title: string
+  item: IndividualService
 }
-const EditableService: React.FC<Props> = ({ title, description, price, key }) => {
+const EditableService: React.FC<Props> = ({ item: { title, description, price }, item }) => {
   const [isChanged, setIsChanged] = useState(false);
 
   const showSuccess = () => {
@@ -22,18 +20,12 @@ const EditableService: React.FC<Props> = ({ title, description, price, key }) =>
     }, 5000);
   }
 
-  const updatePriceOnServer = async (newPrice: number) => {
-    try {
-      const response = fetch
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  console.log(item)
 
   return (
-    <div className='editable-service' key={key}>
+    <div className='editable-service'>
       <ServiceWrapper title={title} description={description} >
-        <PriceInput currentPrice={+price} showSuccess={showSuccess} />
+        <PriceInput item={item} currentPrice={+price} showSuccess={showSuccess} />
       </ServiceWrapper>
       {isChanged && <img src={checkDone} alt='done' />}
     </div>
