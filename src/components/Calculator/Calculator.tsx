@@ -5,7 +5,7 @@ import "./Calculator.scss";
 import { CalculatorTitle } from "./CalculatorTitle";
 import { ButtonNext } from "../Buttons/ButtonNext";
 import { DropdownServices, IndividualService, Title } from "./calculator-types";
-import { fetchServicesBySection, fetchServicesByTableName } from "../../api/fetch";
+import { fetchServicesByTable, fetchModulesByTable } from "../../api/fetch";
 import { formatSelectServices, formatSingleServices } from "../../utils/formatService";
 import { observer } from "mobx-react-lite";
 import producerStore from "../../stores/producer-store";
@@ -45,7 +45,7 @@ export const Calculator: React.FC<Props> = observer(({
   const setServicesByTables = useCallback(
     () => {
       if (sectionTable) {
-        fetchServicesBySection(sectionTable).then(({ single, select }) => {
+        fetchServicesByTable(sectionTable).then(({ single, select }) => {
           const synchronizedServices = synchronizeServices(single, step);
           const synchronizedSelects = synchronizeServices(select, step).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
@@ -57,14 +57,14 @@ export const Calculator: React.FC<Props> = observer(({
         return
       }
       if (serviceTableName) {
-        fetchServicesByTableName(serviceTableName).then((res) => {
+        fetchModulesByTable(serviceTableName).then((res) => {
           const formattedServices = formatSingleServices(res);
           const synchronizedServices = synchronizeServices(formattedServices, step);
           setServices(synchronizedServices);
         });
       }
       if (selectsTable) {
-        fetchServicesByTableName(selectsTable).then(res => {
+        fetchModulesByTable(selectsTable).then(res => {
           const selectServices = formatSelectServices(res);
           const synchronizedSelects = synchronizeServices(selectServices, step).filter(service => service.count)
           setSelectedServices(synchronizedSelects)

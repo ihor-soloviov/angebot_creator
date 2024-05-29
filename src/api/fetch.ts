@@ -15,6 +15,8 @@ const headers = {
 };
 
 const apiUrl = import.meta.env.VITE_API_URL;
+const calcRoute = "/calc";
+const admRoute = "/adm";
 
 const request = async <T>(
   url: string,
@@ -49,25 +51,24 @@ const client = {
   delete: (url: string) => request(url, "DELETE"),
 };
 
-export const fetchServicesByTableName = async (tableName: string) => {
-  const { producer } = producerStore;
-  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
-  return client.get<Module[]>(
-    `/getCalculatorModules?table_name=${tableName}&producer=${brand}`
-  );
+export const fetchServices = async () => {
+  const components = await client.get<Module[]>(calcRoute + "/getServices");
+  return formatSingleServices(components);
 };
 
-export const fetchServicesBySection = async (section: string) => {
+export const fetchModulesByTable = async (tableName: string) => {
+  const { producer } = producerStore;
+  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
+  const queries = `?table_name=${tableName}&producer=${brand}`;
+  return client.get<Module[]>(calcRoute + "/getModulesByTable" + queries);
+};
+
+export const fetchServicesByTable = async (section: string) => {
   const result = await client.get<CalculatorServices>(
-    `/usual_service/${section}`
+    calcRoute + `/getServicesBySection/${section}`
   );
   console.log(result);
   return result;
-};
-
-export const getComponents = async () => {
-  const components = await client.get<Module[]>("/getAllModules");
-  return formatSingleServices(components);
 };
 
 export const updateServicePrice = async (
@@ -83,5 +84,5 @@ export const updateServicePrice = async (
     responseData.table_name = item.table_name;
   }
 
-  await client.patch<Module>("/update_usual_service", responseData);
+  await client.patch<Module>(admRoute + "/changePrice", responseData);
 };
