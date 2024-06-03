@@ -6,6 +6,7 @@ import {
   Module,
 } from "../components/Calculator/calculator-types";
 import calculatorStore from "../stores/calculator-store";
+import stepStore from "../stores/step-store";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type RequestData = Record<string, unknown> | null;
@@ -99,13 +100,24 @@ export const uploadMainImage = async (
   const formData = new FormData();
   formData.append("mainImage", mainImage);
 
-  await client.postForm(`${dir}/${angebot_id}/${dir}`, formData);
+  await client.postForm(`/${dir}/${angebot_id}/${dir}`, formData);
 };
 
 export const sendDataToGenerator = async () => {
-  const { targetServices } = calculatorStore;
-  console.log(targetServices);
-  const a = { ...targetServices, angebot_type: "test", angebot_id: 111 };
+  const { targetServices, angebotType, pvsolFileData } = calculatorStore;
+  const { angebotId } = stepStore;
+  console.log({
+    ...targetServices,
+    angebotType: angebotType,
+    angebotId: angebotId,
+    pvsolFileData: pvsolFileData,
+  });
+  const a = {
+    ...targetServices,
+    angebotType: angebotType,
+    angebotId: angebotId,
+    pvsolFileData: pvsolFileData,
+  };
   const response = await client.post("/saveAngebotData", a);
 
   console.log(response);

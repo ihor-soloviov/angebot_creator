@@ -28,11 +28,13 @@ export const SingleServiceItem: React.FC<Props> = observer(
 
     return (
       <ServiceWrapper title={title} description={description}>
-        <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} />
-        {unNormalPriceChange && title === 'Kaskadenschaltung'
-          ? (<p className="service_price">{getUnNormalShownPrice(price, priceCount)}.00 €</p>)
-          : (<p className="service_price">{shownPrice}.00 €</p>)
-        }
+        <>
+          <PlusMinusHandler setPriceСount={setPriceСount} priceСount={priceCount} />
+          {unNormalPriceChange && title === 'Kaskadenschaltung'
+            ? (<p className="service_price">{getUnNormalShownPrice(price, priceCount)}.00 €</p>)
+            : (<p className="service_price">{shownPrice}.00 €</p>)
+          }
+        </>
       </ServiceWrapper>
     );
   })

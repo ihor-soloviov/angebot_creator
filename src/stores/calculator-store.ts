@@ -1,8 +1,22 @@
 import { makeAutoObservable } from "mobx";
 import { IndividualService } from "../components/Calculator/calculator-types";
 
+export enum AngebotType {
+  previous = "Vorläufiges Angebot",
+  analyse = "Wirtschaftsanalyse",
+  default = "",
+}
+
+export interface PvsolFileItem {
+  title: string;
+  price: string;
+  measurement: string;
+}
+
 class CalculatorStore {
   targetServices: { [key: string]: IndividualService[] } = {};
+  angebotType: AngebotType = AngebotType.default;
+  pvsolFileData: PvsolFileItem[] | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -60,6 +74,10 @@ class CalculatorStore {
     return stepServices.find((s) => s.title === serviceTitle);
   };
 
+  setAngebotType = (type: AngebotType) => (this.angebotType = type);
+
+  setPvsolFileData = (dataFromParse: PvsolFileItem[]) =>
+    (this.pvsolFileData = dataFromParse);
 }
 
 export default new CalculatorStore();

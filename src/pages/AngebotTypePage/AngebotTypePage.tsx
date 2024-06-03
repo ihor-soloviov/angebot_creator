@@ -7,9 +7,12 @@ import { SearchInput } from "../../components/Inputs/SearchInput";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import stepStore from "../../stores/step-store";
 import { SearchResult } from "../../types/dealsTypes";
+import { observer } from "mobx-react-lite";
+import calculatorStore, { AngebotType } from "../../stores/calculator-store";
 
-export const AngebotTypePage: React.FC = React.memo(() => {
+export const AngebotTypePage: React.FC = observer(() => {
   const { step, setAngebotId } = stepStore;
+  const { setAngebotType } = calculatorStore;
 
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -20,7 +23,8 @@ export const AngebotTypePage: React.FC = React.memo(() => {
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
-    setSelectedValue(newValue)
+    setSelectedValue(newValue);
+    setAngebotType(newValue as AngebotType)
   };
 
   useEffect(() => {
