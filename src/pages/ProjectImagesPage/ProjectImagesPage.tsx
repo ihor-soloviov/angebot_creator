@@ -7,7 +7,7 @@ import { ImageWithTableBlock, TableData } from "../../components/ImageWithTableB
 import { MainImageAdder } from "../../components/MainImageAdder";
 import { PlusButton } from "../../components/Inputs/PlusButton";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
-import { uploadMainImage } from "../../utils/sendDataToGenerator";
+import { uploadMainImage } from "../../api/fetch";
 
 export interface ProjectPhoto {
   [key: string]: File

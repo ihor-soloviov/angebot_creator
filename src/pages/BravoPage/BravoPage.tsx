@@ -2,7 +2,7 @@ import React from "react";
 import { Header } from "../../components/Header";
 import stepStore from "../../stores/step-store";
 import "./BravoPage.scss";
-import { sendDataToGenerator } from "../../utils/sendDataToGenerator";
+import { sendDataToGenerator } from "../../api/fetch";
 
 export const BravoPage: React.FC = () => {
   const { id } = stepStore;

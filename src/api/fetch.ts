@@ -5,6 +5,7 @@ import {
   IndividualService,
   Module,
 } from "../components/Calculator/calculator-types";
+import calculatorStore from "../stores/calculator-store";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type RequestData = Record<string, unknown> | null;
@@ -15,17 +16,19 @@ const headers = {
 };
 
 const apiUrl = import.meta.env.VITE_API_URL;
-const calcRoute = "/calc";
-const admRoute = "/adm";
 
 const request = async <T>(
   url: string,
   method: RequestMethod = "GET",
-  data: RequestData = null
+  data: RequestData | null = null,
+  formData: FormData | null = null
 ): Promise<T> => {
   const options: RequestInit = { method };
 
-  if (data) {
+  if (formData) {
+    options.body = formData;
+    options.credentials = "include";
+  } else if (data) {
     options.body = JSON.stringify(data);
     options.headers = headers;
     options.credentials = "include";
@@ -47,12 +50,14 @@ const request = async <T>(
 const client = {
   get: <T>(url: string) => request<T>(url),
   post: <T>(url: string, data: RequestData) => request<T>(url, "POST", data),
+  postForm: <T>(url: string, formData: FormData) =>
+    request<T>(url, "POST", null, formData),
   patch: <T>(url: string, data: RequestData) => request<T>(url, "PATCH", data),
   delete: (url: string) => request(url, "DELETE"),
 };
 
 export const fetchServices = async () => {
-  const components = await client.get<Module[]>(calcRoute + "/getServices");
+  const components = await client.get<Module[]>("/getServices");
   return formatSingleServices(components);
 };
 
@@ -60,14 +65,13 @@ export const fetchModulesByTable = async (tableName: string) => {
   const { producer } = producerStore;
   const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
   const queries = `?table_name=${tableName}&producer=${brand}`;
-  return client.get<Module[]>(calcRoute + "/getModulesByTable" + queries);
+  return client.get<Module[]>("/getModulesByTable" + queries);
 };
 
 export const fetchServicesByTable = async (section: string) => {
   const result = await client.get<CalculatorServices>(
-    calcRoute + `/getServicesBySection/${section}`
+    `/getServicesBySection/${section}`
   );
-  console.log(result);
   return result;
 };
 
@@ -75,14 +79,34 @@ export const updateServicePrice = async (
   item: IndividualService,
   newPrice: number
 ) => {
-  const responseData: { id: number; newPrice: number; table_name?: string } = {
+  const requestData: { id: number; newPrice: number; table_name?: string } = {
     id: item.id || 0,
     newPrice,
   };
 
   if (item.table_name) {
-    responseData.table_name = item.table_name;
+    requestData.table_name = item.table_name;
   }
 
-  await client.patch<Module>(admRoute + "/changePrice", responseData);
+  await client.patch<Module>("/changePrice", requestData);
+};
+
+export const uploadMainImage = async (
+  mainImage: File,
+  angebot_id: string,
+  dir: string
+): Promise<void> => {
+  const formData = new FormData();
+  formData.append("mainImage", mainImage);
+
+  await client.postForm(`${dir}/${angebot_id}/${dir}`, formData);
+};
+
+export const sendDataToGenerator = async () => {
+  const { targetServices } = calculatorStore;
+  console.log(targetServices);
+  const a = { ...targetServices, angebot_type: "test", angebot_id: 111 };
+  const response = await client.post("/saveAngebotData", a);
+
+  console.log(response);
 };

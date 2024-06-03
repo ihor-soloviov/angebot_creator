@@ -46,7 +46,6 @@ class CalculatorStore {
 
   stepTotalPrice = (stepName: string) => {
     const stepServices = this.targetServices[stepName] || [];
-    console.log(stepServices)
     return stepServices.reduce((total, service) => {
       const count = service.count || 0;
       return total + service.price * count;
