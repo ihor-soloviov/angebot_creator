@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import img from "../../assets/angebotTypePicture.png"
 import { Header } from "../../components/Header";
@@ -9,9 +10,10 @@ import stepStore from "../../stores/step-store";
 import { SearchResult } from "../../types/dealsTypes";
 import { observer } from "mobx-react-lite";
 import calculatorStore, { AngebotType } from "../../stores/calculator-store";
+import { getNextProjectVersion } from "../../api/fetch";
 
 export const AngebotTypePage: React.FC = observer(() => {
-  const { step, setAngebotId } = stepStore;
+  const { setAngebotId } = stepStore;
   const { setAngebotType } = calculatorStore;
 
   const [selectedValue, setSelectedValue] = useState('Выберете тип предложения');
@@ -29,22 +31,10 @@ export const AngebotTypePage: React.FC = observer(() => {
 
   useEffect(() => {
     if (selectedId && selectedValue) {
-      sessionStorage.setItem(step, JSON.stringify({
-        ...searchResult,
-        angebotId: selectedId,
-        angebotType: selectedValue,
-      }))
-      setAngebotId(selectedId)
-
-      console.log({
-        ...searchResult,
-        angebotId: selectedId,
-        angebotType: selectedValue,
-      })
-
+      getNextProjectVersion(selectedId).then(res => setAngebotId(res))
       setIsDisabled(false)
     }
-  }, [selectedValue, selectedId, setAngebotId, step, searchResult])
+  }, [selectedValue, selectedId])
 
 
   return (

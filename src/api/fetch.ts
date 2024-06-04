@@ -105,20 +105,30 @@ export const uploadMainImage = async (
 
 export const sendDataToGenerator = async () => {
   const { targetServices, angebotType, pvsolFileData } = calculatorStore;
-  const { angebotId } = stepStore;
+  const { id } = stepStore;
   console.log({
     ...targetServices,
     angebotType: angebotType,
-    angebotId: angebotId,
+    angebotId: id,
     pvsolFileData: pvsolFileData,
   });
   const a = {
     ...targetServices,
     angebotType: angebotType,
-    angebotId: angebotId,
+    angebotId: id.toString(),
     pvsolFileData: pvsolFileData,
   };
+
   const response = await client.post("/saveAngebotData", a);
 
   console.log(response);
+};
+
+export const getNextProjectVersion = async (
+  angebotId: string
+): Promise<string> => {
+  const response = await client.get<string>(
+    `/getProjectVersion?angebotId=${angebotId}`
+  );
+  return response;
 };

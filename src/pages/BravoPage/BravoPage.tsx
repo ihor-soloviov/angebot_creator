@@ -12,7 +12,7 @@ export const BravoPage: React.FC = () => {
       <Header />
       <div className="bravoPage__container">
         <h1>Браво!</h1>
-        <p>Ваше предложение ID {id} v.1 <br /> полностью готово</p>
+        <p>Ваше предложение ID {id} <br /> полностью готово</p>
         <h3>Желаете ознакомиться?</h3>
         <button onClick={sendDataToGenerator} className="downloadButton">Загрузить в формате PDF</button>
       </div>
