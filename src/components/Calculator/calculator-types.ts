@@ -8,12 +8,11 @@ export type Module = Title & {
 };
 
 export type IndividualService = Module & {
-  price: number;
   specific: ServiceSpecific;
   count?: number;
-  id?: number;
+  id: string;
   producer?: string;
-  table_name?: string
+  sections?: string
 };
 
 export type DropdownServices = {

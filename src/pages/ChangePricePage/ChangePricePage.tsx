@@ -5,7 +5,7 @@ import { Partition } from '../../imports';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getActualHeader } from '../../utils/getActualHeader';
 import { IndividualService } from '../../components/Calculator/calculator-types';
-import { fetchServicesByTable, fetchServices } from '../../api/fetch';
+import { fetchServicesBySection as fetchServicesBySection, fetchServices } from '../../api/fetch';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';
 import { ButtonPrev } from '../../components/Buttons/ButtonPrev';
@@ -33,7 +33,7 @@ const ChangePricePage = () => {
       const components = await fetchServices();
       setComponents(components);
     } else {
-      const servicesResult = await fetchServicesByTable(title);
+      const servicesResult = await fetchServicesBySection(title);
       if (servicesResult) {
         setServices(servicesResult.single);
       }

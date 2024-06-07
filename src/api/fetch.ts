@@ -2,7 +2,6 @@ import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
 import {
   CalculatorServices,
-  IndividualService,
   Module,
 } from "../components/Calculator/calculator-types";
 import calculatorStore from "../stores/calculator-store";
@@ -62,32 +61,25 @@ export const fetchServices = async () => {
   return formatSingleServices(components);
 };
 
-export const fetchModulesByTable = async (tableName: string) => {
+export const fetchComponentsBySection = async (section: string) => {
   const { producer } = producerStore;
   const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
-  const queries = `?table_name=${tableName}&producer=${brand}`;
-  return client.get<Module[]>("/getModulesByTable" + queries);
+  const queries = `?section=${section}&producer=${brand}`;
+  return client.get<Module[]>("/getComponentsBySection" + queries);
 };
 
-export const fetchServicesByTable = async (section: string) => {
+export const fetchServicesBySection = async (section: string) => {
   const result = await client.get<CalculatorServices>(
     `/getServicesBySection/${section}`
   );
   return result;
 };
 
-export const updateServicePrice = async (
-  item: IndividualService,
-  newPrice: number
-) => {
-  const requestData: { id: number; newPrice: number; table_name?: string } = {
-    id: item.id || 0,
+export const updateServicePrice = async (id: string, newPrice: number) => {
+  const requestData = {
+    id,
     newPrice,
   };
-
-  if (item.table_name) {
-    requestData.table_name = item.table_name;
-  }
 
   await client.patch<Module>("/changePrice", requestData);
 };

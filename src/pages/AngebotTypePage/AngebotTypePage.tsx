@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import img from "../../assets/angebotTypePicture.png"
 import { Header } from "../../components/Header";
 import { CustomSelect } from "../../components/Inputs/CustomSelect";
-import "./AngebotTypePage.scss";
 import { SearchInput } from "../../components/Inputs/SearchInput";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import stepStore from "../../stores/step-store";
@@ -11,6 +10,7 @@ import { SearchResult } from "../../types/dealsTypes";
 import { observer } from "mobx-react-lite";
 import calculatorStore, { AngebotType } from "../../stores/calculator-store";
 import { getNextProjectVersion } from "../../api/fetch";
+import "./AngebotTypePage.scss";
 
 export const AngebotTypePage: React.FC = observer(() => {
   const { setAngebotId } = stepStore;
