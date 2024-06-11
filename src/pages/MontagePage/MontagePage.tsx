@@ -3,8 +3,8 @@ import React from "react";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import "./MontagePage.scss";
 import { Title } from "../../components/Calculator/calculator-types";
+import "./MontagePage.scss";
 
 const title: Title = {
   title: "Installation + Lieferung",
@@ -19,7 +19,7 @@ const additionHeader: Title = {
 export const MontagePage: React.FC = React.memo(() => (
   <div className="montagePage">
     <Header />
-    <Calculator header={title} additionHeader={additionHeader} sectionTable="Installation + Lieferung" />
+    <Calculator header={title} additionHeader={additionHeader} section="Installation + Lieferung" />
     <Footer isCalculator={true} />
   </div >
 ))

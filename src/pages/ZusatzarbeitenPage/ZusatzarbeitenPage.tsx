@@ -10,7 +10,7 @@ export const ZusatzarbeitenPage: React.FC = React.memo(() => (
     <Header />
     <Calculator
       header={{ title: "Zusatzarbeiten", description: "Доп. услуги" }}
-      sectionTable="Zusatzarbeiten"
+      section="Zusatzarbeiten"
     />
     <Footer isCalculator={true} />
   </div>

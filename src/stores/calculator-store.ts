@@ -17,6 +17,7 @@ class CalculatorStore {
   targetServices: { [key: string]: IndividualService[] } = {};
   angebotType: AngebotType = AngebotType.default;
   pvsolFileData: PvsolFileItem[] | null = null;
+  pricesTable = [];
 
   constructor() {
     makeAutoObservable(this);

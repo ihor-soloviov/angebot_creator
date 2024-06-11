@@ -20,7 +20,7 @@ interface Props {
   additionHeader?: Title
   selectsTable?: string
   serviceTableName?: string
-  sectionTable?: string
+  section?: string
 }
 
 export const Calculator: React.FC<Props> = observer(({
@@ -28,7 +28,7 @@ export const Calculator: React.FC<Props> = observer(({
   additionHeader,
   selectsTable,
   serviceTableName,
-  sectionTable
+  section
 }) => {
   const { producer } = producerStore;
   const { step } = stepStore
@@ -44,8 +44,8 @@ export const Calculator: React.FC<Props> = observer(({
 
   const setServicesByTables = useCallback(
     () => {
-      if (sectionTable) {
-        fetchServicesBySection(sectionTable).then(({ single, select }) => {
+      if (section) {
+        fetchServicesBySection(section).then(({ single, select }): void => {
           const synchronizedServices = synchronizeServices(single, step);
           const synchronizedSelects = synchronizeServices(select, step).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
@@ -57,14 +57,15 @@ export const Calculator: React.FC<Props> = observer(({
         return
       }
       if (serviceTableName) {
-        fetchComponentsBySection(serviceTableName).then((res) => {
+        fetchComponentsBySection(serviceTableName).then((res): void => {
+          console.log(res)
           const formattedServices = formatSingleServices(res);
           const synchronizedServices = synchronizeServices(formattedServices, step);
           setServices(synchronizedServices);
         });
       }
       if (selectsTable) {
-        fetchComponentsBySection(selectsTable).then(res => {
+        fetchComponentsBySection(selectsTable).then((res): void => {
           const selectServices = formatSelectServices(res);
           const synchronizedSelects = synchronizeServices(selectServices, step).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
@@ -73,7 +74,6 @@ export const Calculator: React.FC<Props> = observer(({
         }
         )
       }
-
     },
     [],
   )
@@ -90,7 +90,7 @@ export const Calculator: React.FC<Props> = observer(({
 
   useEffect(() => {
     setServicesByTables()
-  }, [producer, sectionTable, selectsTable, serviceTableName])
+  }, [producer, section, selectsTable, serviceTableName])
 
   return (
     <div className="calculator">

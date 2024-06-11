@@ -9,7 +9,7 @@ export const TaubenschutzPage: React.FC = React.memo(() => (
     <Header />
     <Calculator
       header={{ title: "Taubenschutz", description: "Защита от голубей" }}
-      sectionTable="Taubenschutz"
+      section="Taubenschutz"
     />
     <Footer isCalculator={true} />
   </div>

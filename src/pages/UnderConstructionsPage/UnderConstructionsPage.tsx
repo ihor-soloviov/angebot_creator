@@ -17,7 +17,7 @@ export const UnderConstructionsPage: React.FC = React.memo(() => (
     <Header />
     <Calculator
       header={title}
-      sectionTable="Unterkonstruktion"
+      section="Unterkonstruktion"
     />
     <Footer isCalculator={true} />
   </div>

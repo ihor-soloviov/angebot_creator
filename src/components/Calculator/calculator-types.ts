@@ -10,7 +10,7 @@ export type Module = Title & {
 export type IndividualService = Module & {
   specific: ServiceSpecific;
   count?: number;
-  id: string;
+  id?: string;
   producer?: string;
   sections?: string
 };
