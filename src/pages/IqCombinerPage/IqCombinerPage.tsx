@@ -3,7 +3,7 @@ import "./IqCombinerPage.scss";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";
-import { Title } from "../../components/Calculator/calculator-types";
+import { Title } from "../../types/calculator-types";
 
 export const IqCombinerPage: React.FC = () => {
   const title: Title = {

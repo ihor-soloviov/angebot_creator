@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import producerStore from "../../stores/producer-store";
 import { CalculatorTitle } from "../../components/Calculator/CalculatorTitle";
-import { Title } from "../../components/Calculator/calculator-types";
+import { Title } from "../../types/calculator-types";
 import stepStore from "../../stores/step-store";
 import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import { observer } from "mobx-react-lite";
@@ -25,7 +25,7 @@ export const CheckoutPage: React.FC = observer(() => {
 
   const { producer } = producerStore;
   const { totalPrice, stepTotalPrice } = calculatorStore
-  const { id, arraysOfSteps } = stepStore;
+  const { id, arrayOfProducerSteps: arraysOfSteps } = stepStore;
 
   useEffect(() => {
     setPages([...arraysOfSteps[producer]].filter((page: string) => !unavailablePages.includes(page)))

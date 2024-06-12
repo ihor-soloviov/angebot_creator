@@ -20,7 +20,7 @@ export const AngebotTypePage: React.FC = observer(() => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse'];
+  const angebotTypes = ['Vorläufiges Angebot', 'Wirtschaftsanalyse', 'Individuelles Angebot', "Richtpreisangebot"];
 
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
 

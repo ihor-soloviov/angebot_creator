@@ -14,28 +14,28 @@ import { TaubenschutzPage } from "./pages/TaubenschutzPage";
 import { UnderConstructionsPage } from "./pages/UnderConstructionsPage";
 import { WallboxPage } from "./pages/WallboxPage";
 import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
-import { Steps } from "./stores/step-store";
+import { AppSteps } from "./stores/step-store";
 import { ProjectImagesPage } from "./pages/ProjectImagesPage";
-import { Title } from "./components/Calculator/calculator-types";
+import { Title } from "./types/calculator-types";
 
 export const stepComponents = {
-  [Steps.angebotType]: AngebotTypePage,
-  [Steps.pvsolFile]: PvsolFilePage,
-  [Steps.producer]: ProducerPage,
-  [Steps.montage]: MontagePage,
-  [Steps.underConstructions]: UnderConstructionsPage,
-  [Steps.pvModule]: PvModulePage,
-  [Steps.optimizer]: OptimizerPage,
-  [Steps.invertor]: InvertorPage,
-  [Steps.iqCombiner]: IqCombinerPage,
-  [Steps.battery]: BatteryPage,
-  [Steps.wallbox]: WallboxPage,
-  [Steps.backupBox]: BackupBoxPage,
-  [Steps.taubenschutz]: TaubenschutzPage,
-  [Steps.zusatzarbeiten]: ZusatzarbeitenPage,
-  [Steps.checkout]: CheckoutPage,
-  [Steps.bravo]: BravoPage,
-  [Steps.projectImages]: ProjectImagesPage,
+  [AppSteps.angebotType]: AngebotTypePage,
+  [AppSteps.pvsolFile]: PvsolFilePage,
+  [AppSteps.producer]: ProducerPage,
+  [AppSteps.montage]: MontagePage,
+  [AppSteps.underConstructions]: UnderConstructionsPage,
+  [AppSteps.pvModule]: PvModulePage,
+  [AppSteps.optimizer]: OptimizerPage,
+  [AppSteps.invertor]: InvertorPage,
+  [AppSteps.iqCombiner]: IqCombinerPage,
+  [AppSteps.battery]: BatteryPage,
+  [AppSteps.wallbox]: WallboxPage,
+  [AppSteps.backupBox]: BackupBoxPage,
+  [AppSteps.taubenschutz]: TaubenschutzPage,
+  [AppSteps.zusatzarbeiten]: ZusatzarbeitenPage,
+  [AppSteps.checkout]: CheckoutPage,
+  [AppSteps.bravo]: BravoPage,
+  [AppSteps.projectImages]: ProjectImagesPage,
 };
 
 export type Partition = Title & {

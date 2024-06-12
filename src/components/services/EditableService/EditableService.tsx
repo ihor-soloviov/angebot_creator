@@ -3,7 +3,7 @@ import ServiceWrapper from '../ServiceWrapper/ServiceWrapper'
 import PriceInput from '../../Inputs/PriceInput/PriceInput';
 import checkDone from '../../../assets/admin/changedPrice.svg'
 import "./EditableService.scss"
-import { IndividualService } from '../../Calculator/calculator-types';
+import { IndividualService } from '../../../types/calculator-types';
 
 interface Props {
   title: string

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Title } from "../../Calculator/calculator-types";
+import { Title } from "../../../types/calculator-types";
 import "./ServiceWrapper.scss";
 
 interface Props extends Title {

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { PlusMinusHandler } from "../../Buttons/PlusMinusHandler";
-import { IndividualService } from "../../Calculator/calculator-types";
+import { IndividualService } from "../../../types/calculator-types";
 import { getUnNormalShownPrice } from "../../../utils/getUnNormalShownPrice";
 import { observer } from "mobx-react-lite";
 import ServiceWrapper from "../ServiceWrapper/ServiceWrapper";
@@ -16,7 +16,7 @@ interface Props {
 export const SingleServiceItem: React.FC<Props> = observer(
   ({ service, unNormalPriceChange }) => {
     const { title, description, price, count } = service;
-    const { step } = stepStore;
+    const { appStep: step } = stepStore;
     const { updateCount } = calculatorStore;
 
     const [priceCount, setPriceСount] = useState(count || 0)

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import "./PriceInput.scss";
 import { updateServicePrice } from "../../../api/fetch";
-import { IndividualService } from "../../Calculator/calculator-types";
+import { IndividualService } from "../../../types/calculator-types";
 
 interface Props {
   item: IndividualService,

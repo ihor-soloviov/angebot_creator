@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { IndividualService, ServiceSpecific } from "../../Calculator/calculator-types";
+import { IndividualService, ServiceSpecific } from "../../../types/calculator-types";
 import "./CustomService.scss";
 
 interface Props {

@@ -4,7 +4,7 @@ import { ProgressBar } from "../ProgressBar";
 import "./Calculator.scss";
 import { CalculatorTitle } from "./CalculatorTitle";
 import { ButtonNext } from "../Buttons/ButtonNext";
-import { DropdownServices, IndividualService, Title } from "./calculator-types";
+import { DropdownServices, IndividualService, Title } from "../../types/calculator-types";
 import { fetchServicesBySection, fetchComponentsBySection } from "../../api/fetch";
 import { formatSelectServices, formatSingleServices } from "../../utils/formatService";
 import { observer } from "mobx-react-lite";
@@ -31,7 +31,7 @@ export const Calculator: React.FC<Props> = observer(({
   section
 }) => {
   const { producer } = producerStore;
-  const { step } = stepStore
+  const { appStep: step } = stepStore
   const { stepTotalPrice, getService } = calculatorStore;
 
   const [services, setServices] = useState<IndividualService[]>([]);

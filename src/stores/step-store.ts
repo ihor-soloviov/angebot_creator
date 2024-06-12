@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import producerStore from "./producer-store";
 
-export enum Steps {
+export enum AppSteps {
   angebotType = "angebotType",
   pvsolFile = "pvsolFile",
   projectImages = "projectImages",
@@ -18,55 +18,56 @@ export enum Steps {
   taubenschutz = "taubenschutz",
   zusatzarbeiten = "zusatzarbeiten",
   checkout = "checkout",
+  gewin = "gewin",
   bravo = "bravo",
 }
 
-export enum ProducerSteps {
+export enum ProducerStepsCount {
   huawei = 10,
   enphase = 9,
 }
 
 class StepStore {
-  step = Steps.producer;
+  appStep = AppSteps.montage;
   calculatorSteps = 10;
   calculatorStep = 1;
   angebotId = "";
 
-  arraysOfSteps = {
+  arrayOfProducerSteps = {
     Huawei: [
-      Steps.angebotType,
-      Steps.pvsolFile,
-      Steps.projectImages,
-      Steps.producer,
-      Steps.montage,
-      Steps.underConstructions,
-      Steps.pvModule,
-      Steps.optimizer,
-      Steps.invertor,
-      Steps.battery,
-      Steps.wallbox,
-      Steps.backupBox,
-      Steps.taubenschutz,
-      Steps.zusatzarbeiten,
-      Steps.checkout,
-      Steps.bravo,
+      AppSteps.angebotType,
+      // AppSteps.pvsolFile,
+      // AppSteps.projectImages,
+      AppSteps.producer,
+      AppSteps.montage,
+      AppSteps.underConstructions,
+      AppSteps.pvModule,
+      AppSteps.optimizer,
+      AppSteps.invertor,
+      AppSteps.battery,
+      AppSteps.wallbox,
+      AppSteps.backupBox,
+      AppSteps.taubenschutz,
+      AppSteps.zusatzarbeiten,
+      AppSteps.checkout,
+      AppSteps.bravo,
     ],
     Enphase: [
-      Steps.angebotType,
-      Steps.pvsolFile,
-      Steps.projectImages,
-      Steps.producer,
-      Steps.montage,
-      Steps.underConstructions,
-      Steps.pvModule,
-      Steps.invertor,
-      Steps.iqCombiner,
-      Steps.battery,
-      Steps.wallbox,
-      Steps.taubenschutz,
-      Steps.zusatzarbeiten,
-      Steps.checkout,
-      Steps.bravo,
+      AppSteps.angebotType,
+      // AppSteps.pvsolFile,
+      // AppSteps.projectImages,
+      AppSteps.producer,
+      AppSteps.montage,
+      AppSteps.underConstructions,
+      AppSteps.pvModule,
+      AppSteps.invertor,
+      AppSteps.iqCombiner,
+      AppSteps.battery,
+      AppSteps.wallbox,
+      AppSteps.taubenschutz,
+      AppSteps.zusatzarbeiten,
+      AppSteps.checkout,
+      AppSteps.bravo,
     ],
   };
 
@@ -75,45 +76,45 @@ class StepStore {
   }
 
   get steps() {
-    return this.arraysOfSteps;
+    return this.arrayOfProducerSteps;
   }
 
-  isModuleStep = (): boolean => {
+  isComponentStep = (): boolean => {
     const moduleSteps = [
-      Steps.pvModule,
-      Steps.optimizer,
-      Steps.invertor,
-      Steps.iqCombiner,
-      Steps.battery,
-      Steps.wallbox,
-      Steps.backupBox,
+      AppSteps.pvModule,
+      AppSteps.optimizer,
+      AppSteps.invertor,
+      AppSteps.iqCombiner,
+      AppSteps.battery,
+      AppSteps.wallbox,
+      AppSteps.backupBox,
     ];
 
-    return moduleSteps.includes(this.step);
+    return moduleSteps.includes(this.appStep);
   };
 
-  setStep = (value: Steps) => {
-    this.step = value;
+  setStep = (value: AppSteps) => {
+    this.appStep = value;
   };
 
   setCalculatorSteps = (value: number) => {
     this.calculatorSteps = value;
   };
 
-  getCurrectRangeIndex = () => {
-    const activeStep = this.step;
-    const startedIndexesLength = 3;
-    const stepsArray = this.arraysOfSteps[producerStore.producer];
+  get rangeIndex() {
+    const activeStep = this.appStep;
+    // const startedIndexesLength = 2;
+    const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
     const currentStepIndex = stepsArray.findIndex(
       (el, index) => el === activeStep && index < stepsArray.length - 1
     );
 
-    return currentStepIndex - startedIndexesLength;
-  };
+    return currentStepIndex - 1;
+  }
 
   generateNextStep = () => {
-    const activeStep = this.step;
-    const stepsArray = this.arraysOfSteps[producerStore.producer];
+    const activeStep = this.appStep;
+    const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
     const currentStepIndex = stepsArray.findIndex(
       (el, index) => el === activeStep && index < stepsArray.length - 1
     );
@@ -125,8 +126,8 @@ class StepStore {
   };
 
   generatePrevStep = () => {
-    const activeStep = this.step;
-    const stepsArray = this.arraysOfSteps[producerStore.producer];
+    const activeStep = this.appStep;
+    const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
     const currentStepIndex = stepsArray.findIndex(
       (el, index) => el === activeStep && index > 0
     );

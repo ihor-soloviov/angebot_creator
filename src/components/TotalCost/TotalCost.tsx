@@ -1,9 +1,9 @@
 import React from "react";
 import "./TotalCost.scss";
-import stepStore, { Steps } from "../../stores/step-store";
+import stepStore, { AppSteps } from "../../stores/step-store";
 
 export const TotalCost: React.FC = () => {
   return (
-    <div className="totalCost" onClick={() => stepStore.setStep(Steps.checkout)}>Общая стоимость</div>
+    <div className="totalCost" onClick={() => stepStore.setStep(AppSteps.checkout)}>Общая стоимость</div>
   );
 }

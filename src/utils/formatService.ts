@@ -1,7 +1,4 @@
-import {
-  Module,
-  ServiceSpecific,
-} from "../components/Calculator/calculator-types";
+import { Module, ServiceSpecific } from "../types/calculator-types";
 
 export const formatSingleServices = (servicesFromDatabase: Module[]) =>
   servicesFromDatabase.map((el: Module) => ({

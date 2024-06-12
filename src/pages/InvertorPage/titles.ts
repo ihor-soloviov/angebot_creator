@@ -1,4 +1,4 @@
-import { Title } from "../../components/Calculator/calculator-types";
+import { Title } from "../../types/calculator-types";
 
 export const titles: Record<string, Title> = {
   Huawei: {

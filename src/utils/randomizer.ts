@@ -1,4 +1,4 @@
-import { IndividualService } from "../components/Calculator/calculator-types";
+import { IndividualService } from "../types/calculator-types";
 
 export const generateUniqueThreeDigitNumber = (
   objectsArray: IndividualService[]

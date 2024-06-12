@@ -1,9 +1,11 @@
 import { makeAutoObservable } from "mobx";
-import { IndividualService } from "../components/Calculator/calculator-types";
+import { IndividualService } from "../types/calculator-types";
 
 export enum AngebotType {
   previous = "Vorläufiges Angebot",
   analyse = "Wirtschaftsanalyse",
+  oriented = "Richtpreisangebot",
+  individual = 'Individuelles Angebot',
   default = "",
 }
 

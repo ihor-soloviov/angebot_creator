@@ -4,7 +4,7 @@ import { Header } from '../../components/Header';
 import { Partition } from '../../imports';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getActualHeader } from '../../utils/getActualHeader';
-import { IndividualService } from '../../components/Calculator/calculator-types';
+import { IndividualService } from '../../types/calculator-types';
 import { fetchServicesBySection as fetchServicesBySection, fetchServices } from '../../api/fetch';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';

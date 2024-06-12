@@ -4,7 +4,7 @@ import { stepComponents } from "../../imports";
 
 const AngebotCreatorSteps = observer(
   () => {
-    const { step } = stepStore;
+    const { appStep: step } = stepStore;
     const Step = stepComponents[step];
 
     return (

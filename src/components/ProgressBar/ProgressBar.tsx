@@ -6,12 +6,12 @@ import { observer } from "mobx-react-lite";
 
 export const ProgressBar: React.FC = observer(
   () => {
-    const { calculatorSteps, getCurrectRangeIndex } = stepStore;
+    const { calculatorSteps, rangeIndex } = stepStore;
     const [currentRangeIndex, setCurrentRangeIndex] = useState(1);
 
     useEffect(() => {
-      setCurrentRangeIndex(getCurrectRangeIndex());
-    }, [getCurrectRangeIndex])
+      setCurrentRangeIndex(rangeIndex);
+    }, [rangeIndex])
 
 
     const progresSize = Math.round(100 * currentRangeIndex / calculatorSteps);

@@ -1,7 +1,7 @@
 import {
   IndividualService,
   ServiceSpecific,
-} from "../../components/Calculator/calculator-types";
+} from "../../types/calculator-types";
 
 export const enphaseServices: IndividualService[] = [
   {

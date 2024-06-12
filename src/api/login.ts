@@ -1,12 +1,12 @@
 import roleStore, { UserRole } from "../stores/role-store";
-import stepStore, { Steps } from "../stores/step-store";
+import stepStore, { AppSteps } from "../stores/step-store";
 
 interface User {
   login: string;
   password: string;
 }
 
-const {setStep} = stepStore;
+const { setStep } = stepStore;
 
 const updateLocalStorageCredentials = (user: User) => {
   const { login, password } = user;
@@ -27,23 +27,19 @@ export const getLogIn = (data: User) => {
   const { login, password } = data;
   // Перевірка логіну та паролю
   if (login === ADMIN_LOGIN && password === ADMIN_PASSWORD) {
-
-    setStep(Steps.angebotType);
+    setStep(AppSteps.angebotType);
     roleStore.setRole(UserRole.admin);
     updateLocalStorageCredentials(data);
-
   } else if (login === USER_LOGIN && password === USER_PASSWORD) {
-
-    setStep(Steps.angebotType);
+    setStep(AppSteps.angebotType);
     roleStore.setRole(UserRole.user);
     updateLocalStorageCredentials(data);
-    
   } else {
     alert("Неправильний логін або пароль");
   }
 };
 
 export const logIn = () => {
-  setStep(Steps.angebotType);
+  setStep(AppSteps.angebotType);
   // updateLocalStorageCredentials(data);
-}
+};

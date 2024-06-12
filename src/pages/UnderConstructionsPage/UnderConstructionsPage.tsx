@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "./UnderConstructionsPage.scss";
-import { Title } from "../../components/Calculator/calculator-types";
+import { Title } from "../../types/calculator-types";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Calculator } from "../../components/Calculator";

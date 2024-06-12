@@ -1,9 +1,6 @@
 import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
-import {
-  CalculatorServices,
-  Module,
-} from "../components/Calculator/calculator-types";
+import { CalculatorServices, Module } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
 import stepStore from "../stores/step-store";
 
