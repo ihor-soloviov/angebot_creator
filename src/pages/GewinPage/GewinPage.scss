@@ -1,0 +1,115 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.gewinPage {
+  @include pageDecore;
+  padding-bottom: 120px;
+
+  &__inner {
+    display: flex;
+    gap: 89px;
+    margin: 0 auto;
+    padding-top: 148px;
+    height: calc(100% - 64px);
+    width: max-content;
+  }
+
+  &__tables--wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 90px 68px;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+    // width: calc(668px - 136px);
+    width: 461px;
+    height: max-content;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    color: #0b0b0c;
+    font-family: Inter Tight;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    border: 1px solid #c3c9d6;
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+
+  &__tables {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .table-profit {
+    font-size: 13px;
+    td,
+    th {
+      padding: 11px 0 11px 18px;
+    }
+
+    td {
+      border-top: 1px solid #c3c9d6;
+    }
+    tr td:not(:last-of-type) {
+      border-right: 1px solid #c3c9d6;
+    }
+  }
+
+  &__total {
+    width: 100%;
+    border: 1px solid #c3c9d6;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    padding: 24px 0;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  &__rabbat--wrap {
+    align-self: flex-end;
+    width: max-content;
+    padding: 8px 24px 24px;
+    border: 1px solid #c3c9d6;
+    border-radius: 4px;
+  }
+
+  &__rabbat {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+
+    input {
+      border: 1px solid $light-red;
+      outline: none;
+      padding: 8px;
+      width: 50px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+  }
+}

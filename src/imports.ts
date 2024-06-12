@@ -17,6 +17,7 @@ import { ZusatzarbeitenPage } from "./pages/ZusatzarbeitenPage";
 import { AppSteps } from "./stores/step-store";
 import { ProjectImagesPage } from "./pages/ProjectImagesPage";
 import { Title } from "./types/calculator-types";
+import GewinPage from "./pages/GewinPage/GewinPage";
 
 export const stepComponents = {
   [AppSteps.angebotType]: AngebotTypePage,
@@ -34,6 +35,7 @@ export const stepComponents = {
   [AppSteps.taubenschutz]: TaubenschutzPage,
   [AppSteps.zusatzarbeiten]: ZusatzarbeitenPage,
   [AppSteps.checkout]: CheckoutPage,
+  [AppSteps.gewin]: GewinPage,
   [AppSteps.bravo]: BravoPage,
   [AppSteps.projectImages]: ProjectImagesPage,
 };
