@@ -1,6 +1,11 @@
 import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
-import { CalculatorData, CalculatorServices, IndividualService, Module } from "../types/calculator-types";
+import {
+  CalculatorData,
+  CalculatorServices,
+  IndividualService,
+  Module,
+} from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
 import stepStore from "../stores/step-store";
 import { calculateTotalPrices } from "../utils/calculatorData";
@@ -105,14 +110,17 @@ export const sendDataToGenerator = async () => {
   };
 
   type Response = {
-    message: string,
-    data: CalculatorData
-  }
+    message: string;
+    data: CalculatorData;
+  };
 
-  const response = await client.post<Response>("/saveAngebotData", responseData);
+  const response = await client.post<Response>(
+    "/saveAngebotData",
+    responseData
+  );
 
   console.log(response);
-  console.log(calculateTotalPrices(response.data))
+  console.log(calculateTotalPrices(response.data));
 };
 
 export const getNextProjectVersion = async (
@@ -123,4 +131,3 @@ export const getNextProjectVersion = async (
   );
   return response;
 };
-

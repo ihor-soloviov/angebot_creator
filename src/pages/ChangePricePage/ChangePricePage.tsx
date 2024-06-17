@@ -33,8 +33,10 @@ const ChangePricePage = () => {
       const components = await fetchServices();
       setComponents(components);
     } else {
+      console.log(title)
       const servicesResult = await fetchServicesBySection(title);
       if (servicesResult) {
+        console.log(servicesResult)
         setServices(servicesResult.single);
       }
     }

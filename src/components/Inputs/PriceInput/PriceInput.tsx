@@ -36,15 +36,16 @@ const PriceInput: React.FC<Props> = React.memo(
     };
 
     const formatAndSavePrice = () => {
-      if (!item.id) {
+      if (!item._id) {
+        console.log(item._id)
         return
       }
 
       const numericPrice = parseFloat(price);
       if (!isNaN(numericPrice)) {
         setPrice(numericPrice.toFixed(2));
+        updateServicePrice(item._id, numericPrice)
         showSuccess()
-        updateServicePrice(item, numericPrice)
       } else {
         setPrice('');
       }

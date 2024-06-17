@@ -103,7 +103,6 @@ export const Calculator: React.FC<Props> = observer(({
             <React.Fragment key={service.title}>
               <SingleServiceItem
                 service={service}
-                unNormalPriceChange={true}
               />
             </React.Fragment>
           )
@@ -112,7 +111,6 @@ export const Calculator: React.FC<Props> = observer(({
             <React.Fragment key={service.title}>
               <SingleServiceItem
                 service={service}
-                unNormalPriceChange={true}
               />
             </React.Fragment>
           ))}

@@ -12,7 +12,7 @@ export type Module = Title & {
 export type IndividualService = Module & {
   specific: ServiceSpecific;
   count?: number;
-  id?: string;
+  _id?: string;
   producer?: string;
   calculatorSection: string;
   angebotSection: string;

@@ -20,8 +20,6 @@ const EditableService: React.FC<Props> = ({ item: { title, description, price },
     }, 5000);
   }
 
-  console.log(item)
-
   return (
     <div className='editable-service'>
       <ServiceWrapper title={title} description={description} >

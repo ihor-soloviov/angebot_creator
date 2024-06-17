@@ -5,7 +5,7 @@ import { BatteryPage } from "./pages/BatteryPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { InvertorPage } from "./pages/InvertorPage";
 import { IqCombinerPage } from "./pages/IqCombinerPage";
-import { DcMontage } from "./pages/MontagePage";
+import { DcMontage } from "./pages/DcMontagePage";
 import { OptimizerPage } from "./pages/OptimizerPage";
 import { ProducerPage } from "./pages/ProducerPage";
 import { PvModulePage } from "./pages/PvModulePage";

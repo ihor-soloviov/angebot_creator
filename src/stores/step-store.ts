@@ -87,20 +87,6 @@ class StepStore {
     return this.arrayOfProducerSteps;
   }
 
-  isComponentStep = (): boolean => {
-    const moduleSteps = [
-      AppSteps.pvModule,
-      AppSteps.optimizer,
-      AppSteps.invertor,
-      AppSteps.iqCombiner,
-      AppSteps.battery,
-      AppSteps.wallbox,
-      AppSteps.backupBox,
-    ];
-
-    return moduleSteps.includes(this.appStep);
-  };
-
   setStep = (value: AppSteps) => {
     this.appStep = value;
   };
