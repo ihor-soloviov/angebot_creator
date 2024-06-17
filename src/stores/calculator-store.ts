@@ -293,19 +293,6 @@ const a = {
         "specific": "single"
       }
     ],
-    "taubenschutz": [
-      {
-        "title": "Material + Montage je Laufmeter",
-        "price": 228,
-        "_id": "666af2d5c39d037206dfb931",
-        "__v": 0,
-        "description": "(материал и монтаж за погонный метр)",
-        "specific": "single",
-        "angebotSection": "Zusatzarbeiten",
-        "calculatorSection": "Taubenschutz",
-        "count": 6
-      }
-    ],
     "zusatzarbeiten": [
       {
         "title": "Zählerkasten nach VDE-Norm",
