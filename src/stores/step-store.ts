@@ -92,7 +92,6 @@ class StepStore {
 
   get rangeIndex() {
     const activeStep = this.appStep;
-    // const startedIndexesLength = 2;
     const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
     const currentStepIndex = stepsArray.findIndex(
       (el, index) => el === activeStep && index < stepsArray.length - 1

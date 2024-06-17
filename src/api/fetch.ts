@@ -7,7 +7,7 @@ import {
   Module,
 } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
-import stepStore from "../stores/step-store";
+import stepStore, { AppSteps } from "../stores/step-store";
 import { calculateTotalPrices } from "../utils/calculatorData";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
@@ -66,8 +66,13 @@ export const fetchServices = async () => {
 
 export const fetchComponentsBySection = async (section: string) => {
   const { producer } = producerStore;
-  const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
+  const { appStep } = stepStore;
+  let brand: string = producer;
+  if (appStep === AppSteps.wallbox) {
+    brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
+  } 
   const queries = `?section=${section}&producer=${brand}`;
+  console.log(queries);
   return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 

@@ -17,7 +17,8 @@ const unavailablePages = [
   "projectImages",
   "producer",
   "checkout",
-  "bravo"
+  "bravo",
+  "gewin"
 ];
 
 export const CheckoutPage: React.FC = observer(() => {

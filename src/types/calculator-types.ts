@@ -39,13 +39,17 @@ export type CalculatorServices = {
   select: IndividualService[];
 };
 
-export type BaseCalculatorData = {
-  angebotType: AngebotType;
-  angebotId: string;
-  pvsolFileData: PvsolFileItem[] | null;
-};
+// export type BaseCalculatorData = {
+//   angebotType: AngebotType;
+//   angebotId: string;
+//   pvsolFileData: PvsolFileItem[] | null;
+// };
 
-export type CalculatorData = BaseCalculatorData & {
+// export type CalculatorData = BaseCalculatorData & {
+//   [key: string]: IndividualService[];
+// };
+
+export type CalculatorData =  {
   [key: string]: IndividualService[];
 };
 

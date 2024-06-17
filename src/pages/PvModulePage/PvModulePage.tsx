@@ -16,7 +16,7 @@ export const PvModulePage: React.FC = React.memo(() => {
       <Header />
       <Calculator
         header={title}
-        section="PV-Module"
+        section="pvModule"
       />
       <Footer isCalculator={true} />
     </div>

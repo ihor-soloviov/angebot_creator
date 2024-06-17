@@ -4,14 +4,11 @@ import { stepComponents } from '../../imports';
 
 const CalculatorPage = observer(
   () => {
-    const { appStep: step } = stepStore;
+    const { appStep } = stepStore;
 
-    const switchComponent = () => {
-      const Component = stepComponents[step];
-      return <Component />;
-    };
+    const Step = stepComponents[appStep];
     return (
-      <main>{switchComponent()}</main>
+      <main><Step /></main>
     )
   }
 )

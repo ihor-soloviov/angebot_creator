@@ -14,14 +14,14 @@ export const InvertorPage: React.FC = observer(() => {
   const { producer } = producerStore;
   const title: Title = titles[producer]
 
-  const endpoint = producer === Producer.huawei ? "smartmeters" : "other";
+  const endpoint = producer === Producer.huawei ? "smartmeters" : "inverters";
 
   return (
     <div className="invertorPage">
       <Header />
       <Calculator
         header={title}
-        selectsTable="inverters"
+        selectsTable={producer === Producer.enphase ? "" : "inverters"}
         serviceTableName={endpoint}
       />
       <Footer isCalculator={true} />

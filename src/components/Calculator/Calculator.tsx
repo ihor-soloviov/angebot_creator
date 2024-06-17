@@ -65,6 +65,7 @@ export const Calculator: React.FC<Props> = observer(({
       }
       if (selectsTable) {
         fetchComponentsBySection(selectsTable).then((res): void => {
+          console.log(res)
           const selectServices = formatSelectServices(res);
           const synchronizedSelects = synchronizeServices(selectServices, step).filter(service => service.count)
           setSelectedServices(synchronizedSelects)

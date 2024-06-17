@@ -22,6 +22,7 @@ import InbetriebnahmePage from "./pages/InbetriebnahmePage/InbetriebnahmePage";
 export const stepComponents = {
   [AppSteps.angebotType]: AngebotTypePage,
   [AppSteps.pvsolFile]: PvsolFilePage,
+  [AppSteps.projectImages]: ProjectImagesPage,
   [AppSteps.producer]: ProducerPage,
   [AppSteps.dcMontage]: DcMontage,
   [AppSteps.underConstructions]: UnderConstructionsPage,
@@ -37,7 +38,6 @@ export const stepComponents = {
   [AppSteps.checkout]: CheckoutPage,
   [AppSteps.gewin]: GewinPage,
   [AppSteps.bravo]: BravoPage,
-  [AppSteps.projectImages]: ProjectImagesPage,
 };
 
 export type Partition = Title & {
