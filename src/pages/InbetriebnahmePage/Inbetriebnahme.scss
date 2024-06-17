@@ -1,0 +1,8 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.inbetriebnahmePage {
+  @include pageDecore;
+  position: relative;
+  padding-bottom: 158px;
+}

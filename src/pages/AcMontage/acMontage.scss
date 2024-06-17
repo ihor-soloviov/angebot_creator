@@ -1,0 +1,8 @@
+@import "../../utilsScss/colors.scss";
+@import "../../utilsScss/mixins.scss";
+
+.acMontagePage {
+  @include pageDecore;
+  position: relative;
+  padding-bottom: 158px;
+}

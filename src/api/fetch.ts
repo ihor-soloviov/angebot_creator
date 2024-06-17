@@ -1,8 +1,9 @@
 import producerStore, { Producer } from "../stores/producer-store";
 import { formatSingleServices } from "../utils/formatService";
-import { CalculatorServices, Module } from "../types/calculator-types";
+import { CalculatorData, CalculatorServices, IndividualService, Module } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
 import stepStore from "../stores/step-store";
+import { calculateTotalPrices } from "../utils/calculatorData";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type RequestData = Record<string, unknown> | null;
@@ -54,7 +55,7 @@ const client = {
 };
 
 export const fetchServices = async () => {
-  const components = await client.get<Module[]>("/getServices");
+  const components = await client.get<IndividualService[]>("/getServices");
   return formatSingleServices(components);
 };
 
@@ -62,7 +63,7 @@ export const fetchComponentsBySection = async (section: string) => {
   const { producer } = producerStore;
   const brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
   const queries = `?section=${section}&producer=${brand}`;
-  return client.get<Module[]>("/getComponentsBySection" + queries);
+  return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 
 export const fetchServicesBySection = async (section: string) => {
@@ -93,24 +94,25 @@ export const uploadMainImage = async (
 };
 
 export const sendDataToGenerator = async () => {
-  const { targetServices, angebotType, pvsolFileData } = calculatorStore;
+  const { calculatorData, angebotType, pvsolFileData } = calculatorStore;
   const { id } = stepStore;
-  console.log({
-    ...targetServices,
-    angebotType: angebotType,
-    angebotId: id,
-    pvsolFileData: pvsolFileData,
-  });
-  const a = {
-    ...targetServices,
+
+  const responseData = {
+    ...calculatorData,
     angebotType: angebotType,
     angebotId: id.toString(),
     pvsolFileData: pvsolFileData,
   };
 
-  const response = await client.post("/saveAngebotData", a);
+  type Response = {
+    message: string,
+    data: CalculatorData
+  }
+
+  const response = await client.post<Response>("/saveAngebotData", responseData);
 
   console.log(response);
+  console.log(calculateTotalPrices(response.data))
 };
 
 export const getNextProjectVersion = async (
@@ -121,3 +123,4 @@ export const getNextProjectVersion = async (
   );
   return response;
 };
+

@@ -6,9 +6,11 @@ export enum AppSteps {
   pvsolFile = "pvsolFile",
   projectImages = "projectImages",
   producer = "producer",
-  montage = "montage",
+  dcMontage = "dcMontage",
   underConstructions = "underConstructions",
   pvModule = "pvModule",
+  acMontage = "acMontage",
+  inbetriebnahme = "inbetriebnahme",
   optimizer = "optimizer",
   invertor = "invertor",
   iqCombiner = "iqCombiner",
@@ -28,7 +30,7 @@ export enum ProducerStepsCount {
 }
 
 class StepStore {
-  appStep = AppSteps.gewin;
+  appStep = AppSteps.inbetriebnahme;
   calculatorSteps = 10;
   calculatorStep = 1;
   angebotId = "";
@@ -39,9 +41,11 @@ class StepStore {
       // AppSteps.pvsolFile,
       // AppSteps.projectImages,
       AppSteps.producer,
-      AppSteps.montage,
+      AppSteps.dcMontage,
       AppSteps.underConstructions,
       AppSteps.pvModule,
+      AppSteps.acMontage,
+      AppSteps.inbetriebnahme,
       AppSteps.optimizer,
       AppSteps.invertor,
       AppSteps.battery,
@@ -50,6 +54,7 @@ class StepStore {
       AppSteps.taubenschutz,
       AppSteps.zusatzarbeiten,
       AppSteps.checkout,
+      AppSteps.gewin,
       AppSteps.bravo,
     ],
     Enphase: [
@@ -57,9 +62,11 @@ class StepStore {
       // AppSteps.pvsolFile,
       // AppSteps.projectImages,
       AppSteps.producer,
-      AppSteps.montage,
+      AppSteps.dcMontage,
       AppSteps.underConstructions,
       AppSteps.pvModule,
+      AppSteps.acMontage,
+      AppSteps.inbetriebnahme,
       AppSteps.invertor,
       AppSteps.iqCombiner,
       AppSteps.battery,
@@ -67,6 +74,7 @@ class StepStore {
       AppSteps.taubenschutz,
       AppSteps.zusatzarbeiten,
       AppSteps.checkout,
+      AppSteps.gewin,
       AppSteps.bravo,
     ],
   };

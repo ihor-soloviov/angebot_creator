@@ -1,3 +1,5 @@
+import { AngebotType, PvsolFileItem } from "../stores/calculator-store";
+
 export type Title = {
   title: string;
   description?: string;
@@ -12,7 +14,8 @@ export type IndividualService = Module & {
   count?: number;
   id?: string;
   producer?: string;
-  sections?: string
+  calculatorSection: string;
+  angebotSection: string;
 };
 
 export type DropdownServices = {
@@ -34,4 +37,18 @@ export enum ServiceSpecific {
 export type CalculatorServices = {
   single: IndividualService[];
   select: IndividualService[];
+};
+
+export type BaseCalculatorData = {
+  angebotType: AngebotType;
+  angebotId: string;
+  pvsolFileData: PvsolFileItem[] | null;
+};
+
+export type CalculatorData = BaseCalculatorData & {
+  [key: string]: IndividualService[];
+};
+
+export type AngebotData = {
+  [key: string]: { totalPrice: number; count: number };
 };

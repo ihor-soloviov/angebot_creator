@@ -1,12 +1,14 @@
 import { observer } from 'mobx-react-lite'
 import "./GewinPage.scss";
 import { Header } from '../../components/Header';
+import { useState } from 'react';
+import { Footer } from '../../components/Footer';
 
 const GewinPage = observer(() => {
-  const dcPrice = 5938.48;
-  const acPrice = 7294.76;
-  const zusatzarbeiten = 455;
-  const projectAndAbschluss = 175;
+  const [dcPrice, setDcPrice] = useState(6316)
+  const [acPrice, setAcPrice] = useState(9559)
+  const [zusatzarbeiten, setZusatzarbeiten] = useState(3790);
+  const [projectAndAbschluss, setProjectAndAbschluss] = useState(175)
 
   return (
     <div className='gewinPage'>
@@ -67,7 +69,7 @@ const GewinPage = observer(() => {
             </table>
           </div>
           <div className="gewinPage__total">
-            {dcPrice + acPrice + zusatzarbeiten + projectAndAbschluss} €
+            {dcPrice + acPrice + zusatzarbeiten + projectAndAbschluss - 2190} €
           </div>
           <div className="gewinPage__rabbat--wrap">
             <div className='gewinPage__rabbat'>
@@ -78,6 +80,7 @@ const GewinPage = observer(() => {
         </div>
 
       </div>
+      <Footer />
     </div>
   )
 })

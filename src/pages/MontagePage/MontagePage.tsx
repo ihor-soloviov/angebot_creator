@@ -16,7 +16,7 @@ const additionHeader: Title = {
   description: "Размер и количество лесов"
 }
 
-export const MontagePage: React.FC = React.memo(() => (
+export const DcMontage: React.FC = React.memo(() => (
   <div className="montagePage">
     <Header />
     <Calculator header={title} additionHeader={additionHeader} section="Installation + Lieferung" />

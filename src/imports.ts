@@ -5,7 +5,7 @@ import { BatteryPage } from "./pages/BatteryPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { InvertorPage } from "./pages/InvertorPage";
 import { IqCombinerPage } from "./pages/IqCombinerPage";
-import { MontagePage } from "./pages/MontagePage";
+import { DcMontage } from "./pages/MontagePage";
 import { OptimizerPage } from "./pages/OptimizerPage";
 import { ProducerPage } from "./pages/ProducerPage";
 import { PvModulePage } from "./pages/PvModulePage";
@@ -18,14 +18,18 @@ import { AppSteps } from "./stores/step-store";
 import { ProjectImagesPage } from "./pages/ProjectImagesPage";
 import { Title } from "./types/calculator-types";
 import GewinPage from "./pages/GewinPage/GewinPage";
+import AcMontage from "./pages/AcMontage/AcMontage";
+import InbetriebnahmePage from "./pages/InbetriebnahmePage/InbetriebnahmePage";
 
 export const stepComponents = {
   [AppSteps.angebotType]: AngebotTypePage,
   [AppSteps.pvsolFile]: PvsolFilePage,
   [AppSteps.producer]: ProducerPage,
-  [AppSteps.montage]: MontagePage,
+  [AppSteps.dcMontage]: DcMontage,
   [AppSteps.underConstructions]: UnderConstructionsPage,
   [AppSteps.pvModule]: PvModulePage,
+  [AppSteps.acMontage]: AcMontage,
+  [AppSteps.inbetriebnahme]: InbetriebnahmePage,
   [AppSteps.optimizer]: OptimizerPage,
   [AppSteps.invertor]: InvertorPage,
   [AppSteps.iqCombiner]: IqCombinerPage,
