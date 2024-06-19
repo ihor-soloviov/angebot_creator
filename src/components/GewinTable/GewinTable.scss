@@ -1,29 +1,5 @@
-@import "../../../utilsScss/mixins.scss";
-@import "../../../utilsScss/colors.scss";
-
-.adminPage__table {
-  @include pageDecore;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 63px;
-  padding-bottom: 120px;
-
-  h1 {
-    font-family: Poppins;
-    font-size: 32px;
-    font-weight: 500;
-    margin-bottom: 14px;
-  }
-
-  h2 {
-    color: #8f9aa5;
-    font-family: Inter Tight;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 59px;
-  }
-}
+@import "../../utilsScss/mixins.scss";
+@import "../../utilsScss/colors.scss";
 
 .tablesWrapper {
   display: flex;
@@ -75,6 +51,31 @@
       padding: 0;
       width: 44px;
     }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+  }
+}
+
+.fullPrice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid #8f9aa5;
+
+  p {
+    font-size: 32px;
   }
 }
 
@@ -92,19 +93,15 @@
     border: 1px solid #c3c9d6;
     border-radius: 4px;
   }
-
-  .tableColumn__first {
-    gap: 92px;
-  }
-
-  .tableColumn__second {
-    gap: 72px;
-  }
 }
 
 .tableColumn {
   display: flex;
   flex-direction: column;
+
+  &__third {
+    gap: 51px;
+  }
 }
 
 .tablesFinal__inner {
@@ -152,7 +149,8 @@
   td {
     text-align-last: left;
   }
-  th, td {
+  th,
+  td {
     padding: 13px 0 13px 18px;
   }
 
@@ -236,6 +234,12 @@
 
   td {
     border-top: 1px solid #c3c9d6;
+  }
+
+  input {
+    width: 13px;
+    border: none;
+    outline: none;
   }
 }
 

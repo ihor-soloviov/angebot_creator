@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
-import "./Calculator.scss";
 import { CalculatorTitle } from "./CalculatorTitle";
 import { ButtonNext } from "../Buttons/ButtonNext";
 import { DropdownServices, IndividualService, Title } from "../../types/calculator-types";
@@ -14,6 +13,7 @@ import CalculatorContainer from "./CalculatorContainer/CalculatorContainer";
 import { SingleServiceItem } from "../services/SingleServiceItem";
 import { SelectServiceItem } from "../services/SelectServiceItem";
 import stepStore from "../../stores/step-store";
+import "./Calculator.scss";
 
 interface Props {
   header: Title
@@ -25,13 +25,12 @@ interface Props {
 
 export const Calculator: React.FC<Props> = observer(({
   header,
-  additionHeader,
   selectsTable,
   serviceTableName,
   section
 }) => {
   const { producer } = producerStore;
-  const { appStep: step } = stepStore
+  const { appStep } = stepStore
   const { stepTotalPrice, getService } = calculatorStore;
 
   const [services, setServices] = useState<IndividualService[]>([]);
@@ -45,8 +44,8 @@ export const Calculator: React.FC<Props> = observer(({
     () => {
       if (section) {
         fetchServicesBySection(section).then(({ single, select }): void => {
-          const synchronizedServices = synchronizeServices(single, step);
-          const synchronizedSelects = synchronizeServices(select, step).filter(service => service.count)
+          const synchronizedServices = synchronizeServices(single, appStep);
+          const synchronizedSelects = synchronizeServices(select, appStep).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
           setServices(synchronizedServices);
           if (select.length > 0) {
@@ -59,7 +58,7 @@ export const Calculator: React.FC<Props> = observer(({
         fetchComponentsBySection(serviceTableName).then((res): void => {
           console.log(res)
           const formattedServices = formatSingleServices(res);
-          const synchronizedServices = synchronizeServices(formattedServices, step);
+          const synchronizedServices = synchronizeServices(formattedServices, appStep);
           setServices(synchronizedServices);
         });
       }
@@ -67,7 +66,7 @@ export const Calculator: React.FC<Props> = observer(({
         fetchComponentsBySection(selectsTable).then((res): void => {
           console.log(res)
           const selectServices = formatSelectServices(res);
-          const synchronizedSelects = synchronizeServices(selectServices, step).filter(service => service.count)
+          const synchronizedSelects = synchronizeServices(selectServices, appStep).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
           console.log('selects Table', synchronizedSelects)
           setSelects({ options: selectServices })
@@ -116,13 +115,12 @@ export const Calculator: React.FC<Props> = observer(({
             </React.Fragment>
           ))}
         </CalculatorContainer>
-        {additionHeader && < CalculatorTitle header={additionHeader} className="additional__title" />}
         <div className="calculatorService__container">
           {selects && <SelectServiceItem services={selects} addSelectedService={addSelectedService} />}
         </div>
         <div className="calculator__total">
           <p>Стоимость этапа</p>
-          <p>{stepTotalPrice(step)}.00€</p>
+          <p>{stepTotalPrice(appStep)}.00€</p>
         </div>
         <ButtonNext width={394} />
       </div>

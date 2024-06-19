@@ -1,5 +1,3 @@
-import { AngebotType, PvsolFileItem } from "../stores/calculator-store";
-
 export type Title = {
   title: string;
   description?: string;

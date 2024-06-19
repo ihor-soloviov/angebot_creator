@@ -3,7 +3,7 @@ import { IndividualService, ServiceSpecific } from "../types/calculator-types";
 export const formatSingleServices = (servicesFromDatabase: IndividualService[]) =>
   servicesFromDatabase.map((el: IndividualService) => ({
     ...el,
-    count: 0,
+    count: el.count || 0,
     specific: ServiceSpecific.Single,
   }));
 

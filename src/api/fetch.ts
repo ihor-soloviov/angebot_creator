@@ -8,7 +8,6 @@ import {
 } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
 import stepStore, { AppSteps } from "../stores/step-store";
-import { calculateTotalPrices } from "../utils/calculatorData";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type RequestData = Record<string, unknown> | null;
@@ -125,7 +124,6 @@ export const sendDataToGenerator = async () => {
   );
 
   console.log(response);
-  console.log(calculateTotalPrices(response.data));
 };
 
 export const getNextProjectVersion = async (

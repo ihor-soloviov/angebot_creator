@@ -1,38 +1,61 @@
-import {
-  AngebotData,
-  CalculatorData,
-  IndividualService,
-} from "../types/calculator-types";
+import { CalculatorData, IndividualService } from "../types/calculator-types";
 
-export const calculateTotalPrices = (calcData: CalculatorData) => {
-  const totalPrices: AngebotData = {};
+const profitChangePriceArray = [
+  "DC-Montage je Modul",
+  "Montage & Verkabelung je Wechselrichter",
+  "Montage & Verkabelung je Stromspeicher",
+  "Anschluss der PV-Anlage an der Hausverteilung",
+  "Anfahrt Elektriker",
+];
 
-  function processArray(array: IndividualService[]) {
-    array.forEach((item) => {
-      const { angebotSection, price, count } = item;
-      const itemCount = count || 1;
-      const totalPrice = price * itemCount;
+const dcTable = ["dcMontage", "underConstructions", "pvModule"];
 
-      if (!totalPrices[angebotSection]) {
-        totalPrices[angebotSection] = { totalPrice: 0, count: 0 };
-      }
+const acTable = [
+  "acMontage",
+  "inbetriebnahme",
+  "invertor",
+  "optimizer",
+  "battery",
+];
 
-      totalPrices[angebotSection].totalPrice += totalPrice;
-      totalPrices[angebotSection].count += itemCount;
-    });
+export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
+  if (arr.length === 0) {
+    return 0;
   }
 
-  for (const key in calcData) {
-    if (Array.isArray(calcData[key])) {
-      processArray(calcData[key] as IndividualService[]);
+  return arr.reduce((total, item) => {
+    const price = profitChangePriceArray.includes(item.title)
+      ? item.price * profit
+      : item.price;
+    const count = item.count || 1;
+    return total + price * count;
+  }, 0);
+};
+
+export const calculatePrices = (
+  calculatorData: CalculatorData,
+  profit: number
+) => {
+  const travelCost = 500; //Anfahrt
+  let dcPrice = travelCost;
+  let acPrice = 0;
+  let zusaPrice = 0;
+
+  Object.entries(calculatorData).forEach(([calculatorStep, services]) => {
+    if (!Array.isArray(services)) {
+      return;
     }
-  }
 
-  // Формування масиву з результатами
-  const result = Object.keys(totalPrices).map((section) => ({
-    calculatorSection: section,
-    totalPrice: totalPrices[section],
-  }));
+    const totalSum = calculateTotalSum(services, profit);
+    
+    if (dcTable.includes(calculatorStep)) {
+      dcPrice += totalSum;
+    } else if (acTable.includes(calculatorStep)) {
+      acPrice += totalSum;
+    } else if (calculatorStep === "zusatzarbeiten") {
+      zusaPrice += totalSum;
+    }
+  });
 
-  return result;
+  return { dcPrice, acPrice, zusaPrice };
 };

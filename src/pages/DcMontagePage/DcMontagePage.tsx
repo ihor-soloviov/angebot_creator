@@ -11,15 +11,10 @@ const title: Title = {
   description: "Монтаж + доставка"
 }
 
-const additionHeader: Title = {
-  title: "Auf- und Abbau Gerüst/Absturzsicherung je Dachseite",
-  description: "Размер и количество лесов"
-}
-
 export const DcMontage: React.FC = React.memo(() => (
   <div className="montagePage">
     <Header />
-    <Calculator header={title} additionHeader={additionHeader} section="Installation + Lieferung" />
+    <Calculator header={title} section="Installation + Lieferung" />
     <Footer isCalculator={true} />
   </div >
 ))
