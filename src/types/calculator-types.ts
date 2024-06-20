@@ -12,6 +12,7 @@ export type IndividualService = Module & {
   count?: number;
   _id?: string;
   producer?: string;
+  primePrice?: number;
   calculatorSection: string;
   angebotSection: string;
 };
@@ -19,12 +20,6 @@ export type IndividualService = Module & {
 export type DropdownServices = {
   label?: string;
   options: IndividualService[];
-};
-
-export type SelectedServiceOption = {
-  value: string;
-  price: number;
-  count: number;
 };
 
 export enum ServiceSpecific {
@@ -47,10 +42,7 @@ export type CalculatorServices = {
 //   [key: string]: IndividualService[];
 // };
 
-export type CalculatorData =  {
+export type CalculatorData = {
   [key: string]: IndividualService[];
 };
 
-export type AngebotData = {
-  [key: string]: { totalPrice: number; count: number };
-};

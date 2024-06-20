@@ -16,6 +16,7 @@ const acTable = [
   "invertor",
   "optimizer",
   "battery",
+  "iqCombiner",
 ];
 
 export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
@@ -32,30 +33,49 @@ export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
   }, 0);
 };
 
-export const calculatePrices = (
-  calculatorData: CalculatorData,
-  profit: number
-) => {
+export const calculatePrices = (calculatorData: Record<string, number>) => {
   const travelCost = 500; //Anfahrt
   let dcPrice = travelCost;
   let acPrice = 0;
   let zusaPrice = 0;
 
-  Object.entries(calculatorData).forEach(([calculatorStep, services]) => {
-    if (!Array.isArray(services)) {
-      return;
-    }
-
-    const totalSum = calculateTotalSum(services, profit);
-    
+  Object.entries(calculatorData).forEach(([calculatorStep, stepPrice]) => {
     if (dcTable.includes(calculatorStep)) {
-      dcPrice += totalSum;
+      dcPrice += stepPrice;
     } else if (acTable.includes(calculatorStep)) {
-      acPrice += totalSum;
-    } else if (calculatorStep === "zusatzarbeiten") {
-      zusaPrice += totalSum;
+      acPrice += stepPrice;
+    } else {
+      zusaPrice += stepPrice;
     }
   });
 
   return { dcPrice, acPrice, zusaPrice };
+};
+
+export const calculateTablePrices = (
+  calculatorData: CalculatorData,
+  profit: number
+) => {
+  const additionWorks = ["wallbox", "zusatzarbeiten"];
+  let additionWorksPrice = 0;
+
+  const tablePrices: { [key: string]: number } = {};
+
+  Object.entries(calculatorData).forEach(([calculatorStep, stepServices]) => {
+    if (!Array.isArray(stepServices)) {
+      return;
+    }
+
+    const totalSum = calculateTotalSum(stepServices, profit);
+
+    if (additionWorks.includes(calculatorStep)) {
+      additionWorksPrice += totalSum;
+      tablePrices.zusatzarbeiten = additionWorksPrice;
+      return;
+    }
+
+    tablePrices[calculatorStep] = totalSum;
+  });
+
+  return tablePrices;
 };

@@ -1,7 +1,7 @@
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-import "./GewinPage.scss";
 import GewinTable from '../../components/GewinTable/GewinTable';
+import "./GewinPage.scss";
 
 const GewinPage = () => (
   <div className='gewinPage'>

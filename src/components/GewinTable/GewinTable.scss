@@ -1,7 +1,7 @@
 @import "../../utilsScss/mixins.scss";
 @import "../../utilsScss/colors.scss";
 
-.tablesWrapper {
+.tables__wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,7 +95,7 @@
   }
 }
 
-.tableColumn {
+.table-column {
   display: flex;
   flex-direction: column;
 
