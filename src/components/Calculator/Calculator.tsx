@@ -56,7 +56,6 @@ export const Calculator: React.FC<Props> = observer(({
       }
       if (serviceTableName) {
         fetchComponentsBySection(serviceTableName).then((res): void => {
-          console.log(res)
           const formattedServices = formatSingleServices(res);
           const synchronizedServices = synchronizeServices(formattedServices, appStep);
           setServices(synchronizedServices);
@@ -64,11 +63,9 @@ export const Calculator: React.FC<Props> = observer(({
       }
       if (selectsTable) {
         fetchComponentsBySection(selectsTable).then((res): void => {
-          console.log(res)
           const selectServices = formatSelectServices(res);
           const synchronizedSelects = synchronizeServices(selectServices, appStep).filter(service => service.count)
           setSelectedServices(synchronizedSelects)
-          console.log('selects Table', synchronizedSelects)
           setSelects({ options: selectServices })
         }
         )

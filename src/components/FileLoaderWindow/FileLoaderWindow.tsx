@@ -65,7 +65,6 @@ export const FileLoaderWindow: React.FC<Props> = observer(
         setDragIcon(dragError)
         setDragtext('При загрузке данных возникла ошибка. Пожалуйста, повторите попытку позже')
       }
-      console.log(result)
       setDrag(false)
     }
 

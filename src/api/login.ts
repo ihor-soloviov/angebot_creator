@@ -10,9 +10,6 @@ const { setStep } = stepStore;
 
 const updateLocalStorageCredentials = (user: User) => {
   const { login, password } = user;
-  console.log("Updating local storage credentials");
-  console.log("New login:", login);
-  console.log("New password:", password);
 
   localStorage.setItem("login", login);
   localStorage.setItem("password", password);

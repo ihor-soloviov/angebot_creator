@@ -6,7 +6,13 @@ const profitChangePriceArray = [
   "Montage & Verkabelung je Stromspeicher",
   "Anschluss der PV-Anlage an der Hausverteilung",
   "Anfahrt Elektriker",
+  "Netzanmeldung",
 ];
+
+export const roundUp = (num: number) => {
+  const precision = Math.pow(10, 2);
+  return Math.ceil(num * precision) / precision;
+};
 
 const dcTable = ["dcMontage", "underConstructions", "pvModule"];
 
@@ -24,16 +30,20 @@ export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
     return 0;
   }
 
-  return arr.reduce((total, item) => {
+  const totalSum = arr.reduce((total, item) => {
     const price = profitChangePriceArray.includes(item.title)
       ? item.price * profit
       : item.price;
     const count = item.count || 1;
     return total + price * count;
   }, 0);
+
+  return roundUp(totalSum);
 };
 
-export const calculatePrices = (calculatorData: Record<string, number>) => {
+export const calculateProfitPrices = (
+  calculatorData: Record<string, number>
+) => {
   const travelCost = 500; //Anfahrt
   let dcPrice = travelCost;
   let acPrice = 0;
@@ -49,10 +59,35 @@ export const calculatePrices = (calculatorData: Record<string, number>) => {
     }
   });
 
-  return { dcPrice, acPrice, zusaPrice };
+  return {
+    dcPrice: roundUp(dcPrice),
+    acPrice: roundUp(acPrice),
+    zusaPrice: roundUp(zusaPrice),
+  };
 };
 
-export const calculateTablePrices = (
+export const calculateTotalWithoutProfit = (arr: IndividualService[]) => {
+  if (arr.length === 0) {
+    return 0;
+  }
+  const totalSum = arr.reduce((total, item) => {
+    const count = item.count || 1;
+    return total + item.price * count;
+  }, 0);
+
+  return roundUp(totalSum);
+};
+
+export const calculatePricesWithoutProfit = (
+  calculatorData: Record<string, number>
+) => {
+  let total = 0;
+  Object.values(calculatorData).forEach((stepPrice) => (total += stepPrice));
+
+  return roundUp(total);
+};
+
+export const calculatePricesBySteps = (
   calculatorData: CalculatorData,
   profit: number
 ) => {
@@ -74,8 +109,87 @@ export const calculateTablePrices = (
       return;
     }
 
-    tablePrices[calculatorStep] = totalSum;
+    tablePrices[calculatorStep] = roundUp(totalSum);
   });
 
   return tablePrices;
+};
+
+export const calculateExpence = (calculatorData: CalculatorData) => {
+  return Object.values(calculatorData).reduce((total, serviceArray) => {
+    return (
+      total +
+      serviceArray.reduce((arrayTotal, service) => {
+        const count = service?.count || 1;
+        const primePrice = service.primePrice || 0;
+        let workPrice;
+
+        if (service.title === "Quermontage") {
+          workPrice = getQuermontageWorkPrice(count);
+        } else if (service.title === "Hochmontage") {
+          workPrice = getHochmontage(count);
+        } else {
+          workPrice = service.workPrice || 0;
+        }
+        const result = arrayTotal + count * primePrice + count * workPrice;
+        return roundUp(result);
+      }, 0)
+    );
+  }, 0);
+};
+
+export const calculateTotalWorkDc = (
+  arr: IndividualService[],
+  profit: number
+) => {
+  if (arr.length === 0) {
+    return 0;
+  }
+
+  const totalSum = arr.reduce((total, item) => {
+    let workPrice: number = 0;
+    if (item.calculatorSection === "pvModule") {
+      workPrice = item.primePrice || 0;
+    }
+    workPrice = item.workPrice || 0;
+    const price = profitChangePriceArray.includes(item.title)
+      ? workPrice * profit
+      : workPrice;
+    const count = item.count || 1;
+    return total + price * count;
+  }, 0);
+
+  return roundUp(totalSum);
+};
+
+export const calculateTotalWorkAc = (
+  arr: IndividualService[],
+  profit: number
+) => {
+  if (arr.length === 0) {
+    return 0;
+  }
+
+  const totalSum = arr.reduce((total, item) => {
+    let workPrice: number = 0;
+    if (item.angebotSection === "Components") {
+      workPrice = item.primePrice || 0;
+    }
+    workPrice = item.workPrice || 0;
+    const price = profitChangePriceArray.includes(item.title)
+      ? workPrice * profit
+      : workPrice;
+    const count = item.count || 1;
+    return total + price * count;
+  }, 0);
+
+  return roundUp(totalSum);
+};
+
+const getQuermontageWorkPrice = (count: number) => {
+  return count > 20 ? 70 : 78;
+};
+
+const getHochmontage = (count: number) => {
+  return count > 30 ? 60 : count < 15 ? 78 : 67;
 };

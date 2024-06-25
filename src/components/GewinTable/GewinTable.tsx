@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import calculatorStore from "../../stores/calculator-store";
-import { calculatePrices, calculateTablePrices } from "../../utils/calculatorData";
+import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, roundUp, calculateTotalWorkAc } from "../../utils/calculatorData";
 import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
+import SalesTable from "./SalesTable/SalesTable";
 
 const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
@@ -24,33 +25,51 @@ const GewinTable = observer(() => {
     zusatzarbeiten: 0
   })
 
-  //main step prices
+  //main group prices
   const projectAndAbschluss = 175;
-  const [dcPrice, setDcPrice] = useState(0)
-  const [acPrice, setAcPrice] = useState(0)
+
   const [profit, setProfit] = useState(1.9);
-  const [zusatzarbeiten, setZusatzarbeiten] = useState(0);
 
-  const setter = useCallback(() => {
-    const { dcPrice, acPrice, zusaPrice } = calculatePrices(calculatorPrices);
+  const [dcPrice, setDcPrice] = useState(0)
+
+  const [techPrice, setTechPrice] = useState(0);
+  const [fullCost, setFullCost] = useState(0);
+
+  const [dcWorkPrice, setDcWorkPrice] = useState(0);
+  const [mainGewin, setMainGewin] = useState(0);
+
+  const setPricesByGroups = (prices: Record<string, number>) => {
+    const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
     setDcPrice(dcPrice);
-    setAcPrice(acPrice)
-    setZusatzarbeiten(zusaPrice)
 
-  }, [calculatorPrices])
+    const techPrice = roundUp(acPrice + dcPrice + projectAndAbschluss);
+    setTechPrice(techPrice);
+    setFullCost(techPrice + zusaPrice)
+
+  }
 
   useEffect(() => {
-    setCalculatorPrices(calculateTablePrices(calculatorData, profit))
-    setTimeout(() => {
-      setter();
-    }, 500);
+    const prices = calculatePricesBySteps(calculatorData, profit)
+    setCalculatorPrices(prices)
+    setPricesByGroups(prices);
+
+    const { underConstructions, dcMontage, pvModule } = calculatorData;
+    const dcWorks = [...underConstructions, ...dcMontage, ...pvModule];
+    const dcWorkPrice = calculateTotalWorkDc(dcWorks, profit)
+    setDcWorkPrice(dcWorkPrice)
+
+    //
+    const { wallbox, acMontage, optimizer, invertor, inbetriebnahme, battery } = calculatorData;
+    const acWorkPrice = calculateTotalWorkAc([...wallbox, ...acMontage, ...optimizer, ...invertor, ...inbetriebnahme, ...battery], profit)
+    // const gewin = techPrice - dcWorkPrice - (acWorkPrice +) дописати розрахунок zus work price
+
   }, [calculatorData, profit])
 
 
   return (
     <div className="tables__wrapper">
       <div className="giwennfaktor__inner">
-        <p>Rabbat</p>
+        <p>Rabatt</p>
         <div className="giwennfaktor">
           <input
             type="number"
@@ -61,36 +80,12 @@ const GewinTable = observer(() => {
         </div>
       </div>
       <div className="tables__inner">
-        <div className="table-column table-column__first">
-          <table className="table-gewin">
-            <thead>
-              <tr>
-                <th className="grey">Verkaufspreis</th>
-                <th className="red">{acPrice + dcPrice + zusatzarbeiten}€</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Kosten</td>
-                <td>10,108.00€</td>
-              </tr>
-              <tr>
-                <td>Einkaufspreis</td>
-                <td>10,108.00€</td>
-              </tr>
-              <tr>
-                <td>Gewinn</td>
-                <td>9,352.00€</td>
-              </tr>
-              <tr>
-                <td>Gewinn in %</td>
-                <td>48,06%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <SalesTable dcAndProject={dcPrice + projectAndAbschluss} dcWorkPrice={dcWorkPrice} calculatorPrices={calculatorPrices} />
         <StepsTable projectAndAbschluss={projectAndAbschluss} calculatorPrices={calculatorPrices} />
-        <ProfitTable dcPrice={dcPrice} acPrice={acPrice} zusaPrice={zusatzarbeiten} projectAndAbschluss={projectAndAbschluss} />
+        <ProfitTable
+          techPrice={techPrice}
+          fullCost={fullCost}
+        />
       </div>
     </div>
   )

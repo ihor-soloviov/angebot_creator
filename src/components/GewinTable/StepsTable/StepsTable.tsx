@@ -1,4 +1,5 @@
 import React from 'react';
+import { roundUp } from '../../../utils/calculatorData';
 
 interface Props {
   projectAndAbschluss: number,
@@ -16,6 +17,7 @@ const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices }) 
     invertor,
     battery
   } = calculatorPrices;
+
   return (
     <div className="table-column table-column__second">
       <table>
@@ -26,7 +28,7 @@ const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices }) 
           </tr>
           <tr>
             <td>2. Installation + Lieferung</td>
-            <td>{dcMontage + acMontage}€</td>
+            <td>{roundUp(dcMontage + acMontage)}€</td>
           </tr>
           <tr>
             <td>3. Inbetriebnahme</td>

@@ -7,10 +7,8 @@ export const fetchUserAndSellerData = async (
   setSearchResult: (value: SearchResult | null) => void
 ) => {
   const data = await axios.get(
-    `https://mailer.work-set.eu/pdApi/deals/${debouncedSearch}`
+    `https://mailer.dev.work-set.eu/pdApi/deals/${debouncedSearch}`
   );
-
-  console.log(data)
 
   if (data && Object.keys(data).length > 0) {
     setSearchResult(data.data);

@@ -13,6 +13,7 @@ export type IndividualService = Module & {
   _id?: string;
   producer?: string;
   primePrice?: number;
+  workPrice?: number;
   calculatorSection: string;
   angebotSection: string;
 };
@@ -45,4 +46,3 @@ export type CalculatorServices = {
 export type CalculatorData = {
   [key: string]: IndividualService[];
 };
-

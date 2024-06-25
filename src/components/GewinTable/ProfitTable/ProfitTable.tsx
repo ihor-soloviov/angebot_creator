@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { roundUp } from '../../../utils/calculatorData';
 
 interface Props {
-  dcPrice: number,
-  acPrice: number,
-  projectAndAbschluss: number,
-  zusaPrice: number
+  techPrice: number,
+  fullCost: number
 }
-const ProfitTable: React.FC<Props> = ({ dcPrice, acPrice, projectAndAbschluss, zusaPrice }) => {
+const ProfitTable: React.FC<Props> = ({ techPrice, fullCost }) => {
   //discount tables variables
   const [discount, setDiscount] = useState(0);
   const [totalLoss, setTotalLoss] = useState(0)
-  const [fullPrice, setFullPrice] = useState(0)
+  // const [fullPrice, setFullPrice] = useState(0)
   const [sellersGain, setSellersGain] = useState(10);
-  const [sellingPrice, setSellingPrice] = useState(0);
+
+
 
   useEffect(() => setTotalLoss(discount + sellersGain), [discount, sellersGain])
-  useEffect(() => {
-    setSellingPrice(dcPrice + acPrice + projectAndAbschluss)
-    setFullPrice(dcPrice + acPrice + zusaPrice + projectAndAbschluss)
-  }, [acPrice, dcPrice, projectAndAbschluss, zusaPrice])
 
 
   return (
@@ -27,22 +23,22 @@ const ProfitTable: React.FC<Props> = ({ dcPrice, acPrice, projectAndAbschluss, z
         <tbody>
           <tr>
             <td>Verkaufspreis</td>
-            <td className="light-red">{sellingPrice} €</td>
+            <td className="light-red">{techPrice} €</td>
             <td></td>
           </tr>
           <tr>
             <td>abzgl. Skonto</td>
-            <td className="table__discount">{sellingPrice - (sellingPrice * discount / 100)} €</td>
+            <td className="table__discount">{techPrice - (techPrice * discount / 100)} €</td>
             <td className="table__profit">7,328.64€</td>
           </tr>
           <tr>
             <td>abzgl. Vertrieb</td>
-            <td className="table__distribution">{sellingPrice - (sellingPrice * sellersGain / 100)} €</td>
+            <td className="table__distribution">{roundUp(techPrice - (techPrice * sellersGain / 100))} €</td>
             <td className="table__profit">5,913.49€</td>
           </tr>
           <tr>
             <td>abzgl. Vertrieb + Skonto</td>
-            <td className="table__distribution_discount">{sellingPrice - (sellingPrice * totalLoss / 100)} €</td>
+            <td className="table__distribution_discount">{roundUp(techPrice - (techPrice * totalLoss / 100))} €</td>
             <td className="table__profit light-red">5,913.49€</td>
           </tr>
         </tbody>
@@ -76,7 +72,7 @@ const ProfitTable: React.FC<Props> = ({ dcPrice, acPrice, projectAndAbschluss, z
       </table>
 
       <div className="fullPrice">
-        <p>{fullPrice} €</p>
+        <p>{roundUp(fullCost)} €</p>
       </div>
     </div>
   )

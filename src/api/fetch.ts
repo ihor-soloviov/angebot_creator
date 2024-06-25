@@ -71,7 +71,6 @@ export const fetchComponentsBySection = async (section: string) => {
     brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
   } 
   const queries = `?section=${section}&producer=${brand}`;
-  console.log(queries);
   return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 
@@ -118,12 +117,11 @@ export const sendDataToGenerator = async () => {
     data: CalculatorData;
   };
 
-  const response = await client.post<Response>(
+  await client.post<Response>(
     "/saveAngebotData",
     responseData
   );
 
-  console.log(response);
 };
 
 export const getNextProjectVersion = async (
