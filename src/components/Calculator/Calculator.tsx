@@ -43,7 +43,7 @@ export const Calculator: React.FC<Props> = observer(({
   const setServicesByTables = useCallback(
     () => {
       if (section) {
-        fetchServicesBySection(section).then(({ single, select }): void => {
+        fetchServicesBySection(section, producer).then(({ single, select }): void => {
           const synchronizedServices = synchronizeServices(single, appStep);
           const synchronizedSelects = synchronizeServices(select, appStep).filter(service => service.count)
           setSelectedServices(synchronizedSelects)

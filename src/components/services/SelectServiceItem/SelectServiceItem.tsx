@@ -15,7 +15,7 @@ const defaultOption: IndividualService = {
   count: 0,
   specific: ServiceSpecific.Select,
   angebotSection: "",
-  calculatorSection: ""
+  appSection: ""
 }
 
 export const SelectServiceItem: React.FC<Props> = React.memo(({ services, addSelectedService }) => {

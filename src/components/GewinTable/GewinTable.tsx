@@ -39,6 +39,7 @@ const GewinTable = observer(() => {
   const [mainGewin, setMainGewin] = useState(0);
 
   const setPricesByGroups = (prices: Record<string, number>) => {
+    console.log(prices)
     const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
     setDcPrice(dcPrice);
 

@@ -14,7 +14,7 @@ export type IndividualService = Module & {
   producer?: string;
   primePrice?: number;
   workPrice?: number;
-  calculatorSection: string;
+  appSection: string;
   angebotSection: string;
 };
 

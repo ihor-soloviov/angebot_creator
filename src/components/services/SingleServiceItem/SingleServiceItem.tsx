@@ -15,15 +15,15 @@ interface Props {
 export const SingleServiceItem: React.FC<Props> = observer(
   ({ service }) => {
     const { title, description, price, count } = service;
-    const { appStep: step } = stepStore;
+    const { appStep } = stepStore;
     const { updateCount } = calculatorStore;
 
     const [priceCount, setPriceСount] = useState(count || 0)
     const shownPrice = priceCount === 0 ? 0 : price * priceCount;
 
     useEffect(() => {
-      updateCount(step, service, priceCount);
-    }, [priceCount, step]);
+      updateCount(appStep, service, priceCount);
+    }, [priceCount, appStep]);
 
     return (
       <ServiceWrapper title={title} description={description}>

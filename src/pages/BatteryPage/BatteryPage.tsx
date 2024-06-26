@@ -9,7 +9,6 @@ import { Title } from "../../types/calculator-types";
 import { titles } from "./titles";
 import "./BatteryPage.scss";
 
-
 export const BatteryPage: React.FC = observer(() => {
   const { producer } = producerStore;
   const title: Title = titles[producer];

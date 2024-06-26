@@ -1,5 +1,5 @@
 import producerStore, { Producer } from "../stores/producer-store";
-import { formatSingleServices } from "../utils/formatService";
+import { filterServicesByProducer, formatSingleServices } from "../utils/formatService";
 import {
   CalculatorData,
   CalculatorServices,
@@ -74,11 +74,12 @@ export const fetchComponentsBySection = async (section: string) => {
   return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 
-export const fetchServicesBySection = async (section: string) => {
+export const fetchServicesBySection = async (section: string, producer: Producer) => {
   const result = await client.get<CalculatorServices>(
     `/getServicesBySection/${section}`
   );
-  return result;
+  console.log(result)
+  return filterServicesByProducer(result, producer);
 };
 
 export const updateServicePrice = async (id: string, newPrice: number) => {

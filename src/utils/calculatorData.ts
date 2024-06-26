@@ -35,10 +35,11 @@ export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
       ? item.price * profit
       : item.price;
     const count = item.count || 1;
+    console.log(item.angebotSection, item.price, item.title);
     return total + price * count;
   }, 0);
 
-  return roundUp(totalSum);
+  return totalSum;
 };
 
 export const calculateProfitPrices = (
@@ -94,25 +95,25 @@ export const calculatePricesBySteps = (
   const additionWorks = ["wallbox", "zusatzarbeiten"];
   let additionWorksPrice = 0;
 
-  const tablePrices: { [key: string]: number } = {};
+  const formatedCalculatorData: { [key: string]: number } = {};
 
   Object.entries(calculatorData).forEach(([calculatorStep, stepServices]) => {
     if (!Array.isArray(stepServices)) {
       return;
     }
 
-    const totalSum = calculateTotalSum(stepServices, profit);
+    const total = calculateTotalSum(stepServices, profit);
 
     if (additionWorks.includes(calculatorStep)) {
-      additionWorksPrice += totalSum;
-      tablePrices.zusatzarbeiten = additionWorksPrice;
+      additionWorksPrice += total;
+      formatedCalculatorData.zusatzarbeiten = additionWorksPrice;
       return;
     }
 
-    tablePrices[calculatorStep] = roundUp(totalSum);
+    formatedCalculatorData[calculatorStep] = roundUp(total);
   });
-
-  return tablePrices;
+  console.log(formatedCalculatorData);
+  return formatedCalculatorData;
 };
 
 export const calculateExpence = (calculatorData: CalculatorData) => {
@@ -148,7 +149,7 @@ export const calculateTotalWorkDc = (
 
   const totalSum = arr.reduce((total, item) => {
     let workPrice: number = 0;
-    if (item.calculatorSection === "pvModule") {
+    if (item.appSection === "pvModule") {
       workPrice = item.primePrice || 0;
     }
     workPrice = item.workPrice || 0;
