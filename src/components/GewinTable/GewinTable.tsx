@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import calculatorStore from "../../stores/calculator-store";
-import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, roundUp, calculateTotalWorkAc } from "../../utils/calculatorData";
+import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, roundUp, calculateTotalWorkAc, calculateTotalSum } from "../../utils/calculatorData";
 import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
 import SalesTable from "./SalesTable/SalesTable";
+import { toJS } from "mobx";
 
 const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
@@ -28,9 +29,10 @@ const GewinTable = observer(() => {
   //main group prices
   const projectAndAbschluss = 175;
 
-  const [profit, setProfit] = useState(1.9);
+  const [profit, setProfit] = useState(1);
 
-  const [dcPrice, setDcPrice] = useState(0)
+  const [dcPrice, setDcPrice] = useState(0);
+  const [additionalBatteries, setAdditionalBatteries] = useState(0);
 
   const [techPrice, setTechPrice] = useState(0);
   const [fullCost, setFullCost] = useState(0);
@@ -39,15 +41,21 @@ const GewinTable = observer(() => {
   const [mainGewin, setMainGewin] = useState(0);
 
   const setPricesByGroups = (prices: Record<string, number>) => {
-    console.log(prices)
     const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
-    setDcPrice(dcPrice);
-
     const techPrice = roundUp(acPrice + dcPrice + projectAndAbschluss);
-    setTechPrice(techPrice);
-    setFullCost(techPrice + zusaPrice)
+    
+    const additionalBatteries = calculatorData.zusatzarbeiten.filter(el => el.description && el.description === 'дополнительные батареи');
+    const additionalBatteriesPrice = calculateTotalSum(additionalBatteries)
+    setAdditionalBatteries(additionalBatteriesPrice);
 
+    setTimeout(() => {
+      setDcPrice(dcPrice);
+      setTechPrice(techPrice);
+      console.log(techPrice, zusaPrice, additionalBatteriesPrice)
+      setFullCost(techPrice + zusaPrice - additionalBatteriesPrice)
+    }, 500);
   }
+
 
   useEffect(() => {
     const prices = calculatePricesBySteps(calculatorData, profit)
@@ -82,7 +90,7 @@ const GewinTable = observer(() => {
       </div>
       <div className="tables__inner">
         <SalesTable dcAndProject={dcPrice + projectAndAbschluss} dcWorkPrice={dcWorkPrice} calculatorPrices={calculatorPrices} />
-        <StepsTable projectAndAbschluss={projectAndAbschluss} calculatorPrices={calculatorPrices} />
+        <StepsTable additionalBatteries={additionalBatteries} projectAndAbschluss={projectAndAbschluss} calculatorPrices={calculatorPrices} />
         <ProfitTable
           techPrice={techPrice}
           fullCost={fullCost}

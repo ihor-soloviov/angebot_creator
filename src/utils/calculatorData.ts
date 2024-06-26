@@ -25,7 +25,7 @@ const acTable = [
   "iqCombiner",
 ];
 
-export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
+export const calculateTotalSum = (arr: IndividualService[], profit: number = 1) => {
   if (arr.length === 0) {
     return 0;
   }
@@ -35,7 +35,6 @@ export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
       ? item.price * profit
       : item.price;
     const count = item.count || 1;
-    console.log(item.angebotSection, item.price, item.title);
     return total + price * count;
   }, 0);
 
@@ -45,8 +44,7 @@ export const calculateTotalSum = (arr: IndividualService[], profit: number) => {
 export const calculateProfitPrices = (
   calculatorData: Record<string, number>
 ) => {
-  const travelCost = 500; //Anfahrt
-  let dcPrice = travelCost;
+  let dcPrice = 0;
   let acPrice = 0;
   let zusaPrice = 0;
 
@@ -54,6 +52,7 @@ export const calculateProfitPrices = (
     if (dcTable.includes(calculatorStep)) {
       dcPrice += stepPrice;
     } else if (acTable.includes(calculatorStep)) {
+      console.log(calculatorStep, stepPrice)
       acPrice += stepPrice;
     } else {
       zusaPrice += stepPrice;
@@ -82,8 +81,11 @@ export const calculateTotalWithoutProfit = (arr: IndividualService[]) => {
 export const calculatePricesWithoutProfit = (
   calculatorData: Record<string, number>
 ) => {
-  let total = 0;
-  Object.values(calculatorData).forEach((stepPrice) => (total += stepPrice));
+  let total = 175; //Projektierung price
+  Object.entries(calculatorData).forEach(([step, stepPrice]) => {
+    console.log(step, stepPrice)
+    return (total += stepPrice)
+  });
 
   return roundUp(total);
 };
@@ -112,7 +114,6 @@ export const calculatePricesBySteps = (
 
     formatedCalculatorData[calculatorStep] = roundUp(total);
   });
-  console.log(formatedCalculatorData);
   return formatedCalculatorData;
 };
 
@@ -125,9 +126,9 @@ export const calculateExpence = (calculatorData: CalculatorData) => {
         const primePrice = service.primePrice || 0;
         let workPrice;
 
-        if (service.title === "Quermontage") {
+        if (service.title === "Quermontage (SL Rack)") {
           workPrice = getQuermontageWorkPrice(count);
-        } else if (service.title === "Hochmontage") {
+        } else if (service.title === "Hochmontage (Türk.)") {
           workPrice = getHochmontage(count);
         } else {
           workPrice = service.workPrice || 0;

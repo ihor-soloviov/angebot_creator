@@ -24,6 +24,7 @@ const SalesTable: React.FC<Props> = observer(({ calculatorPrices, dcAndProject, 
 
   useEffect(() => {
     const result = calculateExpence(calculatorData)
+    console.log(result)
     setExpense(result)
   }, [calculatorData])
 

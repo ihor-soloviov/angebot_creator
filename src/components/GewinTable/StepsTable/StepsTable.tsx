@@ -4,8 +4,9 @@ import { roundUp } from '../../../utils/calculatorData';
 interface Props {
   projectAndAbschluss: number,
   calculatorPrices: Record<string, number>
+  additionalBatteries: number
 }
-const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices }) => {
+const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices, additionalBatteries }) => {
   const {
     acMontage,
     dcMontage,
@@ -52,11 +53,11 @@ const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices }) 
           </tr>
           <tr>
             <td>8. PV-Speicher</td>
-            <td>{battery}€</td>
+            <td>{battery + additionalBatteries}€</td>
           </tr>
           <tr>
             <td>Zusatzarbeiten</td>
-            <td>{zusatzarbeiten}€</td>
+            <td>{zusatzarbeiten - additionalBatteries}€</td>
           </tr>
         </tbody>
       </table>
