@@ -28,7 +28,7 @@ export enum ProducerStepsCount {
 }
 
 class StepStore {
-  appStep = AppSteps.inbetriebnahme;
+  appStep = AppSteps.producer;
   calculatorSteps = 10;
   calculatorStep = 1;
   angebotId = "";

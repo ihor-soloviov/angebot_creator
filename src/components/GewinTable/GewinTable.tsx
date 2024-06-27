@@ -8,7 +8,7 @@ import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
 import SalesTable from "./SalesTable/SalesTable";
-import { toJS } from "mobx";
+// import { toJS } from "mobx";
 
 const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
@@ -30,30 +30,26 @@ const GewinTable = observer(() => {
   const projectAndAbschluss = 175;
 
   const [profit, setProfit] = useState(1);
-
   const [dcPrice, setDcPrice] = useState(0);
   const [additionalBatteries, setAdditionalBatteries] = useState(0);
-
   const [techPrice, setTechPrice] = useState(0);
   const [fullCost, setFullCost] = useState(0);
-
   const [dcWorkPrice, setDcWorkPrice] = useState(0);
-  const [mainGewin, setMainGewin] = useState(0);
+  // const [mainGewin, setMainGewin] = useState(0);
 
   const setPricesByGroups = (prices: Record<string, number>) => {
     const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
     const techPrice = roundUp(acPrice + dcPrice + projectAndAbschluss);
-    
+
     const additionalBatteries = calculatorData.zusatzarbeiten.filter(el => el.description && el.description === 'дополнительные батареи');
     const additionalBatteriesPrice = calculateTotalSum(additionalBatteries)
     setAdditionalBatteries(additionalBatteriesPrice);
 
-    setTimeout(() => {
-      setDcPrice(dcPrice);
-      setTechPrice(techPrice);
-      console.log(techPrice, zusaPrice, additionalBatteriesPrice)
-      setFullCost(techPrice + zusaPrice - additionalBatteriesPrice)
-    }, 500);
+    setDcPrice(dcPrice);
+    setTechPrice(techPrice);
+    console.log(techPrice, zusaPrice, additionalBatteriesPrice)
+    setFullCost(techPrice + zusaPrice)
+
   }
 
 
@@ -68,8 +64,8 @@ const GewinTable = observer(() => {
     setDcWorkPrice(dcWorkPrice)
 
     //
-    const { wallbox, acMontage, optimizer, invertor, inbetriebnahme, battery } = calculatorData;
-    const acWorkPrice = calculateTotalWorkAc([...wallbox, ...acMontage, ...optimizer, ...invertor, ...inbetriebnahme, ...battery], profit)
+    // const { wallbox, acMontage, optimizer, invertor, inbetriebnahme, battery } = calculatorData;
+    // const acWorkPrice = calculateTotalWorkAc([...wallbox, ...acMontage, ...optimizer, ...invertor, ...inbetriebnahme, ...battery], profit)
     // const gewin = techPrice - dcWorkPrice - (acWorkPrice +) дописати розрахунок zus work price
 
   }, [calculatorData, profit])
@@ -89,8 +85,16 @@ const GewinTable = observer(() => {
         </div>
       </div>
       <div className="tables__inner">
-        <SalesTable dcAndProject={dcPrice + projectAndAbschluss} dcWorkPrice={dcWorkPrice} calculatorPrices={calculatorPrices} />
-        <StepsTable additionalBatteries={additionalBatteries} projectAndAbschluss={projectAndAbschluss} calculatorPrices={calculatorPrices} />
+        <SalesTable
+          dcAndProject={dcPrice + projectAndAbschluss}
+          dcWorkPrice={dcWorkPrice}
+          calculatorPrices={calculatorPrices}
+        />
+        <StepsTable
+          additionalBatteries={additionalBatteries}
+          projectAndAbschluss={projectAndAbschluss}
+          calculatorPrices={calculatorPrices}
+        />
         <ProfitTable
           techPrice={techPrice}
           fullCost={fullCost}

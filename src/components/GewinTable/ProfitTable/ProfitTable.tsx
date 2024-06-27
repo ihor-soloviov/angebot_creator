@@ -9,7 +9,6 @@ const ProfitTable: React.FC<Props> = ({ techPrice, fullCost }) => {
   //discount tables variables
   const [discount, setDiscount] = useState(0);
   const [totalLoss, setTotalLoss] = useState(0)
-  // const [fullPrice, setFullPrice] = useState(0)
   const [sellersGain, setSellersGain] = useState(10);
 
 

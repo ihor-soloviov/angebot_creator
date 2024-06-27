@@ -25,7 +25,10 @@ const acTable = [
   "iqCombiner",
 ];
 
-export const calculateTotalSum = (arr: IndividualService[], profit: number = 1) => {
+export const calculateTotalSum = (
+  arr: IndividualService[],
+  profit: number = 1
+) => {
   if (arr.length === 0) {
     return 0;
   }
@@ -52,7 +55,7 @@ export const calculateProfitPrices = (
     if (dcTable.includes(calculatorStep)) {
       dcPrice += stepPrice;
     } else if (acTable.includes(calculatorStep)) {
-      console.log(calculatorStep, stepPrice)
+      console.log(calculatorStep, stepPrice);
       acPrice += stepPrice;
     } else {
       zusaPrice += stepPrice;
@@ -83,8 +86,8 @@ export const calculatePricesWithoutProfit = (
 ) => {
   let total = 175; //Projektierung price
   Object.entries(calculatorData).forEach(([step, stepPrice]) => {
-    console.log(step, stepPrice)
-    return (total += stepPrice)
+    console.log(step, stepPrice);
+    return (total += stepPrice);
   });
 
   return roundUp(total);
@@ -92,7 +95,7 @@ export const calculatePricesWithoutProfit = (
 
 export const calculatePricesBySteps = (
   calculatorData: CalculatorData,
-  profit: number
+  profit: number = 1
 ) => {
   const additionWorks = ["wallbox", "zusatzarbeiten"];
   let additionWorksPrice = 0;
