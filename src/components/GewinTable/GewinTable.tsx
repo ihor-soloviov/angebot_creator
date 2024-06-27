@@ -39,6 +39,7 @@ const GewinTable = observer(() => {
 
   const setPricesByGroups = (prices: Record<string, number>) => {
     const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
+    console.log(dcPrice, acPrice, zusaPrice)
     const techPrice = roundUp(acPrice + dcPrice + projectAndAbschluss);
 
     const additionalBatteries = calculatorData.zusatzarbeiten.filter(el => el.description && el.description === 'дополнительные батареи');
@@ -47,11 +48,9 @@ const GewinTable = observer(() => {
 
     setDcPrice(dcPrice);
     setTechPrice(techPrice);
-    console.log(techPrice, zusaPrice, additionalBatteriesPrice)
     setFullCost(techPrice + zusaPrice)
 
   }
-
 
   useEffect(() => {
     const prices = calculatePricesBySteps(calculatorData, profit)
@@ -88,7 +87,6 @@ const GewinTable = observer(() => {
         <SalesTable
           dcAndProject={dcPrice + projectAndAbschluss}
           dcWorkPrice={dcWorkPrice}
-          calculatorPrices={calculatorPrices}
         />
         <StepsTable
           additionalBatteries={additionalBatteries}

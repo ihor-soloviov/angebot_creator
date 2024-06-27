@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { calculateExpence, calculatePricesWithoutProfit, roundUp } from '../../../utils/calculatorData'
+import { calculateExpence, calculatePricesBySteps, calculatePricesWithoutProfit, roundUp } from '../../../utils/calculatorData'
 import { observer } from 'mobx-react-lite'
 import calculatorStore from '../../../stores/calculator-store'
 
 interface Props {
-  calculatorPrices: Record<string, number>
   dcWorkPrice: number
   dcAndProject: number
 }
 
-const SalesTable: React.FC<Props> = observer(({ calculatorPrices, dcAndProject, dcWorkPrice }) => {
+const SalesTable: React.FC<Props> = observer(({ dcAndProject, dcWorkPrice }) => {
   const { calculatorData } = calculatorStore
   const [clearPrice, setClearPrice] = useState(0)
   const [expense, setExpense] = useState(0);
 
 
   useEffect(() => {
-    if (calculatorPrices) {
-      const result = calculatePricesWithoutProfit(calculatorPrices)
-      setClearPrice(result)
-    }
-  }, [calculatorPrices])
+    const prices = calculatePricesBySteps(calculatorData);
+    const result = calculatePricesWithoutProfit(prices)
+    setClearPrice(result)
+
+  }, [calculatorData])
 
   useEffect(() => {
     const result = calculateExpence(calculatorData)
-    console.log(result)
     setExpense(result)
   }, [calculatorData])
 

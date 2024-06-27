@@ -5,8 +5,12 @@ const profitChangePriceArray = [
   "Montage & Verkabelung je Wechselrichter",
   "Montage & Verkabelung je Stromspeicher",
   "Anschluss der PV-Anlage an der Hausverteilung",
-  "Anfahrt Elektriker",
   "Netzanmeldung",
+];
+
+const countNoChangesArray = [
+  "Montage & Verkabelung je Wechselrichter",
+  "Montage & Verkabelung je Stromspeicher",
 ];
 
 export const roundUp = (num: number) => {
@@ -38,6 +42,7 @@ export const calculateTotalSum = (
       ? item.price * profit
       : item.price;
     const count = item.count || 1;
+    console.log(item.title, total + price * count)
     return total + price * count;
   }, 0);
 
@@ -55,7 +60,6 @@ export const calculateProfitPrices = (
     if (dcTable.includes(calculatorStep)) {
       dcPrice += stepPrice;
     } else if (acTable.includes(calculatorStep)) {
-      console.log(calculatorStep, stepPrice);
       acPrice += stepPrice;
     } else {
       zusaPrice += stepPrice;
@@ -63,9 +67,9 @@ export const calculateProfitPrices = (
   });
 
   return {
-    dcPrice: roundUp(dcPrice),
-    acPrice: roundUp(acPrice),
-    zusaPrice: roundUp(zusaPrice),
+    dcPrice,
+    acPrice,
+    zusaPrice,
   };
 };
 
@@ -86,7 +90,6 @@ export const calculatePricesWithoutProfit = (
 ) => {
   let total = 175; //Projektierung price
   Object.entries(calculatorData).forEach(([step, stepPrice]) => {
-    console.log(step, stepPrice);
     return (total += stepPrice);
   });
 
@@ -120,27 +123,42 @@ export const calculatePricesBySteps = (
   return formatedCalculatorData;
 };
 
-export const calculateExpence = (calculatorData: CalculatorData) => {
-  return Object.values(calculatorData).reduce((total, serviceArray) => {
-    return (
-      total +
-      serviceArray.reduce((arrayTotal, service) => {
-        const count = service?.count || 1;
-        const primePrice = service.primePrice || 0;
-        let workPrice;
+const getWorkPrice = (service: IndividualService, count: number): number => {
+  if (service.angebotSection === "Components") {
+    return 0;
+  }
+  switch (service.title) {
+    case "Quermontage (SL Rack)":
+      return getQuermontageWorkPrice(count);
+    case "Hochmontage (Türk.)":
+      return getHochmontage(count);
+    default:
+      return service.workPrice || 0;
+  }
+};
 
-        if (service.title === "Quermontage (SL Rack)") {
-          workPrice = getQuermontageWorkPrice(count);
-        } else if (service.title === "Hochmontage (Türk.)") {
-          workPrice = getHochmontage(count);
-        } else {
-          workPrice = service.workPrice || 0;
-        }
-        const result = arrayTotal + count * primePrice + count * workPrice;
-        return roundUp(result);
-      }, 0)
-    );
-  }, 0);
+const calculateServiceTotal = (service: IndividualService): number => {
+  const count = countNoChangesArray.includes(service.title)
+    ? 1
+    : service?.count || 1;
+  const primePrice = service.primePrice || 0;
+  const workPrice = getWorkPrice(service, count);
+
+  const total = count * (primePrice + workPrice);
+  return roundUp(total);
+};
+
+export const calculateExpence = (calculatorData: CalculatorData): number => {
+  const projectingPrimePrice = 375;
+  const startValue = projectingPrimePrice;
+  return Object.values(calculatorData).reduce((total, serviceArray) => {
+    const serviceTotal = serviceArray.reduce((arrayTotal, service) => {
+      return service.appSection === "pvModule"
+        ? arrayTotal
+        : arrayTotal + calculateServiceTotal(service);
+    }, 0);
+    return total + serviceTotal;
+  }, startValue);
 };
 
 export const calculateTotalWorkDc = (
