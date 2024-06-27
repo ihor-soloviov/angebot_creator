@@ -51,7 +51,7 @@ const SalesTable: React.FC<Props> = observer(({ dcAndProject, dcWorkPrice }) => 
           </tr>
           <tr>
             <td>Gewinn</td>
-            <td>{roundUp(dcAndProject - dcWorkPrice)}0€</td>
+            <td>{roundUp(dcAndProject - dcWorkPrice)}€</td>
           </tr>
           <tr>
             <td>Gewinn in %</td>

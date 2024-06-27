@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { roundUp } from '../../../utils/calculatorData';
 
 interface Props {
   techPrice: number,
   fullCost: number
+  discount: number,
+  changeDiscount: (e: React.ChangeEvent<HTMLInputElement>) => void
+  changeSellerGain: (e: React.ChangeEvent<HTMLInputElement>) => void
+  changeTotalLoss: (e: React.ChangeEvent<HTMLInputElement>) => void
+  mainGewin: number
+  sellersGain: number
+  totalLoss: number
 }
-const ProfitTable: React.FC<Props> = ({ techPrice, fullCost }) => {
-  //discount tables variables
-  const [discount, setDiscount] = useState(0);
-  const [totalLoss, setTotalLoss] = useState(0)
-  const [sellersGain, setSellersGain] = useState(10);
-
-
-
-  useEffect(() => setTotalLoss(discount + sellersGain), [discount, sellersGain])
-
+const ProfitTable: React.FC<Props> = ({ techPrice, fullCost, discount, changeDiscount, mainGewin, sellersGain, totalLoss, changeSellerGain, changeTotalLoss }) => {
 
   return (
     <div className="table-column table-column__third">
@@ -28,17 +26,17 @@ const ProfitTable: React.FC<Props> = ({ techPrice, fullCost }) => {
           <tr>
             <td>abzgl. Skonto</td>
             <td className="table__discount">{techPrice - (techPrice * discount / 100)} €</td>
-            <td className="table__profit">7,328.64€</td>
+            <td className="table__profit"></td>
           </tr>
           <tr>
             <td>abzgl. Vertrieb</td>
             <td className="table__distribution">{roundUp(techPrice - (techPrice * sellersGain / 100))} €</td>
-            <td className="table__profit">5,913.49€</td>
+            <td className="table__profit"></td>
           </tr>
           <tr>
             <td>abzgl. Vertrieb + Skonto</td>
             <td className="table__distribution_discount">{roundUp(techPrice - (techPrice * totalLoss / 100))} €</td>
-            <td className="table__profit light-red">5,913.49€</td>
+            <td className="table__profit light-red">{mainGewin}€</td>
           </tr>
         </tbody>
       </table>
@@ -54,15 +52,15 @@ const ProfitTable: React.FC<Props> = ({ techPrice, fullCost }) => {
         <tbody>
           <tr>
             <td>
-              <input value={discount} onChange={(e) => setDiscount(+e.target.value)} />
+              <input value={discount} onChange={changeDiscount} />
               %
             </td>
             <td className="red white-color">
-              <input className="red white-color" value={sellersGain} onChange={(e) => setSellersGain(+e.target.value)} />
+              <input className="red white-color" value={sellersGain} onChange={changeSellerGain} />
               %
             </td>
             <td>
-              <input value={totalLoss} onChange={(e) => setTotalLoss(+e.target.value)} />
+              <input value={totalLoss} onChange={changeTotalLoss} />
               %
             </td>
           </tr>

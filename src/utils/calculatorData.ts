@@ -42,7 +42,6 @@ export const calculateTotalSum = (
       ? item.price * profit
       : item.price;
     const count = item.count || 1;
-    console.log(item.title, total + price * count)
     return total + price * count;
   }, 0);
 
@@ -67,9 +66,9 @@ export const calculateProfitPrices = (
   });
 
   return {
-    dcPrice,
-    acPrice,
-    zusaPrice,
+    dcPrice: roundUp(dcPrice),
+    acPrice: roundUp(acPrice),
+    zusaPrice: roundUp(zusaPrice),
   };
 };
 
@@ -89,9 +88,7 @@ export const calculatePricesWithoutProfit = (
   calculatorData: Record<string, number>
 ) => {
   let total = 175; //Projektierung price
-  Object.entries(calculatorData).forEach(([step, stepPrice]) => {
-    return (total += stepPrice);
-  });
+  Object.values(calculatorData).forEach((stepPrice) => (total += stepPrice));
 
   return roundUp(total);
 };
@@ -123,7 +120,10 @@ export const calculatePricesBySteps = (
   return formatedCalculatorData;
 };
 
-const getWorkPrice = (service: IndividualService, count: number): number => {
+const getWorkPrice = (
+  service: IndividualService,
+  count: number = 1
+): number => {
   if (service.angebotSection === "Components") {
     return 0;
   }
@@ -161,49 +161,48 @@ export const calculateExpence = (calculatorData: CalculatorData): number => {
   }, startValue);
 };
 
-export const calculateTotalWorkDc = (
-  arr: IndividualService[],
-  profit: number
-) => {
+export const calculateTotalWorkDc = (arr: IndividualService[]) => {
   if (arr.length === 0) {
     return 0;
   }
 
   const totalSum = arr.reduce((total, item) => {
-    let workPrice: number = 0;
+    let workPrice = getWorkPrice(item, item.count);
     if (item.appSection === "pvModule") {
       workPrice = item.primePrice || 0;
     }
-    workPrice = item.workPrice || 0;
-    const price = profitChangePriceArray.includes(item.title)
-      ? workPrice * profit
-      : workPrice;
     const count = item.count || 1;
-    return total + price * count;
+    return total + workPrice * count;
   }, 0);
 
   return roundUp(totalSum);
 };
 
-export const calculateTotalWorkAc = (
-  arr: IndividualService[],
-  profit: number
-) => {
+export const calculateTotalWorkAc = (arr: IndividualService[]) => {
   if (arr.length === 0) {
     return 0;
   }
 
+
   const totalSum = arr.reduce((total, item) => {
-    let workPrice: number = 0;
+    let workPrice = item.workPrice || 0;
+    let count = 1;
     if (item.angebotSection === "Components") {
       workPrice = item.primePrice || 0;
+      count = item.count || 1;
     }
-    workPrice = item.workPrice || 0;
-    const price = profitChangePriceArray.includes(item.title)
-      ? workPrice * profit
-      : workPrice;
-    const count = item.count || 1;
-    return total + price * count;
+    if (item.appSection === "Zusatzarbeiten" || item.appSection === "wallbox") {
+      if (item.description && item.description === "дополнительные батареи") {
+        const work = item.workPrice || 0;
+        const prime = item.primePrice || 0;
+        workPrice = work + prime;
+        count = item.count || 1;
+      } else {
+        workPrice = 0;
+        count = 0
+      }
+    }
+    return total + workPrice * count;
   }, 0);
 
   return roundUp(totalSum);
