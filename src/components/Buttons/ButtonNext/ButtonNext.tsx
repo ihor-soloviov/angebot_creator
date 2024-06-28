@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import arrButton from "../../../assets/arrowButton.svg"
 import "./ButtonNext.scss";
 import classNames from "classnames";
@@ -15,24 +15,28 @@ interface Props {
 
 export const ButtonNext: React.FC<Props> = observer(({ isDisabled, width, storageSetter, adminOnClick }) => {
   const { setStep, generateNextStep } = stepStore;
-  const nextStep = generateNextStep();
 
-  const handler = () => {
-    if (adminOnClick) {
-      adminOnClick();
-      return
-    }
+  const handler = useCallback(
+    () => {
+      const nextStep = generateNextStep()
+      if (adminOnClick) {
+        adminOnClick();
+        return
+      }
 
-    if (nextStep === null) {
-      return;
-    }
+      if (nextStep === null) {
+        return;
+      }
 
-    if (storageSetter) {
-      storageSetter()
-    }
+      if (storageSetter) {
+        storageSetter()
+      }
 
-    setStep(nextStep)
-  }
+      setStep(nextStep)
+    },
+    [adminOnClick, generateNextStep, setStep, storageSetter],
+  )
+
 
 
   return (

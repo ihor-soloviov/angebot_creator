@@ -7,14 +7,12 @@ import { ButtonNext } from "../../components/Buttons/ButtonNext";
 import { ButtonPrev } from "../../components/Buttons/ButtonPrev";
 import "./ProducerPage.scss";
 import producerStore, { Producer } from "../../stores/producer-store";
-import stepStore from "../../stores/step-store";
 
 export const ProducerPage: React.FC = React.memo(() => {
   const [selectedValue, setSelectedValue] = useState<string>('Выберете производителя');
   const [isDisabled, setIsDisabled] = useState(true);
   const producerValues = Object.values(Producer);
 
-  const { setCalculatorSteps } = stepStore;
   const { setProducer } = producerStore;
 
   const changeSelectedValue: (value: string) => void = (newValue) => {
@@ -26,11 +24,7 @@ export const ProducerPage: React.FC = React.memo(() => {
     if (selectedValue !== 'Выберете производителя') {
       setProducer(selectedValue as Producer);
     }
-
-    if (selectedValue === Producer.enphase) {
-      setCalculatorSteps(9)
-    }
-  }, [selectedValue, setProducer, setCalculatorSteps]);
+  }, [selectedValue, setProducer]);
 
 
   return (

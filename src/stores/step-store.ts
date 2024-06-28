@@ -30,8 +30,6 @@ export enum ProducerStepsCount {
 
 class StepStore {
   appStep = AppSteps.producer;
-  calculatorSteps = 10;
-  calculatorStep = 1;
   angebotId = "";
 
   arrayOfProducerSteps = {
@@ -80,26 +78,32 @@ class StepStore {
     makeAutoObservable(this);
   }
 
-  get steps() {
-    return this.arrayOfProducerSteps;
+  get calculatorSteps() {
+    const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
+    const startIndex = stepsArray.indexOf(AppSteps.producer) + 1;
+    const endIndex = stepsArray.indexOf(AppSteps.checkout);
+
+    return stepsArray.slice(startIndex, endIndex);
+  }
+
+  get calculatorStepsLength() {
+    return this.calculatorSteps.length;
   }
 
   setStep = (value: AppSteps) => {
     this.appStep = value;
   };
 
-  setCalculatorSteps = (value: number) => {
-    this.calculatorSteps = value;
-  };
-
   get rangeIndex() {
     const activeStep = this.appStep;
-    const stepsArray = this.arrayOfProducerSteps[producerStore.producer];
-    const currentStepIndex = stepsArray.findIndex(
-      (el, index) => el === activeStep && index < stepsArray.length - 1
+    const filteredSteps = this.calculatorSteps;
+
+    // Знаходимо індекс активного кроку в відфільтрованому масиві
+    const currentStepIndex = filteredSteps.findIndex(
+      (el, index) => el === activeStep && index < filteredSteps.length
     );
 
-    return currentStepIndex - 1;
+    return currentStepIndex;
   }
 
   generateNextStep = () => {
@@ -111,7 +115,6 @@ class StepStore {
     if (currentStepIndex !== -1) {
       return stepsArray[currentStepIndex + 1];
     }
-    // Якщо вже на останньому кроці або крок не знайдено
     return null;
   };
 

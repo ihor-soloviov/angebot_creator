@@ -74,7 +74,6 @@ export const fetchServicesBySection = async (section: string, producer: Producer
   const result = await client.get<CalculatorServices>(
     `/getServicesBySection/${section}`
   );
-  console.log(result)
   return filterServicesByProducer(result, producer);
 };
 
