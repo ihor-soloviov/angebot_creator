@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ProgressBar } from "../ProgressBar";
 import { CalculatorTitle } from "./CalculatorTitle";
 import { ButtonNext } from "../Buttons/ButtonNext";
-import { DropdownServices, IndividualService, Title } from "../../types/calculator-types";
+import { DropdownItems, CalculatorItem, Title } from "../../types/calculator-types";
 import { fetchServicesBySection, fetchComponentsBySection } from "../../api/fetch";
 import { formatSelectServices, formatSingleServices } from "../../utils/formatService";
 import { observer } from "mobx-react-lite";
@@ -12,7 +12,7 @@ import calculatorStore from "../../stores/calculator-store";
 import CalculatorContainer from "./CalculatorContainer/CalculatorContainer";
 import { SingleServiceItem } from "../services/SingleServiceItem";
 import { SelectServiceItem } from "../services/SelectServiceItem";
-import stepStore from "../../stores/step-store";
+import stepStore, { AppSteps } from "../../stores/step-store";
 import "./Calculator.scss";
 
 interface Props {
@@ -33,10 +33,10 @@ export const Calculator: React.FC<Props> = observer(({
   const { appStep } = stepStore
   const { stepTotalPrice, getService } = calculatorStore;
 
-  const [services, setServices] = useState<IndividualService[]>([]);
-  const [selectedServices, setSelectedServices] = useState<IndividualService[]>([])
-  const [selects, setSelects] = useState<DropdownServices | null>(null);
-  const addSelectedService = (service: IndividualService) => {
+  const [services, setServices] = useState<CalculatorItem[]>([]);
+  const [selectedServices, setSelectedServices] = useState<CalculatorItem[]>([])
+  const [selects, setSelects] = useState<DropdownItems | null>(null);
+  const addSelectedService = (service: CalculatorItem) => {
     setSelectedServices(prev => [...prev, service])
   }
 
@@ -74,9 +74,9 @@ export const Calculator: React.FC<Props> = observer(({
     [],
   )
 
-  const synchronizeServices = (fetchedServices: IndividualService[], stepName: string): IndividualService[] => {
+  const synchronizeServices = (fetchedServices: CalculatorItem[], stepName: AppSteps): CalculatorItem[] => {
     return fetchedServices.map(service => {
-      const existingService = getService(stepName, service.title);
+      const existingService = getService(stepName, service._id);
       if (existingService) {
         return { ...service, count: existingService.count };
       }

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { PlusMinusHandler } from "../../Buttons/PlusMinusHandler";
-import { IndividualService } from "../../../types/calculator-types";
+import { CalculatorItem } from "../../../types/calculator-types";
 import { getUnNormalShownPrice } from "../../../utils/getUnNormalShownPrice";
 import { observer } from "mobx-react-lite";
 import ServiceWrapper from "../ServiceWrapper/ServiceWrapper";
@@ -9,7 +9,7 @@ import calculatorStore from "../../../stores/calculator-store";
 import stepStore from "../../../stores/step-store";
 
 interface Props {
-  service: IndividualService
+  service: CalculatorItem
 }
 
 export const SingleServiceItem: React.FC<Props> = observer(

@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import "./PriceInput.scss";
 import { updateServicePrice } from "../../../api/fetch";
-import { IndividualService } from "../../../types/calculator-types";
+import { CalculatorItem } from "../../../types/calculator-types";
 
 interface Props {
-  item: IndividualService,
+  item: CalculatorItem,
   currentPrice: number,
   showSuccess: () => void,
 }

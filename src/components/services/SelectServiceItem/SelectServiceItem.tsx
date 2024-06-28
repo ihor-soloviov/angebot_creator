@@ -1,25 +1,25 @@
 import React, { useCallback, useMemo, useState } from "react";
 import "./SelectServiceItem.scss";
-import { DropdownServices, IndividualService, ServiceSpecific } from "../../../types/calculator-types";
+import { DropdownItems, CalculatorItem, ItemSpecific } from "../../../types/calculator-types";
 import { CustomSelect } from "../../Inputs/CustomSelect";
 import classNames from "classnames";
 
 interface Props {
-  services: DropdownServices
-  addSelectedService: (selectObject: IndividualService) => void
+  services: DropdownItems
+  addSelectedService: (selectObject: CalculatorItem) => void
 }
 
-const defaultOption: IndividualService = {
+const defaultOption: CalculatorItem = {
   title: 'Выберете вариант',
   price: 0,
   count: 0,
-  specific: ServiceSpecific.Select,
+  specific: ItemSpecific.Select,
   angebotSection: "",
   appSection: ""
 }
 
 export const SelectServiceItem: React.FC<Props> = React.memo(({ services, addSelectedService }) => {
-  const [selectedOption, setSelectedOption] = useState<IndividualService>(defaultOption);
+  const [selectedOption, setSelectedOption] = useState<CalculatorItem>(defaultOption);
 
   const { label, options } = services;
   const valuesForCustomSelect = useMemo(() => options.map(obj => obj.title), [options]);

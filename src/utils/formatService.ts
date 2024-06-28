@@ -1,32 +1,28 @@
 import {
-  CalculatorServices,
-  IndividualService,
-  ServiceSpecific,
+  CalculatorItems,
+  CalculatorItem,
+  ItemSpecific,
 } from "../types/calculator-types";
 
-export const formatSingleServices = (
-  servicesFromDatabase: IndividualService[]
-) =>
-  servicesFromDatabase.map((el: IndividualService) => ({
+export const formatSingleServices = (dbServices: CalculatorItem[]) =>
+  dbServices.map((el: CalculatorItem) => ({
     ...el,
     count: el.count || 0,
-    specific: ServiceSpecific.Single,
+    specific: ItemSpecific.Single,
   }));
 
-export const formatSelectServices = (
-  servicesFromDatabase: IndividualService[]
-) =>
-  servicesFromDatabase.map((el: IndividualService) => ({
+export const formatSelectServices = (dbServices: CalculatorItem[]) =>
+  dbServices.map((el: CalculatorItem) => ({
     ...el,
-    specific: ServiceSpecific.Select,
+    specific: ItemSpecific.Select,
   }));
 
 export const filterServicesByProducer = (
-  services: CalculatorServices,
+  services: CalculatorItems,
   producer: string
-): CalculatorServices => {
-  const filterByProducer = (service: IndividualService) =>
-    service?.available === 'all' || service.producer === producer;
+): CalculatorItems => {
+  const filterByProducer = (service: CalculatorItem) =>
+    service?.available === "all" || service.producer === producer;
 
   return {
     single: services.single.filter(filterByProducer),

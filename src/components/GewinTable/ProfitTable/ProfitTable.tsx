@@ -1,5 +1,5 @@
 import React from 'react'
-import { roundUp } from '../../../utils/calculatorData';
+import { roundUp } from '../../../utils/calculations';
 
 interface Props {
   techPrice: number,

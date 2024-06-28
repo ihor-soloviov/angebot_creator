@@ -4,7 +4,7 @@ import { Header } from '../../components/Header';
 import { Partition } from '../../imports';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getActualHeader } from '../../utils/getActualHeader';
-import { IndividualService } from '../../types/calculator-types';
+import { CalculatorItem } from '../../types/calculator-types';
 import { fetchServicesBySection as fetchServicesBySection, fetchServices } from '../../api/fetch';
 import { CalculatorTitle } from '../../components/Calculator/CalculatorTitle';
 import { ButtonNext } from '../../components/Buttons/ButtonNext';
@@ -20,8 +20,8 @@ const ChangePricePage = () => {
     className: ""
   })
 
-  const [services, setServices] = useState<IndividualService[]>([]);
-  const [components, setComponents] = useState<IndividualService[]>([]);
+  const [services, setServices] = useState<CalculatorItem[]>([]);
+  const [components, setComponents] = useState<CalculatorItem[]>([]);
 
   const setServicesFromServer = async () => {
     const { title } = actualHeader;

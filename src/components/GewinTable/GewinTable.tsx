@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import calculatorStore from "../../stores/calculator-store";
-import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, calculateTotalSum, calculateTotalWorkAc, roundUp } from "../../utils/calculatorData";
+import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, calculateTotalSum, calculateTotalWorkAc, roundUp, getDcWorkPriceArray, getAcWorkPriceArray } from "../../utils/calculations";
 import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
 import SalesTable from "./SalesTable/SalesTable";
 import { AppSteps } from "../../stores/step-store";
+import { CalculatedSteps } from "../../types/calculator-types";
 
 const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
@@ -50,12 +51,16 @@ const GewinTable = observer(() => {
 
   useEffect(() => setTotalLoss(discount + sellersGain), [discount, sellersGain])
 
-  const setPricesByGroups = (prices: Record<string, number>) => {
+  const setPricesByGroups = (prices: CalculatedSteps) => {
     const { dcPrice, acPrice, zusaPrice } = calculateProfitPrices(prices);
     const techPrice = acPrice + dcPrice + projectAndAbschluss;
+    let additionalBatteriesPrice = 0;
 
-    const additionalBatteries = calculatorData.zusatzarbeiten.filter(el => el.description && el.description === 'дополнительные батареи');
-    const additionalBatteriesPrice = calculateTotalSum(additionalBatteries)
+    if (calculatorData.zusatzarbeiten) {
+      const additionalBatteries = calculatorData.zusatzarbeiten.filter(el => el.description && el.description === 'дополнительные батареи');
+      additionalBatteriesPrice = calculateTotalSum(additionalBatteries)
+    }
+
     setAdditionalBatteries(additionalBatteriesPrice);
 
     setDcPrice(dcPrice);
@@ -69,14 +74,19 @@ const GewinTable = observer(() => {
     setCalculatorPrices(prices)
     setPricesByGroups(prices);
 
-    const { underConstructions, dcMontage, pvModule } = calculatorData;
-    const dcWorks = [...underConstructions, ...dcMontage, ...pvModule];
+    const dcWorks = getDcWorkPriceArray(calculatorData);
     const dcWorkPrice = calculateTotalWorkDc(dcWorks)
     setDcWorkPrice(dcWorkPrice)
 
-    const { wallbox, acMontage, optimizer, invertor, inbetriebnahme, battery, zusatzarbeiten } = calculatorData;
-    const acWorkPrice = calculateTotalWorkAc([...acMontage, ...inbetriebnahme, ...optimizer, ...invertor, ...battery, ...zusatzarbeiten, ...wallbox,]) + 200;
-    const additionalBatteries = calculateTotalWorkAc([...zusatzarbeiten]);
+    const acWorks = getAcWorkPriceArray(calculatorData);
+    const acWorkPrice = calculateTotalWorkAc(acWorks) + 200;
+
+    const { zusatzarbeiten } = calculatorData;
+    let additionalBatteries = 0;
+
+    if (zusatzarbeiten) {
+      additionalBatteries = calculateTotalWorkAc([...zusatzarbeiten]);
+    }
     const priceWithAllLosses = roundUp(techPrice - (techPrice * totalLoss / 100))
     const gewin = priceWithAllLosses - dcWorkPrice - acWorkPrice - projectAndAbschluss + additionalBatteries;
     setMainGewin(roundUp(gewin))

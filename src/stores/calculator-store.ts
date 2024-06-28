@@ -1,11 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import { IndividualService } from "../types/calculator-types";
+import { CalculatorItem, ItemsByStep } from "../types/calculator-types";
+import { AppSteps } from "./step-store";
 
 export enum AngebotType {
   previous = "Vorläufiges Angebot",
   analyse = "Wirtschaftsanalyse",
   oriented = "Richtpreisangebot",
-  individual = 'Individuelles Angebot',
+  individual = "Individuelles Angebot",
   default = "",
 }
 
@@ -16,8 +17,8 @@ export interface PvsolFileItem {
 }
 
 class CalculatorStore {
-  calculatorData: { [key: string]: IndividualService[] } = {};
-  angebotData: { [key: string]: IndividualService[] } = {};
+  calculatorData: Partial<ItemsByStep> = {};
+  angebotData: { [key: string]: CalculatorItem[] } = {};
   angebotType: AngebotType = AngebotType.default;
   pvsolFileData: PvsolFileItem[] | null = null;
   pricesTable = [];
@@ -27,8 +28,8 @@ class CalculatorStore {
   }
 
   updateCount = (
-    stepName: string,
-    service: IndividualService,
+    stepName: AppSteps,
+    service: CalculatorItem,
     count: number
   ) => {
     if (!this.calculatorData[stepName]) {
@@ -36,6 +37,9 @@ class CalculatorStore {
     }
 
     const stepServices = this.calculatorData[stepName];
+    if (!stepServices) {
+      return;
+    }
     const selectedServiceIndex = stepServices.findIndex(
       (s) => s._id === service._id
     );
@@ -62,7 +66,7 @@ class CalculatorStore {
       }, 0);
   }
 
-  stepTotalPrice = (stepName: string) => {
+  stepTotalPrice = (stepName: AppSteps) => {
     const stepServices = this.calculatorData[stepName] || [];
     return stepServices.reduce((total, service) => {
       const count = service.count || 0;
@@ -71,11 +75,11 @@ class CalculatorStore {
   };
 
   getService = (
-    stepName: string,
-    serviceTitle: string
-  ): IndividualService | undefined => {
+    stepName: AppSteps,
+    serviceId: string
+  ): CalculatorItem | undefined => {
     const stepServices = this.calculatorData[stepName] || [];
-    return stepServices.find((s) => s.title === serviceTitle);
+    return stepServices.find((s) => s._id === serviceId);
   };
 
   setAngebotType = (type: AngebotType) => (this.angebotType = type);

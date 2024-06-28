@@ -1,17 +1,22 @@
 import { AppSteps } from "../stores/step-store";
 import {
   CalculatedSteps,
-  ServicesByStep,
-  IndividualService,
+  ItemsByStep,
+  CalculatorItem,
 } from "../types/calculator-types";
 
-const profitChangePriceArray = [
-  "DC-Montage je Modul",
-  "Montage & Verkabelung je Wechselrichter",
-  "Montage & Verkabelung je Stromspeicher",
-  "Anschluss der PV-Anlage an der Hausverteilung",
-  "Netzanmeldung",
-];
+const getItemPrice = (item: CalculatorItem, profit: number) => {
+  const profitChangePriceArray = [
+    "DC-Montage je Modul",
+    "Montage & Verkabelung je Wechselrichter",
+    "Montage & Verkabelung je Stromspeicher",
+    "Anschluss der PV-Anlage an der Hausverteilung",
+    "Netzanmeldung",
+  ];
+  return profitChangePriceArray.includes(item.title)
+    ? item.price * profit
+    : item.price;
+};
 
 const countNoChangesArray = [
   "Montage & Verkabelung je Wechselrichter",
@@ -28,6 +33,17 @@ const dcTable = [
   AppSteps.underConstructions,
   AppSteps.pvModule,
 ];
+
+export const getDcWorkPriceArray = (itemsBySteps: ItemsByStep): CalculatorItem[] => {
+  return dcTable.reduce((acc, step) => {
+    const stepItems = itemsBySteps[step];
+    if (stepItems) {
+      acc.push(...stepItems);
+    }
+    return acc;
+  }, [] as CalculatorItem[]);
+};
+
 const acTable = [
   AppSteps.acMontage,
   AppSteps.inbetriebnahme,
@@ -37,8 +53,18 @@ const acTable = [
   AppSteps.iqCombiner,
 ];
 
+export const getAcWorkPriceArray = (itemsBySteps: ItemsByStep): CalculatorItem[] => {
+  return acTable.reduce((acc, step) => {
+    const stepItems = itemsBySteps[step];
+    if (stepItems) {
+      acc.push(...stepItems);
+    }
+    return acc;
+  }, [] as CalculatorItem[]);
+};
+
 export const calculateTotalSum = (
-  arr: IndividualService[],
+  arr: CalculatorItem[],
   profit: number = 1
 ) => {
   if (arr.length === 0) {
@@ -46,9 +72,7 @@ export const calculateTotalSum = (
   }
 
   const totalSum = arr.reduce((total, item) => {
-    const price = profitChangePriceArray.includes(item.title)
-      ? item.price * profit
-      : item.price;
+    const price = getItemPrice(item, profit);
     const count = item.count || 1;
     return total + price * count;
   }, 0);
@@ -80,7 +104,7 @@ export const calculateProfitPrices = (calculatorData: CalculatedSteps) => {
   };
 };
 
-export const calculateTotalWithoutProfit = (arr: IndividualService[]) => {
+export const calculateTotalWithoutProfit = (arr: CalculatorItem[]) => {
   if (arr.length === 0) {
     return 0;
   }
@@ -102,13 +126,13 @@ export const calculatePricesWithoutProfit = (
 };
 
 export const calculatePricesBySteps = (
-  calculatorData: ServicesByStep,
+  calculatorData: ItemsByStep,
   profit: number = 1
 ) => {
   const additionWorks = ["wallbox", "zusatzarbeiten"];
   let additionWorksPrice = 0;
 
-  const formatedCalculatorData: Partial<CalculatedSteps> = {};
+  const formatedCalculatorData: CalculatedSteps = {};
 
   Object.entries(calculatorData).forEach(([calculatorStep, stepServices]) => {
     const step = calculatorStep as AppSteps;
@@ -129,10 +153,7 @@ export const calculatePricesBySteps = (
   return formatedCalculatorData;
 };
 
-const getWorkPrice = (
-  service: IndividualService,
-  count: number = 1
-): number => {
+const getWorkPrice = (service: CalculatorItem, count: number = 1): number => {
   if (service.angebotSection === "Components") {
     return 0;
   }
@@ -146,7 +167,7 @@ const getWorkPrice = (
   }
 };
 
-const calculateServiceTotal = (service: IndividualService): number => {
+const calculateServiceTotal = (service: CalculatorItem): number => {
   const count = countNoChangesArray.includes(service.title)
     ? 1
     : service?.count || 1;
@@ -157,7 +178,7 @@ const calculateServiceTotal = (service: IndividualService): number => {
   return roundUp(total);
 };
 
-export const calculateExpence = (calculatorData: ServicesByStep): number => {
+export const calculateExpence = (calculatorData: ItemsByStep): number => {
   const projectingPrimePrice = 375;
   const startValue = projectingPrimePrice;
   return Object.values(calculatorData).reduce((total, serviceArray) => {
@@ -170,7 +191,7 @@ export const calculateExpence = (calculatorData: ServicesByStep): number => {
   }, startValue);
 };
 
-export const calculateTotalWorkDc = (arr: IndividualService[]) => {
+export const calculateTotalWorkDc = (arr: CalculatorItem[]) => {
   if (arr.length === 0) {
     return 0;
   }
@@ -187,7 +208,7 @@ export const calculateTotalWorkDc = (arr: IndividualService[]) => {
   return roundUp(totalSum);
 };
 
-export const calculateTotalWorkAc = (arr: IndividualService[]) => {
+export const calculateTotalWorkAc = (arr: CalculatorItem[]) => {
   if (arr.length === 0) {
     return 0;
   }

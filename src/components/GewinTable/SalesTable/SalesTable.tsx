@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { calculateExpence, calculatePricesBySteps, calculatePricesWithoutProfit, roundUp } from '../../../utils/calculatorData'
+import { calculateExpence, calculatePricesBySteps, calculatePricesWithoutProfit, roundUp } from '../../../utils/calculations'
 import { observer } from 'mobx-react-lite'
 import calculatorStore from '../../../stores/calculator-store'
 

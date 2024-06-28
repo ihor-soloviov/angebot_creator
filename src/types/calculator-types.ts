@@ -5,14 +5,14 @@ export type Title = {
   description?: string;
 };
 
-export type Module = Title & {
+export type Item = Title & {
   price: number;
 };
 
-export type IndividualService = Module & {
-  specific: ServiceSpecific;
+export type CalculatorItem = Item & {
+  specific: ItemSpecific;
   count?: number;
-  _id?: string;
+  _id: string;
   producer?: string;
   primePrice?: number;
   workPrice?: number;
@@ -21,25 +21,25 @@ export type IndividualService = Module & {
   angebotSection: string;
 };
 
-export type DropdownServices = {
+export type DropdownItems = {
   label?: string;
-  options: IndividualService[];
+  options: CalculatorItem[];
 };
 
-export enum ServiceSpecific {
+export enum ItemSpecific {
   Select = "select",
   Single = "single",
 }
 
-export type CalculatorServices = {
-  single: IndividualService[];
-  select: IndividualService[];
+export type CalculatorItems = {
+  single: CalculatorItem[];
+  select: CalculatorItem[];
 };
 
-export type ServicesByStep = {
-  [key in AppSteps]: IndividualService[];
+export type ItemsByStep = {
+  [key in AppSteps]?: CalculatorItem[];
 };
 
 export type CalculatedSteps = {
-  [key in AppSteps]: number;
+  [key in AppSteps]?: number;
 };

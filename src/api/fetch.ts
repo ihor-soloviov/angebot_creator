@@ -4,10 +4,10 @@ import {
   formatSingleServices,
 } from "../utils/formatService";
 import {
-  ServicesByStep,
-  CalculatorServices,
-  IndividualService,
-  Module,
+  ItemsByStep,
+  CalculatorItems,
+  CalculatorItem,
+  Item,
 } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
 import stepStore from "../stores/step-store";
@@ -62,7 +62,7 @@ const client = {
 };
 
 export const fetchServices = async () => {
-  const components = await client.get<IndividualService[]>("/getServices");
+  const components = await client.get<CalculatorItem[]>("/getServices");
   return formatSingleServices(components);
 };
 
@@ -70,14 +70,14 @@ export const fetchComponentsBySection = async (section: string) => {
   const { producer } = producerStore;
 
   const queries = `?section=${section}&producer=${producer}`;
-  return client.get<IndividualService[]>("/getComponentsBySection" + queries);
+  return client.get<CalculatorItem[]>("/getComponentsBySection" + queries);
 };
 
 export const fetchServicesBySection = async (
   section: string,
   producer: Producer
 ) => {
-  const result = await client.get<CalculatorServices>(
+  const result = await client.get<CalculatorItems>(
     `/getServicesBySection/${section}`
   );
   return filterServicesByProducer(result, producer);
@@ -89,7 +89,7 @@ export const updateServicePrice = async (id: string, newPrice: number) => {
     newPrice,
   };
 
-  await client.patch<Module>("/changePrice", requestData);
+  await client.patch<Item>("/changePrice", requestData);
 };
 
 export const uploadMainImage = async (
@@ -116,7 +116,7 @@ export const sendDataToGenerator = async () => {
 
   type Response = {
     message: string;
-    data: ServicesByStep;
+    data: ItemsByStep;
   };
 
   await client.post<Response>("/saveAngebotData", responseData);

@@ -3,11 +3,11 @@ import ServiceWrapper from '../ServiceWrapper/ServiceWrapper'
 import PriceInput from '../../Inputs/PriceInput/PriceInput';
 import checkDone from '../../../assets/admin/changedPrice.svg'
 import "./EditableService.scss"
-import { IndividualService } from '../../../types/calculator-types';
+import { CalculatorItem } from '../../../types/calculator-types';
 
 interface Props {
   title: string
-  item: IndividualService
+  item: CalculatorItem
 }
 const EditableService: React.FC<Props> = ({ item: { title, description, price }, item }) => {
   const [isChanged, setIsChanged] = useState(false);
