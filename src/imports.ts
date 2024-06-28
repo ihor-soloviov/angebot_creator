@@ -18,6 +18,7 @@ import { Title } from "./types/calculator-types";
 import GewinPage from "./pages/GewinPage/GewinPage";
 import AcMontage from "./pages/AcMontage/AcMontage";
 import InbetriebnahmePage from "./pages/InbetriebnahmePage/InbetriebnahmePage";
+import CabelsPage from "./pages/CabelsPage/CabelsPage";
 
 export const stepComponents = {
   [AppSteps.angebotType]: AngebotTypePage,
@@ -32,6 +33,7 @@ export const stepComponents = {
   [AppSteps.optimizer]: OptimizerPage,
   [AppSteps.invertor]: InvertorPage,
   [AppSteps.iqCombiner]: IqCombinerPage,
+  [AppSteps.cabels]: CabelsPage,
   [AppSteps.battery]: BatteryPage,
   [AppSteps.wallbox]: WallboxPage,
   [AppSteps.zusatzarbeiten]: ZusatzarbeitenPage,

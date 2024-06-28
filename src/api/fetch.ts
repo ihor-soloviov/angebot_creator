@@ -65,12 +65,8 @@ export const fetchServices = async () => {
 
 export const fetchComponentsBySection = async (section: string) => {
   const { producer } = producerStore;
-  const { appStep } = stepStore;
-  let brand: string = producer;
-  if (appStep === AppSteps.wallbox) {
-    brand = producer === Producer.enphase ? "Pulsar Plus" : producer;
-  } 
-  const queries = `?section=${section}&producer=${brand}`;
+
+  const queries = `?section=${section}&producer=${producer}`;
   return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 

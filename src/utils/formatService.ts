@@ -26,7 +26,7 @@ export const filterServicesByProducer = (
   producer: string
 ): CalculatorServices => {
   const filterByProducer = (service: IndividualService) =>
-    !service.producer || service.producer === producer;
+    service?.available === 'all' || service.producer === producer;
 
   return {
     single: services.single.filter(filterByProducer),

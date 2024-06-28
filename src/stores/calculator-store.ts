@@ -37,7 +37,7 @@ class CalculatorStore {
 
     const stepServices = this.calculatorData[stepName];
     const selectedServiceIndex = stepServices.findIndex(
-      (s) => s.title === service.title
+      (s) => s._id === service._id
     );
 
     if (count > 0) {
