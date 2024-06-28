@@ -8,21 +8,24 @@ import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
 import SalesTable from "./SalesTable/SalesTable";
+import { AppSteps } from "../../stores/step-store";
 
 const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
 
   //calculatorPrices
-  const [calculatorPrices, setCalculatorPrices] = useState<Record<string, number>>({
-    acMontage: 0,
-    inbetriebnahme: 0,
-    invertor: 0,
-    optimizer: 0,
-    battery: 0,
-    dcMontage: 0,
-    underConstructions: 0,
-    pvModule: 0,
-    zusatzarbeiten: 0
+  const [calculatorPrices, setCalculatorPrices] = useState<Partial<Record<AppSteps, number>>>({
+    [AppSteps.acMontage]: 0,
+    [AppSteps.inbetriebnahme]: 0,
+    [AppSteps.invertor]: 0,
+    [AppSteps.optimizer]: 0,
+    [AppSteps.cabels]: 0,
+    [AppSteps.battery]: 0,
+    [AppSteps.iqCombiner]: 0,
+    [AppSteps.dcMontage]: 0,
+    [AppSteps.underConstructions]: 0,
+    [AppSteps.pvModule]: 0,
+    [AppSteps.zusatzarbeiten]: 0
   })
 
   //main group prices

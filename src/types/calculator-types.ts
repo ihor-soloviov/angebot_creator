@@ -1,3 +1,5 @@
+import { AppSteps } from "../stores/step-store";
+
 export type Title = {
   title: string;
   description?: string;
@@ -34,16 +36,10 @@ export type CalculatorServices = {
   select: IndividualService[];
 };
 
-// export type BaseCalculatorData = {
-//   angebotType: AngebotType;
-//   angebotId: string;
-//   pvsolFileData: PvsolFileItem[] | null;
-// };
+export type ServicesByStep = {
+  [key in AppSteps]: IndividualService[];
+};
 
-// export type CalculatorData = BaseCalculatorData & {
-//   [key: string]: IndividualService[];
-// };
-
-export type CalculatorData = {
-  [key: string]: IndividualService[];
+export type CalculatedSteps = {
+  [key in AppSteps]: number;
 };

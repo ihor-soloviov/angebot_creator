@@ -1,13 +1,16 @@
 import producerStore, { Producer } from "../stores/producer-store";
-import { filterServicesByProducer, formatSingleServices } from "../utils/formatService";
 import {
-  CalculatorData,
+  filterServicesByProducer,
+  formatSingleServices,
+} from "../utils/formatService";
+import {
+  ServicesByStep,
   CalculatorServices,
   IndividualService,
   Module,
 } from "../types/calculator-types";
 import calculatorStore from "../stores/calculator-store";
-import stepStore, { AppSteps } from "../stores/step-store";
+import stepStore from "../stores/step-store";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 type RequestData = Record<string, unknown> | null;
@@ -70,7 +73,10 @@ export const fetchComponentsBySection = async (section: string) => {
   return client.get<IndividualService[]>("/getComponentsBySection" + queries);
 };
 
-export const fetchServicesBySection = async (section: string, producer: Producer) => {
+export const fetchServicesBySection = async (
+  section: string,
+  producer: Producer
+) => {
   const result = await client.get<CalculatorServices>(
     `/getServicesBySection/${section}`
   );
@@ -110,14 +116,10 @@ export const sendDataToGenerator = async () => {
 
   type Response = {
     message: string;
-    data: CalculatorData;
+    data: ServicesByStep;
   };
 
-  await client.post<Response>(
-    "/saveAngebotData",
-    responseData
-  );
-
+  await client.post<Response>("/saveAngebotData", responseData);
 };
 
 export const getNextProjectVersion = async (

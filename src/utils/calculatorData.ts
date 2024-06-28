@@ -1,4 +1,9 @@
-import { CalculatorData, IndividualService } from "../types/calculator-types";
+import { AppSteps } from "../stores/step-store";
+import {
+  CalculatedSteps,
+  ServicesByStep,
+  IndividualService,
+} from "../types/calculator-types";
 
 const profitChangePriceArray = [
   "DC-Montage je Modul",
@@ -18,15 +23,18 @@ export const roundUp = (num: number) => {
   return Math.ceil(num * precision) / precision;
 };
 
-const dcTable = ["dcMontage", "underConstructions", "pvModule"];
-
+const dcTable = [
+  AppSteps.dcMontage,
+  AppSteps.underConstructions,
+  AppSteps.pvModule,
+];
 const acTable = [
-  "acMontage",
-  "inbetriebnahme",
-  "invertor",
-  "optimizer",
-  "battery",
-  "iqCombiner",
+  AppSteps.acMontage,
+  AppSteps.inbetriebnahme,
+  AppSteps.invertor,
+  AppSteps.optimizer,
+  AppSteps.battery,
+  AppSteps.iqCombiner,
 ];
 
 export const calculateTotalSum = (
@@ -48,20 +56,20 @@ export const calculateTotalSum = (
   return totalSum;
 };
 
-export const calculateProfitPrices = (
-  calculatorData: Record<string, number>
-) => {
+export const calculateProfitPrices = (calculatorData: CalculatedSteps) => {
   let dcPrice = 0;
   let acPrice = 0;
   let zusaPrice = 0;
 
   Object.entries(calculatorData).forEach(([calculatorStep, stepPrice]) => {
-    if (dcTable.includes(calculatorStep)) {
-      dcPrice += stepPrice;
-    } else if (acTable.includes(calculatorStep)) {
-      acPrice += stepPrice;
+    const step = calculatorStep as AppSteps;
+    const price = stepPrice as number;
+    if (dcTable.includes(step)) {
+      dcPrice += price;
+    } else if (acTable.includes(step)) {
+      acPrice += price;
     } else {
-      zusaPrice += stepPrice;
+      zusaPrice += price;
     }
   });
 
@@ -85,7 +93,7 @@ export const calculateTotalWithoutProfit = (arr: IndividualService[]) => {
 };
 
 export const calculatePricesWithoutProfit = (
-  calculatorData: Record<string, number>
+  calculatorData: CalculatedSteps
 ) => {
   let total = 175; //Projektierung price
   Object.values(calculatorData).forEach((stepPrice) => (total += stepPrice));
@@ -94,28 +102,29 @@ export const calculatePricesWithoutProfit = (
 };
 
 export const calculatePricesBySteps = (
-  calculatorData: CalculatorData,
+  calculatorData: ServicesByStep,
   profit: number = 1
 ) => {
   const additionWorks = ["wallbox", "zusatzarbeiten"];
   let additionWorksPrice = 0;
 
-  const formatedCalculatorData: { [key: string]: number } = {};
+  const formatedCalculatorData: Partial<CalculatedSteps> = {};
 
   Object.entries(calculatorData).forEach(([calculatorStep, stepServices]) => {
+    const step = calculatorStep as AppSteps;
     if (!Array.isArray(stepServices)) {
       return;
     }
 
     const total = calculateTotalSum(stepServices, profit);
 
-    if (additionWorks.includes(calculatorStep)) {
+    if (additionWorks.includes(step)) {
       additionWorksPrice += total;
       formatedCalculatorData.zusatzarbeiten = additionWorksPrice;
       return;
     }
 
-    formatedCalculatorData[calculatorStep] = roundUp(total);
+    formatedCalculatorData[step] = roundUp(total);
   });
   return formatedCalculatorData;
 };
@@ -148,7 +157,7 @@ const calculateServiceTotal = (service: IndividualService): number => {
   return roundUp(total);
 };
 
-export const calculateExpence = (calculatorData: CalculatorData): number => {
+export const calculateExpence = (calculatorData: ServicesByStep): number => {
   const projectingPrimePrice = 375;
   const startValue = projectingPrimePrice;
   return Object.values(calculatorData).reduce((total, serviceArray) => {
@@ -183,7 +192,6 @@ export const calculateTotalWorkAc = (arr: IndividualService[]) => {
     return 0;
   }
 
-
   const totalSum = arr.reduce((total, item) => {
     let workPrice = item.workPrice || 0;
     let count = 1;
@@ -199,7 +207,7 @@ export const calculateTotalWorkAc = (arr: IndividualService[]) => {
         count = item.count || 1;
       } else {
         workPrice = 0;
-        count = 0
+        count = 0;
       }
     }
     return total + workPrice * count;
