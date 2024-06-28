@@ -1,22 +1,25 @@
 import React from 'react';
 import { roundUp } from '../../../utils/calculations';
+import { CalculatedSteps } from '../../../types/calculator-types';
 
 interface Props {
   projectAndAbschluss: number,
-  calculatorPrices: Record<string, number>
+  calculatorPrices: CalculatedSteps
   additionalBatteries: number
 }
 const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices, additionalBatteries }) => {
   const {
-    acMontage,
-    dcMontage,
+    acMontage = 0,
+    dcMontage = 0,
     inbetriebnahme,
     underConstructions,
     optimizer,
     pvModule,
-    zusatzarbeiten,
-    invertor,
-    battery
+    zusatzarbeiten = 0,
+    invertor = 0,
+    cabels = 0,
+    iqCombiner = 0,
+    battery = 0
   } = calculatorPrices;
 
   return (
@@ -24,35 +27,45 @@ const StepsTable: React.FC<Props> = ({ projectAndAbschluss, calculatorPrices, ad
       <table>
         <tbody className="table-steps">
           <tr>
-            <td>1. Projektierung</td>
+            <td>Projektierung</td>
             <td>{projectAndAbschluss}€</td>
           </tr>
           <tr>
-            <td>2. Installation + Lieferung</td>
+            <td>Installation + Lieferung</td>
             <td>{roundUp(dcMontage + acMontage)}€</td>
           </tr>
           <tr>
-            <td>3. Inbetriebnahme</td>
+            <td>Inbetriebnahme</td>
             <td>{inbetriebnahme}€</td>
           </tr>
           <tr>
-            <td>4. Unterkonstruktion</td>
+            <td>Unterkonstruktion</td>
             <td>{underConstructions}€</td>
           </tr>
           <tr>
-            <td>5. PV-Module</td>
+            <td>PV-Module</td>
             <td>{pvModule}€</td>
           </tr>
+          {optimizer &&
+            (<tr>
+              <td>Optimierer</td>
+              <td>{optimizer}€</td>
+            </tr>)
+          }
+          {iqCombiner && (
+            (<tr>
+              <td>IQ Combiner 3P EU</td>
+              <td>{iqCombiner}€</td>
+            </tr>)
+          )}
+
           <tr>
-            <td>6. Optimierer</td>
-            <td>{optimizer}€</td>
+            <td>Wechselrichter + Smart Dongle + Smartmeter</td>
+            <td>{cabels ? invertor + cabels : invertor}€</td>
           </tr>
+
           <tr>
-            <td>7. Wechselrichter + Smart Dongle + Smartmeter</td>
-            <td>{invertor}€</td>
-          </tr>
-          <tr>
-            <td>8. PV-Speicher</td>
+            <td>PV-Speicher</td>
             <td>{battery + additionalBatteries}€</td>
           </tr>
           <tr>

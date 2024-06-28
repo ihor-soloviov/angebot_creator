@@ -3,7 +3,16 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import calculatorStore from "../../stores/calculator-store";
-import { calculateProfitPrices, calculatePricesBySteps, calculateTotalWorkDc, calculateTotalSum, calculateTotalWorkAc, roundUp, getDcWorkPriceArray, getAcWorkPriceArray } from "../../utils/calculations";
+import {
+  calculateProfitPrices,
+  calculatePricesBySteps,
+  calculateTotalWorkDc,
+  calculateTotalSum,
+  calculateTotalWorkAc,
+  roundUp,
+  getDcWorkPriceArray,
+  getAcWorkPriceArray
+} from "../../utils/calculations";
 import "./GewinTable.scss";
 import StepsTable from "./StepsTable/StepsTable";
 import ProfitTable from "./ProfitTable/ProfitTable";
@@ -15,7 +24,7 @@ const GewinTable = observer(() => {
   const { calculatorData } = calculatorStore;
 
   //calculatorPrices
-  const [calculatorPrices, setCalculatorPrices] = useState<Partial<Record<AppSteps, number>>>({
+  const [calculatorPrices, setCalculatorPrices] = useState<CalculatedSteps>({
     [AppSteps.acMontage]: 0,
     [AppSteps.inbetriebnahme]: 0,
     [AppSteps.invertor]: 0,

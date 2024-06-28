@@ -1,3 +1,4 @@
+import producerStore, { Producer } from "../stores/producer-store";
 import { AppSteps } from "../stores/step-store";
 import {
   CalculatedSteps,
@@ -5,22 +6,33 @@ import {
   CalculatorItem,
 } from "../types/calculator-types";
 
-const getItemPrice = (item: CalculatorItem, profit: number) => {
-  const profitChangePriceArray = [
-    "DC-Montage je Modul",
-    "Montage & Verkabelung je Wechselrichter",
-    "Montage & Verkabelung je Stromspeicher",
-    "Anschluss der PV-Anlage an der Hausverteilung",
-    "Netzanmeldung",
-  ];
-  return profitChangePriceArray.includes(item.title)
-    ? item.price * profit
-    : item.price;
-};
+const dcTable = [
+  AppSteps.dcMontage,
+  AppSteps.underConstructions,
+  AppSteps.pvModule,
+];
+
+const acTable = [
+  AppSteps.acMontage,
+  AppSteps.inbetriebnahme,
+  AppSteps.invertor,
+  AppSteps.optimizer,
+  AppSteps.cabels,
+  AppSteps.battery,
+  AppSteps.iqCombiner,
+];
 
 const countNoChangesArray = [
   "Montage & Verkabelung je Wechselrichter",
   "Montage & Verkabelung je Stromspeicher",
+];
+
+const profitChangePriceArray = [
+  "DC-Montage je Modul",
+  "Montage & Verkabelung je Wechselrichter",
+  "Montage & Verkabelung je Stromspeicher",
+  "Anschluss der PV-Anlage an der Hausverteilung",
+  "Netzanmeldung",
 ];
 
 export const roundUp = (num: number) => {
@@ -28,13 +40,23 @@ export const roundUp = (num: number) => {
   return Math.ceil(num * precision) / precision;
 };
 
-const dcTable = [
-  AppSteps.dcMontage,
-  AppSteps.underConstructions,
-  AppSteps.pvModule,
-];
+const getItemPrice = (item: CalculatorItem, profit: number) => {
+  return profitChangePriceArray.includes(item.title)
+    ? item.price * profit
+    : item.price;
+};
 
-export const getDcWorkPriceArray = (itemsBySteps: ItemsByStep): CalculatorItem[] => {
+const getQuermontageWorkPrice = (count: number) => {
+  return count > 20 ? 70 : 78;
+};
+
+const getHochmontage = (count: number) => {
+  return count > 30 ? 60 : count < 15 ? 78 : 67;
+};
+
+export const getDcWorkPriceArray = (
+  itemsBySteps: ItemsByStep
+): CalculatorItem[] => {
   return dcTable.reduce((acc, step) => {
     const stepItems = itemsBySteps[step];
     if (stepItems) {
@@ -44,16 +66,9 @@ export const getDcWorkPriceArray = (itemsBySteps: ItemsByStep): CalculatorItem[]
   }, [] as CalculatorItem[]);
 };
 
-const acTable = [
-  AppSteps.acMontage,
-  AppSteps.inbetriebnahme,
-  AppSteps.invertor,
-  AppSteps.optimizer,
-  AppSteps.battery,
-  AppSteps.iqCombiner,
-];
-
-export const getAcWorkPriceArray = (itemsBySteps: ItemsByStep): CalculatorItem[] => {
+export const getAcWorkPriceArray = (
+  itemsBySteps: ItemsByStep
+): CalculatorItem[] => {
   return acTable.reduce((acc, step) => {
     const stepItems = itemsBySteps[step];
     if (stepItems) {
@@ -80,12 +95,12 @@ export const calculateTotalSum = (
   return totalSum;
 };
 
-export const calculateProfitPrices = (calculatorData: CalculatedSteps) => {
+export const calculateProfitPrices = (arr: CalculatedSteps) => {
   let dcPrice = 0;
   let acPrice = 0;
   let zusaPrice = 0;
 
-  Object.entries(calculatorData).forEach(([calculatorStep, stepPrice]) => {
+  Object.entries(arr).forEach(([calculatorStep, stepPrice]) => {
     const step = calculatorStep as AppSteps;
     const price = stepPrice as number;
     if (dcTable.includes(step)) {
@@ -129,7 +144,7 @@ export const calculatePricesBySteps = (
   calculatorData: ItemsByStep,
   profit: number = 1
 ) => {
-  const additionWorks = ["wallbox", "zusatzarbeiten"];
+  const additionWorks = [AppSteps.wallbox, AppSteps.zusatzarbeiten];
   let additionWorksPrice = 0;
 
   const formatedCalculatorData: CalculatedSteps = {};
@@ -155,6 +170,9 @@ export const calculatePricesBySteps = (
 
 const getWorkPrice = (service: CalculatorItem, count: number = 1): number => {
   if (service.angebotSection === "Components") {
+    if (producerStore.producer === Producer.enphase) {
+      return service.workPrice || 0;
+    }
     return 0;
   }
   switch (service.title) {
@@ -175,13 +193,16 @@ const calculateServiceTotal = (service: CalculatorItem): number => {
   const workPrice = getWorkPrice(service, count);
 
   const total = count * (primePrice + workPrice);
+  console.log(service.title, total, primePrice);
   return roundUp(total);
 };
 
-export const calculateExpence = (calculatorData: ItemsByStep): number => {
+export const calculateExpence = (arr: ItemsByStep): number => {
   const projectingPrimePrice = 375;
   const startValue = projectingPrimePrice;
-  return Object.values(calculatorData).reduce((total, serviceArray) => {
+  console.log("a");
+
+  return Object.values(arr).reduce((total, serviceArray) => {
     const serviceTotal = serviceArray.reduce((arrayTotal, service) => {
       return service.appSection === "pvModule"
         ? arrayTotal
@@ -212,13 +233,20 @@ export const calculateTotalWorkAc = (arr: CalculatorItem[]) => {
   if (arr.length === 0) {
     return 0;
   }
-
   const totalSum = arr.reduce((total, item) => {
     let workPrice = item.workPrice || 0;
     let count = 1;
+
     if (item.angebotSection === "Components") {
-      workPrice = item.primePrice || 0;
-      count = item.count || 1;
+      if (producerStore.producer === Producer.enphase) {
+        const work = item.workPrice || 0;
+        const prime = item.primePrice || 0;
+        workPrice = work + prime;
+        count = item.count || 1;
+      } else {
+        workPrice = item.primePrice || 0;
+        count = item.count || 1;
+      }
     }
     if (item.appSection === "Zusatzarbeiten" || item.appSection === "wallbox") {
       if (item.description && item.description === "дополнительные батареи") {
@@ -235,12 +263,4 @@ export const calculateTotalWorkAc = (arr: CalculatorItem[]) => {
   }, 0);
 
   return roundUp(totalSum);
-};
-
-const getQuermontageWorkPrice = (count: number) => {
-  return count > 20 ? 70 : 78;
-};
-
-const getHochmontage = (count: number) => {
-  return count > 30 ? 60 : count < 15 ? 78 : 67;
 };

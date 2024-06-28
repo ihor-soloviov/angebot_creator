@@ -16,7 +16,7 @@ export const IqCombinerPage: React.FC = () => {
       <Header />
       <Calculator
         header={title}
-        serviceTableName="iq_combiner"
+        serviceTableName="iqCombiner"
       />
       <Footer isCalculator={true} />
     </div >
